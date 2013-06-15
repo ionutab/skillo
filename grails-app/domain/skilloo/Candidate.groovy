@@ -15,6 +15,8 @@ class Candidate {
 
     Consultant consultant
     Address address
+    
+    static hasMany = [candidateQualifications:CandidateQualification, candidateNotes:CandidateNote, payrolls:Payroll]
 
     static constraints = {   
         consultant(nullable: true)   
