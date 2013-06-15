@@ -10,13 +10,13 @@ class Candidate {
     boolean carOwner
     boolean active;
 
-	String telephoneNumbers
-	String emails
-	
+    String telephoneNumbers
+    String emails
+
     Consultant consultant
-	Address address
-    	
-    static constraints = {
-        consultant(nullable: true)
+    Address address
+
+    static constraints = {   
+        consultant(nullable: true)   
     }
 }

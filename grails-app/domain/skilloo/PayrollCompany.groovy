@@ -8,7 +8,7 @@ class PayrollCompany {
     static belongsTo = Candidate
 
     static hasMany = [candidates:Candidate]
-    
+
     static constraints = {
     }
 }
