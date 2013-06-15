@@ -4,10 +4,8 @@ class PayrollCompany {
 
     String name
     String details
-
-    static belongsTo = Candidate
-
-    static hasMany = [candidates:Candidate]
+    
+    static hasMany = [payrolls: Payroll]
 
     static constraints = {
     }

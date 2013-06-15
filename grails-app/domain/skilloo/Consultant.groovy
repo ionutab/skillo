@@ -4,6 +4,8 @@ class Consultant {
 
     String extraInformation
 
+    static hasMany = [candidateNotes:CandidateNote]
+    
     static constraints = {
     }
 }
