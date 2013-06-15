@@ -1,6 +1,6 @@
 package skilloo
 
-class ClientContact {
+class Contact {
 
 	String firstName
 	String lastName

@@ -1,7 +1,6 @@
 package skilloo
 
-class ConsultantController {
-
+class AddressController {
     def scaffold = true
 
     def index() {

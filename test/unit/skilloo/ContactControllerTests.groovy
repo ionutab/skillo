@@ -5,9 +5,9 @@ package skilloo
 import org.junit.*
 import grails.test.mixin.*
 
-@TestFor(ClientContactController)
-@Mock(ClientContact)
-class ClientContactControllerTests {
+@TestFor(ContactController)
+@Mock(Contact)
+class ContactControllerTests {
 
     def populateValidParams(params) {
         assert params != null
@@ -47,7 +47,7 @@ class ClientContactControllerTests {
 
         assert response.redirectedUrl == '/clientContact/show/1'
         assert controller.flash.message != null
-        assert ClientContact.count() == 1
+        assert Contact.count() == 1
     }
 
     void testShow() {
@@ -57,7 +57,7 @@ class ClientContactControllerTests {
         assert response.redirectedUrl == '/clientContact/list'
 
         populateValidParams(params)
-        def clientContact = new ClientContact(params)
+        def clientContact = new Contact(params)
 
         assert clientContact.save() != null
 
@@ -75,7 +75,7 @@ class ClientContactControllerTests {
         assert response.redirectedUrl == '/clientContact/list'
 
         populateValidParams(params)
-        def clientContact = new ClientContact(params)
+        def clientContact = new Contact(params)
 
         assert clientContact.save() != null
 
@@ -95,7 +95,7 @@ class ClientContactControllerTests {
         response.reset()
 
         populateValidParams(params)
-        def clientContact = new ClientContact(params)
+        def clientContact = new Contact(params)
 
         assert clientContact.save() != null
 
@@ -139,17 +139,17 @@ class ClientContactControllerTests {
         response.reset()
 
         populateValidParams(params)
-        def clientContact = new ClientContact(params)
+        def clientContact = new Contact(params)
 
         assert clientContact.save() != null
-        assert ClientContact.count() == 1
+        assert Contact.count() == 1
 
         params.id = clientContact.id
 
         controller.delete()
 
-        assert ClientContact.count() == 0
-        assert ClientContact.get(clientContact.id) == null
+        assert Contact.count() == 0
+        assert Contact.get(clientContact.id) == null
         assert response.redirectedUrl == '/clientContact/list'
     }
 }

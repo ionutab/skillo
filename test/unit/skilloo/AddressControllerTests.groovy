@@ -5,9 +5,9 @@ package skilloo
 import org.junit.*
 import grails.test.mixin.*
 
-@TestFor(CandidateAddressController)
-@Mock(CandidateAddress)
-class CandidateAddressControllerTests {
+@TestFor(AddressController)
+@Mock(Address)
+class AddressControllerTests {
 
     def populateValidParams(params) {
         assert params != null
@@ -47,7 +47,7 @@ class CandidateAddressControllerTests {
 
         assert response.redirectedUrl == '/candidateAddress/show/1'
         assert controller.flash.message != null
-        assert CandidateAddress.count() == 1
+        assert Address.count() == 1
     }
 
     void testShow() {
@@ -57,7 +57,7 @@ class CandidateAddressControllerTests {
         assert response.redirectedUrl == '/candidateAddress/list'
 
         populateValidParams(params)
-        def candidateAddress = new CandidateAddress(params)
+        def candidateAddress = new Address(params)
 
         assert candidateAddress.save() != null
 
@@ -75,7 +75,7 @@ class CandidateAddressControllerTests {
         assert response.redirectedUrl == '/candidateAddress/list'
 
         populateValidParams(params)
-        def candidateAddress = new CandidateAddress(params)
+        def candidateAddress = new Address(params)
 
         assert candidateAddress.save() != null
 
@@ -95,7 +95,7 @@ class CandidateAddressControllerTests {
         response.reset()
 
         populateValidParams(params)
-        def candidateAddress = new CandidateAddress(params)
+        def candidateAddress = new Address(params)
 
         assert candidateAddress.save() != null
 
@@ -139,17 +139,17 @@ class CandidateAddressControllerTests {
         response.reset()
 
         populateValidParams(params)
-        def candidateAddress = new CandidateAddress(params)
+        def candidateAddress = new Address(params)
 
         assert candidateAddress.save() != null
-        assert CandidateAddress.count() == 1
+        assert Address.count() == 1
 
         params.id = candidateAddress.id
 
         controller.delete()
 
-        assert CandidateAddress.count() == 0
-        assert CandidateAddress.get(candidateAddress.id) == null
+        assert Address.count() == 0
+        assert Address.get(candidateAddress.id) == null
         assert response.redirectedUrl == '/candidateAddress/list'
     }
 }

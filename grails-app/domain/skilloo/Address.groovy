@@ -1,6 +1,6 @@
 package skilloo
 
-class CandidateAddress {
+class Address {
 	
 	String country
 	String city

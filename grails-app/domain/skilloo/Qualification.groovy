@@ -2,13 +2,14 @@ package skilloo
 
 class Qualification {
 
-	String qualificationCode
-	String qualificationName
-	String qualificationDescription
+	String code
+	String name
+	String description
 	
 	
     static constraints = {
-		qualificationCode unique:true
-		qualificationName unique:true
+		code unique:true
+		name unique:true
+        description nullable:true 
     }
 }

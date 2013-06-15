@@ -1,7 +1,6 @@
 package skilloo
 
-class ConsultantController {
-
+class ContactController {
     def scaffold = true
 
     def index() {

@@ -2,12 +2,12 @@ package skilloo
 
 class ClientCompany {
 	
-	String companyName
-	String companyRegistrationNumber
+	String name
+	String registrationNumber
 
-	static hasMany = [clientContacts: ClientContact, payrollCompanies: PayrollCompany]
+	static hasMany = [contacts: Contact]
 	
     static constraints = {
-		companyName(unique: true)
+		name(unique: true)
     }
 }

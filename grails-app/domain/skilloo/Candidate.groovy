@@ -14,8 +14,8 @@ class Candidate {
 	String emails
 	
     Consultant consultant
-	CandidateAddress address
-	
+	Address address
+    	
     static constraints = {
         consultant(nullable: true)
     }
