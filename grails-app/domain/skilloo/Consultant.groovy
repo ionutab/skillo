@@ -4,7 +4,7 @@ class Consultant {
 
     String extraInformation
 
-    static hasMany = [candidateNotes:CandidateNote]
+    static hasMany = [candidateNotes:CandidateNote, clientComments:ClientComment]
     
     static constraints = {
     }

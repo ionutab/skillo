@@ -16,9 +16,10 @@ class Candidate {
     Consultant consultant
     Address address
     
-    static hasMany = [candidateQualifications:CandidateQualification, candidateNotes:CandidateNote, payrolls:Payroll]
+    static hasMany = [candidateQualifications:CandidateQualification, candidateNotes:CandidateNote, payrolls:Payroll, jobs:Job, placements:Placement ]
 
     static constraints = {   
-        consultant(nullable: true)   
+        consultant(nullable: true)
+        emails email:true 
     }
 }
