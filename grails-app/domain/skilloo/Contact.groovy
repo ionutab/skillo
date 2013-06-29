@@ -8,6 +8,9 @@ class Contact {
     String telephoneNumbers
     String emails
 
+    static hasMany = [clientComments:ClientComment]
+    
     static constraints = {
+        emails email:true
     }
 }
