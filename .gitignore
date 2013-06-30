@@ -15,3 +15,8 @@
 *.exe
 *.out
 *.app
+/target
+/.settings
+/.gitignore
+/.classpath
+/.project
