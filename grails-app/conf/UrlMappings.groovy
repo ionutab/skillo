@@ -5,7 +5,7 @@ class UrlMappings {
 		/* 
 		 * Pages without controller 
 		 */
-//		"/"				(view:"/index")
+		"/"				(view:"/index")
 		"/about"		(view:"/siteinfo/about")
 		"/blog"			(view:"/siteinfo/blog")
 		"/systeminfo"	(view:"/siteinfo/systeminfo")
@@ -13,7 +13,7 @@ class UrlMappings {
 		"/terms"		(view:"/siteinfo/terms")
 		"/imprint"		(view:"/siteinfo/imprint")
 		"/nextSteps"	(view:"/home/nextSteps")
-		"/test"			(view:"/home/test")
+		"/l"			(view:"/home/layout")
 		
 		/* 
 		 * Pages with controller
@@ -24,6 +24,7 @@ class UrlMappings {
 			action		= { 'index' }
             view		= { 'index' }
         }
+		
 		"/$controller/$action?/$id?"{
 			constraints {
 				controller(matches:/^((?!(api|mobile|web)).*)$/)

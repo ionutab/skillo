@@ -61,5 +61,8 @@ grails.project.dependency.resolution = {
         compile ':cache:1.0.1'
 		
 		compile ":kickstart-with-bootstrap:0.9.6"
+		
+		compile ":twitter-bootstrap:2.3.2"
+		
     }
 }
