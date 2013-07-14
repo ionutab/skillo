@@ -14,6 +14,7 @@ class UrlMappings {
 		"/imprint"		(view:"/siteinfo/imprint")
 		"/nextSteps"	(view:"/home/nextSteps")
 		"/l"			(view:"/home/layout")
+        "/a"            (view:"/home/anotherlayout")
 		
 		/* 
 		 * Pages with controller
