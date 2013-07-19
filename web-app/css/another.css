@@ -1,0 +1,17 @@
+/* BASE LAYOUT */
+.body-navbar-fixed {
+    padding-top: 43px;
+}
+
+.sidebar {
+    position: fixed;
+    top: 43px;
+    bottom: 0;
+    padding: 0;
+    margin: 0;
+    width: 180px;
+}
+
+.content-container {
+    margin-left: 182px;
+}
