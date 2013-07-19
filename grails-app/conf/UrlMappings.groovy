@@ -13,7 +13,8 @@ class UrlMappings {
 		"/terms"		(view:"/siteinfo/terms")
 		"/imprint"		(view:"/siteinfo/imprint")
 		"/nextSteps"	(view:"/home/nextSteps")
-		"/l"			(view:"/home/layout")
+		"/i"			(view:"/home/testworkspace")
+		"/i/landing"	(view:"/home/testlanding")
         "/a"            (view:"/home/anotherlayout")
 		
 		/* 

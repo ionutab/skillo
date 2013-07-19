@@ -34,19 +34,18 @@
 </head>
 
 <body>
-
+	<g:render template="/_testmenu/testNavbar"/>
 	<%--navbar --%>
+	
 	<%--workcontent --%>
-
-<%-- 	
+	
 	<div class="container-fluid">
-		  <div class="row-fluid">
-			    <div class="span12">
-			      	<g:render template="/layouts/content"/>
-			    </div>
+		  <div class="row ">
+   			<g:render template="/_testmenu/testSidebar"/>
 		  </div>
 	</div>
---%>	
+		<!-- Included Javascript files and other resources -->
+	<r:layoutResources />
 </body>
 
 </html>
