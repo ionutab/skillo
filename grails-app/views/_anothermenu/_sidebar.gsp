@@ -1,20 +1,11 @@
 <div class="well sidebar sidebar-fixed">
     <ul class="nav nav-list">
-        <li class="nav-header">Sidebar</li>
-        <li class="active"><a href="#">Link</a></li>
-        <li><a href="#">Link</a></li>
-        <li><a href="#">Link</a></li>
-        <li><a href="#">Link</a></li>
-        <li class="nav-header">Sidebar</li>
-        <li><a href="#">Link</a></li>
-        <li><a href="#">Link</a></li>
-        <li><a href="#">Link</a></li>
-        <li><a href="#">Link</a></li>
-        <li><a href="#">Link</a></li>
-        <li><a href="#">Link</a></li>
-        <li class="nav-header">Sidebar</li>
-        <li><a href="#">Link</a></li>
-        <li><a href="#">Link</a></li>
-        <li><a href="#">Link</a></li>
+        <g:each status="i" var="c" in="['Qualification','Candidate']">
+            <li class="controller${params.controller == c ? " active" : ""}">
+                <g:link controller="${c}" action="index">
+                    <g:message code="${c}.label" default="${c.capitalize()}"/>
+                </g:link>
+            </li>
+        </g:each>
     </ul>
 </div><!--/.well -->

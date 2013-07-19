@@ -4,7 +4,7 @@
 <html>
 <head>
 	<meta http-equiv="Content-Type" content="text/html; charset=UTF-8" />
-	<meta name="layout" content="kickstart" />
+	<meta name="layout" content="anotherlayout" />
 	<g:set var="entityName" value="\${message(code: '${domainClass.propertyName}.label', default: '${className}')}" />
 	<title><g:message code="default.list.label" args="[entityName]" /></title>
 </head>
