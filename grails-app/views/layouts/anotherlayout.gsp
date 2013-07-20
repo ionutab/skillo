@@ -23,8 +23,8 @@
     <r:require modules="another"/>
 
 	<r:layoutResources />
-    <g:layoutHead />
 
+    <g:layoutHead />
 	<%-- For Javascript see end of body --%>
 </head>
 

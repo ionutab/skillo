@@ -21,6 +21,7 @@
 	<r:require modules="jquery"/>
 	<r:require modules="bootstrap"/>
 	<r:require modules="bootstrap_utils"/>
+	<r:require modules="test"/>
 
 	<r:layoutResources />
 	<g:layoutHead />
@@ -34,17 +35,27 @@
 </head>
 
 <body>
-	<g:render template="/_testmenu/testNavbar"/>
+
 	<%--navbar --%>
+	<g:render template="/_testmenu/testNavbar"/><%--
+	
 	
 	<%--workcontent --%>
+	<div class="main-content-container container-fluid">
 	
-	<div class="container-fluid">
-		  <div class="row ">
-   			<g:render template="/_testmenu/testSidebar"/>
-		  </div>
+		<%-- sidebar --%> 
+		<g:if test="${ pageProperty(name:'page.sidebar') }">
+			<g:pageProperty name="page.sidebar"/>
+		</g:if>
+		<g:else>
+			<g:render template="/_testmenu/testSidebar"/>
+		</g:else>
+		
+		<g:render template="/layouts/testWorkspaceContent"/>
+		
 	</div>
-		<!-- Included Javascript files and other resources -->
+	
+	<!-- Included Javascript files and other resources -->
 	<r:layoutResources />
 </body>
 

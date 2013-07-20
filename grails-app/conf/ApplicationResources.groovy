@@ -7,4 +7,9 @@ modules = {
         dependsOn 'bootstrap'
         resource url:'css/another.css'
     }
+	
+	test {
+		dependsOn 'bootstrap'
+		resource url:'css/test.css'
+	}
 }

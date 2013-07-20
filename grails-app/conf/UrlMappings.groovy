@@ -14,7 +14,6 @@ class UrlMappings {
 		"/imprint"		(view:"/siteinfo/imprint")
 		"/nextSteps"	(view:"/home/nextSteps")
 		"/i"			(view:"/home/testworkspace")
-		"/i/landing"	(view:"/home/testlanding")
         "/a"            (view:"/home/anotherspace")
 		
 		/* 
