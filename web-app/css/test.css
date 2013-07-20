@@ -1,0 +1,31 @@
+/* BASE LAYOUT */
+.body-navbar-fixed {
+    padding-top: 43px;
+}
+
+.sidebar {
+	position: fixed;
+    top: 43px;
+    bottom: 0px;
+    padding: 20px 0px;
+    border-radius: 0;
+    margin: 0px;
+    width: 180px;
+}
+
+.main-content-container {
+	position: relative;
+    padding: 0;
+	margin-top: 43px;
+}
+
+.workspace-content-container {
+	min-height: 100%;
+	padding: 0;
+	margin-left: 182px;
+	margin-right: 0;
+	margin-top: 0;
+}
+
+
+
