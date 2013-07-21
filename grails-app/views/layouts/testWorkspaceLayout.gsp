@@ -37,7 +37,7 @@
 <body>
 
 	<%--navbar --%>
-	<g:render template="/_testmenu/testNavbar"/><%--
+	<g:render template="/_testmenu/testWorkspaceNavbar"/><%--
 	
 	
 	<%--workcontent --%>
@@ -48,7 +48,7 @@
 			<g:pageProperty name="page.sidebar"/>
 		</g:if>
 		<g:else>
-			<g:render template="/_testmenu/testSidebar"/>
+			<g:render template="/_testmenu/testWorkspaceSidebar"/>
 		</g:else>
 		
 		<g:render template="/layouts/testWorkspaceContent"/>

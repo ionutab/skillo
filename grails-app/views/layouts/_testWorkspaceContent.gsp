@@ -6,8 +6,20 @@
 		<div class="alert alert-info">${flash.message}</div>
 	</g:if>
 	
-	<g:layoutBody />
-	<g:pageProperty name="page.body" />
+	<div class="page-content-container">
+		<div class="content-fluid">
+			<div class="row-fluid">
+			
+				<g:render template="/_testmenu/testWorkspaceListContext"/>
+			
+				<g:layoutBody />
+				<g:pageProperty name="page.body" />
+				
+				<g:render template="/_testmenu/testWorkspaceListContext"/>
+				
+			</div>
+		</div>
+	</div>
 	
 	<%-- footer --%> 
 	<g:if test="${ pageProperty(name:'page.footer') }">
