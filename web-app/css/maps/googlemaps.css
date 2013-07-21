@@ -1,0 +1,25 @@
+#map-canvas {
+  margin: 0;
+  padding: 0;
+  height: 100%;
+}
+#map-canvas label { 
+  width: auto; 
+  display:inline; 
+}
+#map-canvas img { 
+  max-width: none; 
+}
+#over_map { 
+	position: relative; 
+	bottom: 150px;
+	z-index: 99;
+	width:400px; 
+	height: 90px; 
+	background-color: white;
+	margin: auto;
+    }
+    
+#basic-map-controlls {
+	margin: 10px auto;
+}

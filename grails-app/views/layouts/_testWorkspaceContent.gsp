@@ -22,11 +22,13 @@
 	</div>
 	
 	<%-- footer --%> 
+	<%-- 
 	<g:if test="${ pageProperty(name:'page.footer') }">
 		<g:pageProperty name="page.footer"/>
 	</g:if>
 	<g:else>
 		<g:render template="/_testmenu/testWorkspaceFooter"/>
 	</g:else>
+	--%>
 	
 </div>

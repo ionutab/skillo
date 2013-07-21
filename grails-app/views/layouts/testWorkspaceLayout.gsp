@@ -34,14 +34,14 @@
 	<%-- For Javascript see end of body --%>
 </head>
 
-<body>
+<body data-spy="scroll">
 
 	<%--navbar --%>
 	<g:render template="/_testmenu/testWorkspaceNavbar"/><%--
 	
 	
 	<%--workcontent --%>
-	<div class="main-content-container container-fluid">
+    <div id="main-content-container" class="container-fluid">
 	
 		<%-- sidebar --%> 
 		<g:if test="${ pageProperty(name:'page.sidebar') }">
