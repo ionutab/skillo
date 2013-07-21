@@ -15,6 +15,7 @@ class UrlMappings {
 		"/nextSteps"	(view:"/home/nextSteps")
 		"/i"			(view:"/home/testworkspace")
         "/a"            (view:"/home/anotherspace")
+        "/map"          (view:"/home/testmap")
 		
 		/* 
 		 * Pages with controller
