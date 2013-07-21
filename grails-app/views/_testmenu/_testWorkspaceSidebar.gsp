@@ -8,10 +8,10 @@
         </li>
         <g:each var="c,i" in="['qualification':'bookmark','candidate':'user','map':'map-marker']">
             <li class="controller${params.controller == c ? " active" : ""}">
-                <g:link controller="${c}" action="index">
-                    <i class="icon-${i}"></i>
-                    <g:message code="${c}.label" default="${c.capitalize()}"/>
-                </g:link>
+	                <g:link controller="${c}" action="index">
+	                    <i class="icon-${i}"></i>
+	                    <g:message code="${c}.label" default="${c.capitalize()}"/>
+	                </g:link>
             </li>
         </g:each>
     </ul>
