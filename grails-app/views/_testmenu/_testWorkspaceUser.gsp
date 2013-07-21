@@ -46,7 +46,7 @@
 			</a></li>
 
 			<li class="divider"></li>--}%
-			<li class=""><a href="${createLink(uri: '/')}">
+			<li class=""><a href="${createLink(controller: 'logout')}">
 				<i class="icon-off"></i>
 				<g:message code="security.signoff.label"/>
 			</a></li>

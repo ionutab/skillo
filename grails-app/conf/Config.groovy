@@ -91,3 +91,7 @@ log4j = {
 }
 
 grails.config.defaults.locations = [KickstartResources]
+// Added by the Spring Security Core plugin:
+grails.plugins.springsecurity.userLookup.userDomainClassName = 'skilloo.User'
+grails.plugins.springsecurity.userLookup.authorityJoinClassName = 'skilloo.UserRole'
+grails.plugins.springsecurity.authority.className = 'skilloo.Role'
