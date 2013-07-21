@@ -4,7 +4,7 @@
 
 <head>
 	<meta http-equiv="Content-Type" content="text/html; charset=UTF-8" />
-	<meta name="layout" content="anotherlayout" />
+	<meta name="layout" content="testWorkspaceLayout" />
 	<g:set var="entityName" value="\${message(code: '${domainClass.propertyName}.label', default: '${className}')}" />
 	<title><g:message code="default.create.label" args="[entityName]" /></title>
 </head>
@@ -23,10 +23,8 @@
 		<fieldset class="form">
 			<g:render template="form"/>
 		</fieldset>
-		<div class="form-actions">
-			<g:submitButton name="create" class="btn btn-primary" value="\${message(code: 'default.button.create.label', default: 'Create')}" />
-            <button class="btn" type="reset"><g:message code="default.button.reset.label" default="Reset" /></button>
-		</div>
+		<g:submitButton name="create" class="btn btn-primary" value="\${message(code: 'default.button.create.label', default: 'Create')}" />
+        <button class="btn" type="reset"><g:message code="default.button.reset.label" default="Reset" /></button>
 	</g:form>
 	
 </section>
