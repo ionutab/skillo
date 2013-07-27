@@ -1,10 +1,11 @@
 <html>
 
 <head>
-    <title>Layout test page - perfect!</title>
+    <title>Map</title>
     <meta name="viewport" content="initial-scale=1.0, user-scalable=no">
     <meta name="layout" content="testWorkspaceLayout" />
     <script src="https://maps.googleapis.com/maps/api/js?v=3.exp&sensor=false&region=GB&key=AIzaSyAbiKuyocwKDEDdhiPIvxem_lNqujz3IHA&sensor=false"></script>
+    <r:require modules="application"/>
     <r:require modules="maps"/>
 </head>
 
