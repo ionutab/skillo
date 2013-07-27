@@ -2,7 +2,7 @@
 <div class="well sidebar sidebar-fixed">
     <ul class="nav nav-list">
         <li class="${params.controller == null ? "active" : ""}">
-            <a class="brand" href="${createLink(uri: '/i')}">
+            <a class="brand" href="${createLink(uri: '/')}">
                 <i class="icon-home"></i>
                 <span><g:message code="default.home.label"/></span>
             </a>
