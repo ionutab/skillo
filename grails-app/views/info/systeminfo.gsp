@@ -2,7 +2,7 @@
 
 <head>
     <title><g:message code="default.contact.title"/></title>
-    <meta name="layout" content="skilloSimpleLayout" />
+    <meta name="layout" content="kickstart" />
 </head>
 
 <body>
