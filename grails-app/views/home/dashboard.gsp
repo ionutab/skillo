@@ -2,7 +2,7 @@
 
 <head>
 	<title>Layout test page - perfect!</title>
-	<meta name="layout" content="testWorkspaceLayout" />
+	<meta name="layout" content="skilloWorkspaceLayout" />
 </head>
 
 <body>
