@@ -9,13 +9,17 @@
 	<div class="page-content-container">
 		<div class="content-fluid">
 			<div class="row-fluid">
-			
-				<g:render template="/_menu/listContext"/>
+
+                <g:if test="${!layout_nocontextbar}">
+				    <g:render template="/_menu/listContext"/>
+                </g:if>
 			
 				<g:layoutBody />
 				<g:pageProperty name="page.body" />
-				
-				<g:render template="/_menu/listContext"/>
+
+                <g:if test="${!layout_nocontextbar}">
+                    <g:render template="/_menu/listContext"/>
+                </g:if>
 				
 			</div>
 		</div>

@@ -43,16 +43,13 @@
 	<%--workcontent --%>
     <div id="main-content-container" class="container-fluid">
 	
-		<%-- sidebar --%> 
-		<g:if test="${ pageProperty(name:'page.sidebar') }">
-			<g:pageProperty name="page.sidebar"/>
-		</g:if>
-		<g:else>
+		<%-- sidebar --%>
+        <g:if test="${!layout_nocontextbar}">
 			<g:render template="/_menu/sidebar"/>
-		</g:else>
-		
+		</g:if>
+
 		<g:render template="/layouts/workspace"/>
-		
+
 	</div>
 	
 	<!-- Included Javascript files and other resources -->
