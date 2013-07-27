@@ -51,7 +51,7 @@
 			<g:render template="/_menu/sidebar"/>
 		</g:else>
 		
-		<g:render template="/layouts/workspaceContent"/>
+		<g:render template="/layouts/workspace"/>
 		
 	</div>
 	
