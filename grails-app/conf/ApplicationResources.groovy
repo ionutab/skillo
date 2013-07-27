@@ -3,14 +3,9 @@ modules = {
         resource url:'js/application.js'
     }
 
-    another {
-        dependsOn 'bootstrap'
-        resource url:'css/another.css'
-    }
-	
-	test {
+	admin {
 		dependsOn 'bootstrap'
-		resource url:'css/test.css'
+		resource url:'css/admin.css'
 	}
 	
 	maps {

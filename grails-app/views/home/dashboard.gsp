@@ -2,12 +2,12 @@
 
 <head>
 	<title>Layout test page - perfect!</title>
-	<meta name="layout" content="skilloWorkspaceLayout" />
+	<meta name="layout" content="admin" />
 </head>
 
 <body>
 
-	<p>This is body! No, this is Patrick!</p>
+	<p>Dashboard page.</p>
 
 </body>
 

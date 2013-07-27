@@ -21,7 +21,7 @@
 	<r:require modules="jquery"/>
 	<r:require modules="bootstrap"/>
 	<r:require modules="bootstrap_utils"/>
-	<r:require modules="test"/>
+	<r:require modules="admin"/>
 
 	<r:layoutResources />
 	<g:layoutHead />
