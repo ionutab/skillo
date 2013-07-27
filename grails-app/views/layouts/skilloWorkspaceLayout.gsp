@@ -37,7 +37,7 @@
 <body data-spy="scroll">
 
 	<%--navbar --%>
-	<g:render template="/_testmenu/testWorkspaceNavbar"/><%--
+	<g:render template="/_menu/navbar"/><%--
 	
 	
 	<%--workcontent --%>
@@ -48,10 +48,10 @@
 			<g:pageProperty name="page.sidebar"/>
 		</g:if>
 		<g:else>
-			<g:render template="/_testmenu/testWorkspaceSidebar"/>
+			<g:render template="/_menu/sidebar"/>
 		</g:else>
 		
-		<g:render template="/layouts/testWorkspaceContent"/>
+		<g:render template="/layouts/workspaceContent"/>
 		
 	</div>
 	
