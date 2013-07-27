@@ -43,7 +43,7 @@
 		<g:render template="/layouts/header"/>														
 	</g:else>
 
-	<g:render template="/layouts/content"/>														
+	<g:render template="/layouts/workspaceContent"/>														
 
 	<!-- Enable to overwrite Footer by individual page -->
 	<g:if test="${ pageProperty(name:'page.footer') }">
