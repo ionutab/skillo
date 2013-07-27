@@ -5,7 +5,7 @@
 	function initialize() {
 	  var mapOptions = {
 	    zoom: 11,
-//	    minZoom: 10,
+	    minZoom: 5,
 	    maxZoom: 17,
 	    center: new google.maps.LatLng(51.5077, -0.126),
 	    panControl: false,
