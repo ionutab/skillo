@@ -10,12 +10,12 @@
 		<div class="content-fluid">
 			<div class="row-fluid">
 			
-				<g:render template="/_testmenu/testWorkspaceListContext"/>
+				<g:render template="/_menu/listContext"/>
 			
 				<g:layoutBody />
 				<g:pageProperty name="page.body" />
 				
-				<g:render template="/_testmenu/testWorkspaceListContext"/>
+				<g:render template="/_menu/listContext"/>
 				
 			</div>
 		</div>
@@ -27,7 +27,7 @@
 		<g:pageProperty name="page.footer"/>
 	</g:if>
 	<g:else>
-		<g:render template="/_testmenu/testWorkspaceFooter"/>
+		<g:render template="/_menu/footer"/>
 	</g:else>
 	--%>
 	
