@@ -7,7 +7,7 @@
                 <span><g:message code="default.home.label"/></span>
             </a>
         </li>
-        <g:each var="c,i" in="['qualification':'bookmark','candidate':'user']">
+        <g:each var="c,i" in="['candidate':'user','client':'briefcase']">
             <li class="controller${params.controller == c ? " active" : ""}">
                     <g:link controller="${c}" action="index">
                         <i class="icon-${i}"></i>
