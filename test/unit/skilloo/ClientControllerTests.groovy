@@ -5,9 +5,9 @@ package skilloo
 import org.junit.*
 import grails.test.mixin.*
 
-@TestFor(ClientCompanyController)
-@Mock(ClientCompany)
-class ClientCompanyControllerTests {
+@TestFor(ClientController)
+@Mock(Client)
+class ClientControllerTests {
 
     def populateValidParams(params) {
         assert params != null
@@ -47,7 +47,7 @@ class ClientCompanyControllerTests {
 
         assert response.redirectedUrl == '/clientCompany/show/1'
         assert controller.flash.message != null
-        assert ClientCompany.count() == 1
+        assert Client.count() == 1
     }
 
     void testShow() {
@@ -57,7 +57,7 @@ class ClientCompanyControllerTests {
         assert response.redirectedUrl == '/clientCompany/list'
 
         populateValidParams(params)
-        def clientCompany = new ClientCompany(params)
+        def clientCompany = new Client(params)
 
         assert clientCompany.save() != null
 
@@ -75,7 +75,7 @@ class ClientCompanyControllerTests {
         assert response.redirectedUrl == '/clientCompany/list'
 
         populateValidParams(params)
-        def clientCompany = new ClientCompany(params)
+        def clientCompany = new Client(params)
 
         assert clientCompany.save() != null
 
@@ -95,7 +95,7 @@ class ClientCompanyControllerTests {
         response.reset()
 
         populateValidParams(params)
-        def clientCompany = new ClientCompany(params)
+        def clientCompany = new Client(params)
 
         assert clientCompany.save() != null
 
@@ -139,17 +139,17 @@ class ClientCompanyControllerTests {
         response.reset()
 
         populateValidParams(params)
-        def clientCompany = new ClientCompany(params)
+        def clientCompany = new Client(params)
 
         assert clientCompany.save() != null
-        assert ClientCompany.count() == 1
+        assert Client.count() == 1
 
         params.id = clientCompany.id
 
         controller.delete()
 
-        assert ClientCompany.count() == 0
-        assert ClientCompany.get(clientCompany.id) == null
+        assert Client.count() == 0
+        assert Client.get(clientCompany.id) == null
         assert response.redirectedUrl == '/clientCompany/list'
     }
 }
