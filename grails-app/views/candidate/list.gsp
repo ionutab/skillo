@@ -12,6 +12,24 @@
 
 <body>
 
+<div class="accordion" id="accordion2">
+	<div class="accordion-group">
+        <div class="accordion-heading">
+	        <a class="accordion-toggle" data-toggle="collapse" data-parent="#accordion2" href="#collapseOne">
+                <g:message code="candidate.search.label" default="Search Candidates" />
+	        </a>
+        </div>
+        
+		<div id="collapseOne" class="accordion-body collapse in">
+			<div class="accordion-inner">
+			    
+			</div>
+		</div>
+		        
+	</div>
+</div>
+  
+
 <div class="tabbable tabs-right">
 	<ul class="nav nav-tabs">
         <li class="active">
