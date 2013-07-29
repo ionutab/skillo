@@ -10,11 +10,12 @@ class Candidate {
     boolean carOwner
     boolean active;
 
-    String telephoneNumbers
+    String telephoneNumber
     String emails
 
     Consultant consultant
     Address address
+	Qualification mainTrade;
     
     static hasMany = [candidateQualifications:CandidateQualification, candidateNotes:CandidateNote, payrolls:Payroll, jobs:Job, placements:Placement ]
 
@@ -29,9 +30,10 @@ class Candidate {
 		sponsored(nullable: true)
 		carOwner(nullable: true)
 		active(nullable: true)
-		telephoneNumbers(nullable: true)
+		telephoneNumber(nullable: true)
 		emails(nullable: true)
 		address(nullable: true)
+		mainTrade(nullable: true)
 		candidateNotes(nullable: true)
 		payrolls(nullable: true)
 		candidateQualifications(nullable: true)
