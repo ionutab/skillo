@@ -3,7 +3,7 @@ package skilloo
 
 class Placement {
     
-    ClientCompany clientCompany
+    Client clientCompany
     Candidate candidate
     WorkSite workSite
     Date start

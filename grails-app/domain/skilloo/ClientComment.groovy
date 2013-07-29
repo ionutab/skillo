@@ -3,7 +3,7 @@ package skilloo
 class ClientComment {
 
     Contact contact
-    ClientCompany clientCompany
+    Client clientCompany
     Consultant consultant
     
     Comment comment

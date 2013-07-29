@@ -3,7 +3,7 @@ package skilloo
 class WorkSite {
 
     Address address
-    ClientCompany clientCompany
+    Client clientCompany
     String details
     
     static constraints = {
