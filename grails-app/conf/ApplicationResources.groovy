@@ -11,6 +11,11 @@ modules = {
 	maps {
 		dependsOn 'bootstrap'
 		resource url:'css/maps/googlemaps.css'
-			resource url:'js/maps/googlemaps.js'
+		resource url:'js/maps/googlemaps.js'
+	}
+	
+	candidates {
+		dependsOn 'bootstrap'
+		resource url:'js/candidates-list.js'
 	}
 }
