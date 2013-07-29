@@ -30,7 +30,7 @@
 	<div class="tab-content">
         <div class="tab-pane active" id="candidatesearch-1">
 			<section id="list-candidate" class="first">
-			    <table class="table table-bordered">
+			    <table class="table table-bordered table-striped">
 			        <thead>
 			            <tr>
 			            
