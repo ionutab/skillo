@@ -20,6 +20,24 @@ class Candidate {
 
     static constraints = {   
         consultant(nullable: true)
+		
+		/**
+		 * temporary added in order to allow various tests on candidates list
+		 */
+		birthDate(nullable: true)
+		driver(nullable: true)
+		sponsored(nullable: true)
+		carOwner(nullable: true)
+		active(nullable: true)
+		telephoneNumbers(nullable: true)
+		emails(nullable: true)
+		address(nullable: true)
+		candidateNotes(nullable: true)
+		payrolls(nullable: true)
+		candidateQualifications(nullable: true)
+		jobs(nullable: true)
+		placements(nullable: true)
+		
         emails email:true 
     }
 }
