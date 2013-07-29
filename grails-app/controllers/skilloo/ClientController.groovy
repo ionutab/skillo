@@ -1,6 +1,6 @@
 package skilloo
 
-class ClientCompanyController {
+class ClientController {
     
     def scaffold = true
 
