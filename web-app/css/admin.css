@@ -69,3 +69,13 @@ body {
     top: 41px;
 }
 
+#add-candidates-tab-button{
+	padding-top: 8px;
+	padding-bottom: 8px;
+	min-width: 131px;
+	padding-right: 12px;
+	padding-left: 12px;
+	margin-right: 0;
+	margin-bottom: 3px;
+}
+
