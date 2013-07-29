@@ -1,6 +1,6 @@
 package skilloo
 
-class ClientCompany {
+class Client {
 
     String name
     String registrationNumber
