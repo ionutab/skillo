@@ -96,11 +96,11 @@ grails.plugins.springsecurity.userLookup.userDomainClassName = 'skilloo.User'
 grails.plugins.springsecurity.userLookup.authorityJoinClassName = 'skilloo.UserRole'
 grails.plugins.springsecurity.authority.className = 'skilloo.Role'
 grails.plugins.springsecurity.securityConfigType = "InterceptUrlMap"
-grails.plugins.springsecurity.rejectIfNoRule = true
 grails.plugins.springsecurity.interceptUrlMap = [
         '/js/**':        ['IS_AUTHENTICATED_ANONYMOUSLY'],
         '/css/**':       ['IS_AUTHENTICATED_ANONYMOUSLY'],
         '/images/**':    ['IS_AUTHENTICATED_ANONYMOUSLY'],
         '/login/**':     ['IS_AUTHENTICATED_ANONYMOUSLY'],
-        '/logout/**':    ['IS_AUTHENTICATED_ANONYMOUSLY']
+        '/logout/**':    ['IS_AUTHENTICATED_ANONYMOUSLY'],
+        '/**':           ['IS_AUTHENTICATED_REMEMBERED']
 ]
