@@ -57,6 +57,20 @@ body {
     margin-left: 182px;
 }
 
+.sidebar > .nav-list {
+    padding: 0;
+}
+
+.sidebar > .nav-list > li {
+    padding-left: 15px;
+    padding-right: 15px;
+    border-top: 1px solid #cfcfcf;
+}
+
+.sidebar > .nav-list > li:first-child {
+    border-top: 0;
+}
+
 .alert {
     border-radius: 0;
 }
