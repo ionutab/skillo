@@ -57,18 +57,27 @@ body {
     margin-left: 182px;
 }
 
-.sidebar > .nav-list {
+.sidebar .nav-list {
     padding: 0;
 }
 
-.sidebar > .nav-list > li {
-    padding-left: 15px;
-    padding-right: 15px;
+.sidebar .nav-list > li {
     border-top: 1px solid #cfcfcf;
 }
 
 .sidebar > .nav-list > li:first-child {
     border-top: 0;
+}
+
+.sidebar .nav-list > li > a {
+    padding-left: 15px;
+    padding-right: 15px;
+    margin: 0;
+}
+
+.sidebar .nav-list .nav-list > li > a {
+    padding-left: 30px;
+    padding-right: 30px;
 }
 
 .alert {
