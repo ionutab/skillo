@@ -6,11 +6,11 @@ class Contact {
     String lastName
     String position
     String telephoneNumbers
-    String emails
+    String email
 
     static hasMany = [clientComments:ClientComment]
     
     static constraints = {
-        emails email:true
+        email email:true
     }
 }
