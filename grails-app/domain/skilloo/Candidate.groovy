@@ -11,7 +11,7 @@ class Candidate {
     boolean active;
 
     String telephoneNumber
-    String emails
+    String email
 
     Consultant consultant
     Address address
@@ -31,7 +31,7 @@ class Candidate {
 		carOwner(nullable: true)
 		active(nullable: true)
 		telephoneNumber(nullable: true)
-		emails(nullable: true)
+		email(nullable: true)
 		address(nullable: true)
 		mainTrade(nullable: true)
 		candidateNotes(nullable: true)
@@ -40,6 +40,6 @@ class Candidate {
 		jobs(nullable: true)
 		placements(nullable: true)
 		
-        emails email:true 
+        email email:true 
     }
 }
