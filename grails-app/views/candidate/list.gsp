@@ -4,7 +4,7 @@
 <head>
     <meta http-equiv="Content-Type" content="text/html; charset=UTF-8" />
     <meta name="layout" content="admin" />
-    <g:set var="entityName" value="\${message(code: 'Candidate.label', default: 'Candidate')}" />
+    <g:set var="entityName" value="${message(code: 'Candidate.label', default: 'Candidate')}" />
     <title><g:message code="candidate.list.label" args=" " /></title>
     <r:require modules="application"/>
     <r:require modules="candidates"/>
@@ -14,7 +14,8 @@
 
 <g:form action="list" controller="candidate" name="searchForm">
   <fieldset>
-    <legend><g:message code="candidate.search.label" /> </legend>
+    <legend><g:message code="candidate.search.label" /></legend>
+    
     <div class="row-fluid">
 	    <div class="span12">
 		    <g:textField name="firstName" placeholder="${message(code: 'candidate.search.firstName.label', default: 'First Name')}" value="${params.firstName}"/>
