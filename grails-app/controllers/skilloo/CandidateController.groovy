@@ -23,7 +23,11 @@ class CandidateController {
 	}
 	
 	def create() {
-		[Candidate: new Candidate(params)]
+		def candidate = new Candidate(params)
+		candidate.driver = true
+		candidate.carOwner = true
+		candidate.active = true
+		[candidateInstance: candidate]
 	}
 	
 	def save() {
@@ -45,6 +49,6 @@ class CandidateController {
 			return
 		}
 
-		[candidate: candidate]
+		[Candidate: candidate]
 	}
 }
