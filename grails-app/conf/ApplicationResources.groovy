@@ -4,7 +4,7 @@ modules = {
     }
 
 	admin {
-		dependsOn 'bootstrap'
+		dependsOn 'bootstrap', 'jquery', 'font-awesome'
 		resource url:'css/admin.css'
 	}
 	
