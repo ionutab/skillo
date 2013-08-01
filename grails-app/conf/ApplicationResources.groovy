@@ -17,5 +17,6 @@ modules = {
 	candidates {
 		dependsOn 'bootstrap'
 		resource url:'js/candidates-list.js'
+		resource url:'js/candidates-form.js'
 	}
 }
