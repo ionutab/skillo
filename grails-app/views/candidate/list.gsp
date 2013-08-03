@@ -79,7 +79,7 @@
 		                        </td>
 		                        <td>
 		                            <g:if test="${Candidate.telephoneNumber != null}">
-                                        ${Candidate.telephoneNumber.details}
+                                        ${Candidate.telephoneNumber}
 		                            </g:if>
 		                        </td>
 		                        <td>
