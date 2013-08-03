@@ -17,6 +17,20 @@
 	<table class="table">
 		<tbody>
 		
+            <tr class="prop">
+                <td valign="top" class="name"><g:message code="candidate.firstName.label" default="First Name" /></td>
+                
+                <td valign="top" class="value">${fieldValue(bean: candidateInstance, field: "firstName")}</td>
+                
+            </tr>
+        
+            <tr class="prop">
+                <td valign="top" class="name"><g:message code="candidate.lastName.label" default="Last Name" /></td>
+                
+                <td valign="top" class="value">${fieldValue(bean: candidateInstance, field: "lastName")}</td>
+                
+            </tr>
+        
 			<tr class="prop">
 				<td valign="top" class="name"><g:message code="candidate.consultant.label" default="Consultant" /></td>
 				
@@ -69,7 +83,7 @@
 			<tr class="prop">
 				<td valign="top" class="name"><g:message code="candidate.emails.label" default="Emails" /></td>
 				
-				<td valign="top" class="value">${fieldValue(bean: candidateInstance, field: "emails")}</td>
+				<td valign="top" class="value">${fieldValue(bean: candidateInstance, field: "email")}</td>
 				
 			</tr>
 		
@@ -87,84 +101,79 @@
 				
 			</tr>
 		
-			<tr class="prop">
-				<td valign="top" class="name"><g:message code="candidate.candidateNotes.label" default="Candidate Notes" /></td>
-				
-				<td valign="top" style="text-align: left;" class="value">
-					<ul>
-					<g:each in="${candidateInstance.candidateNotes}" var="c">
-						<li><g:link controller="candidateNote" action="show" id="${c.id}">${c?.encodeAsHTML()}</g:link></li>
-					</g:each>
-					</ul>
-				</td>
-				
-			</tr>
+		    <g:if test="${candidateInstance.candidateNotes} != null">
+				<tr class="prop">
+					<td valign="top" class="name"><g:message code="candidate.candidateNotes.label" default="Candidate Notes" /></td>
+					
+					<td valign="top" style="text-align: left;" class="value">
+						<ul>
+						<g:each in="${candidateInstance.candidateNotes}" var="c">
+							<li><g:link controller="candidateNote" action="show" id="${c.id}">${c?.encodeAsHTML()}</g:link></li>
+						</g:each>
+						</ul>
+					</td>
+					
+				</tr>
+		    </g:if>
+		    
+            <g:if test="${candidateInstance.payrolls} != null">
+				<tr class="prop">
+					<td valign="top" class="name"><g:message code="candidate.payrolls.label" default="Payrolls" /></td>
+					
+					<td valign="top" style="text-align: left;" class="value">
+						<ul>
+						<g:each in="${candidateInstance.payrolls}" var="p">
+							<li><g:link controller="payroll" action="show" id="${p.id}">${p?.encodeAsHTML()}</g:link></li>
+						</g:each>
+						</ul>
+					</td>
+				</tr>
+			</g:if>
 		
-			<tr class="prop">
-				<td valign="top" class="name"><g:message code="candidate.payrolls.label" default="Payrolls" /></td>
-				
-				<td valign="top" style="text-align: left;" class="value">
-					<ul>
-					<g:each in="${candidateInstance.payrolls}" var="p">
-						<li><g:link controller="payroll" action="show" id="${p.id}">${p?.encodeAsHTML()}</g:link></li>
-					</g:each>
-					</ul>
-				</td>
-				
-			</tr>
+		    <g:if test="${candidateInstance.candidateQualifications} != null">
+				<tr class="prop">
+					<td valign="top" class="name"><g:message code="candidate.candidateQualifications.label" default="Candidate Qualifications" /></td>
+					
+					<td valign="top" style="text-align: left;" class="value">
+						<ul>
+						<g:each in="${candidateInstance.candidateQualifications}" var="c">
+							<li><g:link controller="candidateQualification" action="show" id="${c.id}">${c?.encodeAsHTML()}</g:link></li>
+						</g:each>
+						</ul>
+					</td>
+					
+				</tr>
+			</g:if>
 		
-			<tr class="prop">
-				<td valign="top" class="name"><g:message code="candidate.candidateQualifications.label" default="Candidate Qualifications" /></td>
-				
-				<td valign="top" style="text-align: left;" class="value">
-					<ul>
-					<g:each in="${candidateInstance.candidateQualifications}" var="c">
-						<li><g:link controller="candidateQualification" action="show" id="${c.id}">${c?.encodeAsHTML()}</g:link></li>
-					</g:each>
-					</ul>
-				</td>
-				
-			</tr>
+		    <g:if test="${candidateInstance.jobs} != null" >
+				<tr class="prop">
+					<td valign="top" class="name"><g:message code="candidate.jobs.label" default="Jobs" /></td>
+					
+					<td valign="top" style="text-align: left;" class="value">
+						<ul>
+						<g:each in="${candidateInstance.jobs}" var="j">
+							<li><g:link controller="job" action="show" id="${j.id}">${j?.encodeAsHTML()}</g:link></li>
+						</g:each>
+						</ul>
+					</td>
+					
+				</tr>
+			</g:if>
 		
-			<tr class="prop">
-				<td valign="top" class="name"><g:message code="candidate.jobs.label" default="Jobs" /></td>
-				
-				<td valign="top" style="text-align: left;" class="value">
-					<ul>
-					<g:each in="${candidateInstance.jobs}" var="j">
-						<li><g:link controller="job" action="show" id="${j.id}">${j?.encodeAsHTML()}</g:link></li>
-					</g:each>
-					</ul>
-				</td>
-				
-			</tr>
-		
-			<tr class="prop">
-				<td valign="top" class="name"><g:message code="candidate.placements.label" default="Placements" /></td>
-				
-				<td valign="top" style="text-align: left;" class="value">
-					<ul>
-					<g:each in="${candidateInstance.placements}" var="p">
-						<li><g:link controller="placement" action="show" id="${p.id}">${p?.encodeAsHTML()}</g:link></li>
-					</g:each>
-					</ul>
-				</td>
-				
-			</tr>
-		
-			<tr class="prop">
-				<td valign="top" class="name"><g:message code="candidate.firstName.label" default="First Name" /></td>
-				
-				<td valign="top" class="value">${fieldValue(bean: candidateInstance, field: "firstName")}</td>
-				
-			</tr>
-		
-			<tr class="prop">
-				<td valign="top" class="name"><g:message code="candidate.lastName.label" default="Last Name" /></td>
-				
-				<td valign="top" class="value">${fieldValue(bean: candidateInstance, field: "lastName")}</td>
-				
-			</tr>
+            <g:if test="${candidateInstance.placements} != null" >		
+				<tr class="prop">
+					<td valign="top" class="name"><g:message code="candidate.placements.label" default="Placements" /></td>
+					
+					<td valign="top" style="text-align: left;" class="value">
+						<ul>
+						<g:each in="${candidateInstance.placements}" var="p">
+							<li><g:link controller="placement" action="show" id="${p.id}">${p?.encodeAsHTML()}</g:link></li>
+						</g:each>
+						</ul>
+					</td>
+					
+				</tr>
+			</g:if>
 		
 		</tbody>
 	</table>
