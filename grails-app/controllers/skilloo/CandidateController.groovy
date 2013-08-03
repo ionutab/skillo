@@ -23,6 +23,7 @@ class CandidateController {
 	}
 	
 	def create() {
+		println "Candidate.create"
 		def candidate = new Candidate(params)
 		candidate.driver = true
 		candidate.carOwner = true
@@ -31,9 +32,29 @@ class CandidateController {
 	}
 	
 	def save() {
+		println "Candidate.save"
 		def candidate = new Candidate(params)
+		
+		def address = new Address(params);
+		address.active = true
+		address.
+		
+		candidate.address = address
+		
+		if(params.mainTradeId == null) {
+			println "main trade qualification does not exist"
+			candidate.mainTrade = null
+		}
+		
+		if (!address.save(flush: true)) {
+			println "Address not saved"
+			render(view: "create", model: [candidateInstance: candidate])
+			return
+		}
+		
 		if (!candidate.save(flush: true)) {
-			render(view: "create", model: [candidate: candidate])
+			println "Candidate not saved"
+			render(view: "create", model: [candidateInstance: candidate])
 			return
 		}
 
@@ -49,6 +70,6 @@ class CandidateController {
 			return
 		}
 
-		[Candidate: candidate]
+		[candidateInstance: candidate]
 	}
 }
