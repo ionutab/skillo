@@ -168,50 +168,68 @@
 		</div>
 	</div>
 
-	<div class="control-group fieldcontain ${hasErrors(bean: candidateInstance, field: 'payrolls', 'error')} ">
-		<label for="payrolls" class="control-label"><g:message
-				code="candidate.payrolls.label" default="Payrolls" /></label>
-		<div class="controls">
+</fieldset>
+<fieldset>
+    <legend>
+        <g:message code="candidate.form.competencesPayment" />
+    </legend>
+    <div class="control-group fieldcontain ${hasErrors(bean: candidateInstance, field: 'payrolls', 'error')} ">
+        <label for="payrolls" class="control-label">
+            <g:message code="candidate.payrolls.label" default="Payrolls" />
+        </label>
+        <div class="controls">
+            <ul class="one-to-many">
+                <g:each in="${candidateInstance?.payrolls?}" var="p">
+                    <li>
+                        <g:link controller="payroll" action="show" id="${p.id}">
+                            ${p?.encodeAsHTML()}
+                        </g:link></li>
+                </g:each>
+                <li class="add">
+                    <g:link controller="payroll" action="create" params="['candidate.id': candidateInstance?.id]">
+                        ${message(code: 'default.add.label', args: [message(code: 'payroll.label', default: 'Payroll')])}
+                    </g:link>
+                </li>
+            </ul>
 
-			<ul class="one-to-many">
-				<g:each in="${candidateInstance?.payrolls?}" var="p">
-					<li><g:link controller="payroll" action="show" id="${p.id}">
-							${p?.encodeAsHTML()}
-						</g:link></li>
-				</g:each>
-				<li class="add"><g:link controller="payroll" action="create"
-						params="['candidate.id': candidateInstance?.id]">
-						${message(code: 'default.add.label', args: [message(code: 'payroll.label', default: 'Payroll')])}
-					</g:link></li>
-			</ul>
-
-			<span class="help-inline">
-				${hasErrors(bean: candidateInstance, field: 'payrolls', 'error')}
-			</span>
-		</div>
-	</div>
-
-	<div class="control-group fieldcontain ${hasErrors(bean: candidateInstance, field: 'jobs', 'error')} ">
-		<label for="jobs" class="control-label"><g:message
-				code="candidate.jobs.label" default="Jobs" /></label>
-		<div class="controls">
-
-			<ul class="one-to-many">
-				<g:each in="${candidateInstance?.jobs?}" var="j">
-					<li><g:link controller="job" action="show" id="${j.id}">
-							${j?.encodeAsHTML()}
-						</g:link></li>
-				</g:each>
-				<li class="add"><g:link controller="job" action="create"
-						params="['candidate.id': candidateInstance?.id]">
-						${message(code: 'default.add.label', args: [message(code: 'job.label', default: 'Job')])}
-					</g:link></li>
-			</ul>
-
-			<span class="help-inline">
-				${hasErrors(bean: candidateInstance, field: 'jobs', 'error')}
-			</span>
-		</div>
-	</div>
+            <span class="help-inline">
+                ${hasErrors(bean: candidateInstance, field: 'payrolls', 'error')}
+            </span>
+        </div>
+    </div>    
+</fieldset>
+<fieldset>
+    <legend>
+        <g:message code="candidate.form.workHistory" />
+    </legend>
+    <div class="control-group fieldcontain ${hasErrors(bean: candidateInstance, field: 'jobs', 'error')} ">
+        <label for="jobs" class="control-label">
+            <g:message code="candidate.jobs.label" default="Jobs" />
+        </label>
+        <div class="controls">
+            <ul class="one-to-many">
+                <g:each in="${candidateInstance?.jobs?}" var="j">
+                    <li>
+                        <g:link controller="job" action="show" id="${j.id}">
+                            ${j?.encodeAsHTML()}
+                        </g:link>
+                    </li>
+                </g:each>
+                <li class="add">
+                    <g:link controller="job" action="create" params="['candidate.id': candidateInstance?.id]">
+                        ${message(code: 'default.add.label', args: [message(code: 'job.label', default: 'Job')])}
+                    </g:link>
+                </li>
+            </ul>
+            <span class="help-inline">
+                ${hasErrors(bean: candidateInstance, field: 'jobs', 'error')}
+            </span>
+        </div>
+    </div>
+</fieldset>
+<fieldset>
+    <legend>
+        <g:message code="candidate.form.notes" />
+    </legend>
 </fieldset>
 
