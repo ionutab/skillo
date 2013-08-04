@@ -41,11 +41,12 @@ class CandidateController {
             return
         }
 
-        def postcode = PostCode.findByCode(params.get("address.postcode"))
+        def postcode = PostCode.findByCode(params.get("address.postcode").toString())
 
-        if(postcode == null){
-            postcode = new PostCode();
-            postcode.code = params.get("address.postcode");
+        if (postcode == null){
+            println "Post Code does not exist in database"
+            render(view: "create", model: [candidateInstance: candidate])
+            return
         }
 
         address.details = params.get("address.details");
@@ -55,7 +56,7 @@ class CandidateController {
             println "main trade qualification does not exist"
             candidate.mainTrade = null
         } else {
-            Qualification mainTrade = Qualification.get(mainTradeId)
+            Qualification mainTrade = Qualification.get(params.mainTradeId)
             candidate.mainTrade = mainTrade
         }
 
