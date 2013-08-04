@@ -11,6 +11,7 @@ class Candidate {
     boolean active;
 
     String telephoneNumber
+    String otherTelephoneNumber
     String email
 
     Consultant consultant
@@ -21,6 +22,9 @@ class Candidate {
 
     static constraints = {   
         consultant nullable: true
+        otherTelephoneNumber nullable: true
+        telephoneNumber minSize: 8
+
 		
 		/**
 		 * temporary added in order to allow various tests on candidates list
