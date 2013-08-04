@@ -66,8 +66,8 @@
 			                <th><g:message code="candidate.telephoneNumber.label" default="Telephone Number" /></th>
 			                <th><g:message code="address.details.label" default="Address" /></th>
 			                <th><g:message code="address.postcode.label" default="Post Code" /></th>
-			                <th><g:message code="address.mainTrade.label" default="Main Trade" /></th>
-			                <th><g:message code="actions" default="Actions" /></th>
+			                <th><g:message code="candidate.mainTrade.label" default="Main Trade" /></th>
+			                <th><g:message code="default.actions.label" default="Actions" /></th>
 			                
 			            </tr>
 			        </thead>
@@ -89,7 +89,7 @@
 		                        </td>
 		                        <td>
 		                            <g:if test="${Candidate.address != null}">
-		                                ${Candidate.address.postCode}
+		                                ${Candidate.address.postCode.code}
 		                            </g:if>
 		                        </td>
 		                        <td>
