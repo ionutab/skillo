@@ -1,4 +1,7 @@
 <%@ page import="skilloo.Candidate"%>
+<g:javascript library="application" />
+<modalbox:modalIncludes />
+
 
 <fieldset>
 	<legend>
@@ -39,7 +42,7 @@
 				    <g:message code="candidate.birthDate.label" default="Birth Date" />
 				</label>
 				<div class="controls">
-					<bs:datePicker name="birthDate" precision="day" value="${candidateInstance?.birthDate}" default="none" noSelection="['':' ']" />
+					<bs:datePicker name="birthDate" id="birthDate" precision="day" value="${candidateInstance?.birthDate}" default="none" noSelection="['':' ']"  />
 					<span class="help-inline">
 						${hasErrors(bean: candidateInstance, field: 'birthDate', 'error')}
 					</span>
@@ -56,15 +59,19 @@
 					<g:textField name="telephoneNumber" class="input-small" value="${candidateInstance?.telephoneNumber}" />
 					<span class="help-inline">
 						${hasErrors(bean: candidateInstance, field: 'telephoneNumber', 'error')}
-					</span>
-				</div>
-			</div>
-		</div>
+                    </span>
+                    <g:textField name="otherTelephoneNumber" class="input-small" value="${candidateInstance?.otherTelephoneNumber}" />
+                    <span class="help-inline">
+                        ${hasErrors(bean: candidateInstance, field: 'otherTelephoneNumber', 'error')}
+                    </span>
+                </div>
+            </div>
+        </div>
 	</div>
 	<div class="row-fluid">
 		<div class="span4">
 			<div class="control-group fieldcontain ${hasErrors(bean: candidateInstance, field: 'address', 'error')} ">
-				<label for="address" class="control-label">
+				<label for="address.details" class="control-label">
 				    <g:message code="candidate.address.label" default="Address" />
 				</label>
 				<div class="controls">
@@ -77,11 +84,11 @@
 		</div>
 		<div class="span4">
 			<div class="control-group fieldcontain ${hasErrors(bean: candidateInstance, field: 'address', 'error')} ">
-				<label for="address" class="control-label">
+				<label for="address.postcode" class="control-label">
 				    <g:message code="address.postcode.label" default="Post Code" />
 				</label>
 				<div class="controls">
-					<g:textField name="address.postcode" class="input-small" value="${candidateInstance?.address?.postCode}" />
+					<g:textField name="address.postcode" id="address.postcode" class="input-small" value="${candidateInstance?.address?.postCode}" />
 					<span class="help-inline">
 						${hasErrors(bean: candidateInstance, field: 'address', 'error')}
 					</span>
@@ -104,20 +111,23 @@
 		</div>
 		<div class="span4">
 			<div class="control-group fieldcontain ${hasErrors(bean: candidateInstance, field: 'mainTrade', 'error')} ">
-				<label for="mainTrade" class="control-label">
+				<label for="mainTrade.name" class="control-label">
 				    <g:message code="candidate.mainTrade.label" default="Main Trade" />
 				</label>
 				<div class="controls">
 					<%--
                         TODO:add most used qualifications list on the right so that the user can select the qualification if not typing it 
                     --%>
-					<g:textField name="mainTrade.name" class="input-xlarge"
-						value="${candidateInstance?.mainTrade?.name}" />
+					<g:textField name="mainTradeName" class="input-xlarge" value="${candidateInstance?.mainTrade?.name}" />
 					<span class="help-inline">
 						${hasErrors(bean: candidateInstance, field: 'mainTrade', 'error')}
 					</span>
-				</div>
-			</div>
+                    <g:hiddenField name="mainTradeId" id="mainTradeId" value="${candidateInstance?.mainTrade?.name}" />
+                    <modalbox:createLink controller="qualification" action="listModal" title="${message(code: 'qualification.list.label', default: 'Qualification List', args: ' ')}" width="600" >
+                        <i class="icon-th-list"></i>
+                    </modalbox:createLink>
+                </div>
+            </div>
 		</div>
 	</div>
 </fieldset>
@@ -129,7 +139,8 @@
 		<div class="span2">
 			<div class="control-group fieldcontain ${hasErrors(bean: candidateInstance, field: 'driver', 'error')} ">
 				<label for="driver" class="control-label">
-				<g:message code="candidate.driver.label" default="Driver" /></label>
+				    <g:message code="candidate.driver.label" default="Driver" />
+                </label>
 				<div class="controls">
 					<bs:checkBox name="driver" value="${candidateInstance?.driver}" />
 					<span class="help-inline">
@@ -232,4 +243,3 @@
         <g:message code="candidate.form.notes" />
     </legend>
 </fieldset>
-
