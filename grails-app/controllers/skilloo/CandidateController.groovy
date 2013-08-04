@@ -1,7 +1,5 @@
 package skilloo
 
-import java.awt.GraphicsConfiguration.DefaultBufferCapabilities;
-
 class CandidateController {
 
     def scaffold = true
@@ -35,28 +33,44 @@ class CandidateController {
 		println "Candidate.save"
 		def candidate = new Candidate(params)
 		
-		def address = new Address(params);
+		def address = new Address();
 		address.active = true
-		address.
-		
-		candidate.address = address
-		
-		if(params.mainTradeId == null) {
-			println "main trade qualification does not exist"
-			candidate.mainTrade = null
-		}
-		
-		if (!address.save(flush: true)) {
-			println "Address not saved"
-			render(view: "create", model: [candidateInstance: candidate])
-			return
-		}
-		
-		if (!candidate.save(flush: true)) {
-			println "Candidate not saved"
-			render(view: "create", model: [candidateInstance: candidate])
-			return
-		}
+
+        if(params.get("address.postcode") == null){
+            render(view: "create", model: [candidateInstance: candidate])
+            return
+        }
+
+        def postcode = PostCode.findByCode(params.get("address.postcode"))
+
+        if(postcode == null){
+            postcode = new PostCode();
+            postcode.code = params.get("address.postcode");
+        }
+
+        address.details = params.get("address.details");
+        address.postCode = postcode
+
+        if(params.mainTradeId == null) {
+            println "main trade qualification does not exist"
+            candidate.mainTrade = null
+        } else {
+            Qualification mainTrade = Qualification.get(mainTradeId)
+            candidate.mainTrade = mainTrade
+        }
+
+        if (!address.save(flush: true)) {
+            println "Address not saved"
+            render(view: "create", model: [candidateInstance: candidate])
+            return
+        }
+
+        candidate.address = address
+        if (!candidate.save(flush: true)) {
+            println "Candidate not saved"
+            render(view: "create", model: [candidateInstance: candidate])
+            return
+        }
 
 		flash.message = message(code: 'default.created.message', args: [message(code: 'candidate.label', default: 'Candidate'), candidate.id])
 		redirect(action: "show", id: candidate.id)
