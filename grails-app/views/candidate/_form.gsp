@@ -1,12 +1,9 @@
 <%@ page import="skilloo.Candidate"%>
-<g:javascript library="application" />
-<modalbox:modalIncludes />
-
-
+<r:require modules="candidates"/>
 <fieldset>
-	<legend>
-		<g:message code="candidate.form.basicInfo" />
-	</legend>
+    <legend>
+        <g:message code="candidate.form.basicInfo" />
+    </legend>
 	<div class="row-fluid">
 		<div class="span4">
 			<div class="control-group fieldcontain ${hasErrors(bean: candidate, field: 'firstName', 'error')} ">
@@ -84,13 +81,13 @@
 		</div>
 		<div class="span4">
 			<div class="control-group fieldcontain ${hasErrors(bean: candidateInstance, field: 'address', 'error')} ">
-				<label for="address.postcode" class="control-label">
+				<label for="address.postCode" class="control-label">
 				    <g:message code="address.postcode.label" default="Post Code" />
 				</label>
 				<div class="controls">
-					<g:textField name="address.postcode" id="address.postcode" class="input-small" value="${candidateInstance?.address?.postCode}" />
+					<g:textField name="address.postCode" id="address.postCode" class="input-small" value="${candidateInstance?.address?.postCode?.code}" />
 					<span class="help-inline">
-						${hasErrors(bean: candidateInstance, field: 'address', 'error')}
+						${hasErrors(bean: candidateInstance, field: 'postCode', 'error')}
 					</span>
 				</div>
 			</div>
@@ -118,14 +115,19 @@
 					<%--
                         TODO:add most used qualifications list on the right so that the user can select the qualification if not typing it 
                     --%>
-					<g:textField name="mainTradeName" class="input-xlarge" value="${candidateInstance?.mainTrade?.name}" />
+                    <g:select
+                        name="mainTrade.name"
+                        from="${AvailableMainTrades}"
+                        value="${candidateInstance?.mainTrade?.id}"
+                        optionKey="id"
+                        optionValue="name"
+                        class="input-xlarge"
+                        id="mainTradeId"
+                        noSelection="${['null':'']}"
+                        />
 					<span class="help-inline">
 						${hasErrors(bean: candidateInstance, field: 'mainTrade', 'error')}
 					</span>
-                    <g:hiddenField name="mainTradeId" id="mainTradeId" value="${candidateInstance?.mainTrade?.name}" />
-                    <modalbox:createLink controller="qualification" action="listModal" title="${message(code: 'qualification.list.label', default: 'Qualification List', args: ' ')}" width="600" >
-                        <i class="icon-th-list"></i>
-                    </modalbox:createLink>
                 </div>
             </div>
 		</div>
@@ -155,7 +157,7 @@
 	               <g:message code="candidate.carOwner.label" default="Car Owner" />
 	            </label>
 	            <div class="controls">
-	                <bs:checkBox name="carOwner" value="${candidateInstance?.carOwner}" checked="${true}" />
+	                <bs:checkBox name="carOwner" value="${candidateInstance?.carOwner}" />
 	                <span class="help-inline">
 	                    ${hasErrors(bean: candidateInstance, field: 'carOwner', 'error')}
 	                </span>
@@ -170,7 +172,7 @@
 			      <g:message code="candidate.sponsored.label" default="Sponsored" />
 			    </label>
 			    <div class="controls">
-			        <bs:checkBox name="sponsored" value="${candidateInstance?.sponsored}" checked="${true}" />
+			        <bs:checkBox name="sponsored" value="${candidateInstance?.sponsored}" />
 			        <span class="help-inline">
 			            ${hasErrors(bean: candidateInstance, field: 'sponsored', 'error')}
 			        </span>
@@ -178,68 +180,5 @@
 			</div>
 		</div>
 	</div>
+</fieldset>
 
-</fieldset>
-<fieldset>
-    <legend>
-        <g:message code="candidate.form.competencesPayment" />
-    </legend>
-    <div class="control-group fieldcontain ${hasErrors(bean: candidateInstance, field: 'payrolls', 'error')} ">
-        <label for="payrolls" class="control-label">
-            <g:message code="candidate.payrolls.label" default="Payrolls" />
-        </label>
-        <div class="controls">
-            <ul class="one-to-many">
-                <g:each in="${candidateInstance?.payrolls?}" var="p">
-                    <li>
-                        <g:link controller="payroll" action="show" id="${p.id}">
-                            ${p?.encodeAsHTML()}
-                        </g:link></li>
-                </g:each>
-                <li class="add">
-                    <g:link controller="payroll" action="create" params="['candidate.id': candidateInstance?.id]">
-                        ${message(code: 'default.add.label', args: [message(code: 'payroll.label', default: 'Payroll')])}
-                    </g:link>
-                </li>
-            </ul>
-
-            <span class="help-inline">
-                ${hasErrors(bean: candidateInstance, field: 'payrolls', 'error')}
-            </span>
-        </div>
-    </div>    
-</fieldset>
-<fieldset>
-    <legend>
-        <g:message code="candidate.form.workHistory" />
-    </legend>
-    <div class="control-group fieldcontain ${hasErrors(bean: candidateInstance, field: 'jobs', 'error')} ">
-        <label for="jobs" class="control-label">
-            <g:message code="candidate.jobs.label" default="Jobs" />
-        </label>
-        <div class="controls">
-            <ul class="one-to-many">
-                <g:each in="${candidateInstance?.jobs?}" var="j">
-                    <li>
-                        <g:link controller="job" action="show" id="${j.id}">
-                            ${j?.encodeAsHTML()}
-                        </g:link>
-                    </li>
-                </g:each>
-                <li class="add">
-                    <g:link controller="job" action="create" params="['candidate.id': candidateInstance?.id]">
-                        ${message(code: 'default.add.label', args: [message(code: 'job.label', default: 'Job')])}
-                    </g:link>
-                </li>
-            </ul>
-            <span class="help-inline">
-                ${hasErrors(bean: candidateInstance, field: 'jobs', 'error')}
-            </span>
-        </div>
-    </div>
-</fieldset>
-<fieldset>
-    <legend>
-        <g:message code="candidate.form.notes" />
-    </legend>
-</fieldset>
