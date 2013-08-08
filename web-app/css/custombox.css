@@ -1,0 +1,25 @@
+
+.box {
+    margin-top: 20px;
+}
+
+.box .box-top {
+    padding:10px;
+    background-color: #0088cc;
+}
+
+.box .box-top h4 {
+    display:inline-block;
+    line-height:20px;
+    margin:0;
+    color:#fff
+}
+
+.box .box-body {
+    padding: 10px;
+    background: #e3e3e3;
+}
+
+.box .box-info .box-top {
+    background-color: #e3e3e3;
+}
