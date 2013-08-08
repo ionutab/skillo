@@ -36,19 +36,26 @@ class CandidateController {
 	def save() {
 		println "Candidate.save"
 		def candidate = new Candidate(params)
+
+        if(candidate.firstName == "" || candidate.lastName == ""){
+            flash.message = message(code: "candidate.form.error.nameNull")
+            render(view: "create", model: [candidateInstance: candidate])
+            return
+        }
 		
 		def address = new Address();
 		address.active = true
 
-        if(params.get("address.postCode") == null){
+        if(params.get("addressPostCode") == ""){
+            flash.message = message(code: "candidate.form.error.postCodeNull")
             render(view: "create", model: [candidateInstance: candidate])
             return
         }
 
-        def postcode = PostCode.findByCode(params.get("address.postCode").toString())
+        def postcode = PostCode.findByCode(params.get("addressPostCode").toString())
 
         if (postcode == null){
-            flash.message = message(code: "candidate.form.error.postCode", args: [params.get("address.postCode")])
+            flash.message = message(code: "candidate.form.error.postCode", args: [params.get("addressPostCode")])
             render(view: "create", model: [candidateInstance: candidate])
             return
         }
@@ -80,7 +87,7 @@ class CandidateController {
 		flash.message = message(code: 'default.created.message', args: [message(code: 'candidate.label', default: 'Candidate'), candidate.id])
 		redirect(action: "show", id: candidate.id)
 	}
-	
+
 	def show() {
 		def candidate = Candidate.get(params.id)
 		if (!candidate) {
