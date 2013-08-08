@@ -81,11 +81,11 @@
 		</div>
 		<div class="span4">
 			<div class="control-group fieldcontain ${hasErrors(bean: candidateInstance, field: 'address', 'error')} ">
-				<label for="address.postCode" class="control-label">
+				<label for="addressPostCode" class="control-label">
 				    <g:message code="address.postcode.label" default="Post Code" />
 				</label>
 				<div class="controls">
-					<g:textField name="address.postCode" id="address.postCode" class="input-small" value="${candidateInstance?.address?.postCode?.code}" />
+					<g:textField name="addressPostCode" id="addressPostCode" class="input-small" value="${candidateInstance?.address?.postCode?.code}" />
 					<span class="help-inline">
 						${hasErrors(bean: candidateInstance, field: 'postCode', 'error')}
 					</span>
@@ -116,13 +116,13 @@
                         TODO:add most used qualifications list on the right so that the user can select the qualification if not typing it 
                     --%>
                     <g:select
-                        name="mainTrade.name"
+                        name="mainTradeId"
+                        id="mainTradeId"
                         from="${AvailableMainTrades}"
                         value="${candidateInstance?.mainTrade?.id}"
                         optionKey="id"
                         optionValue="name"
                         class="input-xlarge"
-                        id="mainTradeId"
                         noSelection="${['null':'']}"
                         />
 					<span class="help-inline">
