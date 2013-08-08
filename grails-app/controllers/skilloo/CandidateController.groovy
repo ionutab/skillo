@@ -25,8 +25,12 @@ class CandidateController {
 		def candidate = new Candidate(params)
 		candidate.driver = true
 		candidate.carOwner = true
-		candidate.active = true
-		[candidateInstance: candidate]
+        candidate.active = true
+        def candidatePayrolls = []
+
+        def availableMainTrades = Qualification.findAllByIsMainTrade(true)
+
+		[candidateInstance: candidate, CandidatePayrolls: candidatePayrolls, AvailableMainTrades: availableMainTrades]
 	}
 	
 	def save() {
@@ -36,15 +40,15 @@ class CandidateController {
 		def address = new Address();
 		address.active = true
 
-        if(params.get("address.postcode") == null){
+        if(params.get("address.postCode") == null){
             render(view: "create", model: [candidateInstance: candidate])
             return
         }
 
-        def postcode = PostCode.findByCode(params.get("address.postcode").toString())
+        def postcode = PostCode.findByCode(params.get("address.postCode").toString())
 
         if (postcode == null){
-            println "Post Code does not exist in database"
+            flash.message = message(code: "candidate.form.error.postCode", args: [params.get("address.postCode")])
             render(view: "create", model: [candidateInstance: candidate])
             return
         }
