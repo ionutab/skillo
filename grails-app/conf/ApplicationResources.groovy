@@ -6,6 +6,7 @@ modules = {
 	admin {
 		dependsOn 'bootstrap'
 		resource url:'css/admin.css'
+		resource url:'css/custombox.css'
 	}
 	
 	maps {
@@ -18,5 +19,12 @@ modules = {
 		dependsOn 'bootstrap'
 		resource url:'js/candidates-list.js'
 		resource url:'js/candidates-form.js'
+	}
+
+	select2 {
+		dependsOn 'bootstrap'
+        resource url:'js/select2/select2.js'
+        resource url:'css/select2/select2.css'
+        resource url:'css/select2/select2-bootstrap.css'
 	}
 }
