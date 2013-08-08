@@ -7,7 +7,20 @@
 
 <body>
 
-	<p>Dashboard page.</p>
+<div class="container-fluid">
+    <div class="row-fluid">
+        <div class="span12">
+            <div class="box">
+                <div class="box-top">
+                    <h4><i class="icon-reorder"></i> Box </h4>
+                </div>
+                <div class="box-body">
+                    Hello!
+                </div>
+            </div>
+        </div>
+    </div>
+</div>
 
 </body>
 
