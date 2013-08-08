@@ -1,6 +1,7 @@
-
-$("#add-candidates-tab-button").click(function() {
-	alert('duplicating');
+$(document).ready(function() {
+    $("#add-candidates-tab-button").click(function() {
+        alert('duplicating');
+    });
 });
 
 
