@@ -20,12 +20,17 @@
 		<g:renderErrors bean="candidate" as="list" />
 	</div>
 	</g:hasErrors>
-	
-	<g:form action="save" class="form-horizontal" >
-		<g:render template="form"/>
-		<g:submitButton name="create" class="btn btn-primary" value="${message(code: 'default.button.save.label', default: 'Save')}" />
-        <button class="btn" type="reset"><g:message code="default.button.reset.label" default="Reset" /></button>
-	</g:form>
+
+    <div class="row">
+        <div class="span6">
+            <g:form action="save" class="form-horizontal" >
+                <g:render template="basicForm"/>
+                <g:submitButton name="create" class="btn btn-primary" value="${message(code: 'default.button.save.label', default: 'Save')}" />
+                <button class="btn" type="reset"><g:message code="default.button.reset.label" default="Reset" /></button>
+            </g:form>
+        </div>
+    </div>
+
 
     %{--TODO create special template for these , or form--}%
 
