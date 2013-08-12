@@ -15,10 +15,11 @@
 
             <g:layoutBody />
             <g:pageProperty name="page.body" />
-
+            %{--
             <g:if test="${!layout_nocontextbar}">
                 <g:render template="/_menu/listContext"/>
             </g:if>
+            --}%
 				
 		</div>
 	</div>
