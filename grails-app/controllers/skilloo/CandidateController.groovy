@@ -26,12 +26,28 @@ class CandidateController {
 		candidate.driver = true
 		candidate.carOwner = true
         candidate.active = true
-        def candidatePayrolls = []
 
-        def availableMainTrades = Qualification.findAllByIsMainTrade(true)
+        def availableMainTrades = Qualification.findAllByCanBeMainTrade(true)
 
-		[candidateInstance: candidate, CandidatePayrolls: candidatePayrolls, AvailableMainTrades: availableMainTrades]
+		[candidateInstance: candidate, AvailableMainTrades: availableMainTrades]
 	}
+
+    def edit() {
+        def candidate = Candidate.get(params.id)
+        if (!candidate) {
+            flash.message = message(code: 'default.not.found.message', args: [message(code: 'candidate.label', default: 'Candidate'), params.id])
+            redirect(action: "list")
+            return
+        }
+
+        def newCandidateQualification = new CandidateQualification()
+        newCandidateQualification.setCandidate(candidate)
+
+        def availableMainTrades = Qualification.findAllByCanBeMainTrade(true)
+        def availableQualifications = Qualification.findAll()
+
+        [candidateInstance: candidate, newCandidateQualification: newCandidateQualification , AvailableMainTrades: availableMainTrades, AvailableQualifications: availableQualifications ]
+    }
 	
 	def save() {
 		println "Candidate.save"
@@ -68,7 +84,13 @@ class CandidateController {
             candidate.mainTrade = null
         } else {
             Qualification mainTrade = Qualification.get(params.mainTradeId)
-            candidate.mainTrade = mainTrade
+            CandidateQualification candidateQualification = new CandidateQualification()
+            candidateQualification.setQualification(mainTrade)
+            candidateQualification.setCandidate(candidate)
+            candidateQualification.setActive(Boolean.TRUE)
+            candidateQualification.setIsMainTrade(Boolean.TRUE)
+            candidate.candidateQualifications = new ArrayList<CandidateQualification>()
+            candidate.candidateQualifications.add(candidateQualification)
         }
 
         if (!address.save(flush: true)) {
@@ -85,8 +107,49 @@ class CandidateController {
         }
 
 		flash.message = message(code: 'default.created.message', args: [message(code: 'candidate.label', default: 'Candidate'), candidate.id])
-		redirect(action: "show", id: candidate.id)
+		redirect(action: "edit", fragment: "candidateQualificationsForm", id: candidate.id)
 	}
+
+    def addCandidateQualification() {
+        println "Candidate.addCandidateQualification"
+        if(params.get("candidateId") == null){
+            println "candidateId IS NULL"
+            return
+        }
+
+        def candidate = Candidate.get(Long.parseLong(params.get("candidateId").toString()))
+        if(candidate == null){
+            println "candidate IS NULL"
+            return
+        }
+
+        if(params.get("newQualificationId") == null){
+            println "qualification Id IS NULL"
+            return
+        }
+        def qualification = Qualification.get(Long.parseLong(params.get("newQualificationId").toString()))
+        if(qualification == null){
+            println "qualifications IS NULL"
+            return
+        }
+
+        def newCandidateQualification = new CandidateQualification(params)
+
+        newCandidateQualification.setCandidate(candidate)
+        newCandidateQualification.setQualification(qualification)
+        newCandidateQualification.setActive(Boolean.TRUE)
+        newCandidateQualification.setIsMainTrade(Boolean.FALSE)
+
+        candidate.candidateQualifications.add(newCandidateQualification)
+
+        if(!newCandidateQualification.save(flush: true)){
+            println "Candidate Qualification not saved"
+            render(view: "edit", model: [candidateInstance: candidate, newCandidateQualification: newCandidateQualification])
+        }
+
+
+        redirect(action: "edit", fragment: "candidateQualificationsForm", id: candidate.id)
+    }
 
 	def show() {
 		def candidate = Candidate.get(params.id)
