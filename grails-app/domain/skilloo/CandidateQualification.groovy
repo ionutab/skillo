@@ -7,9 +7,11 @@ class CandidateQualification {
     Date expiryDate
     String number
     Boolean active
+    Boolean isMainTrade
     
     static constraints = {
-        number unique:true 
+        expiryDate nullable: true
+        number nullable: true
     }
     
 }
