@@ -2,6 +2,11 @@
             <legend>
                 <g:message code="candidate.form.basicInfo" />
             </legend>
+
+            %{--
+                TODO: add suggested people after the first name and last name entry
+            --}%
+
             <div class="control-group fieldcontain ${hasErrors(bean: candidate, field: 'firstName', 'error')} ">
                 <label for="firstName" class="control-label">
                     <g:message code="candidate.firstName.label" default="First Name" />
