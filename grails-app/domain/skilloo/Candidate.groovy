@@ -5,10 +5,10 @@ class Candidate {
     String firstName
     String lastName
     Date birthDate
-    boolean driver
-    boolean sponsored
-    boolean carOwner
-    boolean active;
+    Boolean driver
+    Boolean sponsored
+    Boolean carOwner
+    Boolean active
 
     String telephoneNumber
     String otherTelephoneNumber
@@ -16,8 +16,7 @@ class Candidate {
 
     Consultant consultant
     Address address
-	Qualification mainTrade;
-    
+
     static hasMany = [candidateQualifications:CandidateQualification, candidateNotes:CandidateNote, payrolls:Payroll, jobs:Job, placements:Placement ]
 
     static constraints = {   
@@ -35,7 +34,6 @@ class Candidate {
 		carOwner nullable: true
 		active nullable: true
 		email nullable: true
-		mainTrade nullable: true
 		candidateNotes nullable: true
 		payrolls nullable: true
 		candidateQualifications nullable: true
