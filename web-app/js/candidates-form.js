@@ -7,5 +7,10 @@ $(document).ready(function() {
             allowClear:true
         }
     );
+    $("#newQualificationId").select2({
+            placeholder: "Select a Qualification",
+            allowClear:true
+        }
+    );
 
 });
