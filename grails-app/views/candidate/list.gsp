@@ -93,12 +93,17 @@
 		                            </g:if>
 		                        </td>
 		                        <td>
-		                            <g:if test="${Candidate.mainTrade != null}">
-		                                ${Candidate.mainTrade.name}
+		                            <g:if test="${Candidate.candidateQualifications != null && Candidate.candidateQualifications.size() > 0}">
+                                        <g:each in="${Candidate.candidateQualifications}" var="cq">
+                                            <g:if test="${cq.isMainTrade}">
+                                                ${cq.qualification?.name}
+                                            </g:if>
+                                        </g:each>
 		                            </g:if>
 		                        </td>
 		                        <td>
-		                        </td>
+                                    <g:link action="edit" id="${Candidate.id}" class="btn btn-small"><g:message code="default.edit.label" args=" " /></g:link>
+                                </td>
 			                </tr>
 			            </g:each>
 			        </tbody>
