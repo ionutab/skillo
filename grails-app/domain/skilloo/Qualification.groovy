@@ -5,7 +5,7 @@ class Qualification {
     String code
     String name
     String description
-    Boolean isMainTrade
+    Boolean canBeMainTrade
 
     static constraints = {
         code unique:true
