@@ -94,13 +94,6 @@
 				
 			</tr>
 		
-			<tr class="prop">
-				<td valign="top" class="name"><g:message code="candidate.mainTrade.label" default="Main Trade" /></td>
-				
-				<td valign="top" class="value"><g:link controller="qualification" action="show" id="${candidateInstance?.mainTrade?.id}">${candidateInstance?.mainTrade?.encodeAsHTML()}</g:link></td>
-				
-			</tr>
-		
 		    <g:if test="${candidateInstance.candidateNotes} != null">
 				<tr class="prop">
 					<td valign="top" class="name"><g:message code="candidate.candidateNotes.label" default="Candidate Notes" /></td>
@@ -116,13 +109,13 @@
 				</tr>
 		    </g:if>
 		    
-            <g:if test="${candidateInstance.payrolls} != null">
+            <g:if test="${candidateInstance.payroll} != null">
 				<tr class="prop">
-					<td valign="top" class="name"><g:message code="candidate.payrolls.label" default="Payrolls" /></td>
+					<td valign="top" class="name"><g:message code="candidate.payroll.label" default="Payroll" /></td>
 					
 					<td valign="top" style="text-align: left;" class="value">
 						<ul>
-						<g:each in="${candidateInstance.payrolls}" var="p">
+						<g:each in="${candidateInstance.payroll}" var="p">
 							<li><g:link controller="payroll" action="show" id="${p.id}">${p?.encodeAsHTML()}</g:link></li>
 						</g:each>
 						</ul>
