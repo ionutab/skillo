@@ -48,7 +48,7 @@
         <g:message code="candidateQualification.isMainTrade.label" default="Is Main Trade" />
     </label>
     <div class="controls">
-        <bs:checkBox name="sponsored" value="${newCandidateQualification?.isMainTrade}" />
+        <bs:checkBox name="isMainTrade" value="${newCandidateQualification?.isMainTrade}" />
         <span class="help-inline">
             ${hasErrors(bean: newCandidateQualification, field: 'isMainTrade', 'error')}
         </span>
