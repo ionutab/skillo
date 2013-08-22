@@ -40,7 +40,7 @@ body {
 .page-content-container {
     display:block;
     margin: 0;
-    padding: 20px 20px 20px;
+    padding: 10px 10px 10px;
     min-height: 100%;
 }
 
@@ -103,22 +103,40 @@ body {
 }
 
 .form-horizontal .control-label {
-    width: 100px;
+    width: 130px;
 }
 
 .form-horizontal .controls {
     /*margin-left: 120px; default bootstrap difference is 20px*/
-    margin-left: 115px;
+    margin-left: 140px;
 }
 
 .form-horizontal .control-group {
     margin-bottom: 10px;
 }
 
-legend + .control-group {
+.legend + .control-group {
     margin-top: 0;
 }
 
 .autocomplete{
     height: 40px;
+}
+
+.datepicker{
+    z-index:1151;
+}
+
+legend {
+    font-size: 16px;
+    margin-bottom: 10px;
+}
+
+.table th, .table td {
+    line-height: 14px;
+    vertical-align: middle;
+}
+
+.top-context {
+    margin-top: -15px;
 }
