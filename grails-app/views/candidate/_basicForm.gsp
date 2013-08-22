@@ -1,12 +1,4 @@
 <%@ page import="skilloo.Candidate"%>
-            <legend>
-                <g:message code="candidate.form.basicInfo" />
-            </legend>
-
-            %{--
-                TODO: add suggested people after the first name and last name entry
-            --}%
-
             <div class="control-group fieldcontain ${hasErrors(bean: candidate, field: 'firstName', 'error')} ">
                 <label for="firstName" class="control-label">
                     <g:message code="candidate.firstName.label" default="First Name" />
@@ -34,7 +26,8 @@
                     <g:message code="candidate.birthDate.label" default="Birth Date" />
                 </label>
                 <div class="controls">
-                    <bs:datePicker name="birthDate" id="birthDate" precision="day" value="${candidateInstance?.birthDate}" default="none" noSelection="['':' ']"  />
+                    <bs:datePicker name="birthDate" id="birthDate" precision="year" value="${candidateInstance?.birthDate}" default="none" noSelection="['':' ']" />
+
                     <span class="help-inline">
                         ${hasErrors(bean: candidateInstance, field: 'birthDate', 'error')}
                     </span>
@@ -79,7 +72,8 @@
             </div>
             <div class="control-group fieldcontain ${hasErrors(bean: candidateInstance, field: 'email', 'error')} ">
                 <label for="email" class="control-label">
-                <g:message code="candidate.email.label" default="Email" /></label>
+                    <g:message code="candidate.email.label" default="Email" />
+                </label>
                 <div class="controls">
                     <g:field type="email" name="email" class="input-xlarge" value="${candidateInstance?.email}" />
                     <span class="help-inline">
@@ -87,6 +81,20 @@
                     </span>
                 </div>
             </div>
+
+            <% if(params.action == 'edit'){ %>
+                <div class="control-group fieldcontain ${hasErrors(bean: candidateInstance, field: 'mainTrade', 'error')} ">
+                    <label for="owningConsultantId" class="control-label">
+                        <g:message code="candidate.owningConsultant.label" default="Owning Consultant" />
+                    </label>
+                    <div class="controls">
+                        <g:textField name="owningConsultantId" class="input-xlarge" value="${candidateInstance?.consultant?.firstName + ' ' + candidateInstance?.consultant?.lastName}" disabled="disabled" />
+                        <span class="help-inline">
+                            ${hasErrors(bean: candidateInstance, field: 'consultant', 'error')}
+                        </span>
+                    </div>
+                </div>
+            <% } %>
 
             <% if(params.action == 'create') {%>
                 <div class="control-group fieldcontain ${hasErrors(bean: candidateInstance, field: 'mainTrade', 'error')} ">
@@ -113,10 +121,6 @@
                     </div>
                 </div>
             <% } %>
-
-            <legend>
-                <g:message code="candidate.form.extraInfo" />
-            </legend>
 
     <div class="row-fluid">
         <div class="span4">
@@ -161,4 +165,3 @@
             </div>
         </div>
     </div>
-
