@@ -62,7 +62,7 @@
 			            <tr>
 			            
 			                <g:sortableColumn property="firstName" title="${message(code: 'candidate.firstName.label', default: 'First ')}" />
-			                <g:sortableColumn property="lastName" title="${message(code: 'candidate.firstName.label', default: 'Last Name')}" />
+			                <g:sortableColumn property="lastName" title="${message(code: 'candidate.lastName.label', default: 'Last Name')}" />
 			                <th><g:message code="candidate.telephoneNumber.label" default="Telephone Number" /></th>
 			                <th><g:message code="address.details.label" default="Address" /></th>
 			                <th><g:message code="address.postcode.label" default="Post Code" /></th>
@@ -75,7 +75,16 @@
 			            <g:each in="${CandidateList}" status="i" var="Candidate">
 			                <tr>
 		                        <td colspan="2">
-		                            <g:link action="show" id="${Candidate.id}">${Candidate.firstName}</g:link> <g:link action="show" id="${Candidate.id}">${Candidate.lastName}</g:link>
+		                            <g:link action="show" data-placement="right" data-trigger="click" id="${Candidate.id}" elementId="${Candidate.id}">${Candidate.firstName}</g:link>
+                                    <g:link url="#" class="popable" data-placement="right" data-trigger="click" elementId="${Candidate.id}">${Candidate.lastName}</g:link>
+                                    <div id="popover_content_wrapper_${Candidate.id}" style="display: none">
+                                        <div>
+                                            <p><b><g:message code="candidate.owningConsultant.label"/>:</b> ${Candidate.consultant?.firstName} ${Candidate.consultant?.lastName}</p>
+                                            <p><b><g:message code="candidate.email.label"/>:</b> ${Candidate.email}</p>
+                                            <p><b><g:message code="candidate.driver.label"/>:</b> ${Candidate.driver}</p>
+                                            <p><b><g:message code="candidate.carOwner.label"/>:</b> ${Candidate.carOwner}</p>
+                                        </div>
+                                    </div>
 		                        </td>
 		                        <td>
 		                            <g:if test="${Candidate.telephoneNumber != null}">
@@ -112,7 +121,7 @@
 			    <div class="pagination">
 			        <bs:paginate total="${CandidateTotal}" />
 			    </div>
-			    
+
 			</section>
         </div>
         
