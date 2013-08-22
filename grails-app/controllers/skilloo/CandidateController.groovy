@@ -1,8 +1,11 @@
 package skilloo
 
+import java.text.DateFormat
+
 class CandidateController {
 
     def scaffold = true
+    def springSecurityService
 
     def index() {
         redirect(action: "list")
@@ -21,11 +24,14 @@ class CandidateController {
 	}
 	
 	def create() {
-		println "Candidate.create"
 		def candidate = new Candidate(params)
 		candidate.driver = true
 		candidate.carOwner = true
         candidate.active = true
+
+        Calendar localCalendar = Calendar.getInstance(TimeZone.getDefault())
+        localCalendar.set(localCalendar.get(Calendar.YEAR) - 18, 0, 1)
+        candidate.birthDate = localCalendar.getTime()
 
         def availableMainTrades = Qualification.findAllByCanBeMainTrade(true)
 
@@ -50,7 +56,6 @@ class CandidateController {
     }
 	
 	def save() {
-		println "Candidate.save"
 		def candidate = new Candidate(params)
 
         if(candidate.firstName == "" || candidate.lastName == ""){
@@ -79,9 +84,10 @@ class CandidateController {
         address.details = params.get("address.details");
         address.postCode = postcode
 
-        if(params.mainTradeId == null) {
-            println "main trade qualification does not exist"
-            candidate.mainTrade = null
+
+        if(params.get("mainTradeId") == null) {
+            render(view: "create", model: [candidateInstance: candidate])
+            return
         } else {
             Qualification mainTrade = Qualification.get(params.mainTradeId)
             CandidateQualification candidateQualification = new CandidateQualification()
@@ -91,62 +97,86 @@ class CandidateController {
             candidateQualification.setIsMainTrade(Boolean.TRUE)
             candidate.candidateQualifications = new ArrayList<CandidateQualification>()
             candidate.candidateQualifications.add(candidateQualification)
+            println("Candidate Qualification added" )
         }
 
         if (!address.save(flush: true)) {
-            println "Address not saved"
+            log.debug("Address not saved" )
             render(view: "create", model: [candidateInstance: candidate])
             return
         }
 
         candidate.address = address
+        candidate.active = Boolean.TRUE
+
+        def user = User.get(springSecurityService.principal.id)
+
+        if(user != null){
+            def consultant = Consultant.findByUser(user)
+
+            if(consultant == null){
+                log.debug("Consultant is null")
+                render(view: "create", model: [candidateInstance: candidate])
+                return
+            }
+
+            candidate.consultant = consultant
+
+        } else {
+            log.debug("user is null")
+        }
+
         if (!candidate.save(flush: true)) {
-            println "Candidate not saved"
+            log.debug("Candidate not saved" )
             render(view: "create", model: [candidateInstance: candidate])
             return
         }
 
-		flash.message = message(code: 'default.created.message', args: [message(code: 'candidate.label', default: 'Candidate'), candidate.id])
-		redirect(action: "edit", fragment: "candidateQualificationsForm", id: candidate.id)
+        flash.message = message(code: 'default.created.message', args: [message(code: 'candidate.label', default: 'Candidate'), candidate.id])
+		redirect(action: "edit", id: candidate.id)
 	}
 
     def addCandidateQualification() {
-        println "Candidate.addCandidateQualification"
+
         if(params.get("candidateId") == null){
-            println "candidateId IS NULL"
             return
         }
 
         def candidate = Candidate.get(Long.parseLong(params.get("candidateId").toString()))
+
         if(candidate == null){
-            println "candidate IS NULL"
             return
         }
 
         if(params.get("newQualificationId") == null){
-            println "qualification Id IS NULL"
             return
         }
         def qualification = Qualification.get(Long.parseLong(params.get("newQualificationId").toString()))
         if(qualification == null){
-            println "qualifications IS NULL"
             return
         }
+
 
         def newCandidateQualification = new CandidateQualification(params)
 
         newCandidateQualification.setCandidate(candidate)
         newCandidateQualification.setQualification(qualification)
         newCandidateQualification.setActive(Boolean.TRUE)
-        newCandidateQualification.setIsMainTrade(Boolean.FALSE)
 
         candidate.candidateQualifications.add(newCandidateQualification)
 
-        if(!newCandidateQualification.save(flush: true)){
-            println "Candidate Qualification not saved"
-            render(view: "edit", model: [candidateInstance: candidate, newCandidateQualification: newCandidateQualification])
+        if(Boolean.TRUE == newCandidateQualification.getIsMainTrade()){
+            def candidateQualifications = CandidateQualification.findAllByCandidate(candidate)
+            candidateQualifications.each { candidateQualification ->
+                //put the other qualifications to not be main trade
+                candidateQualification.setIsMainTrade(Boolean.FALSE)
+                candidateQualification.save()
+            }
         }
 
+        if(!newCandidateQualification.save(flush: true)){
+            render(view: "edit", model: [candidateInstance: candidate, newCandidateQualification: newCandidateQualification])
+        }
 
         redirect(action: "edit", fragment: "candidateQualificationsForm", id: candidate.id)
     }
