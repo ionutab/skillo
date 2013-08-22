@@ -6,10 +6,12 @@ class Payroll {
     PayrollCompany payrollCompany
     
     Boolean registered
+    Boolean inducted
     
     String referenceNumber
     String nationalInsuranceNumber
     String registrationNumber
+    String unqiueTaxReferenceNumber
 
     static constraints = {
     }
