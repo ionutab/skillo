@@ -1,3 +1,5 @@
+import org.apache.log4j.ConsoleAppender
+
 // locations to search for config files that get merged into the main config;
 // config files can be ConfigSlurper scripts, Java properties files, or classes
 // in the classpath in ConfigSlurper format
@@ -88,6 +90,9 @@ log4j = {
            'org.springframework',
            'org.hibernate',
            'net.sf.ehcache.hibernate'
+
+    debug  'grails.app.controllers'
+
 }
 
 grails.config.defaults.locations = [KickstartResources]
