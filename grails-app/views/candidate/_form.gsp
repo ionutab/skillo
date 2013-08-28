@@ -27,7 +27,7 @@
 			<div class="control-group fieldcontain ${hasErrors(bean: candidateInstance, field: 'driver', 'error')} ">
 				<label for="driver" class="control-label"><g:message code="candidate.driver.label" default="Driver" /></label>
 				<div class="controls">
-					<bs:checkBox name="driver" value="${candidateInstance?.driver}" />
+					<g:checkBox name="driver" value="${candidateInstance?.driver}" />
 					<span class="help-inline">${hasErrors(bean: candidateInstance, field: 'driver', 'error')}</span>
 				</div>
 			</div>
@@ -35,7 +35,7 @@
 			<div class="control-group fieldcontain ${hasErrors(bean: candidateInstance, field: 'sponsored', 'error')} ">
 				<label for="sponsored" class="control-label"><g:message code="candidate.sponsored.label" default="Sponsored" /></label>
 				<div class="controls">
-					<bs:checkBox name="sponsored" value="${candidateInstance?.sponsored}" />
+					<g:checkBox name="sponsored" value="${candidateInstance?.sponsored}" />
 					<span class="help-inline">${hasErrors(bean: candidateInstance, field: 'sponsored', 'error')}</span>
 				</div>
 			</div>
@@ -43,7 +43,7 @@
 			<div class="control-group fieldcontain ${hasErrors(bean: candidateInstance, field: 'carOwner', 'error')} ">
 				<label for="carOwner" class="control-label"><g:message code="candidate.carOwner.label" default="Car Owner" /></label>
 				<div class="controls">
-					<bs:checkBox name="carOwner" value="${candidateInstance?.carOwner}" />
+					<g:checkBox name="carOwner" value="${candidateInstance?.carOwner}" />
 					<span class="help-inline">${hasErrors(bean: candidateInstance, field: 'carOwner', 'error')}</span>
 				</div>
 			</div>
@@ -51,7 +51,7 @@
 			<div class="control-group fieldcontain ${hasErrors(bean: candidateInstance, field: 'active', 'error')} ">
 				<label for="active" class="control-label"><g:message code="candidate.active.label" default="Active" /></label>
 				<div class="controls">
-					<bs:checkBox name="active" value="${candidateInstance?.active}" />
+					<g:checkBox name="active" value="${candidateInstance?.active}" />
 					<span class="help-inline">${hasErrors(bean: candidateInstance, field: 'active', 'error')}</span>
 				</div>
 			</div>
