@@ -119,7 +119,7 @@
 			    </table>
 			    
 			    <div class="pagination">
-			        <bs:paginate total="${CandidateTotal}" />
+			        <g:paginate total="${CandidateTotal}" />
 			    </div>
 
 			</section>
