@@ -125,6 +125,7 @@ body {
 
 .datepicker{
     z-index:1151;
+    border: 1px solid #cccccc;
 }
 
 legend {
