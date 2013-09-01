@@ -7,8 +7,8 @@
 	<meta name="layout" content="admin" />
 	<g:set var="entityName" value="${message(code: 'candidate.label', default: 'Candidate')}" />
 	<title><g:message code="default.edit.label" args="[entityName]" /></title>
-    <r:require modules="candidates"/>
     <r:require modules="forms"/>
+    <r:require modules="candidates"/>
 </head>
 
 <body>
