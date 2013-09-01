@@ -26,7 +26,7 @@
         <g:message code="candidateQualification.expiryDate.label" default="Expiry Date" />
     </label>
     <div class="controls">
-        <bs:datePicker name="expiryDate" id="expiryDate" precision="day" value="${newCandidateQualification?.expiryDate}" default="none" noSelection="['':' ']"  />
+        <g:datePicker name="expiryDate" id="expiryDate" precision="day" value="${newCandidateQualification?.expiryDate}" default="none" noSelection="['':' ']"  />
         <span class="help-inline">
             ${hasErrors(bean: newCandidateQualification, field: 'expiryDate', 'error')}
         </span>
@@ -48,7 +48,7 @@
         <g:message code="candidateQualification.isMainTrade.label" default="Is Main Trade" />
     </label>
     <div class="controls">
-        <bs:checkBox name="isMainTrade" value="${newCandidateQualification?.isMainTrade}" />
+        <g:checkBox name="isMainTrade" value="${newCandidateQualification?.isMainTrade}" />
         <span class="help-inline">
             ${hasErrors(bean: newCandidateQualification, field: 'isMainTrade', 'error')}
         </span>
