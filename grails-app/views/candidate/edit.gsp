@@ -8,7 +8,7 @@
 	<g:set var="entityName" value="${message(code: 'candidate.label', default: 'Candidate')}" />
 	<title><g:message code="default.edit.label" args="[entityName]" /></title>
     <r:require modules="candidates"/>
-    <r:require modules="select2"/>
+    <r:require modules="forms"/>
 </head>
 
 <body>
@@ -105,7 +105,7 @@
                         <g:message code="payroll.registered.label" default="Registered" />
                     </label>
                     <div class="controls">
-                        <bs:checkBox name="registered" value="${candidateInstance?.payroll?.registered}" />
+                        <g:checkBox name="registered" value="${candidateInstance?.payroll?.registered}" />
                         <span class="help-inline">
                             ${hasErrors(bean: candidateInstance.payroll, field: 'registered', 'error')}
                         </span>
@@ -118,7 +118,7 @@
                         <g:message code="payroll.inducted.label" default="Inducted" />
                     </label>
                     <div class="controls">
-                        <bs:checkBox name="inducted" value="${candidateInstance?.payroll?.inducted}" />
+                        <g:checkBox name="inducted" value="${candidateInstance?.payroll?.inducted}" />
                         <span class="help-inline">
                             ${hasErrors(bean: candidateInstance.payroll, field: 'inducted', 'error')}
                         </span>
