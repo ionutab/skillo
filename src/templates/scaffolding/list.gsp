@@ -51,7 +51,7 @@
 		</tbody>
 	</table>
 	<div class="pagination">
-		<bs:paginate total="\${${propertyName}Total}" />
+		<g:paginate total="\${${propertyName}Total}" />
 	</div>
 </section>
 
