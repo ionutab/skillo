@@ -8,7 +8,7 @@
 	<g:set var="entityName" value="${message(code: 'candidate.label', default: 'Candidate')}" />
 	<title><g:message code="default.create.label" args="[entityName]" /></title>
     <r:require modules="candidates"/>
-    <r:require modules="select2"/>
+    <r:require modules="forms"/>
 </head>
 
 <body>
