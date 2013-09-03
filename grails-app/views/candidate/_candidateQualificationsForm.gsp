@@ -26,7 +26,7 @@
         <g:message code="candidateQualification.expiryDate.label" default="Expiry Date" />
     </label>
     <div class="controls">
-        <g:datePicker name="expiryDate" id="expiryDate" precision="day" value="${newCandidateQualification?.expiryDate}" default="none" noSelection="['':' ']"  />
+        <g:field type="expiryDate" name="expiryDate" id="expiryDate" class="datepicker" value="${formatDate(date: newCandidateQualification?.expiryDate)}" default="none" precision="day" />
         <span class="help-inline">
             ${hasErrors(bean: newCandidateQualification, field: 'expiryDate', 'error')}
         </span>
