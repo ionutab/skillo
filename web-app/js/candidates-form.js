@@ -13,7 +13,7 @@ $(document).ready(function() {
         }
     );
 
-    $("#birthDate").datepicker({
+    $(".datepicker").datepicker({
         viewMode:'years'
     });
 
