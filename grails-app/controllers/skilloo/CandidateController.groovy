@@ -29,9 +29,11 @@ class CandidateController {
 		candidate.carOwner = true
         candidate.active = true
 
+        /*
         Calendar localCalendar = Calendar.getInstance(TimeZone.getDefault())
         localCalendar.set(localCalendar.get(Calendar.YEAR) - 18, 0, 1)
         candidate.birthDate = localCalendar.getTime()
+        */
 
         def availableMainTrades = Qualification.findAllByCanBeMainTrade(true)
 
@@ -63,7 +65,7 @@ class CandidateController {
             render(view: "create", model: [candidateInstance: candidate])
             return
         }
-		
+
 		def address = new Address();
 		address.active = true
 
@@ -132,7 +134,7 @@ class CandidateController {
             return
         }
 
-        flash.message = message(code: 'default.created.message', args: [message(code: 'candidate.label', default: 'Candidate'), candidate.id])
+        flash.message = message(code: 'default.created.message', args: [message(code: 'candidate.label', default: 'Candidate'), candidate.firstName + " " + candidate.lastName])
 		redirect(action: "edit", id: candidate.id)
 	}
 
