@@ -13,7 +13,8 @@ $(document).ready(function() {
         }
     );
 
-    $("#birthDate").datepicker(
-    );
+    $("#birthDate").datepicker({
+        viewMode:'years'
+    });
 
 });
