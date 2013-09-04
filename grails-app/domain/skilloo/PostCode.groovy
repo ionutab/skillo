@@ -21,6 +21,7 @@ class PostCode {
     
 	static constraints = {
         code minSize: 4
+        code unique: true
         county nullable: true
         countryCode nullable: true
 
