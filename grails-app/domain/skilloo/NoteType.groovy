@@ -6,5 +6,6 @@ class NoteType {
     Boolean important
 
     static constraints = {
+        code blank: false
     }
 }

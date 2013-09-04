@@ -8,8 +8,8 @@ class Qualification {
     Boolean canBeMainTrade
 
     static constraints = {
-        code nullable: true, unique:true
-        name nullable: false, unique:true
-        description nullable:true
+        code nullable: true, unique:true, blank: false
+        name unique:true, blank: false
+        description nullable:true, blank: false
     }
 }

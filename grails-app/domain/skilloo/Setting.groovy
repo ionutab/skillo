@@ -6,6 +6,7 @@ class Setting {
     String defaultValue
 
     static constraints = {
-        code unique:true 
+        code unique:true, blank: false
+        defaultValue blank: false
     }
 }

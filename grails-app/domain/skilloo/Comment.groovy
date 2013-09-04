@@ -7,5 +7,6 @@ class Comment {
     Boolean active
 
     static constraints = {
+        comment blank: false
     }
 }

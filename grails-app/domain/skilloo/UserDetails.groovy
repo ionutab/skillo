@@ -11,5 +11,9 @@ class UserDetails {
     static belongsTo = [user:User]
     
     static constraints = {
+        firstName blank: false
+        lastName blank: false
+        telephoneNumber blank: false
+        country blank: false
     }
 }

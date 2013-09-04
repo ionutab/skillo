@@ -20,23 +20,20 @@ class PostCode {
     }
     
 	static constraints = {
-        code minSize: 4
-        code unique: true
-        county nullable: true
-        countryCode nullable: true
+        code unique: true, blank: false, minSize: 4
 
         //this is for test purposes only
-        latitude nullable: true
-        longitude nullable: true
+        latitude nullable: true, blank: false
+        longitude nullable: true, blank: false
         easting nullable: true
         northing nullable: true
-        grindRef nullable: true
-        district nullable: true
-        ward nullable: true
-        districtCode nullable: true
-        wardCode nullable: true
-        county nullable: true
-        country nullable: true
-        countryCode nullable: true
+        grindRef nullable: true, blank: false
+        district nullable: true, blank: false
+        ward nullable: true, blank: false
+        districtCode nullable: true, blank: false
+        wardCode nullable: true, blank: false
+        county nullable: true, blank: false
+        country nullable: true, blank: false
+        countryCode nullable: true, blank: false
     }
 }

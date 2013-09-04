@@ -14,6 +14,10 @@ class Consultant {
     static constraints = {
         email email: true
 
+        firstName blank: false
+        lastName blank: false
+        email blank: false
+
         candidateNotes nullable: true
         clientComments nullable: true
         information nullable: true

@@ -7,5 +7,6 @@ class WorkSite {
     String details
     
     static constraints = {
+        details blank: false
     }
 }

@@ -5,12 +5,16 @@ class Contact {
     String firstName
     String lastName
     String position
-    String telephoneNumbers
+    String telephoneNumber
     String email
 
     static hasMany = [clientComments:ClientComment]
     
     static constraints = {
-        email email:true
+        firstName blank: false
+        lastName blank: false
+        position nullable: true, blank: false
+        telephoneNumber nullable: true, blank: false
+        email email:true, nullable: true, blank: false
     }
 }

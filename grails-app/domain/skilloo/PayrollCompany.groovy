@@ -8,6 +8,7 @@ class PayrollCompany {
     static hasMany = [payrolls: Payroll, workHistory: Job]
 
     static constraints = {
-        name unique:true 
+        name unique:true, blank: false
+        details nullable: true, blank: false
     }
 }

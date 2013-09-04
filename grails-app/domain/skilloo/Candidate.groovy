@@ -22,12 +22,14 @@ class Candidate {
 
     static hasMany = [candidateQualifications:CandidateQualification, candidateNotes:CandidateNote, jobs:Job, placements:Placement ]
 
-    static constraints = {   
-        consultant nullable: true
-        otherTelephoneNumber nullable: true
-        telephoneNumber minSize: 8
+    static constraints = {
+        firstName blank: false
+        lastName blank: false
+        nationality nullable: true, blank: false
 
-        nationality nullable: true
+        telephoneNumber blank: false, minSize: 8
+        otherTelephoneNumber nullable: true
+
 		/**
 		 * temporary added in order to allow various tests on candidates list
 		 */

@@ -7,6 +7,7 @@ class UserSetting {
     String value
 
     static constraints = {
+        value blank: false
     }
     
 }

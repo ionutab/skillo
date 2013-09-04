@@ -11,5 +11,6 @@ class Job {
     PayrollCompany payrollCompany
 
     static constraints = {
+        candidatePosition nullable: true, blank: false
     }
 }

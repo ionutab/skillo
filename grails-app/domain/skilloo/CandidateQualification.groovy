@@ -11,7 +11,7 @@ class CandidateQualification {
     
     static constraints = {
         expiryDate nullable: true
-        number nullable: true
+        number nullable: true, blank: false
     }
     
 }

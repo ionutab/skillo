@@ -6,6 +6,7 @@ class UserType {
     String description
 
     static constraints = {
-        code unique:true 
+        code unique:true, blank: false
+        description blank: false
     }
 }

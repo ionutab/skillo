@@ -14,5 +14,9 @@ class Payroll {
     String unqiueTaxReferenceNumber
 
     static constraints = {
+        referenceNumber nullable: true, blank: false
+        nationalInsuranceNumber nullable: true, blank: false
+        registrationNumber nullable: true, blank: false
+        unqiueTaxReferenceNumber nullable: true, blank: false
     }
 }

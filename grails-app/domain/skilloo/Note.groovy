@@ -10,5 +10,6 @@ class Note {
     Boolean active
     
     static constraints = {
+        note nullable: true, blank: false
     }
 }

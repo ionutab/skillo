@@ -7,5 +7,6 @@ class Address {
     PostCode postCode
 
     static constraints = {
+        details blank: false
     }
 }
