@@ -23,6 +23,14 @@ class ${className}Controller {
 
     def save() {
         def ${propertyName} = new ${className}(params)
+
+        def creationProperties = ${propertyName}.properties.findAll()
+
+        println "custom: "
+        for (prop in creationProperties){
+            println prop.properties['key'] + " : " + "'" + prop.properties['value'] + "'"
+        }
+
         if (!${propertyName}.save(flush: true)) {
             render(view: "create", model: [${propertyName}: ${propertyName}])
             return
