@@ -37,6 +37,10 @@ body {
     
 }
 
+#loginForm .controls{
+    margin-left: 0px;
+}
+
 .page-content-container {
     display:block;
     margin: 0;
@@ -62,7 +66,7 @@ body {
 }
 
 .sidebar .nav-list > li {
-    border-top: 1px solid #cfcfcf;
+    /*border-top: 1px solid #cfcfcf;*/
 }
 
 .sidebar > .nav-list > li:first-child {
