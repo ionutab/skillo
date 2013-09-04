@@ -10,12 +10,9 @@
 <body>
 
 <section id="login" class="first">
-<div class="row-fluid">
-	<div class="span5"></div>
-	<div class="span2 well">
-		<h3> <g:message code="springSecurity.login.header"/> </h3>
 		<form id='loginForm' class='form-horizontal' action='${postUrl}' method='POST' autocomplete='off'>
-			<fieldset class="form">
+            <h2> <g:message code="springSecurity.login.header"/> </h2>
+            <fieldset class="form">
 				<div class="control-group fieldcontain ${hasErrors(bean: _DemoPageInstance, field: 'name', 'error')} ">
 					<div class="controls">
                         <g:textField name="j_username" id="username" placeholder="Username" />
@@ -37,9 +34,6 @@
 				<input type='submit' id="submit" class="btn btn-success" value='${message(code: "springSecurity.login.button")}'/>
 			</div>
 		</form>
-	</div>
-	<div class="span5"></div>
-</div>
 </section>
 
 <script type='text/javascript'>
