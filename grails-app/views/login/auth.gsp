@@ -10,39 +10,35 @@
 <body>
 
 <section id="login" class="first">
-<div class="row">
-	<div class="span4"></div>
-	<div class="span4 well">
+<div class="row-fluid">
+	<div class="span5"></div>
+	<div class="span2 well">
 		<h3> <g:message code="springSecurity.login.header"/> </h3>
 		<form id='loginForm' class='form-horizontal' action='${postUrl}' method='POST' autocomplete='off'>
 			<fieldset class="form">
 				<div class="control-group fieldcontain ${hasErrors(bean: _DemoPageInstance, field: 'name', 'error')} ">
-					<label for='username' class="control-label"><g:message code="springSecurity.login.username.label"/>:</label>
 					<div class="controls">
-						<input type='text' class='span2' name='j_username' id='username'/>
+                        <g:textField name="j_username" id="username" placeholder="Username" />
 					</div>
 				</div>
-	
+
 				<div class="control-group fieldcontain ${hasErrors(bean: _DemoPageInstance, field: 'name', 'error')} ">
-					<label for='password' class="control-label"><g:message code="springSecurity.login.password.label"/>:</label>
 					<div class="controls">
-						<input type='password' class='span2' name='j_password' id='password'/>
+                        <g:textField name="j_password" id="password" placeholder="Password" />
 					</div>
 				</div>
-				
-				<div id="remember_me_holder" class="control-group fieldcontain">
-					<label for='${rememberMeParameter}' class="control-label"><g:message code="springSecurity.login.remember.me.label"/></label>
-					<div class="controls">
-						<g:checkBox name="${rememberMeParameter}" value="${hasCookie}" />
-					</div>
-				</div>
+
+					<label for='${rememberMeParameter}' class="checkbox">
+                        <g:message code="springSecurity.login.remember.me.label"/>
+                        <g:checkBox name="${rememberMeParameter}" value="${hasCookie}" />
+                    </label>
 			</fieldset>
 			<div class="controls">
 				<input type='submit' id="submit" class="btn btn-success" value='${message(code: "springSecurity.login.button")}'/>
 			</div>
 		</form>
 	</div>
-	<div class="span4"></div>
+	<div class="span5"></div>
 </div>
 </section>
 
