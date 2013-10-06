@@ -3,7 +3,7 @@ package skilloo
 class Address {
 
     String details
-    Boolean active
+    Boolean active = Boolean.TRUE
     PostCode postCode
 
     static constraints = {
