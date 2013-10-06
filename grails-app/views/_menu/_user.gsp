@@ -6,7 +6,7 @@
 		<a class="dropdown-toggle" role="button" data-toggle="dropdown" data-target="#" href="#" tabindex="-1">
 			<!-- TODO: integrate Springsource Security etc. and show User's name ... -->
     		<i class="icon-user"></i>
-    		<g:message code="security.signin.label"/><b class="caret"></b>
+    		<g:message code="springSecurity.login.title"/><b class="caret"></b>
 		</a>
 
 		<ul class="dropdown-menu" role="menu">
@@ -49,7 +49,7 @@
 			<li class="divider"></li>--}%
 			<li class=""><a href="${createLink(controller: 'logout')}">
 				<i class="icon-off"></i>
-				<g:message code="security.signoff.label"/>
+				<g:message code="springSecurity.logout.label"/>
 			</a></li>
 		</ul>
 
