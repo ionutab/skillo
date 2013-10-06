@@ -1,77 +1,77 @@
 <%@ page import="skilloo.Candidate"%>
             <div class="control-group fieldcontain ${hasErrors(bean: candidate, field: 'firstName', 'error')} ">
-                <label for="firstName" class="control-label">
+                <label for="candidate.firstName" class="control-label">
                     <g:message code="candidate.firstName.label" default="First Name" />
                 </label>
                 <div class="controls">
-                    <g:textField name="firstName" class="input-xlarge" value="${candidateInstance?.firstName}" />
+                    <g:textField name="candidate.firstName" class="input-xlarge" value="${candidateInstance?.firstName}" />
                     <span class="help-inline">
                         ${hasErrors(bean: candidateInstance, field: 'firstName', 'error')}
                     </span>
                 </div>
             </div>
             <div class="control-group fieldcontain ${hasErrors(bean: candidateInstance, field: 'lastName', 'error')} ">
-                <label for="lastName" class="control-label">
+                <label for="candidate.lastName" class="control-label">
                     <g:message code="candidate.lastName.label" default="Last Name" />
                 </label>
                 <div class="controls">
-                    <g:textField name="lastName" class="input-xlarge" value="${candidateInstance?.lastName}" />
+                    <g:textField name="candidate.lastName" class="input-xlarge" value="${candidateInstance?.lastName}" />
                     <span class="help-inline">
                         ${hasErrors(bean: candidateInstance, field: 'lastName', 'error')}
                     </span>
                 </div>
             </div>
             <div class="control-group fieldcontain ${hasErrors(bean: candidateInstance, field: 'birthDate', 'error')} ">
-                <label for="birthDate" class="control-label">
+                <label for="candidate.birthDate" class="control-label">
                     <g:message code="candidate.birthDate.label" default="Birth Date" />
                 </label>
                 <div class="controls">
-                    <g:field type="textField" name="birthDate" id="birthDate" class="datepicker" value="${formatDate(date: candidateInstance?.birthDate)}" default="none" precision="day" />
+                    <g:field type="textField" name="candidate.birthDate" id="candidate.birthDate" class="datepicker" value="${formatDate(date: candidateInstance?.birthDate)}" default="none" precision="day" />
                     <span class="help-inline">
                         ${hasErrors(bean: candidateInstance, field: 'birthDate', 'error')}
                     </span>
                 </div>
             </div>
             <div class="control-group fieldcontain ${hasErrors(bean: candidateInstance, field: 'telephoneNumber', 'error')} ">
-                <label for="telephoneNumber" class="control-label">
+                <label for="candidate.telephoneNumber" class="control-label">
                     <g:message code="candidate.telephoneNumber.label" default="Telephone Number" />
                 </label>
                 <div class="controls">
-                    <g:textField name="telephoneNumber" class="input-small" value="${candidateInstance?.telephoneNumber}" />
+                    <g:textField name="candidate.telephoneNumber" class="input-small" value="${candidateInstance?.telephoneNumber}" />
                     <span class="help-inline">
                         ${hasErrors(bean: candidateInstance, field: 'telephoneNumber', 'error')}
                     </span>
-                    <g:textField name="otherTelephoneNumber" class="input-small" value="${candidateInstance?.otherTelephoneNumber}" />
+                    <g:textField name="candidate.otherTelephoneNumber" class="input-small" value="${candidateInstance?.otherTelephoneNumber}" />
                 </div>
             </div>
-            <div class="control-group fieldcontain ${hasErrors(bean: candidateInstance, field: 'address', 'error')} ">
+            <div class="control-group fieldcontain ${hasErrors(bean: candidateInstance, field: 'address.details', 'error')} ">
                 <label for="address.details" class="control-label">
                     <g:message code="candidate.address.label" default="Address" />
                 </label>
                 <div class="controls">
-                    <g:textField name="address.details" class="input-xlarge" value="${candidateInstance?.address?.details}" />
+                    <g:textField name="address.details" id="address.details" class="input-xlarge" value="${candidateInstance?.address?.details}" />
                     <span class="help-inline">
-                        ${hasErrors(bean: candidateInstance, field: 'address', 'error')}
+                        ${hasErrors(bean: candidateInstance, field: 'address.details', 'error')}
                     </span>
                 </div>
             </div>
-            <div class="control-group fieldcontain ${hasErrors(bean: candidateInstance, field: 'address', 'error')} ">
-                <label for="addressPostCode" class="control-label">
-                    <g:message code="address.postcode.label" default="Post Code" />
+            <div class="control-group fieldcontain ${hasErrors(bean: candidateInstance, field: 'address.postCode.code', 'error')} ">
+                <label for="postCode.code" class="control-label">
+                    <g:message code="postCode.code.label" default="Post Code" />
                 </label>
                 <div class="controls">
-                    <g:textField name="addressPostCode" id="addressPostCode" class="input-small" value="${candidateInstance?.address?.postCode?.code}" />
+                    <g:textField name="postCode.code" id="postCode.code" class="input-small" value="${candidateInstance?.address?.postCode?.code}" />
                     <span class="help-inline">
-                        ${hasErrors(bean: candidateInstance, field: 'postCode', 'error')}
+                        ${hasErrors(bean: candidateInstance, field: 'address.postCode.code', 'error')}
                     </span>
                 </div>
             </div>
             <div class="control-group fieldcontain ${hasErrors(bean: candidateInstance, field: 'email', 'error')} ">
-                <label for="email" class="control-label">
+                <label for="candidate.email" class="control-label">
                     <g:message code="candidate.email.label" default="Email" />
                 </label>
                 <div class="controls">
-                    <g:field type="email" name="email" class="input-xlarge" value="${candidateInstance?.email}" />
+                    <g:field type="email" name="candidate.email" class="input-xlarge" value="${candidateInstance?.email}" />
                     <span class="help-inline">
                         ${hasErrors(bean: candidateInstance, field: 'email', 'error')}
                     </span>
@@ -79,12 +79,12 @@
             </div>
 
             <% if(params.action == 'edit'){ %>
-                <div class="control-group fieldcontain ${hasErrors(bean: candidateInstance, field: 'mainTrade', 'error')} ">
-                    <label for="owningConsultantId" class="control-label">
+                <div class="control-group fieldcontain ${hasErrors(bean: candidateInstance, field: 'consultant', 'error')} ">
+                    <label for="consultant.id" class="control-label">
                         <g:message code="candidate.owningConsultant.label" default="Owning Consultant" />
                     </label>
                     <div class="controls">
-                        <g:textField name="owningConsultantId" class="input-xlarge" value="${candidateInstance?.consultant?.firstName + ' ' + candidateInstance?.consultant?.lastName}" disabled="disabled" />
+                        <g:textField name="consultant.id" class="input-xlarge" value="${candidateInstance?.consultant?.firstName + ' ' + candidateInstance?.consultant?.lastName}" disabled="disabled" />
                         <span class="help-inline">
                             ${hasErrors(bean: candidateInstance, field: 'consultant', 'error')}
                         </span>
@@ -92,8 +92,8 @@
                 </div>
             <% } %>
 
-            <% if(params.action == 'create') {%>
-                <div class="control-group fieldcontain ${hasErrors(bean: candidateInstance, field: 'mainTrade', 'error')} ">
+            <% if(params.action == 'create' || params.action == 'save' ) {%>
+                <div class="control-group fieldcontain ">
                     <label for="mainTradeId" class="control-label">
                         <g:message code="candidate.mainTrade.label" default="Main Trade" />
                     </label>
@@ -102,7 +102,7 @@
                             TODO:add most used qualifications list on the right so that the user can select the qualification if not typing it
                         --%>
                         <g:select
-                            name="mainTradeId"
+                            name="qualifications[0].id"
                             id="mainTradeId"
                             from="${AvailableMainTrades}"
                             value=""
@@ -112,7 +112,6 @@
                             noSelection="${['null':'']}"
                             />
                         <span class="help-inline">
-                            ${hasErrors(bean: candidateInstance, field: 'mainTrade', 'error')}
                         </span>
                     </div>
                 </div>
@@ -121,11 +120,11 @@
     <div class="row-fluid">
         <div class="span4">
             <div class="control-group fieldcontain ${hasErrors(bean: candidateInstance, field: 'driver', 'error')} ">
-                <label for="driver" class="control-label">
+                <label for="candidate.driver" class="control-label">
                     <g:message code="candidate.driver.label" default="Driver" />
                 </label>
                 <div class="controls">
-                    <g:checkBox name="driver" value="${candidateInstance?.driver}" />
+                    <g:checkBox name="candidate.driver" value="${candidateInstance?.driver}" />
                     <span class="help-inline">
                         ${hasErrors(bean: candidateInstance, field: 'driver', 'error')}
                     </span>
@@ -134,11 +133,11 @@
         </div>
         <div class="span4">
             <div class="control-group fieldcontain ${hasErrors(bean: candidateInstance, field: 'carOwner', 'error')} ">
-                <label for="carOwner" class="control-label">
+                <label for="candidate.carOwner" class="control-label">
                    <g:message code="candidate.carOwner.label" default="Car Owner" />
                 </label>
                 <div class="controls">
-                    <g:checkBox name="carOwner" value="${candidateInstance?.carOwner}" />
+                    <g:checkBox name="candidate.carOwner" value="${candidateInstance?.carOwner}" />
                     <span class="help-inline">
                         ${hasErrors(bean: candidateInstance, field: 'carOwner', 'error')}
                     </span>
@@ -149,11 +148,11 @@
     <div class="row-fluid">
         <div class="span4">
             <div class="control-group fieldcontain ${hasErrors(bean: candidateInstance, field: 'sponsored', 'error')} ">
-                <label for="sponsored" class="control-label">
+                <label for="candidate.sponsored" class="control-label">
                   <g:message code="candidate.sponsored.label" default="Sponsored" />
                 </label>
                 <div class="controls">
-                    <g:checkBox name="sponsored" value="${candidateInstance?.sponsored}" />
+                    <g:checkBox name="candidate.sponsored" value="${candidateInstance?.sponsored}" />
                     <span class="help-inline">
                         ${hasErrors(bean: candidateInstance, field: 'sponsored', 'error')}
                     </span>
