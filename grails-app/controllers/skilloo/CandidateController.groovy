@@ -58,84 +58,42 @@ class CandidateController {
     }
 	
 	def save() {
-		def candidate = new Candidate(params)
+		def candidate = new Candidate(params["candidate"])
 
-        if(candidate.firstName == "" || candidate.lastName == ""){
-            flash.message = message(code: "candidate.form.error.nameNull")
-            render(view: "create", model: [candidateInstance: candidate])
-            return
-        }
+        def address = new Address(params["address"])
+        def postCode = new PostCode(params["postCode"])
 
-		def address = new Address();
-		address.active = true
+        postCode = PostCode.findByCode(postCode.code)
 
-        if(params.get("addressPostCode") == ""){
-            flash.message = message(code: "candidate.form.error.postCodeNull")
-            render(view: "create", model: [candidateInstance: candidate])
-            return
-        }
+        address.setPostCode(postCode)
+        candidate.setAddress(address)
 
-        def postcode = PostCode.findByCode(params.get("addressPostCode").toString())
-
-        if (postcode == null){
-            flash.message = message(code: "candidate.form.error.postCode", args: [params.get("addressPostCode")])
-            render(view: "create", model: [candidateInstance: candidate])
-            return
-        }
-
-        address.details = params.get("address.details");
-        address.postCode = postcode
-
-
-        if(params.get("mainTradeId") == null) {
-            render(view: "create", model: [candidateInstance: candidate])
-            return
-        } else {
-            Qualification mainTrade = Qualification.get(params.mainTradeId)
-            CandidateQualification candidateQualification = new CandidateQualification()
-            candidateQualification.setQualification(mainTrade)
-            candidateQualification.setCandidate(candidate)
-            candidateQualification.setActive(Boolean.TRUE)
-            candidateQualification.setIsMainTrade(Boolean.TRUE)
-            candidate.candidateQualifications = new ArrayList<CandidateQualification>()
-            candidate.candidateQualifications.add(candidateQualification)
-            println("Candidate Qualification added" )
-        }
 
         if (!address.save(flush: true)) {
             log.debug("Address not saved" )
-            render(view: "create", model: [candidateInstance: candidate])
-            return
-        }
 
-        candidate.address = address
-        candidate.active = Boolean.TRUE
-
-        def user = User.get(springSecurityService.principal.id)
-
-        if(user != null){
-            def consultant = Consultant.findByUser(user)
-
-            if(consultant == null){
-                log.debug("Consultant is null")
-                render(view: "create", model: [candidateInstance: candidate])
-                return
+            address.errors.each {
+                println "fielderrors: " + it
             }
 
-            candidate.consultant = consultant
-
-        } else {
-            log.debug("user is null")
+            render(view: "create", model: [candidateInstance: candidate])
+            return
         }
 
         if (!candidate.save(flush: true)) {
             log.debug("Candidate not saved" )
+
+            candidate.errors.each {
+                println "fielderrors: " + it
+            }
+
             render(view: "create", model: [candidateInstance: candidate])
             return
         }
 
+        def availableMainTrades = Qualification.findAllByCanBeMainTrade(true)
         flash.message = message(code: 'default.created.message', args: [message(code: 'candidate.label', default: 'Candidate'), candidate.firstName + " " + candidate.lastName])
-		redirect(action: "edit", id: candidate.id)
+		redirect(action: "edit", id: candidate.id, AvailableMainTrades: availableMainTrades )
 	}
 
     def addCandidateQualification() {
