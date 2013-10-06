@@ -15,13 +15,14 @@
             <fieldset class="form">
 				<div class="control-group fieldcontain ${hasErrors(bean: _DemoPageInstance, field: 'name', 'error')} ">
 					<div class="controls">
-                        <g:textField name="j_username" id="username" placeholder="Username" />
+                        <g:textField name="j_username" id="username" placeholder="${message(code: "springSecurity.login.username.label" )}" />
+
 					</div>
 				</div>
 
 				<div class="control-group fieldcontain ${hasErrors(bean: _DemoPageInstance, field: 'name', 'error')} ">
 					<div class="controls">
-                        <g:textField name="j_password" id="password" placeholder="Password" />
+                        <g:textField name="j_password" id="password" placeholder="${message(code: "springSecurity.login.password.label")}" />
 					</div>
 				</div>
 
