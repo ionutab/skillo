@@ -17,7 +17,7 @@ class Candidate {
 
     Consultant consultant
     Address address
-    Boolean active
+    Boolean active = Boolean.TRUE
     Payroll payroll
 
     static hasMany = [candidateQualifications:CandidateQualification, candidateNotes:CandidateNote, jobs:Job, placements:Placement ]
@@ -40,4 +40,6 @@ class Candidate {
 		placements nullable: true
         consultant nullable: true
     }
+
+
 }
