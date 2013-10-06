@@ -23,21 +23,13 @@ class ${className}Controller {
 
     def save() {
         def ${propertyName} = new ${className}(params)
-
-        def creationProperties = ${propertyName}.properties.findAll()
-
-        println "custom: "
-        for (prop in creationProperties){
-            println prop.properties['key'] + " : " + "'" + prop.properties['value'] + "'"
-        }
-
         if (!${propertyName}.save(flush: true)) {
             render(view: "create", model: [${propertyName}: ${propertyName}])
             return
         }
 
 		flash.message = message(code: 'default.created.message', args: [message(code: '${domainClass.propertyName}.label', default: '${className}'), ${propertyName}.id])
-        redirect(action: "show", id: ${propertyName}.id)
+        redirect(action: "list")
     }
 
     def show() {
