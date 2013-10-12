@@ -1,5 +1,5 @@
 <%@ page import="skilloo.Candidate"%>
-            <div class="control-group fieldcontain ${hasErrors(bean: candidate, field: 'firstName', 'error')} ">
+            <div class="control-group fieldcontain ${hasErrors(bean: candidateInstance, field: 'firstName', 'error')} ">
                 <label for="candidate.firstName" class="control-label">
                     <g:message code="candidate.firstName.label" default="First Name" />
                 </label>
@@ -55,14 +55,14 @@
                     </span>
                 </div>
             </div>
-            <div class="control-group fieldcontain ${hasErrors(bean: candidateInstance, field: 'address.postCode.code', 'error')} ">
+            <div class="control-group fieldcontain ${hasErrors(bean: candidateInstance, field: 'address.postCode', 'error')} ">
                 <label for="postCode.code" class="control-label">
                     <g:message code="postCode.code.label" default="Post Code" />
                 </label>
                 <div class="controls">
                     <g:textField name="postCode.code" id="postCode.code" class="input-small" value="${candidateInstance?.address?.postCode?.code}" />
                     <span class="help-inline">
-                        ${hasErrors(bean: candidateInstance, field: 'address.postCode.code', 'error')}
+                        ${hasErrors(bean: candidateInstance, field: 'address.postCode', 'error')}
                     </span>
                 </div>
             </div>
