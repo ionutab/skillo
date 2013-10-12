@@ -16,9 +16,8 @@ class PostCode {
     String country
     String countryCode
 
-    static mapping = {
-    }
-    
+    static belongsTo = [address:Address]
+
 	static constraints = {
         code unique: true, blank: false, minSize: 4
 
@@ -35,5 +34,7 @@ class PostCode {
         county nullable: true, blank: false
         country nullable: true, blank: false
         countryCode nullable: true, blank: false
+
+        address nullable: true
     }
 }
