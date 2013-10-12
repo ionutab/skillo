@@ -13,32 +13,50 @@ class CandidateController {
 
 	def list() {
 		params.max = Math.min(params.max ? params.int('max') : 10, 100)
-		
+
 		def candidateList = Candidate.createCriteria().list(params){
 			if(params.firstName){
 				ilike("firstName", "%{params.firstName}%")
 			}
 		}
-		
+
 		[CandidateList: candidateList, CandidateTotal: Candidate.count()]
 	}
-	
+
 	def create() {
 		def candidate = new Candidate(params)
 		candidate.driver = true
 		candidate.carOwner = true
         candidate.active = true
 
-        /*
-        Calendar localCalendar = Calendar.getInstance(TimeZone.getDefault())
-        localCalendar.set(localCalendar.get(Calendar.YEAR) - 18, 0, 1)
-        candidate.birthDate = localCalendar.getTime()
-        */
-
         def availableMainTrades = Qualification.findAllByCanBeMainTrade(true)
 
 		[candidateInstance: candidate, AvailableMainTrades: availableMainTrades]
 	}
+
+    def save() {
+
+        def candidate = new Candidate(params["candidate"])
+        def address = new Address(params["address"])
+        def postCode = new PostCode(params["postCode"])
+
+        address.postCode = PostCode.findByCode(postCode.code)
+        candidate.address = address
+
+        if(!candidate.save(deepvalidate:true, flush: true)){
+            if(candidate.hasErrors()){
+                candidate.errors.each {
+                    println "fielderrors: " + it
+                }
+            }
+            render(view: "create", model: [candidateInstance: candidate])
+            return
+        }
+
+        def availableMainTrades = Qualification.findAllByCanBeMainTrade(true)
+        flash.message = message(code: 'default.created.message', args: [message(code: 'candidate.label', default: 'Candidate'), candidate.firstName + " " + candidate.lastName])
+        redirect(action: "edit", id: candidate.id, AvailableMainTrades: availableMainTrades )
+    }
 
     def edit() {
         def candidate = Candidate.get(params.id)
@@ -56,45 +74,6 @@ class CandidateController {
 
         [candidateInstance: candidate, newCandidateQualification: newCandidateQualification , AvailableMainTrades: availableMainTrades, AvailableQualifications: availableQualifications ]
     }
-	
-	def save() {
-		def candidate = new Candidate(params["candidate"])
-
-        def address = new Address(params["address"])
-        def postCode = new PostCode(params["postCode"])
-
-        postCode = PostCode.findByCode(postCode.code)
-
-        address.setPostCode(postCode)
-        candidate.setAddress(address)
-
-
-        if (!address.save(flush: true)) {
-            log.debug("Address not saved" )
-
-            address.errors.each {
-                println "fielderrors: " + it
-            }
-
-            render(view: "create", model: [candidateInstance: candidate])
-            return
-        }
-
-        if (!candidate.save(flush: true)) {
-            log.debug("Candidate not saved" )
-
-            candidate.errors.each {
-                println "fielderrors: " + it
-            }
-
-            render(view: "create", model: [candidateInstance: candidate])
-            return
-        }
-
-        def availableMainTrades = Qualification.findAllByCanBeMainTrade(true)
-        flash.message = message(code: 'default.created.message', args: [message(code: 'candidate.label', default: 'Candidate'), candidate.firstName + " " + candidate.lastName])
-		redirect(action: "edit", id: candidate.id, AvailableMainTrades: availableMainTrades )
-	}
 
     def addCandidateQualification() {
 
