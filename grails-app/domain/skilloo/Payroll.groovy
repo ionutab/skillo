@@ -2,7 +2,6 @@ package skilloo
 
 class Payroll {
     
-    Candidate candidate
     PayrollCompany payrollCompany
     
     Boolean registered
@@ -12,6 +11,8 @@ class Payroll {
     String nationalInsuranceNumber
     String registrationNumber
     String unqiueTaxReferenceNumber
+
+    static belongsTo = [candidate:Candidate]
 
     static constraints = {
         referenceNumber nullable: true, blank: false
