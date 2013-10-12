@@ -17,6 +17,15 @@ environments {
             url = "jdbc:h2:mem:devDb;MVCC=TRUE;LOCK_TIMEOUT=10000"
         }
     }
+    localMySQL {
+        dataSource {
+            dbCreate = "create-drop" // one of 'create', 'create-drop', 'update', 'validate', ''
+            driverClassName = "com.mysql.jdbc.Driver"
+            url = "jdbc:mysql://localhost/skillo?useUnicode=yes&characterEncoding=UTF-8"
+            username = "root"
+            password = ""
+        }
+    }
     test {
         dataSource {
             dbCreate = "update"
