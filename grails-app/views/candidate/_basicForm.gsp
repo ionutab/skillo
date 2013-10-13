@@ -93,13 +93,13 @@
             <% } %>
 
             <% if(params.action == 'create' || params.action == 'save' ) {%>
-                <div class="control-group fieldcontain ">
+                <div class="control-group fieldcontain  ${hasErrors(bean: candidateInstance, field: 'candidateQualifications', 'error')} ">
                     <label for="mainTradeId" class="control-label">
                         <g:message code="candidate.mainTrade.label" default="Main Trade" />
                     </label>
                     <div class="controls">
                         <%--
-                            TODO:add most used qualifications list on the right so that the user can select the qualification if not typing it
+                        TODO:add most used qualifications list on the right so that the user can select the qualification if not typing it
                         --%>
                         <g:select
                             name="qualifications[0].id"
@@ -112,6 +112,7 @@
                             noSelection="${['null':'']}"
                             />
                         <span class="help-inline">
+                            ${hasErrors(bean: candidateInstance, field: 'candidateQualifications', 'error')}
                         </span>
                     </div>
                 </div>
