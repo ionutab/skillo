@@ -33,14 +33,17 @@ class Candidate {
         candidateNotes nullable: true
         payroll nullable: true
 
-        /**
-         * temporary added in order to allow various tests on candidates list
-         */
-
-        //candidateQualifications nullable: true
+        //temporarily added nullable false to this , althought not necessarily required because apparently there is a little bug that will not make minSize work if nullable is not SPECIFFICALLY set :D
+        candidateQualifications nullable: false
+        candidateQualifications minSize: 1
 
         jobs nullable: true
         placements nullable: true
+
+    }
+
+    static mapping = {
+        candidateQualifications cascade: "all-delete-orphan"
     }
 
 
