@@ -14,9 +14,6 @@
                 <div class="box-top">
                     <h4><i class="icon-reorder"></i> Box </h4>
                 </div>
-                <div class="box-body">
-                    Hello!
-                </div>
             </div>
         </div>
     </div>
