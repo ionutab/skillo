@@ -30,15 +30,17 @@ class Candidate {
         telephoneNumber blank: false, minSize: 8
         otherTelephoneNumber nullable: true
 
-		/**
-		 * temporary added in order to allow various tests on candidates list
-		 */
-		candidateNotes nullable: true
-		payroll nullable: true
-		candidateQualifications nullable: true
-		jobs nullable: true
-		placements nullable: true
-        consultant nullable: true
+        candidateNotes nullable: true
+        payroll nullable: true
+
+        /**
+         * temporary added in order to allow various tests on candidates list
+         */
+
+        //candidateQualifications nullable: true
+
+        jobs nullable: true
+        placements nullable: true
     }
 
 
