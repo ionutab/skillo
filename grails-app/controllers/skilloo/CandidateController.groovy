@@ -39,19 +39,37 @@ class CandidateController {
         def candidate = new Candidate(params["candidate"])
         def address = new Address(params["address"])
         def postCode = new PostCode(params["postCode"])
+        def user = User.get(springSecurityService.principal.id)
 
         address.postCode = PostCode.findByCode(postCode.code)
         candidate.address = address
 
-        if(!candidate.save(deepvalidate:true, flush: true)){
-            if(candidate.hasErrors()){
-                candidate.errors.each {
-                    println "fielderrors: " + it
-                }
+        if(user != null){
+
+            def consultant = Consultant.findByUser(user)
+
+            if(consultant == null){
+                log.debug("Consultant is null")
+                render(view: "create", model: [candidateInstance: candidate])
+                return
             }
-            render(view: "create", model: [candidateInstance: candidate])
-            return
+
+            candidate.consultant = consultant
+
+            if(!candidate.save(deepvalidate:true, flush: true)){
+                if(candidate.hasErrors()){
+                    candidate.errors.each {
+                        println "fielderrors: " + it
+                    }
+                }
+                render(view: "create", model: [candidateInstance: candidate])
+                return
+            }
+
+        } else {
+            log.debug("user is null")
         }
+
 
         def availableMainTrades = Qualification.findAllByCanBeMainTrade(true)
         flash.message = message(code: 'default.created.message', args: [message(code: 'candidate.label', default: 'Candidate'), candidate.firstName + " " + candidate.lastName])
