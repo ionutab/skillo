@@ -31,14 +31,16 @@ class CandidateController {
 
         def availableMainTrades = Qualification.findAllByCanBeMainTrade(true)
 
-		[candidateInstance: candidate, AvailableMainTrades: availableMainTrades]
+		[candidateInstance: candidate, AvailableMainTrades: availableMainTrades as grails.converters.JSON]
 	}
 
     def save() {
+        def availableMainTrades = Qualification.findAllByCanBeMainTrade(true)
 
         def candidate = new Candidate(params["candidate"])
         def address = new Address(params["address"])
         def postCode = new PostCode(params["postCode"])
+        def mainTrade = new Qualification(params["candidateMainTrade"])
         def user = User.get(springSecurityService.principal.id)
 
         address.postCode = PostCode.findByCode(postCode.code)
@@ -62,18 +64,17 @@ class CandidateController {
                         println "fielderrors: " + it
                     }
                 }
-                render(view: "create", model: [candidateInstance: candidate])
+                render(view: "create", model: [candidateInstance: candidate, AvailableMainTrades: availableMainTrades as grails.converters.JSON ])
                 return
             }
 
+            flash.message = message(code: 'default.created.message', args: [message(code: 'candidate.label', default: 'Candidate'), candidate.firstName + " " + candidate.lastName])
+            redirect(action: "edit", id: candidate.id, AvailableMainTrades: availableMainTrades as grails.converters.JSON )
+
         } else {
             log.debug("user is null")
+            redirect(action: "list")
         }
-
-
-        def availableMainTrades = Qualification.findAllByCanBeMainTrade(true)
-        flash.message = message(code: 'default.created.message', args: [message(code: 'candidate.label', default: 'Candidate'), candidate.firstName + " " + candidate.lastName])
-        redirect(action: "edit", id: candidate.id, AvailableMainTrades: availableMainTrades )
     }
 
     def edit() {
