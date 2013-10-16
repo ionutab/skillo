@@ -20,9 +20,9 @@ modules = {
 	}
 
 	select2 {
-        resource url:'js/select2/select2.js'
         resource url:'css/select2/select2.css'
         resource url:'css/select2/select2-bootstrap.css'
+        resource url:'js/select2-3.4.3/select2.js'
 	}
 
     datepicker {
