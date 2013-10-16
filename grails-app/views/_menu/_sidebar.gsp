@@ -9,8 +9,7 @@
                         ]
                 ],
                 'clients' : [controller:'client', icon:'briefcase'],
-                'map' : [uri:'/map', icon:'globe'],
-                'post codes' : [controller: 'postCode', icon:'map-marker']
+                'map' : [uri:'/map', icon:'globe']
         ]">
             <li class="${conf.uri && request.forwardURI.substring(request.contextPath.length()) == conf.uri || conf.controller && params.controller == conf.controller ? " active" : ""}">
                 <g:if test="${conf.controller || conf.uri}">
