@@ -9,8 +9,6 @@ class CandidateQualification {
     Boolean active
     Boolean isMainTrade
 
-    static belongsTo = Candidate
-
     static constraints = {
         expiryDate nullable: true
         number nullable: true, blank: false
