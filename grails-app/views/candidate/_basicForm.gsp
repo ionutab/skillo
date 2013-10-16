@@ -101,16 +101,23 @@
                         <%--
                         TODO:add most used qualifications list on the right so that the user can select the qualification if not typing it
                         --%>
-                        <g:select
-                            name="qualifications[0].id"
+                        <g:hiddenField
+                            name="candidateMainTrade.id"
                             id="mainTradeId"
-                            from="${AvailableMainTrades}"
-                            value=""
-                            optionKey="id"
-                            optionValue="name"
                             class="input-xlarge"
-                            noSelection="${['null':'']}"
                             />
+
+                        <g:javascript>
+                            function formatCandidateQualification(item) { return item.description; };
+                            $("#mainTradeId").select2({
+                                    data: {results:${AvailableMainTrades}, text:'description'},
+                                    formatSelection: formatCandidateQualification,
+                                    formatResult: formatCandidateQualification,
+                                    placeholder: "Select a Qualification",
+                                    allowClear:true
+                                }
+                            );
+                        </g:javascript>
                         <span class="help-inline">
                             ${hasErrors(bean: candidateInstance, field: 'candidateQualifications', 'error')}
                         </span>
