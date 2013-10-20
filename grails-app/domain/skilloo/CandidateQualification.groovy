@@ -3,11 +3,12 @@ package skilloo
 class CandidateQualification {
 
     Qualification qualification
-    Candidate candidate
     Date expiryDate
     String number
-    Boolean active
+    Boolean active = Boolean.TRUE
     Boolean isMainTrade
+
+    static belongsTo = [candidate:Candidate]
 
     static constraints = {
         expiryDate nullable: true
