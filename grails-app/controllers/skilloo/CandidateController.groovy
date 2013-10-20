@@ -40,41 +40,42 @@ class CandidateController {
         def candidate = new Candidate(params["candidate"])
         def address = new Address(params["address"])
         def postCode = new PostCode(params["postCode"])
-        def mainTrade = new Qualification(params["candidateMainTrade"])
+        def mainTrade = Qualification.findById(params["candidateMainTrade"].id)
+
         def user = User.get(springSecurityService.principal.id)
 
         address.postCode = PostCode.findByCode(postCode.code)
         candidate.address = address
 
-        if(user != null){
+        if(mainTrade.id != null){
 
-            def consultant = Consultant.findByUser(user)
+            mainTrade = Qualification.find(mainTrade)
+            def candidateQualification = new CandidateQualification()
+            candidateQualification.qualification = mainTrade
+            candidateQualification.isMainTrade = true
 
-            if(consultant == null){
-                log.debug("Consultant is null")
-                render(view: "create", model: [candidateInstance: candidate])
-                return
-            }
+            candidate.addToCandidateQualifications(candidateQualification)
 
-            candidate.consultant = consultant
-
-            if(!candidate.save(deepvalidate:true, flush: true)){
-                if(candidate.hasErrors()){
-                    candidate.errors.each {
-                        println "fielderrors: " + it
-                    }
-                }
-                render(view: "create", model: [candidateInstance: candidate, AvailableMainTrades: availableMainTrades as grails.converters.JSON ])
-                return
-            }
-
-            flash.message = message(code: 'default.created.message', args: [message(code: 'candidate.label', default: 'Candidate'), candidate.firstName + " " + candidate.lastName])
-            redirect(action: "edit", id: candidate.id, AvailableMainTrades: availableMainTrades as grails.converters.JSON )
-
-        } else {
-            log.debug("user is null")
-            redirect(action: "list")
         }
+
+        if(user != null){
+            def consultant = Consultant.findByUser(user)
+            candidate.consultant = consultant
+        }
+
+        if(!candidate.save(deepvalidate:true, flush: true)){
+            if(candidate.hasErrors()){
+                candidate.errors.each {
+                    println "fielderrors: " + it
+                }
+            }
+            render(view: "create", model: [candidateInstance: candidate, AvailableMainTrades: availableMainTrades as grails.converters.JSON ])
+            return
+        }
+
+        flash.message = message(code: 'default.created.message', args: [message(code: 'candidate.label', default: 'Candidate'), candidate.firstName + " " + candidate.lastName])
+        redirect(action: "edit", id: candidate.id, AvailableMainTrades: availableMainTrades as grails.converters.JSON )
+
     }
 
     def edit() {
@@ -86,7 +87,6 @@ class CandidateController {
         }
 
         def newCandidateQualification = new CandidateQualification()
-        newCandidateQualification.setCandidate(candidate)
 
         def availableMainTrades = Qualification.findAllByCanBeMainTrade(true)
         def availableQualifications = Qualification.findAll()
@@ -114,10 +114,8 @@ class CandidateController {
             return
         }
 
-
         def newCandidateQualification = new CandidateQualification(params)
 
-        newCandidateQualification.setCandidate(candidate)
         newCandidateQualification.setQualification(qualification)
         newCandidateQualification.setActive(Boolean.TRUE)
 
