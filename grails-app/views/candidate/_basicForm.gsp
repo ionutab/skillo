@@ -105,6 +105,7 @@
                             name="candidateMainTrade.id"
                             id="mainTradeId"
                             class="input-xlarge"
+                            value="${candidateInstance?.candidateQualifications?.asList()?.first()?.qualification?.id}"
                             />
 
                         <g:javascript>
