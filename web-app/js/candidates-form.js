@@ -1,3 +1,19 @@
+var candidateFormFunctions = {
+    initDatePicker:function(){
+        $("#candidateBirthDate").datepicker({
+            viewMode:'years'
+        });
+    },
+
+    setCandidateBirthdate18YearsAgo:function(){
+
+        var myDate=new Date();
+        myDate.setYear(myDate.getYear() - 18);
+        $("#candidateBirthDate").datepicker('setValue',myDate);
+
+    }
+}
+
 $(document).ready(function() {
 
     $(".date").addClass("input-small");
@@ -8,8 +24,12 @@ $(document).ready(function() {
         }
     );
 
-    $(".datepicker").datepicker({
-        viewMode:'years'
+    candidateFormFunctions.initDatePicker();
+
+    $("#candidateBirthDate").click(function(){
+        if(this.value == null || this.value == ''){
+            candidateFormFunctions.setCandidateBirthdate18YearsAgo();
+        }
     });
 
 });
