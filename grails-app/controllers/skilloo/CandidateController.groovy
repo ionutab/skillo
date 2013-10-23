@@ -47,7 +47,7 @@ class CandidateController {
         address.postCode = PostCode.findByCode(postCode.code)
         candidate.address = address
 
-        if(mainTrade.id != null){
+        if(mainTrade != null){
 
             mainTrade = Qualification.find(mainTrade)
             def candidateQualification = new CandidateQualification()
