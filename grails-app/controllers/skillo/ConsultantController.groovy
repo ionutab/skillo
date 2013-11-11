@@ -1,6 +1,6 @@
-package skilloo
+package skillo
 
-class ContactController {
+class ConsultantController {
 
     def scaffold = true
 

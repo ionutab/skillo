@@ -1,8 +1,5 @@
-package skilloo
+package skillo
 
-
-
-import org.junit.*
 import grails.test.mixin.*
 
 @TestFor(ContactController)
