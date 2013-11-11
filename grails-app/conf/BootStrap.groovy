@@ -1,7 +1,7 @@
-import skilloo.Consultant
-import skilloo.Role
-import skilloo.User
-import skilloo.UserRole
+import skillo.Consultant
+import skillo.Role
+import skillo.User
+import skillo.UserRole
 
 class BootStrap {
 
