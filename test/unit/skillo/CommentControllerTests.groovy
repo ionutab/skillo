@@ -1,9 +1,9 @@
-package skilloo
+package skillo
 
 
 
 import grails.test.mixin.*
-import org.junit.*
+import skillo.CommentController
 
 /**
  * See the API for {@link grails.test.mixin.web.ControllerUnitTestMixin} for usage instructions
