@@ -1,15 +1,15 @@
-package skilloo
+package skillo
 
 
 
 import grails.test.mixin.*
-import org.junit.*
+import skillo.UserDetailsController
 
 /**
  * See the API for {@link grails.test.mixin.web.ControllerUnitTestMixin} for usage instructions
  */
-@TestFor(UserController)
-class UserControllerTests {
+@TestFor(UserDetailsController)
+class UserDetailsControllerTests {
 
     void testSomething() {
        fail "Implement me"

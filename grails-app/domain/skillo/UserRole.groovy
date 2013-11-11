@@ -1,4 +1,4 @@
-package skilloo
+package skillo
 
 import org.apache.commons.lang.builder.HashCodeBuilder
 
