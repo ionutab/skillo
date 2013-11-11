@@ -1,4 +1,4 @@
-<%@ page import="skilloo.Candidate" %>
+<%@ page import="skillo.Candidate" %>
 <!doctype html>
 <html>
 
@@ -75,7 +75,7 @@
         <div class="row-fluid">
             <div class="span3">
                 <div class="control-group fieldcontain ${hasErrors(bean: candidateInstance, field: 'payroll.referenceNumber', 'error')} ">
-                    <label for="addressPostCode" class="control-label">
+                    <label for="payroll.referenceNumber" class="control-label">
                         <g:message code="payroll.referenceNumber.label" default="Reference Nr." />
                     </label>
                     <div class="controls">
@@ -88,7 +88,7 @@
             </div>
             <div class="span3">
                 <div class="control-group fieldcontain ${hasErrors(bean: candidateInstance, field: 'payroll.registrationNumber', 'error')} ">
-                    <label for="addressPostCode" class="control-label">
+                    <label for="payroll.registrationNumber" class="control-label">
                         <g:message code="payroll.registrationNumber.label" default="Registration Nr." />
                     </label>
                     <div class="controls">
@@ -100,12 +100,12 @@
                 </div>
             </div>
             <div class="span3">
-                <div class="control-group fieldcontain ${hasErrors(bean: candidateInstance, field: 'registered', 'error')} ">
-                    <label for="registered" class="control-label">
+                <div class="control-group fieldcontain ${hasErrors(bean: candidateInstance, field: 'payroll.registered', 'error')} ">
+                    <label for="payroll.registered" class="control-label">
                         <g:message code="payroll.registered.label" default="Registered" />
                     </label>
                     <div class="controls">
-                        <g:checkBox name="registered" value="${candidateInstance?.payroll?.registered}" />
+                        <g:checkBox name="payroll.registered" value="${candidateInstance?.payroll?.registered}" />
                         <span class="help-inline">
                             ${hasErrors(bean: candidateInstance.payroll, field: 'registered', 'error')}
                         </span>
@@ -113,12 +113,12 @@
                 </div>
             </div>
             <div class="span3">
-                <div class="control-group fieldcontain ${hasErrors(bean: candidateInstance, field: 'inducted', 'error')} ">
-                    <label for="inducted" class="control-label">
+                <div class="control-group fieldcontain ${hasErrors(bean: candidateInstance, field: 'payroll.inducted', 'error')} ">
+                    <label for="payroll.inducted" class="control-label">
                         <g:message code="payroll.inducted.label" default="Inducted" />
                     </label>
                     <div class="controls">
-                        <g:checkBox name="inducted" value="${candidateInstance?.payroll?.inducted}" />
+                        <g:checkBox name="payroll.inducted" value="${candidateInstance?.payroll?.inducted}" />
                         <span class="help-inline">
                             ${hasErrors(bean: candidateInstance.payroll, field: 'inducted', 'error')}
                         </span>
@@ -130,7 +130,7 @@
 
             <div class="span3">
                 <div class="control-group fieldcontain ${hasErrors(bean: candidateInstance, field: 'payroll.unqiueTaxReferenceNumber', 'error')} ">
-                    <label for="addressPostCode" class="control-label">
+                    <label for="payroll.unqiueTaxReferenceNumber" class="control-label">
                         <g:message code="payroll.unqiueTaxReferenceNumber.label" default="Unique Tax Reference Nr." />
                     </label>
                     <div class="controls">
@@ -143,7 +143,7 @@
             </div>
             <div class="span3">
                 <div class="control-group fieldcontain ${hasErrors(bean: candidateInstance, field: 'payroll.nationalInsuranceNumber', 'error')} ">
-                    <label for="addressPostCode" class="control-label">
+                    <label for="payroll.nationalInsuranceNumber" class="control-label">
                         <g:message code="payroll.nationalInsuranceNumber.label" default="National Insurance Nr." />
                     </label>
                     <div class="controls">

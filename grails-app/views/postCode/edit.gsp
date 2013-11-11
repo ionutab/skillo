@@ -1,4 +1,4 @@
-<%@ page import="skilloo.PostCode" %>
+<%@ page import="skillo.PostCode" %>
 <!doctype html>
 <html>
 
