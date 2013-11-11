@@ -1,4 +1,13 @@
-package skilloo
+package skillo
+
+import skillo.Address
+import skillo.Candidate
+import skillo.CandidateQualification
+import skillo.Consultant
+import skillo.Payroll
+import skillo.PostCode
+import skillo.Qualification
+import skillo.User
 
 import java.text.DateFormat
 
@@ -41,7 +50,6 @@ class CandidateController {
         def address = new Address(params["address"])
         def postCode = new PostCode(params["postCode"])
         def mainTrade = Qualification.findById(params["candidateMainTrade"].id)
-
         def user = User.get(springSecurityService.principal.id)
 
         address.postCode = PostCode.findByCode(postCode.code)
@@ -92,6 +100,41 @@ class CandidateController {
         def availableQualifications = Qualification.findAll()
 
         [candidateInstance: candidate, newCandidateQualification: newCandidateQualification , AvailableMainTrades: availableMainTrades, AvailableQualifications: availableQualifications ]
+    }
+
+    def update(){
+
+        def candidate = Candidate.get(params.id)
+        if(!candidate){
+            flash.message = message(code: 'default.not.found.message', args: [message(code: 'candidate.label', default: 'Candidate'), params.id])
+            redirect(action: "list")
+            return
+        }
+
+        def payroll = new Payroll(params["payroll"])
+        def address = new Address(params["address"])
+        def postCode = new PostCode(params["postCode"])
+
+        candidate.payroll = payroll
+        address.postCode = PostCode.findByCode(postCode.code)
+        candidate.address = address
+
+
+
+        if(candidate.checkVersion(params.version)){
+            if (!candidate.save(deepvalidate:true, flush: true)) {
+                if(candidate.hasErrors()){
+                    candidate.errors.each {
+                        println "fielderrors: " + it
+                    }
+                }
+                render(view: "edit", model: [candidateInstance: candidate])
+                return
+            }
+        }
+
+        flash.message = message(code: 'default.updated.message', args: [message(code: 'candidate.label', default: '${className}'), candidate.id])
+        redirect(action: "list")
     }
 
     def addCandidateQualification() {

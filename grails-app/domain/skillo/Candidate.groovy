@@ -1,6 +1,8 @@
-package skilloo
+package skillo
 
-class Candidate {
+import skillo.history.DomainModelInstanceUpdatable
+
+class Candidate implements DomainModelInstanceUpdatable {
 
     String firstName
     String lastName
@@ -46,5 +48,15 @@ class Candidate {
         candidateQualifications cascade: "all-delete-orphan"
     }
 
+    def boolean checkVersion(Long version){
+        log.info("VERSION CHECKED")
+        if(this.version > version){
+            return false
+        }
+        return true
+    }
 
+    def beforeInsert(){
+        this.make()
+    }
 }

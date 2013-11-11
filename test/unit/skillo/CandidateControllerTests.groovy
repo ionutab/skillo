@@ -1,8 +1,6 @@
-package skilloo
+package skillo
 
 import grails.test.mixin.*
-
-import org.junit.*
 
 @TestFor(CandidateController)
 @Mock(Candidate)
