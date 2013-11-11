@@ -1,4 +1,4 @@
-<%@ page import="skilloo.Candidate"%>
+<%@ page import="skillo.Candidate"%>
             <div class="control-group fieldcontain ${hasErrors(bean: candidateInstance, field: 'firstName', 'error')} ">
                 <label for="candidate.firstName" class="control-label">
                     <g:message code="candidate.firstName.label" default="First Name" />
