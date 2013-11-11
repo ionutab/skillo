@@ -97,9 +97,9 @@ log4j = {
 
 grails.config.defaults.locations = [KickstartResources]
 // Added by the Spring Security Core plugin:
-grails.plugins.springsecurity.userLookup.userDomainClassName = 'skilloo.User'
-grails.plugins.springsecurity.userLookup.authorityJoinClassName = 'skilloo.UserRole'
-grails.plugins.springsecurity.authority.className = 'skilloo.Role'
+grails.plugins.springsecurity.userLookup.userDomainClassName = 'skillo.User'
+grails.plugins.springsecurity.userLookup.authorityJoinClassName = 'skillo.UserRole'
+grails.plugins.springsecurity.authority.className = 'skillo.Role'
 grails.plugins.springsecurity.securityConfigType = "InterceptUrlMap"
 grails.plugins.springsecurity.interceptUrlMap = [
         '/js/**':        ['IS_AUTHENTICATED_ANONYMOUSLY'],
