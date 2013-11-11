@@ -1,5 +1,4 @@
-
-<%@ page import="skilloo.Address" %>
+<%@ page import="skillo.Address" %>
 <!doctype html>
 <html>
 

@@ -1,5 +1,4 @@
-
-<%@ page import="skilloo.Candidate" %>
+<%@ page import="skillo.Candidate" %>
 <!doctype html>
 <html>
 
