@@ -1,15 +1,14 @@
-package skilloo
+package skillo
 
 
 
 import grails.test.mixin.*
-import org.junit.*
 
 /**
  * See the API for {@link grails.test.mixin.web.ControllerUnitTestMixin} for usage instructions
  */
-@TestFor(NoteTypeController)
-class NoteTypeControllerTests {
+@TestFor(PlacementController)
+class PlacementControllerTests {
 
     void testSomething() {
        fail "Implement me"

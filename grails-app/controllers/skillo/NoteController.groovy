@@ -1,7 +1,7 @@
-package skilloo
+package skillo
 
-class PayrollCompanyController {
-
+class NoteController {
+    
     def scaffold = true
 
     def index() {

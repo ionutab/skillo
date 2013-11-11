@@ -1,17 +1,17 @@
-package skilloo
+package skillo
 
 
 
 import grails.test.mixin.*
-import org.junit.*
+import skillo.PostCodeController
 
 /**
  * See the API for {@link grails.test.mixin.web.ControllerUnitTestMixin} for usage instructions
  */
-@TestFor(NoteController)
-class NoteControllerTests {
+@TestFor(PostCodeController)
+class PostCodeControllerTests {
 
     void testSomething() {
-       fail "Implement me"
+        fail "Implement me"
     }
 }

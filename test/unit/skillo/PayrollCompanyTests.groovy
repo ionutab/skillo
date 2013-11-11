@@ -1,4 +1,4 @@
-package skilloo
+package skillo
 
 
 
@@ -8,8 +8,8 @@ import org.junit.*
 /**
  * See the API for {@link grails.test.mixin.domain.DomainClassUnitTestMixin} for usage instructions
  */
-@TestFor(Placement)
-class PlacementTests {
+@TestFor(PayrollCompany)
+class PayrollCompanyTests {
 
     void testSomething() {
        fail "Implement me"

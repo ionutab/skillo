@@ -1,4 +1,4 @@
-package skilloo
+package skillo
 
 class PostCode {
 
@@ -35,4 +35,21 @@ class PostCode {
         country nullable: true, blank: false
         countryCode nullable: true, blank: false
     }
+
+    def beforeInsert(){
+        log.info("before insert making")
+        this.make()
+    }
+
+    def beforeUpdate(){
+        log.info("before update making")
+        this.make()
+    }
+
+    @Override
+    void make() {
+        //To change body of implemented methods use File | Settings | File Templates.
+        log.info("making PostCode")
+    }
+
 }

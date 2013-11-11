@@ -1,9 +1,9 @@
-package skilloo
+package skillo
 
-class QualificationController {
+class NoteTypeController {
 
     def scaffold = true
-
+    
     def index() {
         redirect(action: "list")
     }

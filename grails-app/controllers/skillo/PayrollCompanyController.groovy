@@ -1,6 +1,6 @@
-package skilloo
+package skillo
 
-class PostCodeController {
+class PayrollCompanyController {
 
     def scaffold = true
 

@@ -1,9 +1,7 @@
-package skilloo
+package skillo
 
-
-
-import org.junit.*
 import grails.test.mixin.*
+import skillo.PayrollCompanyController
 
 @TestFor(PayrollCompanyController)
 @Mock(PayrollCompany)

@@ -1,9 +1,7 @@
-package skilloo
+package skillo
 
-
-
-import org.junit.*
 import grails.test.mixin.*
+import skillo.QualificationController
 
 @TestFor(QualificationController)
 @Mock(Qualification)
