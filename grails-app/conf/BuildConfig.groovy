@@ -10,7 +10,7 @@ grails.project.source.level = 1.6
 //grails.project.fork = [
 //   run: [maxMemory:1024, minMemory:64, debug:false, maxPerm:256]
 //]
-
+grails.project.dependency.resolver = "maven" // or ivy
 grails.project.dependency.resolution = {
     // inherit Grails' default dependencies
     inherits("global") {
@@ -45,24 +45,26 @@ grails.project.dependency.resolution = {
     }
 
     plugins {
-        runtime ":hibernate:$grailsVersion"
+//        runtime ":hibernate:$grailsVersion"
+        runtime ':hibernate:3.6.10.3'
         runtime ":jquery:1.10.2"
-        runtime ":resources:1.1.6"
+        runtime ":resources:1.2.1"
         runtime ":font-awesome-resources:3.2.1.1"
         runtime ":twitter-bootstrap:2.3.2"
-
+        compile ":scaffolding:2.0.1"
         // Uncomment these (or add new ones) to enable additional resources capabilities
         //runtime ":zipped-resources:1.0"
         //runtime ":cached-resources:1.0"
         //runtime ":yui-minify-resources:0.1.5"
 
-        build ":tomcat:$grailsVersion"
+//        build ":tomcat:$grailsVersion"
+        build ':tomcat:7.0.42'
 
 //        runtime ":database-migration:1.3.2"  -- might be needed later in the development process
 
         runtime ":font-awesome-resources:3.2.1.1"
 
-        compile ':cache:1.0.1'
+        compile ':cache:1.1.1'
 
         compile ":spring-security-core:1.2.7.3"
 
