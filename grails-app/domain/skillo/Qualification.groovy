@@ -5,7 +5,7 @@ class Qualification {
     String code
     String name
     String description
-    Boolean canBeMainTrade
+    Boolean canBeMainTrade = Boolean.TRUE
 
     static belongsTo = CandidateQualification
 
