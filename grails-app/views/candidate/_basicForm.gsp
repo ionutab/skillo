@@ -111,7 +111,7 @@
                         <g:javascript>
                             function formatCandidateQualification(item) { return item.description; };
                             $("#mainTradeId").select2({
-                                    data: {results:${AvailableMainTrades}, text:'description'},
+                                    data: {results:${AvailableMainTrades}, text:'name'},
                                     formatSelection: formatCandidateQualification,
                                     formatResult: formatCandidateQualification,
                                     placeholder: "Select a Qualification",
