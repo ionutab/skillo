@@ -52,12 +52,17 @@ class CandidateController {
         def mainTrade = Qualification.findById(params["candidateMainTrade"].id)
         def user = User.get(springSecurityService.principal.id)
 
+        if (params["candidate.birthDate"]) {
+            params["candidate.birthDate"] = new Date(params["candidate.birthDate"])
+            candidate.birthDate = params["candidate.birthDate"]
+        }
+
         address.postCode = PostCode.findByCode(postCode.code)
         candidate.address = address
 
         if(mainTrade != null){
 
-            mainTrade = Qualification.find(mainTrade)
+            mainTrade = Qualification.get(mainTrade.id)
             def candidateQualification = new CandidateQualification()
             candidateQualification.qualification = mainTrade
             candidateQualification.isMainTrade = true
@@ -71,6 +76,7 @@ class CandidateController {
             candidate.consultant = consultant
         }
 
+        candidate.clearErrors()
         if(!candidate.save(deepvalidate:true, flush: true)){
             if(candidate.hasErrors()){
                 candidate.errors.each {
@@ -80,6 +86,7 @@ class CandidateController {
             render(view: "create", model: [candidateInstance: candidate, AvailableMainTrades: availableMainTrades as grails.converters.JSON ])
             return
         }
+        candidate.addInsertEvent()
 
         flash.message = message(code: 'default.created.message', args: [message(code: 'candidate.label', default: 'Candidate'), candidate.firstName + " " + candidate.lastName])
         redirect(action: "edit", id: candidate.id, AvailableMainTrades: availableMainTrades as grails.converters.JSON )
