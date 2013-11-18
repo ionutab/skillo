@@ -107,13 +107,6 @@
 				
 			</tr>
 		
-			<tr class="prop">
-				<td valign="top" class="name"><g:message code="postCode.address.label" default="Address" /></td>
-				
-				<td valign="top" class="value"><g:link controller="address" action="show" id="${postCodeInstance?.address?.id}">${postCodeInstance?.address?.encodeAsHTML()}</g:link></td>
-				
-			</tr>
-		
 		</tbody>
 	</table>
 </section>
