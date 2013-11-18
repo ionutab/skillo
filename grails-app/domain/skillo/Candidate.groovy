@@ -1,8 +1,8 @@
 package skillo
 
-import skillo.history.DomainModelInstanceUpdatable
+import skillo.history.SkilloDomainModelWithHistory
 
-class Candidate implements DomainModelInstanceUpdatable {
+class Candidate implements SkilloDomainModelWithHistory {
 
     String firstName
     String lastName
@@ -22,7 +22,7 @@ class Candidate implements DomainModelInstanceUpdatable {
     Boolean active = Boolean.TRUE
     Payroll payroll
 
-    static hasMany = [candidateQualifications:CandidateQualification, candidateNotes:CandidateNote, jobs:Job, placements:Placement ]
+    static hasMany = [ candidateQualifications:CandidateQualification, candidateNotes:CandidateNote, jobs:Job, placements:Placement, candidateHistory:CandidateEvent ]
 
     static constraints = {
         firstName blank: false
@@ -49,14 +49,19 @@ class Candidate implements DomainModelInstanceUpdatable {
     }
 
     def boolean checkVersion(Long version){
-        log.info("VERSION CHECKED")
         if(this.version > version){
             return false
         }
         return true
     }
 
-    def beforeInsert(){
-        this.make()
+    void addInsertEvent() {
+        def insertEvent = new CandidateEvent()
+        insertEvent.candidate = this
+//        insertEvent.history.consultant = this.getConsultant()
+        skilloHistoryContext.insertHistory(insertEvent)
+    }
+
+    void addUpdateEvent(Consultant eventConsultant) {
     }
 }
