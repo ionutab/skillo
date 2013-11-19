@@ -41,6 +41,7 @@ class Candidate implements SkilloDomainModelWithHistory {
 
         jobs nullable: true
         placements nullable: true
+        payroll nullable: true
 
     }
 
@@ -58,7 +59,7 @@ class Candidate implements SkilloDomainModelWithHistory {
     void addInsertEvent() {
         def insertEvent = new CandidateEvent()
         insertEvent.candidate = this
-//        insertEvent.history.consultant = this.getConsultant()
+        insertEvent.consultant = this.getConsultant()
         skilloHistoryContext.insertHistory(insertEvent)
     }
 
