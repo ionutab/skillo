@@ -9,6 +9,7 @@ import skillo.history.DomainModelEvent
  */
 class CandidateEvent implements DomainModelEvent {
 
+    Consultant consultant
     Candidate candidate
     DefaultHistoryEvent eventDetails = new DefaultHistoryEvent()
 
@@ -19,12 +20,12 @@ class CandidateEvent implements DomainModelEvent {
     }
 
     @Override
-    def setEventDetails(String eventDetails) {
+    def void setEventDetails(String eventDetails) {
         this.eventDetails.setDetails(eventDetails)
     }
 
     @Override
-    def setEventDetails(DefaultHistoryEvent eventDetails) {
+    def void setEventDetails(DefaultHistoryEvent eventDetails) {
         this.eventDetails = eventDetails
     }
 }
