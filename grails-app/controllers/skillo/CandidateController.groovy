@@ -126,9 +126,7 @@ class CandidateController {
         address.postCode = PostCode.findByCode(postCode.code)
         candidate.address = address
 
-
-
-        if(candidate.checkVersion(params.version)){
+        if(candidate.checkVersion(Long.parseLong(params.version))){
             if (!candidate.save(deepvalidate:true, flush: true)) {
                 if(candidate.hasErrors()){
                     candidate.errors.each {
