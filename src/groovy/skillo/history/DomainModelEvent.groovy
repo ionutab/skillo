@@ -1,5 +1,7 @@
 package skillo.history
 
+import skillo.Consultant
+
 /**
  * Created with IntelliJ IDEA.
  * User: ionutab
@@ -9,9 +11,11 @@ package skillo.history
  */
 public interface DomainModelEvent {
 
-    public setEventDetails(String eventDetails)
+    public void setEventDetails(String eventDetails)
 
-    public setEventDetails(DefaultHistoryEvent eventDetails)
+    public void setEventDetails(DefaultHistoryEvent eventDetails)
+
+    public void setConsultant(Consultant consultant)
 
     public DefaultHistoryEvent getEventDetails()
 
