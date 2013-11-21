@@ -1,5 +1,5 @@
 
-CREATE TABLE `post_code_temp` (
+CREATE TABLE `skillo_locational`.`post_code_temp` (
   `postcode` varchar(255) NOT NULL,
   `latitude` double DEFAULT NULL,
   `longitude` double DEFAULT NULL,
@@ -14,12 +14,11 @@ CREATE TABLE `post_code_temp` (
   `country` varchar(255) DEFAULT NULL,
   `country_code` varchar(255) DEFAULT NULL,
   UNIQUE KEY `postcode` (`postcode`)
-) ENGINE=InnoDB;
+) ENGINE=InnoDB CHARSET=latin1;
 
-
-
+-- be sure to replace file location to server file location
 LOAD DATA LOCAL INFILE 'C:/s/postcodes.csv'
-INTO TABLE POST_CODE_TEMP
+INTO TABLE SKILLO_LOCATIONAL.POST_CODE_TEMP
 FIELDS TERMINATED BY ','
 OPTIONALLY ENCLOSED BY '"'
 ESCAPED BY ''
