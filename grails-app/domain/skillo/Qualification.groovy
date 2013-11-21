@@ -10,8 +10,9 @@ class Qualification {
     static belongsTo = CandidateQualification
 
     static constraints = {
-        code nullable: true, unique:true, blank: false
-        name unique:true, blank: false
+        code nullable: true, blank: false
+        //I have set the name explicitly to nullable false as I consider it of most importance for now
+        name nullable: false, unique:true, blank: false
         description nullable:true, blank: false
     }
 }
