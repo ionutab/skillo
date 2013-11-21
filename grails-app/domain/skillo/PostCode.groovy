@@ -18,10 +18,6 @@ class PostCode {
 
     static belongsTo = Address
 
-    static mapping = {
-        table name: "post_code" , schema: "skillo_locational"
-    }
-
 	static constraints = {
         code unique: true, blank: false, minSize: 4
 

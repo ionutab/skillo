@@ -12,9 +12,18 @@ hibernate {
 // environment specific settings
 environments {
     development {
+//
+//        dataSource {
+//            dbCreate = "create-drop" // one of 'create', 'create-drop', 'update', 'validate', ''
+//            url = "jdbc:h2:mem:devDb;MVCC=TRUE;LOCK_TIMEOUT=10000"
+//        }
+//
         dataSource {
             dbCreate = "create-drop" // one of 'create', 'create-drop', 'update', 'validate', ''
-            url = "jdbc:h2:mem:devDb;MVCC=TRUE;LOCK_TIMEOUT=10000"
+            driverClassName = "com.mysql.jdbc.Driver"
+            url = "jdbc:mysql://localhost/skillo?useUnicode=yes&characterEncoding=UTF-8"
+            username = "root"
+            password = ""
         }
     }
     localMySQL {
@@ -24,6 +33,15 @@ environments {
             url = "jdbc:mysql://localhost/skillo?useUnicode=yes&characterEncoding=UTF-8"
             username = "root"
             password = ""
+        }
+    }
+    cloudbees {
+        dataSource {
+            dbCreate = "create" // one of 'create', 'create-drop', 'update', 'validate', ''
+            driverClassName = "com.mysql.jdbc.Driver"
+            url = "jdbc:mysql:ec2-50-19-213-178.compute-1.amazonaws.com"
+            username = "skillo"
+            password = "skillo"
         }
     }
     test {

@@ -1,4 +1,4 @@
-CREATE TABLE `skillo_main`.`qualification_temp` (
+CREATE TABLE `skillo`.`qualification_temp` (
   `name` varchar(255) NOT NULL,
   `description` varchar(255) DEFAULT NULL,
   `code` varchar(255) DEFAULT NULL,

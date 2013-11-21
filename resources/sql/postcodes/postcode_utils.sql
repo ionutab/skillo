@@ -1,5 +1,5 @@
 
-CREATE TABLE `skillo_locational`.`post_code_temp` (
+CREATE TABLE `skillo`.`post_code_temp` (
   `postcode` varchar(255) NOT NULL,
   `latitude` double DEFAULT NULL,
   `longitude` double DEFAULT NULL,
@@ -18,7 +18,7 @@ CREATE TABLE `skillo_locational`.`post_code_temp` (
 
 -- be sure to replace file location to server file location
 LOAD DATA LOCAL INFILE 'C:/s/postcodes.csv'
-INTO TABLE SKILLO_LOCATIONAL.POST_CODE_TEMP
+INTO TABLE SKILLO.POST_CODE_TEMP
 FIELDS TERMINATED BY ','
 OPTIONALLY ENCLOSED BY '"'
 ESCAPED BY ''
