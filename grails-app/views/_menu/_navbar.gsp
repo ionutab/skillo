@@ -1,5 +1,5 @@
-<div class="navbar navbar-inverse navbar-fixed-top">
-      <div class="navbar-inner">
+<div class="navbar navbar-fixed-top dark-font-navbar">
+      <div class="%{--navbar-inner--}%">
         <div class="container-fluid">
 			<a class="brand" href="${createLink(uri: '/')}">
 				${meta(name:'app.name')}
