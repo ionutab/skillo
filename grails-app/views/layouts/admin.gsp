@@ -36,9 +36,10 @@
 <body data-spy="scroll">
 
 	<%--navbar --%>
-	<g:render template="/_menu/navbar"/><%--
-	
-	
+    <g:if test="${!layout_nonavbar}">
+        <g:render template="/_menu/navbar"/>
+    </g:if>
+
 	<%--workcontent --%>
     <div id="main-content-container" class="container-fluid">
 	
