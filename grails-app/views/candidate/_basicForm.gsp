@@ -26,7 +26,7 @@
                     <g:message code="candidate.birthDate.label" default="Birth Date" />
                 </label>
                 <div class="controls">
-                    <g:field type="textField" name="candidate.birthDate" id="candidateBirthDate" class="datepicker" value="${formatDate(date: candidateInstance?.birthDate)}" default="none" precision="day" />
+                    <g:field type="textField" name="candidate.birthDate" id="candidateBirthDate" class="input-small datepicker " value="${formatDate(date: candidateInstance?.birthDate)}" default="none" precision="day" />
                     <span class="help-inline">
                         ${hasErrors(bean: candidateInstance, field: 'birthDate', 'error')}
                     </span>
