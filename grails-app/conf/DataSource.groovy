@@ -39,9 +39,12 @@ environments {
         dataSource {
             dbCreate = "update" // one of 'create', 'create-drop', 'update', 'validate', ''
             driverClassName = "com.mysql.jdbc.Driver"
-            url = "jdbc:mysql:ec2-50-19-213-178.compute-1.amazonaws.com"
+            url = "jdbc:mysql://ec2-50-19-213-178.compute-1.amazonaws.com/skillo?useUnicode=yes&characterEncoding=UTF-8"
+            // url = "jdbc:mysql://localhost/skillo?useUnicode=yes&characterEncoding=UTF-8"
             username = "skillo"
             password = "skillo"
+            // username = "root"
+            // password = "" 
         }
     }
     test {
@@ -55,9 +58,12 @@ environments {
             dbCreate = "update"
 //            url = "jdbc:h2:prodDb;MVCC=TRUE;LOCK_TIMEOUT=10000"
             driverClassName = "com.mysql.jdbc.Driver"
-            url = "jdbc:mysql:ec2-50-19-213-178.compute-1.amazonaws.com"
+            url = "jdbc:mysql://ec2-50-19-213-178.compute-1.amazonaws.com/skillo?useUnicode=yes&characterEncoding=UTF-8"
+            // url = "jdbc:mysql://localhost/skillo?useUnicode=yes&characterEncoding=UTF-8"
             username = "skillo"
             password = "skillo"
+            // username = "root"
+            // password = "" 
             pooled = true
             properties {
                maxActive = -1
