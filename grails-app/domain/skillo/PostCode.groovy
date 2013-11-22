@@ -22,8 +22,8 @@ class PostCode {
         code unique: true, blank: false, minSize: 4
 
         //this is for test purposes only
-        latitude nullable: true, blank: false
-        longitude nullable: true, blank: false
+        latitude nullable: true
+        longitude nullable: true
         easting nullable: true
         northing nullable: true
         grindRef nullable: true, blank: false
