@@ -9,11 +9,12 @@ body {
     margin: 0;
     padding: 0;
     height:100%;
+    background-color: #f1f2f6;
 }
 
 .sidebar {
     position: fixed;
-    top: 41px;
+    top: 32px;
     bottom: 0;
     padding: 20px 0;
     border-radius: 0;
@@ -80,14 +81,30 @@ body {
 
 .sidebar .nav-list > li {
     /*border-top: 1px solid #cfcfcf;*/
+    line-height: 30px;
 }
+
+.sidebar .nav-list > li :hover {
+    /*border-top: 1px solid #cfcfcf;*/
+}
+
+.nav > li > a:hover,
+.nav > li > a:focus {
+    text-decoration: none;
+    background-color: #fff;
+}
+
+.sidebar-item:hover{
+    background-color: #ffffff;
+}
+
 
 .sidebar > .nav-list > li:first-child {
     border-top: 0;
 }
 
 .sidebar .nav-list > li > a {
-    padding-left: 15px;
+    padding-left: 20px;
     padding-right: 15px;
     margin: 0;
 }
@@ -154,7 +171,20 @@ legend {
     line-height: 14px;
     vertical-align: middle;
 }
-
+/*
 .top-context {
     margin-top: -15px;
+}
+*/
+
+table {
+    background-color: #FFF;
+}
+
+.dark-font-navbar {
+    color: #333333;
+}
+
+.navbar .brand {
+    color: #333333;
 }
