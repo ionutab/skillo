@@ -1,17 +1,17 @@
 
-<div class="well sidebar sidebar-fixed">
+<div class="sidebar sidebar-fixed">
     <ul class="nav nav-list">
         <g:each var="item,conf" in="[
                 'home' : [uri:'/', icon:'home'],
                 'candidates' : [icon:'user',
-                        items: ['directory' : [controller:'candidate', icon:'folder-open'],
+                        items: ['directory' : [controller:'candidate', icon:'list'],
                                 'qualifications' : [controller:'qualification', icon:'bookmark']
                         ]
                 ],
                 'clients' : [controller:'client', icon:'briefcase'],
                 'map' : [uri:'/map', icon:'globe']
         ]">
-            <li class="${conf.uri && request.forwardURI.substring(request.contextPath.length()) == conf.uri || conf.controller && params.controller == conf.controller ? " active" : ""}">
+            <li class="${conf.uri && request.forwardURI.substring(request.contextPath.length()) == conf.uri || conf.controller && params.controller == conf.controller ? " active" : ""}  sidebar-item" >
                 <g:if test="${conf.controller || conf.uri}">
                     <g:link controller="${conf.controller}" uri="${conf.uri}">
                         <i class="icon-${conf.icon}"></i>
