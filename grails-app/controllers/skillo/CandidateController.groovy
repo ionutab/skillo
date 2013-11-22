@@ -62,7 +62,6 @@ class CandidateController {
 
         if(mainTrade != null){
 
-            mainTrade = Qualification.get(mainTrade.id)
             def candidateQualification = new CandidateQualification()
             candidateQualification.qualification = mainTrade
             candidateQualification.isMainTrade = true
