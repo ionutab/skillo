@@ -6,7 +6,7 @@ CREATE TABLE `skillo`.`qualification_temp` (
 ) ENGINE=InnoDB DEFAULT CHARSET=latin1;
 
 LOAD DATA LOCAL INFILE 'C:/s/basic_qualification_list.csv'
-INTO TABLE SKILLO_MAIN.QUALIFICATION_TEMP
+INTO TABLE SKILLO.QUALIFICATION_TEMP
 FIELDS TERMINATED BY ','
 ENCLOSED BY ''
 OPTIONALLY ENCLOSED BY '"'
@@ -24,3 +24,6 @@ INSERT INTO qualification (code, name, description, can_be_main_trade, version)
     1 as can_be_main_trade,
     0 AS version
   FROM qualification_temp;
+
+update qualification set code = null where length(code) = 0 and code is not null;
+update qualification set description = null where length(description) = 0 and description is not null;
