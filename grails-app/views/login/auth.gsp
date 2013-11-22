@@ -4,6 +4,7 @@
 	<meta name="layout" content="admin" />
 
 	<g:set var="layout_nosidebar"		value="${true}" scope="request"/>
+	<g:set var="layout_nonavbar"		value="${true}" scope="request"/>
 	<g:set var="layout_nocontextbar"	value="${true}" scope="request"/>
 </head>
 
@@ -11,6 +12,7 @@
 
 <section id="login" class="first">
 		<form id='loginForm' class='form-horizontal' action='${postUrl}' method='POST' autocomplete='off'>
+            <h2 style="text-align: center"> <g:meta name="app.title.short"/> </h2>
             <h2> <g:message code="springSecurity.login.header"/> </h2>
             <fieldset class="form">
 				<div class="control-group fieldcontain ${hasErrors(bean: _DemoPageInstance, field: 'name', 'error')} ">
