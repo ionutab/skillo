@@ -10,7 +10,8 @@ class UrlMappings {
 		"/contact"		(view:"/info/contact")
 		"/terms"		(view:"/info/terms")
         "/map"          (view:"/home/map")
-		
+        "/test"          (view:"/home/test")
+
 		/* 
 		 * Pages with controller
 		 * WARN: No domain/controller should be named "api" or "mobile" or "web"!
