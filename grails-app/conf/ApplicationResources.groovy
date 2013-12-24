@@ -8,6 +8,13 @@ modules = {
 		resource url:'css/admin.css'
 		resource url:'css/custombox.css'
 	}
+
+    admin_light {
+        dependsOn 'bootstrap', 'jquery', 'font-awesome'
+        resource url:'css/admin_light.css'
+        resource url:'css/custombox.css'
+        resource url:'js/sidebar.js'
+    }
 	
 	maps {
 		resource url:'css/maps/googlemaps.css'

@@ -1,8 +1,8 @@
 <html>
 
 <head>
-	<title>Layout test page - perfect!</title>
-	<meta name="layout" content="admin" />
+	<title>S°</title>
+	<meta name="layout" content="admin_light" />
 </head>
 
 <body>

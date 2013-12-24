@@ -3,38 +3,32 @@ html{
     margin: 0;
     padding: 0;
     height:100%;
+    border: 0;
 }
 
 body {
     margin: 0;
     padding: 0;
+    border: 0;
     height:100%;
     background-color: #f1f2f6;
 }
 
-.sidebar {
-    position: fixed;
-    top: 32px;
+#sidebar {
+    position: absolute;
+    top: 0px;
     bottom: 0;
-    padding: 20px 0;
     border-radius: 0;
     margin: 0;
-    width: 180px;
+    background-color: #ffffff;
 }
 
-.footer {
-    position: absolute;
-    bottom: 0;
-    right: 0;
-    display: block;
-    left: 0;
-    margin: 0;
-    width: 100%;
+.sidebar-wide{
+    width: 200px;
 }
 
-#main-content-container {
-    display:block;
-    padding: 0;
+.sidebar-narrow{
+    width: 60px;
 }
 
 #loginForm {
@@ -54,36 +48,34 @@ body {
     margin-left: 0px;
 }
 
-.page-content-container {
-    display:block;
-    margin: 0;
-    padding: 10px 10px 10px;
-    min-height: 100%;
+
+#workspace-content-container {
+    position: absolute;
+    top: 40px;
+    right: 0;
+    bottom: 0px;
+    padding: 20px;
 }
 
-.workspace-content-container {
-    display:block;
-    position: relative;
-    min-height: 100%;
-    padding: 0;
-    margin-right: 0;
-    margin-top: 41px;
+.workspace-wide{
+    left: 60px;
 }
 
-.sidebar + .workspace-content-container {
-    margin-left: 182px;
+.workspace-narrow{
+    left: 200px;
 }
 
-.sidebar .nav-list {
+
+#sidebar .nav-list {
     padding: 0;
 }
 
-.sidebar .nav-list > li {
+#sidebar .nav-list > li {
     /*border-top: 1px solid #cfcfcf;*/
     line-height: 30px;
 }
 
-.sidebar .nav-list > li :hover {
+#sidebar .nav-list > li :hover {
     /*border-top: 1px solid #cfcfcf;*/
 }
 
@@ -93,22 +85,22 @@ body {
     background-color: #fff;
 }
 
-.sidebar-item:hover{
+#sidebar-item:hover{
     background-color: #ffffff;
 }
 
 
-.sidebar > .nav-list > li:first-child {
+#sidebar > .nav-list > li:first-child {
     border-top: 0;
 }
 
-.sidebar .nav-list > li > a {
+#sidebar .nav-list > li > a {
     padding-left: 20px;
     padding-right: 15px;
     margin: 0;
 }
 
-.sidebar .nav-list .nav-list > li > a {
+#sidebar .nav-list .nav-list > li > a {
     padding-left: 30px;
     padding-right: 30px;
 }
@@ -121,8 +113,7 @@ body {
     position: fixed;
     right: 0;
     bottom: 0;
-    left: 182px;
-    top: 41px;
+    left: 200px;
 }
 
 #add-candidates-tab-button{
@@ -133,6 +124,11 @@ body {
 	padding-left: 12px;
 	margin-right: 0;
 	margin-bottom: 3px;
+}
+
+#main-content-container {
+    width: 100%;
+    height: 100%;
 }
 
 .form-horizontal .control-label {
@@ -170,11 +166,6 @@ legend {
     line-height: 14px;
     vertical-align: middle;
 }
-/*
-.top-context {
-    margin-top: -15px;
-}
-*/
 
 table {
     background-color: #FFF;
@@ -186,4 +177,12 @@ table {
 
 .navbar .brand {
     color: #333333;
+}
+
+.applogo {
+
+}
+
+.userpane {
+
 }

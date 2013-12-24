@@ -20,7 +20,7 @@
 	<%-- Manual switch for the skin can be found in /view/_menu/_config.gsp --%>
 	<r:require modules="jquery"/>
 	<r:require modules="bootstrap"/>
-	<r:require modules="admin"/>
+	<r:require modules="admin_light"/>
 
 	<r:layoutResources />
 	<g:layoutHead />
@@ -35,13 +35,17 @@
 
 <body data-spy="scroll">
 
-    <%--navbar --%>
-    <g:if test="${!layout_nonavbar}">
-        <g:render template="/_menu/navbar"/>
-    </g:if>
-
 	<%--workcontent --%>
-    <div id="main-content-container" class="container-fluid">
+    <div id="main-content-container">
+
+        <%-- sidebar --%>
+        <g:if test="${!layout_nocontextbar}">
+            <g:render template="/_menu/sidebar_only"/>
+        </g:if>
+
+        <g:render template="/_menu/user_light" />
+
+    <g:render template="/layouts/workspace_light"/>
 	
 	</div>
 	

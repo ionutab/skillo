@@ -1,13 +1,13 @@
+
+<%@ page import="skillo.Candidate" %>
 <!doctype html>
 <html>
 
 <head>
     <meta http-equiv="Content-Type" content="text/html; charset=UTF-8" />
-    <meta name="layout" content="admin" />
+    <meta name="layout" content="admin_light" />
     <g:set var="entityName" value="${message(code: 'candidate.label', default: 'Candidate')}" />
-    <title><g:message code="candidate.list.label" args=" " /></title>
-    <r:require modules="application"/>
-    <r:require modules="candidates"/>
+    <title><g:meta name="app.title.short" /> - <g:message code="candidate.list.label" args=" " /></title>
 </head>
 
 <body>
@@ -15,7 +15,7 @@
 <g:form action="list" controller="candidate" name="searchForm">
   <fieldset>
     <legend><g:message code="candidate.search.label" /></legend>
-    
+
     <div class="row-fluid">
 	    <div class="span12">
 		    <g:textField name="firstName" placeholder="${message(code: 'candidate.search.firstName.label', default: 'First Name')}" value="${params.firstName}"/>
@@ -38,29 +38,34 @@
         </div>
     </div>
   </fieldset>
-  <fieldset>   
-  
+  <fieldset>
+
   </fieldset>
 </g:form>
 
 
 <div class="tabbable tabs-right">
 	<ul class="nav nav-tabs">
-        <li class="active">
-            <a href="#candidatesearch-1" data-toggle="tab">Seach #1</a>
+        %{--
+        I have commented this because then the top context will not work properly - beats me
+        <li>
+            <a href="#cs1" data-toggle="tab">Seach 1</a>
         </li>
-        
+
+        --}%
         <li class="">
-            <button class="btn btn-primary" type="button" id="add-candidates-tab-button"><i class="icon-plus"></i></button>
+            <button class="btn btn-primary" type="button" id="addcandidatestabbutton"><i class="icon-plus"></i></button>
         </li>
 	</ul>
+
 	<div class="tab-content">
-        <div class="tab-pane active" id="candidatesearch-1">
+        <div class="tab-pane active" id="cs1">
+
 			<section id="list-candidate" class="first">
 			    <table class="table table-bordered table-striped">
 			        <thead>
 			            <tr>
-			            
+
 			                <g:sortableColumn property="firstName" title="${message(code: 'candidate.firstName.label', default: 'First ')}" />
 			                <g:sortableColumn property="lastName" title="${message(code: 'candidate.lastName.label', default: 'Last Name')}" />
 			                <th><g:message code="candidate.telephoneNumber.label" default="Telephone Number" /></th>
@@ -68,7 +73,7 @@
 			                <th><g:message code="address.postcode.label" default="Post Code" /></th>
 			                <th><g:message code="candidate.mainTrade.label" default="Main Trade" /></th>
 			                <th><g:message code="default.actions.label" default="Actions" /></th>
-			                
+
 			            </tr>
 			        </thead>
 			        <tbody>
@@ -117,15 +122,15 @@
 			            </g:each>
 			        </tbody>
 			    </table>
-			    
+
 			    <div class="pagination">
 			        <g:paginate total="${CandidateTotal}" />
 			    </div>
 
 			</section>
         </div>
-        
-        
+
+
 	</div>
 </div>
 

@@ -4,7 +4,7 @@
 <html>
 <head>
 	<meta http-equiv="Content-Type" content="text/html; charset=UTF-8" />
- 	<meta name="layout" content="admin" />
+ 	<meta name="layout" content="admin_light" />
 	<g:set var="entityName" value="${message(code: 'address.label', default: 'Address')}" />
 	<title><g:message code="default.list.label" args="[entityName]" /></title>
 </head>
