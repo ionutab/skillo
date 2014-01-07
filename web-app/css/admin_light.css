@@ -28,7 +28,7 @@ body {
 }
 
 .sidebar-narrow{
-    width: 60px;
+    width: 54px;
 }
 
 #loginForm {
@@ -48,6 +48,29 @@ body {
     margin-left: 0px;
 }
 
+#workspace-navbar {
+    display:block;
+    height: 40px;
+    width: 100%;
+    background-color: #344556;
+}
+
+
+#workspace-navbar-absolute {
+    position: absolute;
+    top: 0;
+    right: 0;
+    height: 40px;
+    background-color: #344556;
+}
+
+.workspace-navbar-wide {
+    left: 54px;
+}
+
+.workspace-navbar-narrow {
+    left: 200px;
+}
 
 #workspace-content-container {
     position: absolute;
@@ -58,7 +81,7 @@ body {
 }
 
 .workspace-wide{
-    left: 60px;
+    left: 54px;
 }
 
 .workspace-narrow{
@@ -79,16 +102,9 @@ body {
     /*border-top: 1px solid #cfcfcf;*/
 }
 
-.nav > li > a:hover,
-.nav > li > a:focus {
-    text-decoration: none;
-    background-color: #fff;
-}
-
 #sidebar-item:hover{
     background-color: #ffffff;
 }
-
 
 #sidebar > .nav-list > li:first-child {
     border-top: 0;
@@ -179,8 +195,8 @@ table {
     color: #333333;
 }
 
-.applogo {
-
+.brand h4 {
+    text-align: center;
 }
 
 .userpane {
