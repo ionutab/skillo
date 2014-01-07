@@ -6,7 +6,7 @@
 <div id="sidebar" class="<%=Boolean.TRUE.equals((Boolean)session.getAttribute("user.layout.sidebar.narrow")) ? 'sidebar-narrow' : 'sidebar-wide' %>">
 
     <div id="applogo">
-        <div class="container-fluid">
+        <div>
             <span id="title-long" style="<%=Boolean.TRUE.equals((Boolean)session.getAttribute("user.layout.sidebar.narrow")) ? 'display:none' : '' %>"><a class="brand" href="${createLink(uri: '/')}"><h4>Skill°</h4></a></span>
             <span id="title-short" style="<%=Boolean.TRUE.equals((Boolean)session.getAttribute("user.layout.sidebar.narrow")) ? '' : 'display:none' %>"><a class="brand" href="${createLink(uri: '/')}"><h4>S°</h4></a></span>
         </div>
@@ -58,7 +58,6 @@
         </a>
     </div>
 </div><!--/.well -->
-
 <g:javascript>
     function toggleSidebar(){
 
@@ -73,6 +72,7 @@
         }
         $("#sidebar").toggleClass("sidebar-wide sidebar-narrow");
         $("#workspace-content-container").toggleClass("workspace-narrow workspace-wide");
+        $("#workspace-navbar-absolute").toggleClass("workspace-navbar-narrow workspace-navbar-wide");
         <g:remoteFunction controller="session" action="ajaxToggleSidebar" />
     };
 
