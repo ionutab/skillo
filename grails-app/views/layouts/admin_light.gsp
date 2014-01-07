@@ -39,11 +39,14 @@
     <div id="main-content-container">
 
         <%-- sidebar --%>
-        <g:if test="${!layout_nocontextbar}">
+        <g:if test="${!layout_nosidebar}">
             <g:render template="/_menu/sidebar_only"/>
         </g:if>
 
-        <g:render template="/_menu/user_light" />
+        <%-- navbar --%>
+        <g:if test="${!layout_nonavbar}">
+            <g:render template="/_menu/navbar_light" />
+        </g:if>
 
     <g:render template="/layouts/workspace_light"/>
 	
