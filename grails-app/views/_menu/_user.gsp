@@ -1,6 +1,4 @@
 <%@ page import="org.codehaus.groovy.grails.plugins.springsecurity.SpringSecurityUtils" %>
-<ul class="nav pull-right">
-	<li class="dropdown dropdown-btn">
 <sec:ifNotLoggedIn>
 
 		<a class="dropdown-toggle" role="button" data-toggle="dropdown" data-target="#" href="#" tabindex="-1">
@@ -28,34 +26,29 @@
 
 </sec:ifNotLoggedIn>
 <sec:ifLoggedIn>
+        <div class="btn-group">
+            <a class="btn dropdown-toggle" data-toggle="dropdown" href="#">
+                <sec:loggedInUserInfo field="username" />
+                <i class="icon-user"></i>
+                <span class="caret"></span>
+            </a>
 
-		<a class="dropdown-toggle" role="button" data-toggle="dropdown" data-target="#" href="#">
-			<!-- TODO: Only show menu items based on permissions (e.g., Guest has no account page) -->
-			<i class="icon-user icon-large icon-white"></i>
-            <sec:loggedInUserInfo field="username" />
-			%{--<g:message code="default.user.unknown.label" default="Guest"/>--}% <b class="caret"></b>
-		</a>
-		<ul class="dropdown-menu" role="menu">
-			<!-- TODO: Only show menu items based on permissions -->
-			%{--<li class=""><a href="${createLink(uri: '/')}">
-				<i class="icon-user"></i>
-				<g:message code="user.show.label"/>
-			</a></li>
-			<li class=""><a href="${createLink(uri: '/')}">
-				<i class="icon-cogs"></i>
-				<g:message code="user.settings.change.label"/>
-			</a></li>
-
-			<li class="divider"></li>--}%
-			<li class=""><a href="${createLink(controller: 'logout')}">
-				<i class="icon-off"></i>
-				<g:message code="springSecurity.logout.label"/>
-			</a></li>
-		</ul>
-
+            <ul class="dropdown-menu pull-right">
+                <li class="">
+                    <a href="${createLink(controller: 'userSetting', action: 'index')}">
+                        <i class="icon-cog"></i>
+                        <g:message code="userSetting.multiple.label"/>
+                    </a>
+                </li>
+                <li class="">
+                    <a href="${createLink(controller: 'logout')}">
+                        <i class="icon-off"></i>
+                        <g:message code="springSecurity.logout.label"/>
+                    </a>
+                </li>
+            </ul>
+        </div>
 </sec:ifLoggedIn>
-	</li>
-</ul>
 
 <noscript>
 <ul class="nav pull-right">
