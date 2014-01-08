@@ -15,11 +15,13 @@
 
 <section id="edit-candidate" class="first">
 
+    %{--
 	<g:hasErrors bean="${candidateInstance}">
 	<div class="alert alert-error">
 		<g:renderErrors bean="${candidateInstance}" as="list" />
 	</div>
 	</g:hasErrors>
+    --}%
 
     <g:form method="post" class="form-horizontal" >
         <div class="row-fluid">
@@ -73,13 +75,46 @@
             </div>
         </div>
         <div class="row-fluid">
+            <div class="span6">
+                <div class="control-group fieldcontain  ${hasErrors(bean: candidateInstance, field: 'payroll.payrollCompany', 'error')} ">
+                    <label for="payrollCompanyId" class="control-label">
+                        <g:message code="payroll.payrollCompany.label" default="Payroll Company" />
+                    </label>
+                    <div class="controls">
+
+                        <g:hiddenField
+                                name="payroll.payrollCompany.id"
+                                id="payrollCompanyId"
+                                class="input-xlarge"
+                                value="${candidateInstance?.payroll?.payrollCompany?.id}"
+                        />
+
+                        <g:javascript>
+                            function formatPayrollCompanies(item) { return item.name; };
+                            $("#payrollCompanyId").select2({
+                                    data: {results:${AvailablePayrollCompanies}, text:'name'},
+                                    formatSelection: formatPayrollCompanies,
+                                    formatResult: formatPayrollCompanies,
+                                    placeholder: "Select a Payroll Company",
+                                    allowClear:true
+                                }
+                            );
+                        </g:javascript>
+                        <span class="help-inline">
+                            ${hasErrors(bean: candidateInstance, field: 'payroll.payrollCompany', 'error')}
+                        </span>
+                    </div>
+                </div>
+            </div>
+        </div>
+        <div class="row-fluid">
             <div class="span3">
                 <div class="control-group fieldcontain ${hasErrors(bean: candidateInstance, field: 'payroll.referenceNumber', 'error')} ">
                     <label for="payroll.referenceNumber" class="control-label">
                         <g:message code="payroll.referenceNumber.label" default="Reference Nr." />
                     </label>
                     <div class="controls">
-                        <g:textField id="payrollReferenceNumber" name="payroll.referenceNumber" class="input-small" value="${candidateInstance?.payroll?.referenceNumber}" />
+                        <g:textField id="payrollReferenceNumber" name="payroll.referenceNumber" class="input-medium" value="${candidateInstance?.payroll?.referenceNumber}" />
                         <span class="help-inline">
                             ${hasErrors(bean: candidateInstance.payroll, field: 'referenceNumber', 'error')}
                         </span>
@@ -92,13 +127,44 @@
                         <g:message code="payroll.registrationNumber.label" default="Registration Nr." />
                     </label>
                     <div class="controls">
-                        <g:textField id="payrollRegistrationNumber" name="payroll.registrationNumber" class="input-small" value="${candidateInstance?.payroll?.registrationNumber}" />
+                        <g:textField id="payrollRegistrationNumber" name="payroll.registrationNumber" class="input-medium" value="${candidateInstance?.payroll?.registrationNumber}" />
                         <span class="help-inline">
                             ${hasErrors(bean: candidateInstance.payroll, field: 'registrationNumber', 'error')}
                         </span>
                     </div>
                 </div>
             </div>
+        </div>
+        <div class="row-fluid">
+
+            <div class="span3">
+                <div class="control-group fieldcontain ${hasErrors(bean: candidateInstance, field: 'payroll.unqiueTaxReferenceNumber', 'error')} ">
+                    <label for="payroll.unqiueTaxReferenceNumber" class="control-label">
+                        <g:message code="payroll.unqiueTaxReferenceNumber.label" default="Unique Tax Reference Nr." />
+                    </label>
+                    <div class="controls">
+                        <g:textField id="payrollUnqiueTaxReferenceNumber" name="payroll.unqiueTaxReferenceNumber" class="input-medium" value="${candidateInstance?.payroll?.unqiueTaxReferenceNumber}" />
+                        <span class="help-inline">
+                            ${hasErrors(bean: candidateInstance.payroll, field: 'unqiueTaxReferenceNumber', 'error')}
+                        </span>
+                    </div>
+                </div>
+            </div>
+            <div class="span3">
+                <div class="control-group fieldcontain ${hasErrors(bean: candidateInstance, field: 'payroll.nationalInsuranceNumber', 'error')} ">
+                    <label for="payroll.nationalInsuranceNumber" class="control-label">
+                        <g:message code="payroll.nationalInsuranceNumber.label" default="National Insurance Nr." />
+                    </label>
+                    <div class="controls">
+                        <g:textField id="payrollNationalInsuranceNumber" name="payroll.nationalInsuranceNumber" class="input-medium" value="${candidateInstance?.payroll?.nationalInsuranceNumber}" />
+                        <span class="help-inline">
+                            ${hasErrors(bean: candidateInstance.payroll, field: 'nationalInsuranceNumber', 'error')}
+                        </span>
+                    </div>
+                </div>
+            </div>
+        </div>
+        <div class="row-fluid">
             <div class="span3">
                 <div class="control-group fieldcontain ${hasErrors(bean: candidateInstance, field: 'payroll.registered', 'error')} ">
                     <label for="payroll.registered" class="control-label">
@@ -126,35 +192,6 @@
                 </div>
             </div>
         </div>
-        <div class="row-fluid">
-
-            <div class="span3">
-                <div class="control-group fieldcontain ${hasErrors(bean: candidateInstance, field: 'payroll.unqiueTaxReferenceNumber', 'error')} ">
-                    <label for="payroll.unqiueTaxReferenceNumber" class="control-label">
-                        <g:message code="payroll.unqiueTaxReferenceNumber.label" default="Unique Tax Reference Nr." />
-                    </label>
-                    <div class="controls">
-                        <g:textField id="payrollUnqiueTaxReferenceNumber" name="payroll.unqiueTaxReferenceNumber" class="input-small" value="${candidateInstance?.payroll?.unqiueTaxReferenceNumber}" />
-                        <span class="help-inline">
-                            ${hasErrors(bean: candidateInstance.payroll, field: 'unqiueTaxReferenceNumber', 'error')}
-                        </span>
-                    </div>
-                </div>
-            </div>
-            <div class="span3">
-                <div class="control-group fieldcontain ${hasErrors(bean: candidateInstance, field: 'payroll.nationalInsuranceNumber', 'error')} ">
-                    <label for="payroll.nationalInsuranceNumber" class="control-label">
-                        <g:message code="payroll.nationalInsuranceNumber.label" default="National Insurance Nr." />
-                    </label>
-                    <div class="controls">
-                        <g:textField id="payrollNationalInsuranceNumber" name="payroll.nationalInsuranceNumber" class="input-small" value="${candidateInstance?.payroll?.nationalInsuranceNumber}" />
-                        <span class="help-inline">
-                            ${hasErrors(bean: candidateInstance.payroll, field: 'nationalInsuranceNumber', 'error')}
-                        </span>
-                    </div>
-                </div>
-            </div>
-        </div>
         <g:actionSubmit class="btn btn-primary" action="update" value="${message(code: 'default.button.update.label', default: 'Update')}" />
         <g:actionSubmit class="btn btn-danger"  action="delete" value="${message(code: 'default.button.delete.label', default: 'Delete')}" onclick="return confirm('${message(code: 'default.button.delete.confirm.message', default: 'Are you sure?')}');" />
         <button class="btn" type="reset"><g:message code="default.button.reset.label" default="Reset" /></button>
@@ -162,6 +199,7 @@
 
     <div id="newCandidateQualification" class="modal hide fade" role="dialog">
         <div class="modal-body">
+%{--
 
             <g:form method="post" class="form-horizontal" id="candidateQualificationsForm" >
 
@@ -171,6 +209,7 @@
                 </fieldset>
                 <g:actionSubmit class="btn btn-primary" action="addCandidateQualification"  value="${message(code: 'default.button.save.label', default: 'Save')}" />
             </g:form>
+--}%
 
         </div>
     </div>

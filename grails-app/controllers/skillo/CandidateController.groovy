@@ -44,9 +44,8 @@ class CandidateController {
 	}
 
     def save() {
-        def availableMainTrades = Qualification.findAllByCanBeMainTrade(true)
-
         def candidate = new Candidate(params["candidate"])
+
         def address = new Address(params["address"])
         def postCode = new PostCode(params["postCode"])
         def mainTrade = Qualification.findById(params["candidateMainTrade"].id)
@@ -82,6 +81,7 @@ class CandidateController {
                     println "fielderrors: " + it
                 }
             }
+            def availableMainTrades = Qualification.findAllByCanBeMainTrade(true)
             render(view: "create", model: [candidateInstance: candidate, AvailableMainTrades: availableMainTrades as grails.converters.JSON ])
             return
         }
@@ -104,8 +104,9 @@ class CandidateController {
 
         def availableMainTrades = Qualification.findAllByCanBeMainTrade(true)
         def availableQualifications = Qualification.findAll()
+        def availablePayRollCompanies = PayrollCompany.findAll()
 
-        [candidateInstance: candidate, newCandidateQualification: newCandidateQualification , AvailableMainTrades: availableMainTrades, AvailableQualifications: availableQualifications ]
+        [candidateInstance: candidate, newCandidateQualification: newCandidateQualification , AvailableMainTrades: availableMainTrades , AvailableQualifications: availableQualifications , AvailablePayrollCompanies: availablePayRollCompanies as grails.converters.JSON  ]
     }
 
     def update(){
@@ -117,13 +118,25 @@ class CandidateController {
             return
         }
 
-        def payroll = new Payroll(params["payroll"])
-        def address = new Address(params["address"])
-        def postCode = new PostCode(params["postCode"])
+        candidate.address.properties = params["address"]
+        if(params["postCode.code"] && !params["postCode.code"].equals(candidate.address.postCode.code)){
+            candidate.address.postCode = PostCode.findByCode(params["postCode.code"])
+        }
 
-        candidate.payroll = payroll
-        address.postCode = PostCode.findByCode(postCode.code)
-        candidate.address = address
+        if (params["candidate.birthDate"]) {
+            params["candidate.birthDate"] = new Date(params["candidate.birthDate"])
+            candidate.birthDate = params["candidate.birthDate"]
+        }
+
+        candidate.properties = params["candidate"];
+
+        if(!candidate.payroll){
+            candidate.payroll = new Payroll(params["payroll"])
+            log.info("cp: " + candidate.payroll.referenceNumber)
+        } else {
+            log.info("cp: " + candidate.payroll.id)
+            candidate.payroll.properties = params["payroll"]
+        }
 
         if(candidate.checkVersion(Long.parseLong(params.version))){
             if (!candidate.save(deepvalidate:true, flush: true)) {
@@ -132,7 +145,8 @@ class CandidateController {
                         println "fielderrors: " + it
                     }
                 }
-                render(view: "edit", model: [candidateInstance: candidate])
+                def availablePayRollCompanies = PayrollCompany.findAll()
+                render(view: "edit", model: [candidateInstance: candidate , AvailablePayrollCompanies: availablePayRollCompanies as grails.converters.JSON ])
                 return
             }
         }
@@ -194,4 +208,5 @@ class CandidateController {
 
 		[candidateInstance: candidate]
 	}
+
 }

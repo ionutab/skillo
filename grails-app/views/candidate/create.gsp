@@ -15,11 +15,13 @@
 
 <section id="create-candidate" class="first">
 
-	<g:hasErrors bean="candidate">
+    %{--
+	<g:hasErrors bean="${candidateInstance}">
 	<div class="alert alert-error">
-		<g:renderErrors bean="candidate" as="list" />
+		<g:renderErrors bean="${candidateInstance}" as="list" />
 	</div>
 	</g:hasErrors>
+    --}%
 
     <div class="row">
         <div class="span6">
