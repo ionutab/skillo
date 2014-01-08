@@ -53,12 +53,18 @@
     </ul>
     <br/>
     <div class="" style="margin-left: 15px">
-        <a class="btn btn-mini" href="#" id="toggle-sidebar" onclick="toggleSidebar();">
+        <a class="btn btn-mini" href="#" id="toggle-sidebar" data-toggle="tooltip" title="toggle sidebar" onmouseover="alertToggleSidebar();" onclick="toggleSidebar();">
             <i class="icon-arrow-left"></i>
         </a>
     </div>
 </div><!--/.well -->
 <g:javascript>
+
+    function alertToggleSidebar(){
+
+        $('#toggle-sidebar').tooltip('toggle');
+    }
+
     function toggleSidebar(){
 
         if($("li.sidebar-item > a > span").is(":visible") && $("#sidebar").hasClass("sidebar-wide")){
