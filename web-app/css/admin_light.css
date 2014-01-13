@@ -28,7 +28,7 @@ body {
 }
 
 .sidebar-narrow{
-    width: 54px;
+    width: 40px;
 }
 
 #loginForm {
@@ -48,24 +48,16 @@ body {
     margin-left: 0px;
 }
 
-#workspace-navbar {
-    display:block;
-    height: 40px;
-    width: 100%;
-    background-color: #344556;
-}
-
-
 #workspace-navbar-absolute {
     position: absolute;
     top: 0;
     right: 0;
     height: 40px;
-    background-color: #344556;
+    background-color: #343e5e;
 }
 
 .workspace-navbar-wide {
-    left: 54px;
+    left: 40px;
 }
 
 .workspace-navbar-narrow {
@@ -81,7 +73,7 @@ body {
 }
 
 .workspace-wide{
-    left: 54px;
+    left: 40px;
 }
 
 .workspace-narrow{
@@ -111,7 +103,6 @@ body {
 }
 
 #sidebar .nav-list > li > a {
-    padding-left: 20px;
     padding-right: 15px;
     margin: 0;
 }
@@ -201,4 +192,17 @@ table {
 
 .userpane {
 
+}
+
+.select2-container.input-xlarge{
+    width: 284px;
+}
+
+#title-short {
+    display: block;
+    margin: 1px;
+}
+
+.page-title h4 {
+    font-size: 28px;
 }

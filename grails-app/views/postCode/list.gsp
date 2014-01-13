@@ -6,7 +6,7 @@
 	<meta http-equiv="Content-Type" content="text/html; charset=UTF-8" />
  	<meta name="layout" content="admin_light" />
 	<g:set var="entityName" value="${message(code: 'postCode.label', default: 'PostCode')}" />
-	<title><g:meta name="app.title.short" /> <g:message code="default.list.label" args="[entityName]" /></title>
+	<title><g:message code="default.list.label" args="[entityName]" /></title>
 </head>
 
 <body>

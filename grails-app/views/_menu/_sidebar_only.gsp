@@ -8,7 +8,7 @@
     <div id="applogo">
         <div>
             <span id="title-long" style="<%=Boolean.TRUE.equals((Boolean)session.getAttribute("user.layout.sidebar.narrow")) ? 'display:none' : '' %>"><a class="brand" href="${createLink(uri: '/')}"><h4>Skill°</h4></a></span>
-            <span id="title-short" style="<%=Boolean.TRUE.equals((Boolean)session.getAttribute("user.layout.sidebar.narrow")) ? '' : 'display:none' %>"><a class="brand" href="${createLink(uri: '/')}"><h4>S°</h4></a></span>
+            <span id="title-short" style="<%=Boolean.TRUE.equals((Boolean)session.getAttribute("user.layout.sidebar.narrow")) ? '' : 'display:none' %>"><a class="brand" href="${createLink(uri: '/')}"><img src="${resource( dir:'images',file:'applogo48x2.png')}"></a></span>
         </div>
     </div>
 
@@ -52,7 +52,7 @@
         </g:each>
     </ul>
     <br/>
-    <div class="" style="margin-left: 15px">
+    <div class="" style="margin-left: 10px">
         <a class="btn btn-mini" href="#" id="toggle-sidebar" data-toggle="tooltip" title="toggle sidebar" onmouseover="alertToggleSidebar();" onclick="toggleSidebar();">
             <i class="icon-arrow-left"></i>
         </a>

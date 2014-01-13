@@ -7,7 +7,7 @@
     <meta http-equiv="Content-Type" content="text/html; charset=UTF-8" />
     <meta name="layout" content="admin_light" />
     <g:set var="entityName" value="${message(code: 'candidate.label', default: 'Candidate')}" />
-    <title><g:meta name="app.title.short" /> - <g:message code="candidate.list.label" args=" " /></title>
+    <title><g:message code="candidate.list.label" args=" " /></title>
     <g:set var="page_title" value="${message(code: 'candidate.list.label')}" scope="request"/>
 </head>
 

@@ -1,8 +1,8 @@
 <html>
 
 <head>
-	<title>S°</title>
 	<meta name="layout" content="admin_light" />
+    <g:set var="page_title" value="${message(code: 'dashboard.name.label')}" scope="request"/>
 </head>
 
 <body>
