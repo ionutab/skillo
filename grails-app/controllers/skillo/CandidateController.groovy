@@ -47,7 +47,7 @@ class CandidateController {
         def candidate = new Candidate(params["candidate"])
 
         def address = new Address(params["address"])
-        def postCode = new PostCode(params["postCode"])
+        def postCode = PostCode.findById(params["postCode"].id)
         def mainTrade = Qualification.findById(params["candidateMainTrade"].id)
         def user = User.get(springSecurityService.principal.id)
 
@@ -56,8 +56,14 @@ class CandidateController {
             candidate.birthDate = params["candidate.birthDate"]
         }
 
-        address.postCode = PostCode.findByCode(postCode.code)
+        address.postCode = postCode
         candidate.address = address
+
+        /*
+        log.info("maintrade null: " + (mainTrade == null))
+        log.info("maintrade code null: " + (mainTrade.code == null))
+        log.info("maintrade code \'\': " + (mainTrade.code.length() == 0))
+        */
 
         if(mainTrade != null){
 
@@ -81,12 +87,14 @@ class CandidateController {
                     println "fielderrors: " + it
                 }
             }
+
             def availableMainTrades = Qualification.findAllByCanBeMainTrade(true)
             render(view: "create", model: [candidateInstance: candidate, AvailableMainTrades: availableMainTrades as grails.converters.JSON ])
             return
         }
         candidate.addInsertEvent()
 
+        def availableMainTrades = Qualification.findAllByCanBeMainTrade(true)
         flash.message = message(code: 'default.created.message', args: [message(code: 'candidate.label', default: 'Candidate'), candidate.firstName + " " + candidate.lastName])
         redirect(action: "edit", id: candidate.id, AvailableMainTrades: availableMainTrades as grails.converters.JSON )
 
@@ -128,14 +136,20 @@ class CandidateController {
             candidate.birthDate = params["candidate.birthDate"]
         }
 
-        candidate.properties = params["candidate"];
+        candidate.properties = params["candidate"]
+        if(params["payroll"] == null){
+            candidate.payroll = null
+        }
 
-        if(!candidate.payroll){
-            candidate.payroll = new Payroll(params["payroll"])
-            log.info("cp: " + candidate.payroll.referenceNumber)
-        } else {
-            log.info("cp: " + candidate.payroll.id)
-            candidate.payroll.properties = params["payroll"]
+
+        if(candidate.payroll != null){
+            if(candidate.payroll.id == null){
+                candidate.payroll = new Payroll(params["payroll"])
+                log.info("cp: " + candidate.payroll.referenceNumber)
+            } else {
+                log.info("cp: " + candidate.payroll.id)
+                candidate.payroll.properties = params["payroll"]
+            }
         }
 
         if(candidate.checkVersion(Long.parseLong(params.version))){

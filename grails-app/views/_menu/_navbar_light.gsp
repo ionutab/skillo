@@ -13,6 +13,8 @@
     </div>
 
     <div class="pull-right" style="position: relative; right: 5px; top: 5px;">
+
+        <g:render template="/_menu/notifications"/>
         <g:render template="/_menu/user"/>
     </div>
 

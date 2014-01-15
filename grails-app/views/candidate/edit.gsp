@@ -29,7 +29,7 @@
                 <g:hiddenField name="id" value="${candidateInstance?.id}" />
                 <g:hiddenField name="version" value="${candidateInstance?.version}" />
                 <fieldset class="form">
-                    <g:render template="basicForm"/>
+                    <g:render template="form"/>
                 </fieldset>
             </div>
             <div class="span6">
@@ -107,6 +107,7 @@
                 </div>
             </div>
         </div>
+
         <div class="row-fluid">
             <div class="span3">
                 <div class="control-group fieldcontain ${hasErrors(bean: candidateInstance, field: 'payroll.referenceNumber', 'error')} ">
@@ -114,7 +115,7 @@
                         <g:message code="payroll.referenceNumber.label" default="Reference Nr." />
                     </label>
                     <div class="controls">
-                        <g:textField id="payrollReferenceNumber" name="payroll.referenceNumber" class="input-medium" value="${candidateInstance?.payroll?.referenceNumber}" />
+                        <g:textField id="payrollReferenceNumber" name="candidate.payroll.referenceNumber" class="input-medium" value="${candidateInstance?.payroll?.referenceNumber}" />
                         <span class="help-inline">
                             ${hasErrors(bean: candidateInstance.payroll, field: 'referenceNumber', 'error')}
                         </span>
@@ -127,7 +128,7 @@
                         <g:message code="payroll.registrationNumber.label" default="Registration Nr." />
                     </label>
                     <div class="controls">
-                        <g:textField id="payrollRegistrationNumber" name="payroll.registrationNumber" class="input-medium" value="${candidateInstance?.payroll?.registrationNumber}" />
+                        <g:textField id="payrollRegistrationNumber" name="candidate.payroll.registrationNumber" class="input-medium" value="${candidateInstance?.payroll?.registrationNumber}" />
                         <span class="help-inline">
                             ${hasErrors(bean: candidateInstance.payroll, field: 'registrationNumber', 'error')}
                         </span>
@@ -143,7 +144,7 @@
                         <g:message code="payroll.unqiueTaxReferenceNumber.label" default="Unique Tax Reference Nr." />
                     </label>
                     <div class="controls">
-                        <g:textField id="payrollUnqiueTaxReferenceNumber" name="payroll.unqiueTaxReferenceNumber" class="input-medium" value="${candidateInstance?.payroll?.unqiueTaxReferenceNumber}" />
+                        <g:textField id="payrollUnqiueTaxReferenceNumber" name="candidate.payroll.unqiueTaxReferenceNumber" class="input-medium" value="${candidateInstance?.payroll?.unqiueTaxReferenceNumber}" />
                         <span class="help-inline">
                             ${hasErrors(bean: candidateInstance.payroll, field: 'unqiueTaxReferenceNumber', 'error')}
                         </span>
@@ -156,7 +157,7 @@
                         <g:message code="payroll.nationalInsuranceNumber.label" default="National Insurance Nr." />
                     </label>
                     <div class="controls">
-                        <g:textField id="payrollNationalInsuranceNumber" name="payroll.nationalInsuranceNumber" class="input-medium" value="${candidateInstance?.payroll?.nationalInsuranceNumber}" />
+                        <g:textField id="payrollNationalInsuranceNumber" name="candidate.payroll.nationalInsuranceNumber" class="input-medium" value="${candidateInstance?.payroll?.nationalInsuranceNumber}" />
                         <span class="help-inline">
                             ${hasErrors(bean: candidateInstance.payroll, field: 'nationalInsuranceNumber', 'error')}
                         </span>

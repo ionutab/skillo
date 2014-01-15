@@ -54,7 +54,7 @@
     <br/>
     <div class="" style="margin-left: 10px">
         <a class="btn btn-mini" href="#" id="toggle-sidebar" data-toggle="tooltip" title="toggle sidebar" onmouseover="alertToggleSidebar();" onclick="toggleSidebar();">
-            <i class="icon-arrow-left"></i>
+            <i id="toggle-sidebar-icon" class="icon-arrow-left"></i>
         </a>
     </div>
 </div><!--/.well -->
@@ -79,6 +79,7 @@
         $("#sidebar").toggleClass("sidebar-wide sidebar-narrow");
         $("#workspace-content-container").toggleClass("workspace-narrow workspace-wide");
         $("#workspace-navbar-absolute").toggleClass("workspace-navbar-narrow workspace-navbar-wide");
+        $("#toggle-sidebar-icon").toggleClass("icon-arrow-right icon-arrow-left");
         <g:remoteFunction controller="session" action="ajaxToggleSidebar" />
     };
 

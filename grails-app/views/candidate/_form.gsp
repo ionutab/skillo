@@ -55,6 +55,9 @@
                     </span>
                 </div>
             </div>
+
+%{--
+
             <div class="control-group fieldcontain ${hasErrors(bean: candidateInstance, field: 'address.postCode', 'error')} ">
                 <label for="postCode.code" class="control-label">
                     <g:message code="postCode.code.label" default="Post Code" />
@@ -66,6 +69,69 @@
                     </span>
                 </div>
             </div>
+--}%
+
+
+            <div class="control-group fieldcontain ${hasErrors(bean: candidateInstance, field: 'address.postCode', 'error')} ">
+                <label for="postCode.id" class="control-label">
+                    <g:message code="postCode.code.label" default="Post Code" />
+                </label>
+                <div class="controls">
+                    <g:hiddenField
+                            name="postCode.id"
+                            id="postCodeId"
+                            class="input-xlarge"
+                            value="${candidateInstance?.address?.postCode?.id}"
+                    />
+                    <g:hiddenField
+                            name="postCode.previousCode"
+                            id="postCodeCode"
+                            class="input-xlarge"
+                            value="${candidateInstance?.address?.postCode?.code}"
+                    />
+
+                    <g:javascript>
+                            function formatPostCodeSelection(item) {
+                                return item.code;
+                            };
+
+                            function formatPostCodeResult(item) {
+                                return item.code + ' - ' + item.country;
+                            };
+                            function doWeHaveAPostCodeAlready(){
+                                return "Search for a Post Code";
+                            }
+                            $("#postCodeId").select2({
+                                placeholder: doWeHaveAPostCodeAlready,
+                                minimumInputLength: 2,
+                                ajax:{
+                                    url: '<g:createLink controller="postCode" action="getPostCodes" />',
+                                    dataType: 'json',
+                                    data: function(term, page){
+                                        return {inputCode: term};
+                                    },
+                                    results: function (data, page) {
+                                        return {results: data};
+                                    }
+                                },
+                                initSelection: function(element, callback) {
+                                    var id=$("#postCodeId").val();
+                                    if (id!=="") {
+                                        $("#s2id_postCodeId .select2-chosen").html($("#postCodeCode").val());
+                                    }
+                                },
+                                formatSelection: formatPostCodeSelection,
+                                formatResult: formatPostCodeResult,
+                                escapeMarkup: function (m) { return m; }
+                            });
+
+                    </g:javascript>
+                    <span class="help-inline">
+                        ${hasErrors(bean: candidateInstance, field: 'address.postCode', 'error')}
+                    </span>
+                </div>
+            </div>
+
             <div class="control-group fieldcontain ${hasErrors(bean: candidateInstance, field: 'email', 'error')} ">
                 <label for="candidate.email" class="control-label">
                     <g:message code="candidate.email.label" default="Email" />

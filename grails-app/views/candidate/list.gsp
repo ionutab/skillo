@@ -73,6 +73,7 @@
 			                <th><g:message code="address.details.label" default="Address" /></th>
 			                <th><g:message code="address.postcode.label" default="Post Code" /></th>
 			                <th><g:message code="candidate.mainTrade.label" default="Main Trade" /></th>
+			                <th><g:message code="payroll.payrollCompany.label" default="Payroll Company" /></th>
 			                <th><g:message code="default.actions.label" default="Actions" /></th>
 
 			            </tr>
@@ -93,19 +94,13 @@
                                     </div>
 		                        </td>
 		                        <td>
-		                            <g:if test="${Candidate.telephoneNumber != null}">
-                                        ${Candidate.telephoneNumber}
-		                            </g:if>
+                                    ${Candidate?.telephoneNumber}
 		                        </td>
 		                        <td>
-		                            <g:if test="${Candidate.address != null}">
-                                        ${Candidate.address.details}
-		                            </g:if>
+                                    ${Candidate?.address?.details}
 		                        </td>
 		                        <td>
-		                            <g:if test="${Candidate.address != null}">
-		                                ${Candidate.address.postCode.code}
-		                            </g:if>
+                                    ${Candidate?.address?.postCode?.code}
 		                        </td>
 		                        <td>
 		                            <g:if test="${Candidate.candidateQualifications != null && Candidate.candidateQualifications.size() > 0}">
@@ -116,6 +111,9 @@
                                         </g:each>
 		                            </g:if>
 		                        </td>
+                                <td>
+                                    ${Candidate?.payroll?.payrollCompany?.name}
+                                </td>
 		                        <td>
                                     <g:link action="edit" id="${Candidate.id}" class="btn btn-small"><g:message code="default.edit.label" args=" " /></g:link>
                                 </td>

@@ -33,7 +33,6 @@ class Candidate implements SkilloDomainModelWithHistory {
         otherTelephoneNumber nullable: true
 
         candidateNotes nullable: true
-        payroll nullable: true
 
         //temporarily added nullable false to this , althought not necessarily required because apparently there is a little bug that will not make minSize work if nullable is not SPECIFFICALLY set :D
         candidateQualifications nullable: false
