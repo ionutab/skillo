@@ -33,7 +33,7 @@ modules = {
 	}
 
     datepicker {
-        resource url:'js/bootstrap-datepicker.js'
+        resource url:'js/eternicode-datepicker/bootstrap-datepicker.js'
         resource url:'css/datepicker.css'
     }
 

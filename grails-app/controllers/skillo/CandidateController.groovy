@@ -114,6 +114,8 @@ class CandidateController {
     def update(){
 
         def candidate = Candidate.get(params.id)
+        def user = User.get(springSecurityService.principal.id)
+
         if(!candidate){
             flash.message = message(code: 'default.not.found.message', args: [message(code: 'candidate.label', default: 'Candidate'), params.id])
             redirect(action: "list")
@@ -144,6 +146,16 @@ class CandidateController {
                 render(view: "edit", model: [candidateInstance: candidate , AvailablePayrollCompanies: availablePayRollCompanies as grails.converters.JSON ])
                 return
             }
+        }
+
+        if(user != null){
+            def consultant = Consultant.findByUser(user)
+            candidate.consultant = consultant
+        }
+
+        if(user != null){
+            def consultant = Consultant.findByUser(user)
+            candidate.addUpdateEvent(consultant)
         }
 
         flash.message = message(code: 'default.updated.message', args: [message(code: 'candidate.label', default: '${className}'), candidate.id])

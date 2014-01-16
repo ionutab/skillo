@@ -70,7 +70,7 @@
                     </table>
                 </g:if>
 
-                <a href="#newCandidateQualification" role="button" class="btn btn-info" data-toggle="modal"><i class="icon-plus"></i></a>
+                <a href="#newCandidateQualificationModal" role="button" class="btn btn-info" data-toggle="modal"><i class="icon-plus"></i></a>
 
             </div>
         </div>
@@ -199,9 +199,8 @@
         <button class="btn" type="reset"><g:message code="default.button.reset.label" default="Reset" /></button>
     </g:form>
 
-    <div id="newCandidateQualification" class="modal hide fade" role="dialog">
+    <div id="newCandidateQualificationModal" class="modal hide fade" role="dialog">
         <div class="modal-body">
-%{--
 
             <g:form method="post" class="form-horizontal" id="candidateQualificationsForm" >
 
@@ -211,7 +210,6 @@
                 </fieldset>
                 <g:actionSubmit class="btn btn-primary" action="addCandidateQualification"  value="${message(code: 'default.button.save.label', default: 'Save')}" />
             </g:form>
---}%
 
         </div>
     </div>

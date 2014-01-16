@@ -24,7 +24,7 @@
 
 				<div class="control-group fieldcontain ${hasErrors(bean: _DemoPageInstance, field: 'name', 'error')} ">
 					<div class="controls">
-                        <g:textField name="j_password" id="password" placeholder="${message(code: "springSecurity.login.password.label")}" />
+                        <g:passwordField name="j_password" id="password" placeholder="${message(code: "springSecurity.login.password.label")}"  />
 					</div>
 				</div>
 

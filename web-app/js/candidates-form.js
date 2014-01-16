@@ -1,8 +1,15 @@
 var candidateFormFunctions = {
     initDatePicker:function(){
         $("#candidateBirthDate").datepicker({
-            viewMode:'years'
+              startView:"decade",
+              autoclose: true
         });
+//        $("#candidateBirthDate").blur(function(){
+//            $("#candidateBirthDate").datepicker('hide');
+//        });
+//        $("#candidateBirthDate").focusout(function(){
+//            $("#candidateBirthDate").datepicker('hide');
+//        });
     },
 
     setCandidateBirthdate18YearsAgo:function(){
