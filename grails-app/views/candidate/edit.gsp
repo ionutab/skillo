@@ -115,7 +115,7 @@
                         <g:message code="payroll.referenceNumber.label" default="Reference Nr." />
                     </label>
                     <div class="controls">
-                        <g:textField id="payrollReferenceNumber" name="candidate.payroll.referenceNumber" class="input-medium" value="${candidateInstance?.payroll?.referenceNumber}" />
+                        <g:textField id="payrollReferenceNumber" name="payroll.referenceNumber" class="input-medium" value="${candidateInstance?.payroll?.referenceNumber}" />
                         <span class="help-inline">
                             ${hasErrors(bean: candidateInstance.payroll, field: 'referenceNumber', 'error')}
                         </span>
@@ -128,7 +128,7 @@
                         <g:message code="payroll.registrationNumber.label" default="Registration Nr." />
                     </label>
                     <div class="controls">
-                        <g:textField id="payrollRegistrationNumber" name="candidate.payroll.registrationNumber" class="input-medium" value="${candidateInstance?.payroll?.registrationNumber}" />
+                        <g:textField id="payrollRegistrationNumber" name="payroll.registrationNumber" class="input-medium" value="${candidateInstance?.payroll?.registrationNumber}" />
                         <span class="help-inline">
                             ${hasErrors(bean: candidateInstance.payroll, field: 'registrationNumber', 'error')}
                         </span>
@@ -144,7 +144,7 @@
                         <g:message code="payroll.unqiueTaxReferenceNumber.label" default="Unique Tax Reference Nr." />
                     </label>
                     <div class="controls">
-                        <g:textField id="payrollUnqiueTaxReferenceNumber" name="candidate.payroll.unqiueTaxReferenceNumber" class="input-medium" value="${candidateInstance?.payroll?.unqiueTaxReferenceNumber}" />
+                        <g:textField id="payrollUnqiueTaxReferenceNumber" name="payroll.unqiueTaxReferenceNumber" class="input-medium" value="${candidateInstance?.payroll?.unqiueTaxReferenceNumber}" />
                         <span class="help-inline">
                             ${hasErrors(bean: candidateInstance.payroll, field: 'unqiueTaxReferenceNumber', 'error')}
                         </span>
@@ -157,7 +157,7 @@
                         <g:message code="payroll.nationalInsuranceNumber.label" default="National Insurance Nr." />
                     </label>
                     <div class="controls">
-                        <g:textField id="payrollNationalInsuranceNumber" name="candidate.payroll.nationalInsuranceNumber" class="input-medium" value="${candidateInstance?.payroll?.nationalInsuranceNumber}" />
+                        <g:textField id="payrollNationalInsuranceNumber" name="payroll.nationalInsuranceNumber" class="input-medium" value="${candidateInstance?.payroll?.nationalInsuranceNumber}" />
                         <span class="help-inline">
                             ${hasErrors(bean: candidateInstance.payroll, field: 'nationalInsuranceNumber', 'error')}
                         </span>
@@ -167,7 +167,7 @@
         </div>
         <div class="row-fluid">
             <div class="span3">
-                <div class="control-group fieldcontain ${hasErrors(bean: candidateInstance, field: 'payroll.registered', 'error')} ">
+                <div class="control-group fieldcontain ${hasErrors(bean: candidateInstance, field: 'candidate.payroll.registered', 'error')} ">
                     <label for="payroll.registered" class="control-label">
                         <g:message code="payroll.registered.label" default="Registered" />
                     </label>
@@ -180,7 +180,7 @@
                 </div>
             </div>
             <div class="span3">
-                <div class="control-group fieldcontain ${hasErrors(bean: candidateInstance, field: 'payroll.inducted', 'error')} ">
+                <div class="control-group fieldcontain ${hasErrors(bean: candidateInstance, field: 'candidate.payroll.inducted', 'error')} ">
                     <label for="payroll.inducted" class="control-label">
                         <g:message code="payroll.inducted.label" default="Inducted" />
                     </label>
@@ -193,6 +193,7 @@
                 </div>
             </div>
         </div>
+
         <g:actionSubmit class="btn btn-primary" action="update" value="${message(code: 'default.button.update.label', default: 'Update')}" />
         <g:actionSubmit class="btn btn-danger"  action="delete" value="${message(code: 'default.button.delete.label', default: 'Delete')}" onclick="return confirm('${message(code: 'default.button.delete.confirm.message', default: 'Are you sure?')}');" />
         <button class="btn" type="reset"><g:message code="default.button.reset.label" default="Reset" /></button>

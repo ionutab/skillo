@@ -103,7 +103,8 @@
                             }
                             $("#postCodeId").select2({
                                 placeholder: doWeHaveAPostCodeAlready,
-                                minimumInputLength: 2,
+//                                  VERY IMPORTANT
+                                //minimumInputLength: 4,
                                 ajax:{
                                     url: '<g:createLink controller="postCode" action="getPostCodes" />',
                                     dataType: 'json',

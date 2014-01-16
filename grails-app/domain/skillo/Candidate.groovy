@@ -20,7 +20,7 @@ class Candidate implements SkilloDomainModelWithHistory {
     Consultant consultant
     Address address
     Boolean active = Boolean.TRUE
-    Payroll payroll
+    Payroll payroll = new Payroll()
 
     static hasMany = [ candidateQualifications:CandidateQualification, candidateNotes:CandidateNote, jobs:Job, placements:Placement, candidateHistory:CandidateEvent ]
 

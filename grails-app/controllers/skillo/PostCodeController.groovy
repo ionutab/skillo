@@ -16,8 +16,6 @@ class PostCodeController {
         def inputCode = request.getParameter("inputCode")
         if(inputCode != null){
             def postCodeList = PostCode.findAllByCodeIlike("${inputCode}%")
-            log.info("size : " + postCodeList.size())
-            log.info(postCodeList as grails.converters.JSON)
             render( postCodeList as grails.converters.JSON )
         }
         return

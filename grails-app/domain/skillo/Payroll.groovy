@@ -4,7 +4,7 @@ class Payroll {
     
     PayrollCompany payrollCompany
     
-    Boolean registered
+    Boolean registered = Boolean.FALSE
     Boolean inducted
     
     String referenceNumber
@@ -15,6 +15,8 @@ class Payroll {
     static belongsTo = Candidate
 
     static constraints = {
+        inducted nullable: true
+        payrollCompany nullable: true
         referenceNumber nullable: true, blank: false
         nationalInsuranceNumber nullable: true, blank: false
         registrationNumber nullable: true, blank: false

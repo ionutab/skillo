@@ -44,8 +44,8 @@ class CandidateController {
 	}
 
     def save() {
-        def candidate = new Candidate(params["candidate"])
 
+        def candidate = new Candidate(params["candidate"])
         def address = new Address(params["address"])
         def postCode = PostCode.findById(params["postCode"].id)
         def mainTrade = Qualification.findById(params["candidateMainTrade"].id)
@@ -58,12 +58,6 @@ class CandidateController {
 
         address.postCode = postCode
         candidate.address = address
-
-        /*
-        log.info("maintrade null: " + (mainTrade == null))
-        log.info("maintrade code null: " + (mainTrade.code == null))
-        log.info("maintrade code \'\': " + (mainTrade.code.length() == 0))
-        */
 
         if(mainTrade != null){
 
@@ -136,21 +130,8 @@ class CandidateController {
             candidate.birthDate = params["candidate.birthDate"]
         }
 
+        candidate.payroll.properties = params["payroll"]
         candidate.properties = params["candidate"]
-        if(params["payroll"] == null){
-            candidate.payroll = null
-        }
-
-
-        if(candidate.payroll != null){
-            if(candidate.payroll.id == null){
-                candidate.payroll = new Payroll(params["payroll"])
-                log.info("cp: " + candidate.payroll.referenceNumber)
-            } else {
-                log.info("cp: " + candidate.payroll.id)
-                candidate.payroll.properties = params["payroll"]
-            }
-        }
 
         if(candidate.checkVersion(Long.parseLong(params.version))){
             if (!candidate.save(deepvalidate:true, flush: true)) {
