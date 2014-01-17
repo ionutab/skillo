@@ -11,8 +11,6 @@ class PostCodeController {
     }
 
     def getPostCodes(){
-        log.info("3 " + request.getParameter("inputCode"))
-
         def inputCode = request.getParameter("inputCode")
         if(inputCode != null){
             def postCodeList = PostCode.findAllByCodeIlike("${inputCode}%")
@@ -22,7 +20,6 @@ class PostCodeController {
     }
 
     def getPostCodeById(){
-        log.info("3id " + request.getParameter("inputId"))
         def inputId = request.getParameter("inputId")
         if(inputId != null){
             def postCode = PostCode.get(inputId)

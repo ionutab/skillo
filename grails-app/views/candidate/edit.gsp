@@ -15,13 +15,11 @@
 
 <section id="edit-candidate" class="first">
 
-    %{--
 	<g:hasErrors bean="${candidateInstance}">
 	<div class="alert alert-error">
 		<g:renderErrors bean="${candidateInstance}" as="list" />
 	</div>
 	</g:hasErrors>
-    --}%
 
     <g:form method="post" class="form-horizontal" >
         <div class="row-fluid">
@@ -49,7 +47,7 @@
                                 <tr class="">
                                     <td>
                                         <g:if test="${cq.qualification} != null">
-                                            ${cq.qualification.name}
+                                            ${cq.qualification.name}&nbsp;<span class="label label-success">Main Trade</span>
                                         </g:if>
                                     </td>
                                     <td>

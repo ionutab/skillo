@@ -47,8 +47,8 @@ class CandidateController {
 
         def candidate = new Candidate(params["candidate"])
         def address = new Address(params["address"])
-        def postCode = PostCode.findById(params["postCode"].id)
-        def mainTrade = Qualification.findById(params["candidateMainTrade"].id)
+        def postCode = PostCode.get(params["postCode"].id)
+        def mainTrade = Qualification.get(params["candidateMainTrade"].id)
         def user = User.get(springSecurityService.principal.id)
 
         if (params["candidate.birthDate"]) {

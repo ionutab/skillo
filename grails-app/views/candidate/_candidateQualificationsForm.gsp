@@ -1,15 +1,21 @@
 <legend>
     <g:message code="candidate.form.new.qualification" />
 </legend>
-<g:hiddenField name="candidateId" value="${newCandidateQualification?.candidate?.id}" />
+<div class="alert alert-error">
+    asdada
+    asd
+    asda
+    sd
+</div>
+<g:hiddenField name="newCandidateQualification.candidate.id" value="${newCandidateQualification?.candidate?.id}" />
 <fieldset class="form">
     <div class="control-group fieldcontain ${hasErrors(bean: newCandidateQualification, field: 'qualification', 'error')} ">
-        <label for="newCandidateQualification.qualificationId" class="control-label">
+        <label for="newCandidateQualification.qualification.id" class="control-label">
             <g:message code="qualification.label" default="Qualification" />
         </label>
         <div class="controls">
             <g:select
-                    name="newCandidateQualification.qualificationId"
+                    name="newCandidateQualification.qualification.id"
                     id="newCandidateQualificationQualificationId"
                     from="${AvailableQualifications}"
                     value="${newCandidateQualification?.qualification?.id}"
@@ -17,6 +23,7 @@
                     optionValue="name"
                     class="input-xlarge"
                     noSelection="${['null':'']}"
+                    required=""
             />
             <span class="help-inline">
                 ${hasErrors(bean: newCandidateQualification, field: 'qualification', 'error')}
@@ -24,11 +31,11 @@
         </div>
     </div>
     <div class="control-group fieldcontain ${hasErrors(bean: newCandidateQualification, field: 'expiryDate', 'error')} ">
-        <label for="expiryDate" class="control-label">
+        <label for="newCandidateQualification.expiryDate" class="control-label">
             <g:message code="candidateQualification.expiryDate.label" default="Expiry Date" />
         </label>
         <div class="controls">
-            <g:field type="expiryDate" name="newCandidateQualification.expiryDate" id="newCandidateQualificationExpiryDate" class="datepicker" value="${formatDate(date: newCandidateQualification?.expiryDate)}" default="none" precision="day" />
+            <g:field type="expiryDate" name="newCandidateQualification.expiryDate" id="newCandidateQualificationExpiryDate" class="datepicker" value="${formatDate(date: newCandidateQualification?.expiryDate)}" default="none" precision="day" required="" />
             <span class="help-inline">
                 ${hasErrors(bean: newCandidateQualification, field: 'expiryDate', 'error')}
             </span>
@@ -46,7 +53,7 @@
         </span>
     </div>
     <div class="control-group fieldcontain ${hasErrors(bean: newCandidateQualification, field: 'isMainTrade', 'error')} ">
-        <label for="sponsored" class="control-label">
+        <label for="newCandidateQualification.isMainTrade" class="control-label">
             <g:message code="candidateQualification.isMainTrade.label" default="Is Main Trade" />
         </label>
         <div class="controls">
