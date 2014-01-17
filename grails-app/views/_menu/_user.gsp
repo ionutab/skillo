@@ -3,7 +3,7 @@
 
 		<a class="dropdown-toggle" role="button" data-toggle="dropdown" data-target="#" href="#" tabindex="-1">
 			<!-- TODO: integrate Springsource Security etc. and show User's name ... -->
-    		<i class="icon-user"></i>
+            <span class="glyphicon glyphicon-user"></span>
     		<g:message code="springSecurity.login.title"/><b class="caret"></b>
 		</a>
 
@@ -27,22 +27,22 @@
 </sec:ifNotLoggedIn>
 <sec:ifLoggedIn>
         <div class="btn-group">
-            <a class="btn dropdown-toggle" data-toggle="dropdown" href="#">
+            <a class="btn btn-default dropdown-toggle" data-toggle="dropdown" href="#">
+                <span class="glyphicon glyphicon-user"></span>
                 <sec:loggedInUserInfo field="username" />
-                <i class="icon-user"></i>
                 <span class="caret"></span>
             </a>
 
             <ul class="dropdown-menu pull-right">
                 <li class="">
                     <a href="${createLink(controller: 'userSetting', action: 'index')}">
-                        <i class="icon-cog"></i>
+                        <span class="glyphicon glyphicon-cog"></span>
                         <g:message code="userSetting.multiple.label"/>
                     </a>
                 </li>
                 <li class="">
                     <a href="${createLink(controller: 'logout')}">
-                        <i class="icon-off"></i>
+                        <span class="glyphicon glyphicon-off"></span>
                         <g:message code="springSecurity.logout.label"/>
                     </a>
                 </li>
