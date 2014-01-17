@@ -3,12 +3,6 @@ modules = {
         resource url:'js/application.js'
     }
 
-	admin {
-		dependsOn 'bootstrap', 'jquery', 'font-awesome'
-		resource url:'css/admin.css'
-		resource url:'css/custombox.css'
-	}
-
     admin_light {
         dependsOn 'bootstrap', 'jquery', 'font-awesome'
         resource url:'css/admin_light.css'
