@@ -12,7 +12,7 @@
         </g:if>
     </div>
 
-    <div class="pull-right" style="position: relative; right: 5px; top: 5px;">
+    <div class="pull-right" style="position: relative; right: 5px; top: 3px;">
 
         <g:render template="/_menu/notifications"/>
         <g:render template="/_menu/user"/>
