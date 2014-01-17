@@ -46,11 +46,11 @@ grails.project.dependency.resolution = {
 
     plugins {
 //        runtime ":hibernate:$grailsVersion"
-        runtime ':hibernate:3.6.10.6'
+        runtime ':hibernate:3.6.10.7'
         runtime ":jquery:1.10.2.2"
         runtime ":resources:1.2.1"
         runtime ":font-awesome-resources:4.0.3.0"
-        runtime ":twitter-bootstrap:2.3.2"
+        runtime ":twitter-bootstrap:3.0.3"
         compile ":scaffolding:2.0.1"
         // Uncomment these (or add new ones) to enable additional resources capabilities
         //runtime ":zipped-resources:1.0"
@@ -58,7 +58,7 @@ grails.project.dependency.resolution = {
         //runtime ":yui-minify-resources:0.1.5"
 
 //        build ":tomcat:$grailsVersion"
-        build ':tomcat:7.0.47'
+        build ':tomcat:7.0.50'
 
 //        runtime ":database-migration:1.3.2"  -- might be needed later in the development process
 
