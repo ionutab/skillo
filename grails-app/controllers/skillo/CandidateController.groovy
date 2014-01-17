@@ -90,7 +90,7 @@ class CandidateController {
 
         def availableMainTrades = Qualification.findAllByCanBeMainTrade(true)
         flash.message = message(code: 'default.created.message', args: [message(code: 'candidate.label', default: 'Candidate'), candidate.firstName + " " + candidate.lastName])
-        redirect(action: "edit", id: candidate.id, AvailableMainTrades: availableMainTrades as grails.converters.JSON )
+        redirect(action: "edit", id: candidate.id )
 
     }
 
@@ -103,6 +103,7 @@ class CandidateController {
         }
 
         def newCandidateQualification = new CandidateQualification()
+        newCandidateQualification.setCandidate(candidate)
 
         def availableMainTrades = Qualification.findAllByCanBeMainTrade(true)
         def availableQualifications = Qualification.findAll()
@@ -160,49 +161,6 @@ class CandidateController {
 
         flash.message = message(code: 'default.updated.message', args: [message(code: 'candidate.label', default: '${className}'), candidate.id])
         redirect(action: "list")
-    }
-
-    def addCandidateQualification() {
-
-        if(params.get("candidateId") == null){
-            return
-        }
-
-        def candidate = Candidate.get(Long.parseLong(params.get("candidateId").toString()))
-
-        if(candidate == null){
-            return
-        }
-
-        if(params.get("newQualificationId") == null){
-            return
-        }
-        def qualification = Qualification.get(Long.parseLong(params.get("newQualificationId").toString()))
-        if(qualification == null){
-            return
-        }
-
-        def newCandidateQualification = new CandidateQualification(params)
-
-        newCandidateQualification.setQualification(qualification)
-        newCandidateQualification.setActive(Boolean.TRUE)
-
-        candidate.candidateQualifications.add(newCandidateQualification)
-
-        if(Boolean.TRUE == newCandidateQualification.getIsMainTrade()){
-            def candidateQualifications = CandidateQualification.findAllByCandidate(candidate)
-            candidateQualifications.each { candidateQualification ->
-                //put the other qualifications to not be main trade
-                candidateQualification.setIsMainTrade(Boolean.FALSE)
-                candidateQualification.save()
-            }
-        }
-
-        if(!newCandidateQualification.save(flush: true)){
-            render(view: "edit", model: [candidateInstance: candidate, newCandidateQualification: newCandidateQualification])
-        }
-
-        redirect(action: "edit", fragment: "candidateQualificationsForm", id: candidate.id)
     }
 
 	def show() {

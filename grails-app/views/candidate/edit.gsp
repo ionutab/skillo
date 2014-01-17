@@ -45,26 +45,52 @@
                         </thead>
                         <tbody>
                         <g:each in="${candidateInstance.candidateQualifications}" var="cq">
-                            <tr class="">
-                                <td>
-                                    <g:if test="${cq.qualification} != null">
-                                        ${cq.qualification.name}
-                                    </g:if>
-                                </td>
-                                <td>
-                                    <g:if test="${cq.number} != null">
-                                        ${cq.number}
-                                    </g:if>
-                                </td>
-                                <td>
-                                    <g:if test="${cq.expiryDate} != null">
-                                        <g:formatDate format="yyyy-MM-dd" date="${cq.expiryDate}"/>
-                                    </g:if>
-                                </td>
-                                <td>
-                                    <g:link controller="candidateQualification" action="edit" id="${cq.id}" class="btn btn-small"><g:message code="default.edit.label" args=" " /></g:link>
-                                </td>
-                            </tr>
+                            <g:if test="${cq.isMainTrade == true}">
+                                <tr class="">
+                                    <td>
+                                        <g:if test="${cq.qualification} != null">
+                                            ${cq.qualification.name}
+                                        </g:if>
+                                    </td>
+                                    <td>
+                                        <g:if test="${cq.number} != null">
+                                            ${cq.number}
+                                        </g:if>
+                                    </td>
+                                    <td>
+                                        <g:if test="${cq.expiryDate} != null">
+                                            <g:formatDate format="yyyy-MM-dd" date="${cq.expiryDate}"/>
+                                        </g:if>
+                                    </td>
+                                    <td>
+                                        <g:link controller="candidateQualification" action="edit" id="${cq.id}" class="btn btn-small"><g:message code="default.edit.label" args=" " /></g:link>
+                                    </td>
+                                </tr>
+                            </g:if>
+                        </g:each>
+                        <g:each in="${candidateInstance.candidateQualifications}" var="cq">
+                            <g:if test="${cq.isMainTrade == false}">
+                                <tr class="">
+                                    <td>
+                                        <g:if test="${cq.qualification} != null">
+                                            ${cq.qualification.name}
+                                        </g:if>
+                                    </td>
+                                    <td>
+                                        <g:if test="${cq.number} != null">
+                                            ${cq.number}
+                                        </g:if>
+                                    </td>
+                                    <td>
+                                        <g:if test="${cq.expiryDate} != null">
+                                            <g:formatDate format="yyyy-MM-dd" date="${cq.expiryDate}"/>
+                                        </g:if>
+                                    </td>
+                                    <td>
+                                        <g:link controller="candidateQualification" action="edit" id="${cq.id}" class="btn btn-small"><g:message code="default.edit.label" args=" " /></g:link>
+                                    </td>
+                                </tr>
+                            </g:if>
                         </g:each>
                         </tbody>
                     </table>
@@ -199,20 +225,31 @@
         <button class="btn" type="reset"><g:message code="default.button.reset.label" default="Reset" /></button>
     </g:form>
 
-    <div id="newCandidateQualificationModal" class="modal hide fade" role="dialog">
+    <div id="newCandidateQualificationModal" class="modal hide fade" role="dialog" >
         <div class="modal-body">
-
-            <g:form method="post" class="form-horizontal" id="candidateQualificationsForm" >
-
-                <g:hiddenField name="candidateId" value="${newCandidateQualification?.candidate?.id}" />
-                <fieldset class="form">
-                    <g:render template="candidateQualificationsForm"/>
-                </fieldset>
-                <g:actionSubmit class="btn btn-primary" action="addCandidateQualification"  value="${message(code: 'default.button.save.label', default: 'Save')}" />
+            <g:form method="post" class="form-horizontal" id="newCandidateQualificationForm" controller="candidateQualification">
+                <g:render template="candidateQualificationsForm" bean="${newCandidateQualification}"/>
             </g:form>
 
         </div>
     </div>
+%{--
+    <div id="editCandidateQualificationModal" class="modal hide fade" role="dialog">
+        <div class="modal-body">
+
+            <g:form method="post" class="form-horizontal" id="candidateQualificationsForm" controller="candidateQualification" >
+
+                <g:hiddenField name="candidateId" value="${newCandidateQualification?.candidate?.id}" />
+                <fieldset class="form">
+                    <g:render template="candidateQualificationsForm" bean="${newCandidateQualification}"/>
+                </fieldset>
+                --}%%{--<g:actionSubmit class="btn btn-primary"  action="addCandidateQualification"  value="${message(code: 'default.button.save.label', default: 'Save')}" />--}%%{--
+                <g:submitToRemote  class="btn btn-primary" url="[action: 'addCandidateQualification']" update="updateMe" value="${message(code: 'default.button.save.label', default: 'Save')} "  />
+            </g:form>
+
+        </div>
+    </div>
+    --}%
 
 </section>
 			
