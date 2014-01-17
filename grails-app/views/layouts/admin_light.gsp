@@ -39,8 +39,10 @@
     <div id="main-content-container">
 
         <%-- sidebar --%>
-        <g:if test="${!layout_nosidebar}">
-            <g:render template="/_menu/sidebar_only"/>
+        <g:if test="${!layout_full_width}">
+            <g:if test="${!layout_nosidebar}">
+                <g:render template="/_menu/sidebar_only"/>
+            </g:if>
         </g:if>
 
         <%-- navbar --%>
@@ -48,7 +50,12 @@
             <g:render template="/_menu/navbar_light" />
         </g:if>
 
-    <g:render template="/layouts/workspace_light"/>
+        <g:if test="${!layout_full_width}">
+            <g:render template="/layouts/workspace_light"/>
+        </g:if>
+        <g:if test="${layout_full_width}">
+            <g:render template="/layouts/landing"/>
+        </g:if>
 	
 	</div>
 	
