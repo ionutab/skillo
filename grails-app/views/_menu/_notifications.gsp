@@ -1,5 +1,5 @@
 <div id="notifications">
-    <a href="#" class="brand">
-        <i class="icon-bell"></i>
-    </a>
+    <button type="button" class="btn btn-default">
+        <span class="glyphicon glyphicon-bell"></span>
+    </button>
 </div>

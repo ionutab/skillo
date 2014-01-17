@@ -3,16 +3,14 @@
 %{--alert(<%=Boolean.TRUE.equals((Boolean)session.getAttribute("user.layout.sidebar.narrow")) %>);--}%
 %{--</g:javascript>--}%
 
-<div id="sidebar" class="<%=Boolean.TRUE.equals((Boolean)session.getAttribute("user.layout.sidebar.narrow")) ? 'sidebar-narrow' : 'sidebar-wide' %>">
+<div id="sidebar" class="bs-sidebar <%=Boolean.TRUE.equals((Boolean)session.getAttribute("user.layout.sidebar.narrow")) ? 'sidebar-narrow' : 'sidebar-wide' %>" role="complementary" >
 
     <div id="applogo">
-        <div>
-            <span id="title-long" style="<%=Boolean.TRUE.equals((Boolean)session.getAttribute("user.layout.sidebar.narrow")) ? 'display:none' : '' %>"><a class="brand" href="${createLink(uri: '/')}"><h4>Skill°</h4></a></span>
-            <span id="title-short" style="<%=Boolean.TRUE.equals((Boolean)session.getAttribute("user.layout.sidebar.narrow")) ? '' : 'display:none' %>"><a class="brand" href="${createLink(uri: '/')}"><img src="${resource( dir:'images',file:'applogo48x2.png')}"></a></span>
-        </div>
+        <div id="title-long" style="<%=Boolean.TRUE.equals((Boolean)session.getAttribute("user.layout.sidebar.narrow")) ? 'display:none' : '' %>"><a class="brand" href="${createLink(uri: '/')}"><h4>Skill°</h4></a></div>
+        <div id="title-short" style="<%=Boolean.TRUE.equals((Boolean)session.getAttribute("user.layout.sidebar.narrow")) ? '' : 'display:none' %>"><a class="brand" href="${createLink(uri: '/')}"><img src="${resource( dir:'images',file:'applogo48x2.png')}"></a></div>
     </div>
 
-    <ul class="nav nav-list">
+    <ul class="nav bs-sidenav">
         <g:each var="item,conf" in="[
                 'home' : [uri:'/', icon:'home'],
                 'candidate' : [controller:'candidate', icon:'list'],
@@ -23,20 +21,20 @@
             <li class="${conf.uri && request.forwardURI.substring(request.contextPath.length()) == conf.uri || conf.controller && params.controller == conf.controller ? " active" : ""}  sidebar-item" >
                 <g:if test="${conf.controller || conf.uri}">
                     <g:link controller="${conf.controller}" uri="${conf.uri}">
-                        <i class="icon-${conf.icon}"></i>
+                        <span class="glyphicon glyphicon-${conf.icon}"></span>
                         <span style="<%=Boolean.TRUE.equals((Boolean)session.getAttribute("user.layout.sidebar.narrow")) ? 'display:none' : '' %>"><g:message code="${item}.label" default="${item.capitalize()}"/></span>
                     </g:link>
                 </g:if>
                 <g:if test="${conf.items}">
                     <a href="#" data-toggle="collapse" data-target=".sidebar-${item}">
-                        <i class="icon-${conf.icon}"></i>
+                        <span class="glyphicon glyphicon-${conf.icon}"></span>
                         <g:message code="${item}.label" default="${item.capitalize()}"/>
                     </a>
                     <ul class="nav nav-list collapse sidebar-${item}">
                         <g:each var="subitem,subconf" in="${conf.items}">
                             <li class="${subconf.uri && request.forwardURI.substring(request.contextPath.length()) == subconf.uri || subconf.controller && params.controller == subconf.controller ? " active" : ""}">
                                 <g:link controller="${subconf.controller}" uri="${subconf.uri}">
-                                    <i class="icon-${subconf.icon}"></i>
+                                    <span class="glyphicon glyphicon-${subconf.icon}"></span>
                                     <span><g:message code="${subitem}.label" default="${subitem.capitalize()}"/></span>
                                 </g:link>
                             </li>
@@ -51,13 +49,14 @@
             </li>
         </g:each>
     </ul>
-    <br/>
+
     <div class="" style="margin-left: 10px">
         <a class="btn btn-mini" href="#" id="toggle-sidebar" data-toggle="tooltip" title="toggle sidebar" onmouseover="alertToggleSidebar();" onclick="toggleSidebar();">
             <i id="toggle-sidebar-icon" class="icon-arrow-left"></i>
         </a>
     </div>
-</div><!--/.well -->
+
+</div>
 <g:javascript>
 
     function alertToggleSidebar(){
