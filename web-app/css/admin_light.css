@@ -11,9 +11,9 @@ body {
     padding: 0;
     border: 0;
     height:100%;
-    /*background-color: #f1f2f6;*/
-    background-color: #ffffff;
 }
+
+/* Layout components */
 
 #sidebar {
     position: absolute;
@@ -21,7 +21,7 @@ body {
     bottom: 0;
     border-radius: 0;
     margin: 0;
-    background-color: #ffffff;
+    background-color: #e3e4e8;
 }
 
 .sidebar-wide{
@@ -30,23 +30,6 @@ body {
 
 .sidebar-narrow{
     width: 40px;
-}
-
-#loginForm {
-    max-width: 222px;
-    padding: 20px 30px 30px;
-    margin: 0 auto 20px;
-    border: 1px solid #e5e5e5;
-    -webkit-border-radius: 5px;
-    -moz-border-radius: 5px;
-    border-radius: 5px;
-    -webkit-box-shadow: 0 1px 2px rgba(0,0,0,.05);
-    -moz-box-shadow: 0 1px 2px rgba(0,0,0,.05);
-    box-shadow: 0 1px 2px rgba(0,0,0,.05);
-}
-
-#loginForm .controls{
-    margin-left: 0px;
 }
 
 #workspace-navbar-absolute {
@@ -81,18 +64,31 @@ body {
     left: 200px;
 }
 
+#full-content-container {
+    padding: 10px;
+    height: 100%;
+    background-color: #625a72;
+}
+
+#login-form {
+    max-width: 300px;
+    padding: 20px;
+    margin: 0 auto;
+    width: 300px;
+    background-color: #FFFFFF;
+}
+
+
 
 #sidebar .nav-list {
     padding: 0;
 }
 
 #sidebar .nav-list > li {
-    /*border-top: 1px solid #cfcfcf;*/
     line-height: 30px;
 }
 
 #sidebar .nav-list > li :hover {
-    /*border-top: 1px solid #cfcfcf;*/
 }
 
 #sidebar-item:hover{
@@ -186,6 +182,9 @@ table {
 .brand h4 {
     text-align: center;
     font-size: 28px;
+    padding-top: 5px;
+    padding-bottom: 5px;
+    margin: 0 auto;
 }
 
 .userpane {
@@ -203,6 +202,7 @@ table {
 
 .page-title h4 {
     font-size: 28px;
+    margin: 5px 10px;
 }
 
 /* Pagination fix */
@@ -216,5 +216,16 @@ table {
 
 #notifications {
     display: inline;
-    margin: auto 10px;
+    margin: auto auto;
+}
+
+#applogo {
+    display: block;
+    width: 100%;
+    height: 40px;
+
+}
+
+.form-control:focus {
+    box-shadow: none;
 }
