@@ -21,10 +21,16 @@ modules = {
 	}
 
 	select2 {
-        resource url:'css/select2/select2.css'
-        resource url:'css/select2/select2-bootstrap.css'
-        resource url:'js/select2-3.4.3/select2.js'
+        resource url:'select2-3.4.5/select2.css'
+        resource url:'select2-3.4.5/select2-bootstrap.css'
+        resource url:'select2-3.4.5/select2.js'
 	}
+
+    bs_switch {
+        resource url:'css/bootstrap-switch/bootstrap-switch.css'
+        resource url:'js/bootstrap-switch/bootstrap-switch.js'
+
+    }
 
     datepicker {
         resource url:'js/eternicode-datepicker/bootstrap-datepicker.js'
@@ -32,6 +38,6 @@ modules = {
     }
 
     forms {
-        dependsOn 'select2,datepicker'
+        dependsOn 'select2,datepicker,bs_switch'
     }
 }
