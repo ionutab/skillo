@@ -26,14 +26,14 @@
 
 </sec:ifNotLoggedIn>
 <sec:ifLoggedIn>
-        <div class="btn-group">
-            <a class="btn btn-default dropdown-toggle" data-toggle="dropdown" href="#">
+        <li class="dropdown">
+            <a class="dropdown-toggle"  data-toggle="dropdown" href="#">
                 <span class="glyphicon glyphicon-user"></span>
                 <sec:loggedInUserInfo field="username" />
                 <span class="caret"></span>
             </a>
 
-            <ul class="dropdown-menu pull-right">
+            <ul class="dropdown-menu">
                 <li class="">
                     <a href="${createLink(controller: 'userSetting', action: 'index')}">
                         <span class="glyphicon glyphicon-cog"></span>
@@ -47,7 +47,8 @@
                     </a>
                 </li>
             </ul>
-        </div>
+        </li>
+
 </sec:ifLoggedIn>
 
 <noscript>

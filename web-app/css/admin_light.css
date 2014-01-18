@@ -13,7 +13,7 @@ body {
     height:100%;
 }
 
-/* Layout components */
+    /* LAYOUT COMPONENTS */
 
 #sidebar {
     position: absolute;
@@ -21,7 +21,7 @@ body {
     bottom: 0;
     border-radius: 0;
     margin: 0;
-    background-color: #e3e4e8;
+    background-color: #2a3542;
 }
 
 .sidebar-wide{
@@ -32,12 +32,15 @@ body {
     width: 40px;
 }
 
-#workspace-navbar-absolute {
-    position: absolute;
-    top: 0;
-    right: 0;
+#sidebar ul.nav > li {
     height: 40px;
-    background-color: #343e5e;
+    min-height: 40px;
+}
+
+    /* NAVBAR */
+
+#workspace-navbar-absolute .nav > li > a{
+    color: #FFFFFF;
 }
 
 .workspace-navbar-wide {
@@ -47,6 +50,34 @@ body {
 .workspace-navbar-narrow {
     left: 200px;
 }
+
+.navbar {
+    min-height: 40px;
+    height: 40px;
+    background-color: #2a3542;
+    padding-right: 15px;
+}
+
+.navbar-nav > li > a {
+    padding-top: 10px;
+    padding-bottom: 10px;
+}
+
+.navbar-btn {
+    margin-top: 4px;
+    margin-bottom: 4px;
+}
+
+.navbar h4 {
+    font-size: 28px;
+    margin-top: 5px;
+    margin-bottom: 5px;
+    color: #FFFFFF;
+}
+
+
+
+    /* WORKSPACE COMPONENT */
 
 #workspace-content-container {
     position: absolute;
@@ -67,7 +98,7 @@ body {
 #full-content-container {
     padding: 10px;
     height: 100%;
-    background-color: #625a72;
+    background-color: #2a3542;
 }
 
 #login-form {
@@ -78,35 +109,17 @@ body {
     background-color: #FFFFFF;
 }
 
-
-
-#sidebar .nav-list {
-    padding: 0;
+#sidebar .nav li a {
+    color: #ffffff;
 }
 
-#sidebar .nav-list > li {
-    line-height: 30px;
+#sidebar .nav li a:hover {
+    text-decoration: none;
+    color: #2a3542;
 }
 
-#sidebar .nav-list > li :hover {
-}
-
-#sidebar-item:hover{
-    background-color: #ffffff;
-}
-
-#sidebar > .nav-list > li:first-child {
-    border-top: 0;
-}
-
-#sidebar .nav-list > li > a {
-    padding-right: 15px;
-    margin: 0;
-}
-
-#sidebar .nav-list .nav-list > li > a {
-    padding-left: 30px;
-    padding-right: 30px;
+#sidebar .nav li.active > a {
+    background-color: #546A84;
 }
 
 .alert {
@@ -138,14 +151,6 @@ body {
 .form-horizontal .controls {
     /*margin-left: 120px; default bootstrap difference is 20px*/
     margin-left: 140px;
-}
-
-.form-horizontal .control-group {
-    margin-bottom: 10px;
-}
-
-.legend + .control-group {
-    margin-top: 0;
 }
 
 .autocomplete{
@@ -187,10 +192,6 @@ table {
     margin: 0 auto;
 }
 
-.userpane {
-
-}
-
 .select2-container.input-xlarge{
     width: 284px;
 }
@@ -214,18 +215,27 @@ table {
     border-right-color: rgba(0, 0, 0, 0.15);
 }
 
-#notifications {
-    display: inline;
-    margin: auto auto;
-}
-
-#applogo {
+.applogo {
     display: block;
     width: 100%;
     height: 40px;
+}
 
+.applogo a {
+    color: #546A84;
+}
+
+.applogo a:hover,#applogo a:active {
+    text-decoration: none;
+    color: #FFFFFF;
 }
 
 .form-control:focus {
     box-shadow: none;
+}
+
+.nav > li > a:hover,
+.nav > li > a:focus {
+    color: #2a3542;
+    background-color: #ffffff;
 }

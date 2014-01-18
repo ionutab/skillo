@@ -193,7 +193,7 @@
                 </div>
             <% } %>
 
-    <div class="row-fluid">
+    <div class="row">
         <div class="span4">
             <div class="control-group fieldcontain ${hasErrors(bean: candidateInstance, field: 'driver', 'error')} ">
                 <label for="candidate.driver" class="control-label">
@@ -221,7 +221,7 @@
             </div>
         </div>
     </div>
-    <div class="row-fluid">
+    <div class="row">
         <div class="span4">
             <div class="control-group fieldcontain ${hasErrors(bean: candidateInstance, field: 'sponsored', 'error')} ">
                 <label for="candidate.sponsored" class="control-label">

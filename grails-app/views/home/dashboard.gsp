@@ -7,8 +7,8 @@
 
 <body>
 
-<div class="container-fluid">
-    <div class="row-fluid">
+<div class="container">
+    <div class="row">
     </div>
 </div>
 

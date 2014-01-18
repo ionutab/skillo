@@ -1,6 +1,6 @@
 <div class="navbar navbar-fixed-top dark-font-navbar">
       <div class="%{--navbar-inner--}%">
-        <div class="container-fluid">
+        <div class="container">
 			<a class="brand" href="${createLink(uri: '/')}">
 				${meta(name:'app.name')}
 			</a>

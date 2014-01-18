@@ -1,5 +1,1 @@
-<div id="notifications">
-    <button type="button" class="btn btn-default">
-        <span class="glyphicon glyphicon-bell"></span>
-    </button>
-</div>
+<a href="#" ><span class="glyphicon glyphicon-bell"></span></a>

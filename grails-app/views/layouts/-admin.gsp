@@ -41,7 +41,7 @@
     </g:if>
 
 	<%--workcontent --%>
-    <div id="main-content-container" class="container-fluid">
+    <div id="main-content-container" class="container">
 	
 		<%-- sidebar --%>
         <g:if test="${!layout_nocontextbar}">

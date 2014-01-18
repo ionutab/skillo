@@ -12,26 +12,27 @@
 </head>
 
 <body>
+%{--
 
 <g:form action="list" controller="candidate" name="searchForm">
   <fieldset>
     <legend><g:message code="candidate.search.label" /></legend>
 
-    <div class="row-fluid">
+    <div class="row">
 	    <div class="span12">
 		    <g:textField name="firstName" placeholder="${message(code: 'candidate.search.firstName.label', default: 'First Name')}" value="${params.firstName}"/>
 		    <g:textField name="lastName" placeholder="${message(code: 'candidate.search.lastName.label', default: 'Last Name')}" />
 		    <g:textField name="telephoneNumber" placeholder="${message(code: 'candidate.search.telephoneNumber.label', default: 'Telephone Nr')}" />
 	    </div>
     </div>
-    <div class="row-fluid">
+    <div class="row">
         <div class="span12">
             <input type="text" placeholder="${message(code: 'candidate.search.address.label', default: 'Address')}">
             <input type="text" placeholder="${message(code: 'candidate.search.postCode.label', default: 'Post Code')}">
             <input type="text" placeholder="${message(code: 'candidate.search.mainTrade.label', default: 'Main Trade')}">
         </div>
     </div>
-    <div class="row-fluid">
+    <div class="row">
         <div class="span12">
             <g:submitButton name="list" class="btn btn-primary" value="${message(code: 'default.button.search.label')}" />
             <button type="button" class="btn btn-info"><i class="icon-refresh"></i></button>
@@ -45,15 +46,17 @@
 </g:form>
 
 
-<div class="tabbable tabs-right">
+<div class="tabbable">
 	<ul class="nav nav-tabs">
-        %{--
+        --}%
+%{--
         I have commented this because then the top context will not work properly - beats me
         <li>
             <a href="#cs1" data-toggle="tab">Seach 1</a>
         </li>
 
-        --}%
+        --}%%{--
+
         <li class="">
             <button class="btn btn-primary" type="button" id="addcandidatestabbutton"><i class="icon-plus"></i></button>
         </li>
@@ -132,6 +135,7 @@
 
 	</div>
 </div>
+--}%
 
 </body>
 

@@ -1,22 +1,16 @@
-<div id="workspace-navbar-absolute" class="<%=Boolean.TRUE.equals((Boolean)session.getAttribute("user.layout.sidebar.narrow")) ? 'workspace-navbar-wide' : 'workspace-navbar-narrow' %>" >
-    <div class="page-title">
+<nav class="navbar navbar-fixed-top <%=Boolean.TRUE.equals((Boolean)session.getAttribute("user.layout.sidebar.narrow")) ? 'workspace-navbar-wide' : 'workspace-navbar-narrow' %>" id="workspace-navbar-absolute" role="navigation">
+    <div class="navbar-header">
         <g:if test="${null != page_title}" >
-            <div class="pull-left" style="position: relative; left: 20px; color: #FFFFFF;">
-                <h4>${page_title}</h4>
-            </div>
+            <h4 class="navbar-text navbar-right">${page_title}</h4>
         </g:if>
         <g:if test="${null == page_title}" >
-            <div class="pull-left" style="position: relative; left: 20px; color: #FFFFFF;">
-                <h4>${params.controller} ${params.action}</h4>
-            </div>
+            <h4>${params.controller} ${params.action}</h4>
         </g:if>
     </div>
 
-    <div class="pull-right" style="position: relative; right: 5px; top: 3px;">
-
-        <g:render template="/_menu/notifications"/>
+    <ul class="nav navbar-nav navbar-right">
+        <li><g:render template="/_menu/notifications"/></li>
         <g:render template="/_menu/user"/>
-    </div>
+    </ul>
 
-
-</div>
+</nav>

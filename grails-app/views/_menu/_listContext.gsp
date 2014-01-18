@@ -4,8 +4,8 @@ This menu is used to show function that can be triggered on the content (an obje
 
 <%-- Only show the "Pills" navigation menu if a controller exists (but not for home) --%>
 <g:if test="${ params.controller != null && params.controller != '' &&	params.controller != 'home' }">
-    <div class="row-fluid top-context">
-        <div class="span12">
+    <div class="row top-context">
+        <div class="col-lg-12">
             <ul id="Menu" class="nav nav-pills">
 
                 <g:set var="entityName" value="${message(code: params.controller+'.label', default: params.controller.substring(0,1).toUpperCase() + params.controller.substring(1).toLowerCase())}" />

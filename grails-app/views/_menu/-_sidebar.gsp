@@ -23,7 +23,7 @@
                         <i class="icon-${conf.icon}"></i>
                         <g:message code="${item}.label" default="${item.capitalize()}"/>
                     </a>
-                    <ul class="nav nav-list collapse sidebar-${item}">
+                    <ul class="nav collapse sidebar-${item}">
                         <g:each var="subitem,subconf" in="${conf.items}">
                             <li class="${subconf.uri && request.forwardURI.substring(request.contextPath.length()) == subconf.uri || subconf.controller && params.controller == subconf.controller ? " active" : ""}">
                                 <g:link controller="${subconf.controller}" uri="${subconf.uri}">

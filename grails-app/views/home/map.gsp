@@ -14,12 +14,12 @@
 <div class="map-container">
     <div id="map-canvas"></div>
     <div id="over_map">
-           <div class="container-fluid">
+           <div class="container">
            <div id="basic-map-controlls" class="span12">
-           <div class="row-fluid">
+           <div class="row">
                <input type="text" placeholder="Text input">
            </div>
-           <div class="row-fluid">
+           <div class="row">
            <div class="input-append">
     <input type="text" placeholder="Text input">
     <button class="btn" type="button">Go!</button>

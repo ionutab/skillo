@@ -22,7 +22,7 @@
 	</g:hasErrors>
 
     <g:form method="post" class="form-horizontal" >
-        <div class="row-fluid">
+        <div class="row">
                 <div class="span6">
                 <g:hiddenField name="id" value="${candidateInstance?.id}" />
                 <g:hiddenField name="version" value="${candidateInstance?.version}" />
@@ -98,7 +98,7 @@
 
             </div>
         </div>
-        <div class="row-fluid">
+        <div class="row">
             <div class="span6">
                 <div class="control-group fieldcontain  ${hasErrors(bean: candidateInstance, field: 'payroll.payrollCompany', 'error')} ">
                     <label for="payrollCompanyId" class="control-label">
@@ -132,7 +132,7 @@
             </div>
         </div>
 
-        <div class="row-fluid">
+        <div class="row">
             <div class="span3">
                 <div class="control-group fieldcontain ${hasErrors(bean: candidateInstance, field: 'payroll.referenceNumber', 'error')} ">
                     <label for="payroll.referenceNumber" class="control-label">
@@ -160,7 +160,7 @@
                 </div>
             </div>
         </div>
-        <div class="row-fluid">
+        <div class="row">
 
             <div class="span3">
                 <div class="control-group fieldcontain ${hasErrors(bean: candidateInstance, field: 'payroll.unqiueTaxReferenceNumber', 'error')} ">
@@ -189,7 +189,7 @@
                 </div>
             </div>
         </div>
-        <div class="row-fluid">
+        <div class="row">
             <div class="span3">
                 <div class="control-group fieldcontain ${hasErrors(bean: candidateInstance, field: 'candidate.payroll.registered', 'error')} ">
                     <label for="payroll.registered" class="control-label">

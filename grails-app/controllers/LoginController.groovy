@@ -49,8 +49,7 @@ class LoginController {
 
         String view = 'auth'
         String postUrl = "${request.contextPath}${config.apf.filterProcessesUrl}"
-        render view: view, model: [postUrl: postUrl,
-                rememberMeParameter: config.rememberMe.parameter]
+        render view: view, model: [postUrl: postUrl,rememberMeParameter: config.rememberMe.parameter]
     }
 
     /**
@@ -65,8 +64,7 @@ class LoginController {
      * Show denied page.
      */
     def denied = {
-        if (springSecurityService.isLoggedIn() &&
-                authenticationTrustResolver.isRememberMe(SCH.context?.authentication)) {
+        if (springSecurityService.isLoggedIn() && authenticationTrustResolver.isRememberMe(SCH.context?.authentication)) {
             // have cookie but the page is guarded with IS_AUTHENTICATED_FULLY
             redirect action: 'full', params: params
         }
