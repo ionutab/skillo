@@ -16,7 +16,7 @@ body {
     /* LAYOUT COMPONENTS */
 
 #sidebar {
-    position: absolute;
+    position: fixed;
     top: 0px;
     bottom: 0;
     border-radius: 0;
@@ -75,6 +75,19 @@ body {
     color: #FFFFFF;
 }
 
+#workspace-navbar-absolute .nav > li > a:hover,
+#workspace-navbar-absolute .nav > li > a:focus {
+    color: #2a3542;
+    background-color: #ffffff;
+}
+
+/* custom nav-pills rework in order to make them smaller */
+/* nav pills normal so you can customize nav pills size */
+/* 6 and 12 on the padding so the pill is the same size as the default button size. thanks. */
+.nav-pills-n > li > a {
+    padding: 6px 12px;
+}
+
 
 
     /* WORKSPACE COMPONENT */
@@ -84,7 +97,7 @@ body {
     top: 40px;
     right: 0;
     bottom: 0px;
-    padding: 20px;
+    padding: 15px;
 }
 
 .workspace-wide{
@@ -99,6 +112,10 @@ body {
     padding: 10px;
     height: 100%;
     background-color: #2a3542;
+}
+
+.content-container {
+    margin: 15px auto 0px;
 }
 
 #login-form {
@@ -120,6 +137,10 @@ body {
 
 #sidebar .nav li.active > a {
     background-color: #546A84;
+}
+
+#sidebar .nav li.active > a:hover, #sidebar .nav li.active > a:active {
+    background-color: #FFFFFF;
 }
 
 .alert {
@@ -163,8 +184,8 @@ body {
 }
 
 legend {
-    font-size: 16px;
-    margin-bottom: 10px;
+    font-size: 14px;
+    margin-bottom: 5px;
 }
 
 .table th, .table td {
@@ -198,7 +219,6 @@ table {
 
 #title-short {
     display: block;
-    margin: 1px;
 }
 
 .page-title h4 {
@@ -232,10 +252,4 @@ table {
 
 .form-control:focus {
     box-shadow: none;
-}
-
-.nav > li > a:hover,
-.nav > li > a:focus {
-    color: #2a3542;
-    background-color: #ffffff;
 }
