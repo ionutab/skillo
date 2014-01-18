@@ -7,7 +7,7 @@
 
     <div class="applogo">
         <div id="title-long" style="<%=Boolean.TRUE.equals((Boolean)session.getAttribute("user.layout.sidebar.narrow")) ? 'display:none' : '' %>"><a class="brand" href="${createLink(uri: '/')}"><h4>Skill°</h4></a></div>
-        <div id="title-short" style="<%=Boolean.TRUE.equals((Boolean)session.getAttribute("user.layout.sidebar.narrow")) ? '' : 'display:none' %>"><a class="brand" href="${createLink(uri: '/')}"><img src="${resource( dir:'images',file:'applogo48x2.png')}"></a></div>
+        <div id="title-short" style="<%=Boolean.TRUE.equals((Boolean)session.getAttribute("user.layout.sidebar.narrow")) ? '' : 'display:none' %>"><a class="brand" href="${createLink(uri: '/')}"><h4>5°</h4></a></div>
     </div>
 
     <ul class="nav bs-sidenav">

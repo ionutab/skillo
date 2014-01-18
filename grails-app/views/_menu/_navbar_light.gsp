@@ -9,6 +9,7 @@
     </div>
 
     <ul class="nav navbar-nav navbar-right">
+        <li><g:render template="/_menu/favorites"/></li>
         <li><g:render template="/_menu/notifications"/></li>
         <g:render template="/_menu/user"/>
     </ul>

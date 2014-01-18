@@ -10,7 +10,7 @@ This menu is used to show function that can be triggered on the content (an obje
 
                 <g:set var="entityName" value="${message(code: params.controller+'.label', default: params.controller.substring(0,1).toUpperCase() + params.controller.substring(1).toLowerCase())}" />
 
-                <li class="${ params.action == "list" ? 'active' : '' }">
+                <li class="${ params.action == 'list' ? 'active' : '' }">
                     <g:link action="list"><span class="glyphicon glyphicon-th-list"></span> <g:message code="default.list.label" args="[entityName]"/></g:link>
                 </li>
                 <li class="${ params.action == "create" ? 'active' : '' }">
@@ -22,9 +22,11 @@ This menu is used to show function that can be triggered on the content (an obje
                     <li class="${ params.action == "edit" ? 'active' : '' }">
                         <g:link action="edit" id="${params.id}"><span class="glyphicon glyphicon-pencil"></span> <g:message code="default.edit.label"  args="[entityName]"/></g:link>
                     </li>
+                    %{--
                     <li class="">
                         <g:render template="/_common/modals/deleteTextLink"/>
                     </li>
+                    --}%
                 </g:if>
 
             </ul>

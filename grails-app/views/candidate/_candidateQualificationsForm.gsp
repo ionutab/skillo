@@ -9,7 +9,7 @@
 </div>
 <g:hiddenField name="newCandidateQualification.candidate.id" value="${newCandidateQualification?.candidate?.id}" />
 <fieldset class="form">
-    <div class="control-group fieldcontain ${hasErrors(bean: newCandidateQualification, field: 'qualification', 'error')} ">
+    <div class="control-group fieldcontain ${hasErrors(bean: newCandidateQualification, field: 'qualification', 'has-error')} ">
         <label for="newCandidateQualification.qualification.id" class="control-label">
             <g:message code="qualification.label" default="Qualification" />
         </label>
@@ -26,22 +26,22 @@
                     required=""
             />
             <span class="help-inline">
-                ${hasErrors(bean: newCandidateQualification, field: 'qualification', 'error')}
+                ${hasErrors(bean: newCandidateQualification, field: 'qualification', 'has-error')}
             </span>
         </div>
     </div>
-    <div class="control-group fieldcontain ${hasErrors(bean: newCandidateQualification, field: 'expiryDate', 'error')} ">
+    <div class="control-group fieldcontain ${hasErrors(bean: newCandidateQualification, field: 'expiryDate', 'has-error')} ">
         <label for="newCandidateQualification.expiryDate" class="control-label">
             <g:message code="candidateQualification.expiryDate.label" default="Expiry Date" />
         </label>
         <div class="controls">
             <g:field type="expiryDate" name="newCandidateQualification.expiryDate" id="newCandidateQualificationExpiryDate" class="datepicker" value="${formatDate(date: newCandidateQualification?.expiryDate)}" default="none" precision="day" required="" />
             <span class="help-inline">
-                ${hasErrors(bean: newCandidateQualification, field: 'expiryDate', 'error')}
+                ${hasErrors(bean: newCandidateQualification, field: 'expiryDate', 'has-error')}
             </span>
        </div>
     </div>
-    <div class="control-group fieldcontain ${hasErrors(bean: newCandidateQualification, field: 'expiryDate', 'error')} ">
+    <div class="control-group fieldcontain ${hasErrors(bean: newCandidateQualification, field: 'expiryDate', 'has-error')} ">
         <label for="number" class="control-label">
             <g:message code="candidateQualification.number.label" default="Qualification Number" />
         </label>
@@ -49,17 +49,17 @@
             <g:textField name="newCandidateQualification.number" id="number" class="input-xlarge" value="${newCandidateQualification?.number}" />
         </div>
         <span class="help-inline">
-            ${hasErrors(bean: newCandidateQualification, field: 'number', 'error')}
+            ${hasErrors(bean: newCandidateQualification, field: 'number', 'has-error')}
         </span>
     </div>
-    <div class="control-group fieldcontain ${hasErrors(bean: newCandidateQualification, field: 'isMainTrade', 'error')} ">
+    <div class="control-group fieldcontain ${hasErrors(bean: newCandidateQualification, field: 'isMainTrade', 'has-error')} ">
         <label for="newCandidateQualification.isMainTrade" class="control-label">
             <g:message code="candidateQualification.isMainTrade.label" default="Is Main Trade" />
         </label>
         <div class="controls">
             <g:checkBox name="newCandidateQualification.isMainTrade" value="${newCandidateQualification?.isMainTrade}" />
             <span class="help-inline">
-                ${hasErrors(bean: newCandidateQualification, field: 'isMainTrade', 'error')}
+                ${hasErrors(bean: newCandidateQualification, field: 'isMainTrade', 'has-error')}
             </span>
         </div>
     </div>
