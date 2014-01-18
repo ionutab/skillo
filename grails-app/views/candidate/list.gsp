@@ -51,84 +51,77 @@
 
 <div class="row">
 
+    <g:if test="${CandidateList.size() == 0}">
+        <div class="col-lg-6 col-lg-offset-3 page-background-info" >
+            <h2>There are currently no candidates that you own.</h2>
+            <h2>Feel free to add one make sure there are candidates shared with you.</h2>
+        </div>
+    </g:if>
+
     <div class="content-container col-lg-12">
 
-        <ul class="nav nav-tabs">
+        <g:if test="${CandidateList.size() > 0}">
+            <table class="table table-bordered table-striped">
+                <thead>
+                    <tr>
 
-            %{--I have commented this because then the top context will not work properly - beats me--}%
-            <li><a href="#cs1" data-toggle="tab">Seach 1</a></li>
-            <li><g:link href="#" ><span class="glyphicon glyphicon-plus"></span></g:link></li>
-        </ul>
+                        <g:sortableColumn property="firstName" title="${message(code: 'candidate.firstName.label', default: 'First ')}" />
+                        <g:sortableColumn property="lastName" title="${message(code: 'candidate.lastName.label', default: 'Last Name')}" />
+                        <th><g:message code="candidate.telephoneNumber.label" default="Telephone Number" /></th>
+                        <th><g:message code="address.details.label" default="Address" /></th>
+                        <th><g:message code="address.postcode.label" default="Post Code" /></th>
+                        <th><g:message code="candidate.mainTrade.label" default="Main Trade" /></th>
+                        <th><g:message code="payroll.payrollCompany.label" default="Payroll Company" /></th>
+                        <th><g:message code="default.actions.label" default="Actions" /></th>
 
-        <div class="tab-content">
-            <div class="tab-pane active" id="cs1">
-
-                <section id="list-candidate-1" class="first">
-                    <table class="table table-bordered table-striped">
-                        <thead>
-                            <tr>
-
-                                <g:sortableColumn property="firstName" title="${message(code: 'candidate.firstName.label', default: 'First ')}" />
-                                <g:sortableColumn property="lastName" title="${message(code: 'candidate.lastName.label', default: 'Last Name')}" />
-                                <th><g:message code="candidate.telephoneNumber.label" default="Telephone Number" /></th>
-                                <th><g:message code="address.details.label" default="Address" /></th>
-                                <th><g:message code="address.postcode.label" default="Post Code" /></th>
-                                <th><g:message code="candidate.mainTrade.label" default="Main Trade" /></th>
-                                <th><g:message code="payroll.payrollCompany.label" default="Payroll Company" /></th>
-                                <th><g:message code="default.actions.label" default="Actions" /></th>
-
-                            </tr>
-                        </thead>
-                        <tbody>
-                            <g:each in="${CandidateList}" status="i" var="Candidate">
-                                <tr>
-                                    <td colspan="2">
-                                        <g:link action="show" data-placement="right" data-trigger="click" id="${Candidate.id}" elementId="${Candidate.id}">${Candidate.firstName}</g:link>
-                                        <g:link url="#" class="popable" data-placement="right" data-trigger="click" elementId="${Candidate.id}">${Candidate.lastName}</g:link>
-                                        <div id="popover_content_wrapper_${Candidate.id}" style="display: none">
-                                            <div>
-                                                <p><b><g:message code="candidate.owningConsultant.label"/>:</b> ${Candidate.consultant?.firstName} ${Candidate.consultant?.lastName}</p>
-                                                <p><b><g:message code="candidate.email.label"/>:</b> ${Candidate.email}</p>
-                                                <p><b><g:message code="candidate.driver.label"/>:</b> ${Candidate.driver}</p>
-                                                <p><b><g:message code="candidate.carOwner.label"/>:</b> ${Candidate.carOwner}</p>
-                                            </div>
-                                        </div>
-                                    </td>
-                                    <td>
-                                        ${Candidate?.telephoneNumber}
-                                    </td>
-                                    <td>
-                                        ${Candidate?.address?.details}
-                                    </td>
-                                    <td>
-                                        ${Candidate?.address?.postCode?.code}
-                                    </td>
-                                    <td>
-                                        <g:if test="${Candidate.candidateQualifications != null && Candidate.candidateQualifications.size() > 0}">
-                                            <g:each in="${Candidate.candidateQualifications}" var="cq">
-                                                <g:if test="${cq.isMainTrade}">
-                                                    ${cq.qualification?.name}
-                                                </g:if>
-                                            </g:each>
+                    </tr>
+                </thead>
+                <tbody>
+                    <g:each in="${CandidateList}" status="i" var="Candidate">
+                        <tr>
+                            <td colspan="2">
+                                <g:link action="show" data-placement="right" data-trigger="click" id="${Candidate.id}" elementId="${Candidate.id}">${Candidate.firstName}</g:link>
+                                <g:link url="#" class="popable" data-placement="right" data-trigger="click" elementId="${Candidate.id}">${Candidate.lastName}</g:link>
+                                <div id="popover_content_wrapper_${Candidate.id}" style="display: none">
+                                    <div>
+                                        <p><b><g:message code="candidate.owningConsultant.label"/>:</b> ${Candidate.consultant?.firstName} ${Candidate.consultant?.lastName}</p>
+                                        <p><b><g:message code="candidate.email.label"/>:</b> ${Candidate.email}</p>
+                                        <p><b><g:message code="candidate.driver.label"/>:</b> ${Candidate.driver}</p>
+                                        <p><b><g:message code="candidate.carOwner.label"/>:</b> ${Candidate.carOwner}</p>
+                                    </div>
+                                </div>
+                            </td>
+                            <td>
+                                ${Candidate?.telephoneNumber}
+                            </td>
+                            <td>
+                                ${Candidate?.address?.details}
+                            </td>
+                            <td>
+                                ${Candidate?.address?.postCode?.code}
+                            </td>
+                            <td>
+                                <g:if test="${Candidate.candidateQualifications != null && Candidate.candidateQualifications.size() > 0}">
+                                    <g:each in="${Candidate.candidateQualifications}" var="cq">
+                                        <g:if test="${cq.isMainTrade}">
+                                            ${cq.qualification?.name}
                                         </g:if>
-                                    </td>
-                                    <td>
-                                        ${Candidate?.payroll?.payrollCompany?.name}
-                                    </td>
-                                    <td>
-                                        <g:link action="edit" id="${Candidate.id}" class="btn btn-small"><g:message code="default.edit.label" args=" " /></g:link>
-                                    </td>
-                                </tr>
-                            </g:each>
-                        </tbody>
-                    </table>
-
-                    <div class="pagination">
-                        <g:paginate total="${CandidateTotal}" />
-                    </div>
-
-                </section>
-            </div>
+                                    </g:each>
+                                </g:if>
+                            </td>
+                            <td>
+                                ${Candidate?.payroll?.payrollCompany?.name}
+                            </td>
+                            <td>
+                                <g:link action="edit" id="${Candidate.id}" class="btn btn-small"><g:message code="default.edit.label" args=" " /></g:link>
+                            </td>
+                        </tr>
+                    </g:each>
+                </tbody>
+            </table>
+        </g:if>
+        <div class="pagination">
+            <g:paginate total="${CandidateTotal}" />
         </div>
     </div>
 </div>

@@ -13,31 +13,27 @@
 
 <body>
 
-<section id="create-candidate" class="first">
-
-    %{--
-	<g:hasErrors bean="${candidateInstance}">
-	<div class="alert alert-error">
-		<g:renderErrors bean="${candidateInstance}" as="list" />
-	</div>
-	</g:hasErrors>
-    --}%
-
+<g:form action="save" role="form" class="form-horizontal">
     <div class="row">
-        <div class="span6">
-            <g:form action="save" class="form-horizontal" >
-                <g:render template="form"/>
-                <g:submitButton name="create" class="btn btn-primary" value="${message(code: 'default.button.save.label', default: 'Save')}" />
-                <button class="btn" type="reset"><g:message code="default.button.reset.label" default="Reset" /></button>
-            </g:form>
+        <div class="content-container col-lg-4">
+            <g:render template="form"/>
         </div>
     </div>
+    <div class="row">
+        <div class="content-container col-lg-4">
+            <div class="form-group">
+                <div class="col-sm-offset-3 col-sm-3">
+                    <g:submitButton name="create" class="btn btn-primary" value="${message(code: 'default.button.save.label', default: 'Save')}" />
+                </div>
+            </div>
+        </div>
+    </div>
+</g:form>
 
 
-    %{--TODO create special template for these , or form--}%
 
-</section>
-		
+%{--TODO create special template for these , or form--}%
+
 </body>
 
 </html>

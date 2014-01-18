@@ -33,7 +33,7 @@
         </g:if>
 
         <div class="form-group" >
-            <button type="submit" class="btn btn-default">Submit</button>
+            <button type="submit" class="btn btn-default btn-success">Submit</button>
         </div>
 
         <div class="form-group" >
