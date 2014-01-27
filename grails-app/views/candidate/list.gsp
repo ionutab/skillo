@@ -22,21 +22,13 @@
                 <g:textField class="form-control" name="firstName" placeholder="${message(code: 'candidate.search.firstName.label', default: 'First Name')}" value="${params.firstName}"/>
             </div>
             <div class="col-lg-2">
-                <g:textField class="form-control" name="lastName" placeholder="${message(code: 'candidate.search.lastName.label', default: 'Last Name')}" />
+                <g:textField class="form-control" name="lastName" placeholder="${message(code: 'candidate.search.lastName.label', default: 'Last Name')}" value="${params.lastName}" />
             </div>
             <div class="col-lg-2">
                 <g:textField class="form-control" name="telephoneNumber" placeholder="${message(code: 'candidate.search.telephoneNumber.label', default: 'Telephone Nr')}" />
             </div>
-        </div>
-        <div class="form-group row">
             <div class="col-lg-2">
-                <input class="form-control" type="text" placeholder="${message(code: 'candidate.search.address.label', default: 'Address')}">
-            </div>
-            <div class="col-lg-2">
-                <input class="form-control" type="text" placeholder="${message(code: 'candidate.search.postCode.label', default: 'Post Code')}">
-            </div>
-            <div class="col-lg-2">
-                <input class="form-control" type="text" placeholder="${message(code: 'candidate.search.mainTrade.label', default: 'Main Trade')}">
+                <g:textField class="form-control" name="candidateQualification"" placeholder="${message(code: 'candidate.search.candidateQualification.label', default: 'Trade')}" />
             </div>
         </div>
         <div class="form-group">
@@ -53,16 +45,16 @@
 
     <g:if test="${CandidateList.size() == 0}">
         <div class="col-lg-6 col-lg-offset-3 page-background-info" >
-            <h2>There are currently no candidates that you own.</h2>
-            <h2>Feel free to add one make sure there are candidates shared with you.</h2>
+            <h2>There are currently no candidates that match your criteria.</h2>
         </div>
     </g:if>
 
     <div class="content-container col-lg-12">
 
         <g:if test="${CandidateList.size() > 0}">
-            <table class="table table-bordered table-striped">
-                <thead>
+            <div class="table-responsive">
+                <table class="table table-striped">
+                    <thead>
                     <tr>
 
                         <g:sortableColumn property="firstName" title="${message(code: 'candidate.firstName.label', default: 'First ')}" />
@@ -75,8 +67,8 @@
                         <th><g:message code="default.actions.label" default="Actions" /></th>
 
                     </tr>
-                </thead>
-                <tbody>
+                    </thead>
+                    <tbody>
                     <g:each in="${CandidateList}" status="i" var="Candidate">
                         <tr>
                             <td colspan="2">
@@ -117,8 +109,10 @@
                             </td>
                         </tr>
                     </g:each>
-                </tbody>
-            </table>
+                    </tbody>
+                </table>
+            </div>
+
         </g:if>
         <div class="pagination">
             <g:paginate total="${CandidateTotal}" />

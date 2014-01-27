@@ -1,25 +1,43 @@
 var candidateFormFunctions = {
     initDatePicker:function(elementId){
         $(elementId).datepicker({
-              startView:"decade",
-              autoclose: true
+            startView:"decade",
+            orientation: "top auto",
+            autoclose: true
         });
+    },
+
+    initDatePickerOnAll:function(className){
+        $("."+className).datepicker({
+            startView:"decade",
+            orientation: "top auto",
+            autoclose: true
+        });
+    },
+
+    initSwitchOnAll:function(className){
+
+        $("."+className).bootstrapSwitch();
     },
 
     setCandidateBirthdate18YearsAgo:function(elementId){
         var myDate=new Date();
         myDate.setYear(myDate.getYear() - 18);
-        $(elementId).datepicker('setValue',myDate);
-    },
 
-    resetThisThing:function(formId){
-        alert('some shit');
+        var myMonth =myDate.getMonth()+1 < 10 ? myDate.getMonth()+1 : "0" + myDate.getMonth()+1;
+        $(elementId).val(new String( myMonth + "/" + myDate.getDate() + "/" + myDate.getFullYear()));
     }
 }
 
 $(document).ready(function() {
 
-    $(".date").addClass("input-small");
+    /*
+     candidateFormFunctions.initDatePicker("#candidateBirthDate");
+     candidateFormFunctions.initDatePicker("#newCandidateQualificationExpiryDate");
+     */
+
+    candidateFormFunctions.initDatePickerOnAll("datepicker");
+    candidateFormFunctions.initSwitchOnAll("checkbox");
 
     $("#newCandidateQualificationQualificationId").select2({
             placeholder: "Select a Qualification",
@@ -27,13 +45,10 @@ $(document).ready(function() {
         }
     );
 
-    candidateFormFunctions.initDatePicker("#candidateBirthDate");
-    candidateFormFunctions.initDatePicker("#newCandidateQualificationExpiryDate");
+    //TODO: make sure this is working fine
 
-    $("#candidateBirthDate").click(function(){
-        if(this.value == null || this.value == ''){
-            candidateFormFunctions.setCandidateBirthdate18YearsAgo("#candidateBirthDate");
-        }
-    });
+    if($("#candidateBirthDate") != null && ($("#candidateBirthDate").val() == null ||  "" == $("#candidateBirthDate").val())){
+        candidateFormFunctions.setCandidateBirthdate18YearsAgo("#candidateBirthDate");
+    }
 
 });

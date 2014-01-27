@@ -25,6 +25,8 @@ class CandidateQualificationController {
             newCandidateQualification.expiryDate = new Date()
         }
 
+        newCandidateQualification.number = "EEE" + newCandidateQualification.number
+
         if(Boolean.TRUE == newCandidateQualification.getIsMainTrade()){
             def candidateQualifications = CandidateQualification.findAllByCandidate(candidate)
             candidateQualifications.each { candidateQualification ->
@@ -39,13 +41,8 @@ class CandidateQualificationController {
 
             newCandidateQualification.candidate = Candidate.get(newCandidateQualification.candidate.id)
             newCandidateQualification.candidate.errors.reject("asfdsdfsdfsdfsdf")
-            redirect(controller: "candidate", action: "edit", id: newCandidateQualification.candidate.id )
-            return
         }
-
-        flash.message = message(code: 'default.created.message', args: [message(code: 'candidate.label', default: 'CandidateQualification'), candidate.firstName + " " + candidate.lastName])
-        redirect(controller: "candidate", action: "edit", id: newCandidateQualification.candidate.id )
-        return
+        [newCandidateQualification: newCandidateQualification]
     }
 
 }

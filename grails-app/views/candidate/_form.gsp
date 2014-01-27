@@ -1,6 +1,7 @@
 <%@ page import="skillo.Candidate"%>
+<legend><g:message code="candidate.form.basicInfo" /></legend>
 <div class="form-group  ${hasErrors(bean: candidateInstance, field: 'firstName', 'has-error')} ">
-    <label for="candidate.firstName" class="col-sm-3 control-label">
+    <label for="candidate.firstName" class="col-sm-4 control-label">
         <g:message code="candidate.firstName.label" default="First Name" />
     </label>
     <div class="col-sm-6">
@@ -13,7 +14,7 @@
     --}%
 </div>
 <div class="form-group ${hasErrors(bean: candidateInstance, field: 'lastName', 'has-error')} ">
-    <label for="candidate.lastName" class="col-sm-3 control-label">
+    <label for="candidate.lastName" class="col-sm-4 control-label">
         <g:message code="candidate.lastName.label" default="Last Name" />
     </label>
     <div class="col-sm-6">
@@ -21,19 +22,19 @@
     </div>
 </div>
 <div class="form-group ${hasErrors(bean: candidateInstance, field: 'birthDate', 'has-error')} ">
-    <label for="candidate.birthDate" class="col-sm-3 control-label">
+    <label for="candidate.birthDate" class="col-sm-4 control-label">
         <g:message code="candidate.birthDate.label" default="Birth Date" />
     </label>
     <div class="col-sm-3">
-        <g:field type="textField" name="candidate.birthDate" id="candidateBirthDate" class="form-control datepicker" value="${formatDate(date: candidateInstance?.birthDate)}" default="none" precision="day" />
+        <g:field type="textField" name="candidate.birthDate" id="candidateBirthDate" class="form-control datepicker" value="${formatDate(date: candidateInstance?.birthDate)}" default="none" />
     </div>
 </div>
 <div class="form-group ${hasErrors(bean: candidateInstance, field: 'telephoneNumber', 'has-error')} ">
-    <label for="candidate.telephoneNumber" class="col-sm-3 control-label">
+    <label for="candidate.telephoneNumber" class="col-sm-4 control-label">
         <g:message code="candidate.telephoneNumber.label" default="Telephone Number" />
     </label>
     <div class="col-sm-3">
-        <g:textField name="candidate.telephoneNumber" class="form-control" value="${candidateInstance?.telephoneNumber}" />
+        <g:textField type="tel" name="candidate.telephoneNumber" class="form-control" value="${candidateInstance?.telephoneNumber}" />
     </div>
     %{--
     <div class="col-sm-3">
@@ -42,7 +43,7 @@
     --}%
 </div>
 <div class="form-group ${hasErrors(bean: candidateInstance, field: 'address.details', 'has-error')} ">
-    <label for="address.details" class="col-sm-3 control-label">
+    <label for="address.details" class="col-sm-4 control-label">
         <g:message code="candidate.address.label" default="Address" />
     </label>
     <div class="col-sm-6">
@@ -51,7 +52,7 @@
 </div>
 
 <div class="form-group ${hasErrors(bean: candidateInstance, field: 'address.postCode', 'has-error')} ">
-    <label for="postCode.id" class="col-sm-3 control-label">
+    <label for="postCode.id" class="col-sm-4 control-label">
         <g:message code="postCode.code.label" default="Post Code" />
     </label>
     <div class="col-sm-6">
@@ -107,7 +108,7 @@
 </div>
 
 <div class="form-group ${hasErrors(bean: candidateInstance, field: 'email', 'has-error')} ">
-    <label for="candidate.email" class="col-sm-3 control-label">
+    <label for="candidate.email" class="col-sm-4 control-label">
         <g:message code="candidate.email.label" default="Email" />
     </label>
     <div class="col-sm-6">
@@ -117,7 +118,7 @@
 
 <% if(params.action == 'create' || params.action == 'save' ) {%>
     <div class="form-group ${hasErrors(bean: candidateInstance, field: 'candidateQualifications', 'has-error')} ">
-        <label for="mainTradeId" class="col-sm-3 control-label">
+        <label for="mainTradeId" class="col-sm-4 control-label">
             <g:message code="candidate.mainTrade.label" default="Main Trade" />
         </label>
         <div class="col-sm-6">
@@ -156,35 +157,35 @@
 --}%
 
 <div class="form-group">
-    <label for="candidate.driver" class="col-sm-3 control-label ">
+    <label for="candidate.driver" class="col-sm-4 control-label ">
         <g:message code="candidate.driver.label" default="Driver" />
     </label>
     <div class="col-sm-6">
-        <g:checkBox name="candidate.driver" value="${candidateInstance?.driver}" id="candidateIsDriver" data-on-label="Yes" data-off-label="No" />
+        <g:checkBox name="candidate.driver" class="checkbox" value="${candidateInstance?.driver}" id="candidateIsDriver" data-on-label="Yes" data-off-label="No" />
     </div>
 </div>
 
 <div class="form-group ">
-    <label for="candidate.sponsored" class="col-sm-3 control-label">
+    <label for="candidate.sponsored" class="col-sm-4 control-label">
         <g:message code="candidate.sponsored.label" default="Sponsored" />
     </label>
     <div class="col-sm-6">
-        <g:checkBox name="candidate.sponsored" value="${candidateInstance?.sponsored}" id="candidateIsSponsored" data-on-label="Yes" data-off-label="No"/>
+        <g:checkBox name="candidate.sponsored" class="checkbox" value="${candidateInstance?.sponsored}" id="candidateIsSponsored" data-on-label="Yes" data-off-label="No"/>
     </div>
 </div>
 
 <div class="form-group ">
-    <label for="candidate.carOwner" class="col-sm-3 control-label">
+    <label for="candidate.carOwner" class="col-sm-4 control-label">
        <g:message code="candidate.carOwner.label" default="Car Owner" />
     </label>
     <div class="col-sm-6">
-        <g:checkBox name="candidate.carOwner" value="${candidateInstance?.carOwner}" id="candidateIsCarOwner" data-on-label="Yes" data-off-label="No"/>
+        <g:checkBox name="candidate.carOwner" class="checkbox" value="${candidateInstance?.carOwner}" id="candidateIsCarOwner" data-on-label="Yes" data-off-label="No"/>
     </div>
 </div>
 
-<% if(params.action == 'edit'){ %>
+<% if(params.action == 'edit' || params.action == 'index'){ %>
 <div class="form-group ${hasErrors(bean: candidateInstance, field: 'consultant', 'has-error')} ">
-    <label for="consultant.id" class="col-sm-3 control-label">
+    <label for="consultant.id" class="col-sm-4 control-label">
         <g:message code="candidate.owningConsultant.label" default="By Consultant" />
     </label>
     <div class="col-sm-6">
@@ -192,11 +193,3 @@
     </div>
 </div>
 <% } %>
-
-<g:javascript>
-
-    $("#candidateIsDriver").bootstrapSwitch();
-    $("#candidateIsSponsored").bootstrapSwitch();
-    $("#candidateIsCarOwner").bootstrapSwitch();
-
-</g:javascript>

@@ -27,6 +27,9 @@ class CandidateController {
 			if(params.firstName){
 				ilike("firstName", "%{params.firstName}%")
 			}
+            if(params.lastName){
+                ilike("lastName", "%{params.lastName}%")
+            }
 		}
 
 		[CandidateList: candidateList, CandidateTotal: Candidate.count()]
@@ -95,6 +98,9 @@ class CandidateController {
     }
 
     def edit() {
+
+        log.info("Candidate Controller - edit ffs")
+
         def candidate = Candidate.get(params.id)
         if (!candidate) {
             flash.message = message(code: 'default.not.found.message', args: [message(code: 'candidate.label', default: 'Candidate'), params.id])

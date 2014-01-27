@@ -50,7 +50,7 @@
         </g:each>
         <li>
             <a class="" href="#" id="toggle-sidebar" data-toggle="tooltip" title="toggle sidebar" onmouseover="alertToggleSidebar();" onclick="toggleSidebar();">
-                <span id="toggle-sidebar-icon" class="glyphicon glyphicon-arrow-left"></span>
+                <span id="toggle-sidebar-icon" class="glyphicon <%=Boolean.TRUE.equals((Boolean)session.getAttribute("user.layout.sidebar.narrow")) ? 'glyphicon-arrow-right' : 'glyphicon-arrow-left' %>"></span>
             </a>
         </li>
     </ul>

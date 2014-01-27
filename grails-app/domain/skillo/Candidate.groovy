@@ -46,6 +46,7 @@ class Candidate implements SkilloDomainModelWithHistory {
 
     static mapping = {
         candidateQualifications cascade: "all-delete-orphan"
+        candidateHistory cascade: "all-delete-orphan"
     }
 
     def boolean checkVersion(Long version){
