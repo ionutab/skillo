@@ -20,3 +20,6 @@
 /.gitignore
 /.classpath
 /.project
+
+#intellij idea specific files
+*.iml
