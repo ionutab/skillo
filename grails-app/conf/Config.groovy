@@ -95,6 +95,8 @@ log4j = {
 
 }
 
+grails.databinding.dateFormats = ['dd/MM/yyyy','MMddyyyy', 'yyyy-MM-dd HH:mm:ss.S', "yyyy-MM-dd'T'hh:mm:ss'Z'"]
+
 grails.config.defaults.locations = [KickstartResources]
 // Added by the Spring Security Core plugin:
 grails.plugins.springsecurity.userLookup.userDomainClassName = 'skillo.User'
