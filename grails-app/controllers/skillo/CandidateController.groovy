@@ -13,7 +13,7 @@ import java.text.DateFormat
 
 class CandidateController {
 
-    def scaffold = true
+    def scaffold = false
     def springSecurityService
 
     def index() {
@@ -48,16 +48,11 @@ class CandidateController {
 
     def save() {
 
-        def candidate = new Candidate(params["candidate"])
-        def address = new Address(params["address"])
-        def postCode = PostCode.get(params["postCode"].id)
-        def mainTrade = Qualification.get(params["candidateMainTrade"].id)
+        def candidate = new Candidate(params.candidate)
+        def address = new Address(params.address)
+        def postCode = PostCode.get(params.postCode.id)
+        def mainTrade = Qualification.get(params.candidateMainTrade.id)
         def user = User.get(springSecurityService.principal.id)
-
-        if (params["candidate.birthDate"]) {
-            params["candidate.birthDate"] = new Date(params["candidate.birthDate"])
-            candidate.birthDate = params["candidate.birthDate"]
-        }
 
         address.postCode = postCode
         candidate.address = address
@@ -69,7 +64,6 @@ class CandidateController {
             candidateQualification.isMainTrade = true
 
             candidate.addToCandidateQualifications(candidateQualification)
-
         }
 
         if(user != null){
@@ -91,7 +85,6 @@ class CandidateController {
         }
         candidate.addInsertEvent()
 
-        def availableMainTrades = Qualification.findAllByCanBeMainTrade(true)
         flash.message = message(code: 'default.created.message', args: [message(code: 'candidate.label', default: 'Candidate'), candidate.firstName + " " + candidate.lastName])
         redirect(action: "edit", id: candidate.id )
 
@@ -129,18 +122,14 @@ class CandidateController {
             return
         }
 
-        candidate.address.properties = params["address"]
+        candidate.address.properties = params.address
+
         if(params["postCode.code"] && !params["postCode.code"].equals(candidate.address.postCode.code)){
             candidate.address.postCode = PostCode.findByCode(params["postCode.code"])
         }
 
-        if (params["candidate.birthDate"]) {
-            params["candidate.birthDate"] = new Date(params["candidate.birthDate"])
-            candidate.birthDate = params["candidate.birthDate"]
-        }
-
-        candidate.payroll.properties = params["payroll"]
-        candidate.properties = params["candidate"]
+        candidate.payroll.properties = params.payroll
+        candidate.properties = params.candidate
 
         if(candidate.checkVersion(Long.parseLong(params.version))){
             if (!candidate.save(deepvalidate:true, flush: true)) {
