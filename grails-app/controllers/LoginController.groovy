@@ -98,6 +98,8 @@ class LoginController {
             } else if (exception instanceof LockedException) {
                 msg = g.message(code: "springSecurity.errors.login.locked")
             } else {
+                log.error exception.toString()
+                log.error "exception CLASS: " + exception.class.toString()
                 msg = g.message(code: "springSecurity.errors.login.fail")
             }
         }
