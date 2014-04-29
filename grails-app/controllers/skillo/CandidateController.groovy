@@ -52,7 +52,8 @@ class CandidateController {
         def address = new Address(params.address)
         def postCode = PostCode.get(params.postCode.id)
         def mainTrade = Qualification.get(params.candidateMainTrade.id)
-        def user = User.get(springSecurityService.principal.id)
+
+        def user = springSecurityService.getCurrentUser()
 
         address.postCode = postCode
         candidate.address = address
