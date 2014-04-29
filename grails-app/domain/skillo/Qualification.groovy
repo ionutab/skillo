@@ -15,4 +15,11 @@ class Qualification {
         name nullable: false, unique:true, blank: false
         description nullable:true, blank: false
     }
+
+    def boolean checkVersion(Long version){
+        if(this.version > version){
+            return false
+        }
+        return true
+    }
 }
