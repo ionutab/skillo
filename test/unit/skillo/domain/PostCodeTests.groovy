@@ -1,7 +1,5 @@
 package skillo.domain
 
-
-
 import grails.test.mixin.*
 import org.junit.*
 import skillo.PostCode
@@ -15,4 +13,5 @@ class PostCodeTests {
     void testSomething() {
        fail "Implement me"
     }
+
 }
