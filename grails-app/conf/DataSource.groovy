@@ -35,24 +35,16 @@ environments {
             password = ""
         }
     }
-    cloudbees {
+    test {
         dataSource {
             dbCreate = "update" // one of 'create', 'create-drop', 'update', 'validate', ''
             driverClassName = "com.mysql.jdbc.Driver"
-            url = "jdbc:mysql://ec2-50-19-213-178.compute-1.amazonaws.com/skillo?useUnicode=yes&characterEncoding=UTF-8"
-            // url = "jdbc:mysql://localhost/skillo?useUnicode=yes&characterEncoding=UTF-8"
-            username = "skillo"
-            password = "skillo"
-            // username = "root"
-            // password = "" 
+            url = "jdbc:mysql://us-cdbr-cb-east-01.cleardb.net:3306/cb_skillo?useUnicode=yes&characterEncoding=UTF-8"
+            username = "bb6881f1750d59"
+            password = "8208b455"
         }
     }
-    test {
-        dataSource {
-            dbCreate = "update"
-            url = "jdbc:h2:mem:testDb;MVCC=TRUE;LOCK_TIMEOUT=10000"
-        }
-    }
+
     production {
         dataSource {
             dbCreate = "update"
