@@ -26,7 +26,7 @@ INSERT INTO post_code (version, code, latitude, longitude, easting, northing, gr
     ward,
     district_code,
     ward_code,
-    country,w
+    country,
     country_code
   FROM post_code_temp;
 
