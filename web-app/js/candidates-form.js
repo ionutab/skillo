@@ -31,11 +31,6 @@ var candidateFormFunctions = {
 
 $(document).ready(function() {
 
-    /*
-     candidateFormFunctions.initDatePicker("#candidateBirthDate");
-     candidateFormFunctions.initDatePicker("#newCandidateQualificationExpiryDate");
-     */
-
     candidateFormFunctions.initDatePickerOnAll("datepicker");
     candidateFormFunctions.initSwitchOnAll("checkbox");
 
