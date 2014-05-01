@@ -29,7 +29,7 @@ class Candidate implements SkilloDomainModelWithHistory {
         lastName blank: false
         nationality nullable: true, blank: false
 
-        telephoneNumber blank: false, minSize: 8
+        telephoneNumber blank: false, minSize: 10
         otherTelephoneNumber nullable: true
 
         candidateNotes nullable: true
@@ -41,6 +41,8 @@ class Candidate implements SkilloDomainModelWithHistory {
         jobs nullable: true
         placements nullable: true
         payroll nullable: true
+
+        email email: true
 
     }
 
