@@ -25,7 +25,6 @@ class InitService {
         if(PostCode.count() == 0 || Qualification.count() == 0){
 
             String sqlString = grailsApplication.mainContext.getResource('classpath:/resources/sql/queries.sql').inputStream.text
-//            String sqlString = grailsApplication.mainContext.getResource('classpath:/resources/sql/test.sql').inputStream.text
             Sql sql = new Sql(dataSource)
             List<String> lines = sqlString.readLines()
 
