@@ -7,7 +7,7 @@ class BootStrap {
 
     def springSecurityService
 
-    def initService
+//    def initService
 
     def init = { servletContext ->
 
