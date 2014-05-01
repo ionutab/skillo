@@ -47,7 +47,7 @@
         <g:message code="candidate.address.label" default="Address" />
     </label>
     <div class="col-sm-6">
-        <g:textField name="address.details" id="address.details" class="form-control" value="${candidateInstance?.address?.details}" />
+        <g:textArea name="address.details" id="address.details" class="form-control" value="${candidateInstance?.address?.details}" />
     </div>
 </div>
 
@@ -55,7 +55,7 @@
     <label for="postCode.id" class="col-sm-4 control-label">
         <g:message code="postCode.code.label" default="Post Code" />
     </label>
-    <div class="col-sm-6">
+    <div class="col-sm-3">
         <g:hiddenField
                 name="postCode.id"
                 id="postCodeId"
