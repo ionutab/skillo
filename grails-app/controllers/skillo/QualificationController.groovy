@@ -17,88 +17,91 @@ class QualificationController {
     }
 
     def show() {
-        def qualification = Qualification.get(params.id)
-        if (!qualification) {
+        def qualificationInstance = Qualification.get(params.id)
+        if (!qualificationInstance) {
             flash.message = message(code: 'default.not.found.message', args: [message(code: 'qualification.label', default: 'Qualification'), params.id])
             redirect(action: "list")
             return
         }
 
-        [qualificationInstance: qualification]
+        [qualificationInstance: qualificationInstance]
     }
 
     def edit() {
 
 
-        def qualification = Qualification.get(params.id)
+        def qualificationInstance = Qualification.get(params.id)
 
-        if (!qualification) {
+        if (!qualificationInstance) {
             flash.message = message(code: 'default.not.found.message', args: [message(code: 'qualification.label', default: 'Qualification'), params.id])
             redirect(action: "list")
             return
         }
 
-        log.info("Qualification { ${qualification.name} } edited")
+        log.info("Qualification { ${qualificationInstance.name} } edited")
 
-        [qualificationInstance: qualification]
+        [qualificationInstance: qualificationInstance]
     }
 
     def create() {
-        def qualification = new Qualification(params)
+        def qualificationInstance = new Qualification(params)
 
-        [qualificationInstance: qualification]
+        [qualificationInstance: qualificationInstance]
     }
 
     def save() {
 
-        def qualification = new Qualification(params.qualification)
+        def qualificationInstance = new Qualification(params.qualification)
 
-        if (!qualification.save(deepvalidate: true, flush: true)) {
-            if (qualification.hasErrors()) {
-                qualification.errors.each {
-                    log.info("Failed to save qualification { ${qualification.name} }")
+        if (!qualificationInstance.save(deepvalidate: true, flush: true)) {
+            if (qualificationInstance.hasErrors()) {
+                qualificationInstance.errors.each {
+                    log.info("Failed to save qualification { ${qualificationInstance.name} }")
                 }
 
             }
-            render(view: "create", model: [qualificationInstance: qualification])
+            render(view: "create", model: [qualificationInstance: qualificationInstance])
         } else {
 
-            flash.message = message(code: 'default.created.message', args: [message(code: 'qualification.label', default: 'Qualification'), qualification.name])
+            flash.message = message(code: 'default.created.message', args: [message(code: 'qualification.label', default: 'Qualification'), qualificationInstance.name])
             redirect(action: "list")
         }
     }
 
     def update() {
-        def qualification = new Qualification(params.qualification)
 
+        def qualificationInstance =  Qualification.get(params.id)
 
-        if (params.version) {
-            def version = params.version.toLong()
-            if (qualification.version > version) {
-                log.info("Failed to update qualification { ${qualification.name} }")
-                render(view: "edit", model: [qualificationInstance: qualification])
-            } else {
-                qualification.properties = params
-                if (!qualification.hasErrors() && qualification.save(flush: true)) {
+        print("Params ----------> "+params)
 
-                    flash.message = message(code: 'default.updated.message', args: [message(code: 'qualification.label', default: 'Qualification'), qualification.name])
-                    redirect(action: "list")
-                }
-            }
+        bindData(qualificationInstance, params, [include: ['code', 'name', 'description','canBeMainTrade']])
+
+        print("hhhhh -------------> "+qualificationInstance.code)
+        print("hhhhh -------------> "+qualificationInstance.name)
+        print("hhhhh -------------> "+qualificationInstance.description)
+        print("hhhhh -------------> "+qualificationInstance.canBeMainTrade)
+
+        if(qualificationInstance.save()){
+            log.info("Qualification { ${qualificationInstance.name} } updated")
+            redirect action: "show", id:qualificationInstance.id
+        }else{
+
+            render view: "edit", model: [qualification:qualificationInstance]
         }
 
 
     }
 
     def delete(){
-        def qualification = new Qualification(params.qualification)
+
+        def qualificationInstance = new Qualification(params.qualification)
 
         try {
-            qualification.delete(flush: true)
-            flash.message = "${message(code: 'default.deleted.message', args: [message(code: 'qualification.label', default: 'Qualification'), qualification.name])}"
+            qualificationInstance.delete(flush: true)
+            flash.message = "${message(code: 'default.deleted.message', args: [message(code: 'qualification.label', default: 'Qualification'), qualificationInstance.name])}"
             redirect(action: "list")
         }catch (org.springframework.dao.DataIntegrityViolationException e) {
-            flash.message = "${message(code: 'default.not.deleted.message',  args: [message(code: 'qualification.label', default: 'Qualification'), qualification.name])}"
+            flash.message = "${message(code: 'default.not.deleted.message',  args: [message(code: 'qualification.label', default: 'Qualification'), qualificationInstance.name])}"
             redirect(action: "show", id: params.id)
         }
     }
