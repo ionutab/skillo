@@ -7,6 +7,8 @@ class BootStrap {
 
     def springSecurityService
 
+    def initService
+
     def init = { servletContext ->
 
         if (!User.count()) {
@@ -25,10 +27,7 @@ class BootStrap {
             UserRole.create userMihai, role, true
             UserRole.create userAlexandru, role, true
 
-
-            assert User.count() == 3
-            assert Role.count() == 1
-            assert UserRole.count() == 3
+            initService.serviceMethod()
 
         }
 
