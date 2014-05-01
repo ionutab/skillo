@@ -15,7 +15,7 @@
 
 <g:form action="save" role="form" class="form-horizontal">
     <div class="row">
-        <div class="content-container col-lg-4">
+        <div class="content-container col-lg-6">
             <g:render template="form"/>
         </div>
     </div>
