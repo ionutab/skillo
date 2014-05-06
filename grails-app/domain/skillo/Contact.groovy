@@ -8,6 +8,8 @@ class Contact {
     String telephoneNumber
     String email
 
+    static belongsTo = [Client]
+
     static hasMany = [clientComments:ClientComment]
     
     static constraints = {
