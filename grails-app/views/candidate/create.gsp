@@ -13,16 +13,16 @@
 
 <body>
 
-<g:form action="save" role="form" class="form-horizontal">
+<g:form action="save" role="form" class="form-horizontal" method="POST">
     <div class="row">
-        <div class="content-container col-lg-6">
+        <div class="content-container col-lg-4">
             <g:render template="form"/>
         </div>
     </div>
     <div class="row">
         <div class="content-container col-lg-4">
             <div class="form-group">
-                <div class="col-sm-offset-3 col-sm-3">
+                <div class="col-sm-offset-4 col-sm-3">
                     <g:submitButton name="create" class="btn btn-primary" value="${message(code: 'default.button.save.label', default: 'Save')}" />
                 </div>
             </div>
