@@ -6,7 +6,7 @@ class Address {
     Boolean active = Boolean.TRUE
     PostCode postCode
 
-    static belongsTo = [Candidate,WorkSite]
+    static belongsTo = [Candidate,WorkSite,Client]
 
     static constraints = {
         details blank: false
