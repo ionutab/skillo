@@ -1,20 +1,8 @@
 package skillo
 
-import skillo.Address
-import skillo.Candidate
-import skillo.CandidateQualification
-import skillo.Consultant
-import skillo.Payroll
-import skillo.PostCode
-import skillo.Qualification
-import skillo.User
-
-import java.text.DateFormat
-
-class CandidateController {
+class CandidateController extends BaseController{
 
     def scaffold = false
-    def springSecurityService
 
     def index() {
         redirect(action: "list")
@@ -47,13 +35,12 @@ class CandidateController {
 	}
 
     def save() {
+        log.info("CandidateController.save")
 
         def candidate = new Candidate(params.candidate)
         def address = new Address(params.address)
         def postCode = PostCode.get(params.postCode.id)
         def mainTrade = Qualification.get(params.candidateMainTrade.id)
-
-        def user = springSecurityService.getCurrentUser()
 
         address.postCode = postCode
         candidate.address = address
@@ -67,12 +54,8 @@ class CandidateController {
             candidate.addToCandidateQualifications(candidateQualification)
         }
 
-        if(user != null){
-            def consultant = Consultant.findByUser(user)
-            candidate.consultant = consultant
-        }
+        candidate.consultant = getCurrentConsultant()
 
-        candidate.clearErrors()
         if(!candidate.save(deepvalidate:true, flush: true)){
             if(candidate.hasErrors()){
                 candidate.errors.each {
@@ -84,15 +67,13 @@ class CandidateController {
             render(view: "create", model: [candidateInstance: candidate, AvailableMainTrades: availableMainTrades as grails.converters.JSON ])
             return
         }
-        candidate.addInsertEvent()
-
+//        candidate.addInsertEvent()
         flash.message = message(code: 'default.created.message', args: [message(code: 'candidate.label', default: 'Candidate'), candidate.firstName + " " + candidate.lastName])
         redirect(action: "edit", id: candidate.id )
 
     }
 
     def edit() {
-
         log.info("Candidate Controller - edit ffs")
 
         def candidate = Candidate.get(params.id)
@@ -115,7 +96,6 @@ class CandidateController {
     def update(){
 
         def candidate = Candidate.get(params.id)
-        def user = User.get(springSecurityService.principal.id)
 
         if(!candidate){
             flash.message = message(code: 'default.not.found.message', args: [message(code: 'candidate.label', default: 'Candidate'), params.id])
@@ -125,8 +105,8 @@ class CandidateController {
 
         candidate.address.properties = params.address
 
-        if(params["postCode.code"] && !params["postCode.code"].equals(candidate.address.postCode.code)){
-            candidate.address.postCode = PostCode.findByCode(params["postCode.code"])
+        if(params.postCode?.id && !params.postCode?.id.equals(candidate.address.postCode.id)){
+            candidate.address.postCode = PostCode.get(params.postCode.id)
         }
 
         candidate.payroll.properties = params.payroll
@@ -134,6 +114,7 @@ class CandidateController {
 
         if(candidate.checkVersion(Long.parseLong(params.version))){
             if (!candidate.save(deepvalidate:true, flush: true)) {
+
                 if(candidate.hasErrors()){
                     candidate.errors.each {
                         println "fielderrors: " + it
@@ -143,16 +124,7 @@ class CandidateController {
                 render(view: "edit", model: [candidateInstance: candidate , AvailablePayrollCompanies: availablePayRollCompanies as grails.converters.JSON ])
                 return
             }
-        }
-
-        if(user != null){
-            def consultant = Consultant.findByUser(user)
-            candidate.consultant = consultant
-        }
-
-        if(user != null){
-            def consultant = Consultant.findByUser(user)
-            candidate.addUpdateEvent(consultant)
+//            candidate.addUpdateEvent(getCurrentConsultant())
         }
 
         flash.message = message(code: 'default.updated.message', args: [message(code: 'candidate.label', default: '${className}'), candidate.id])
@@ -169,5 +141,24 @@ class CandidateController {
 
 		[candidateInstance: candidate]
 	}
+
+    def delete(){
+        def candidate = Candidate.get(params.id)
+        if(!candidate) {
+            flash.message = message(code: 'default.not.found.message', args: [message(code: 'candidate.label', default: 'Candidate'), params.id])
+            redirect(action: "list")
+            return
+        }
+
+        candidate.active = false
+        if (!candidate.save(deepvalidate:true, flush: true)) {
+            flash.message = "${message(code: 'default.not.deleted.message', args: [message(code: 'candidate.label', default: 'Candidate'), params.id])}"
+            redirect(action: "list")
+        }
+
+        flash.message = "${message(code: 'default.deleted.message', args: [message(code: 'candidate.label', default: 'Candidate'), params.id])}"
+        redirect(action: "list")
+
+    }
 
 }
