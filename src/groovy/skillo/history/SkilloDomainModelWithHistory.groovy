@@ -13,7 +13,11 @@ public interface SkilloDomainModelWithHistory extends GroovyObject {
 
     def skilloHistoryContext = new SkilloHistoryContext()
 
-    public void addInsertEvent()
+    public void addInsertEvent( )
+
+    public void addInsertEvent(Consultant consultant)
+
+    public void addUpdateEvent( )
 
     public void addUpdateEvent(Consultant consultant)
 
