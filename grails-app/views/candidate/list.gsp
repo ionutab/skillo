@@ -28,7 +28,7 @@
                 <g:textField class="form-control" name="telephoneNumber" placeholder="${message(code: 'candidate.search.telephoneNumber.label', default: 'Telephone Nr')}" />
             </div>
             <div class="col-lg-2">
-                <g:textField class="form-control" name="candidateQualification"" placeholder="${message(code: 'candidate.search.candidateQualification.label', default: 'Trade')}" />
+                <g:textField class="form-control" name="candidateQualification" placeholder="${message(code: 'candidate.search.candidateQualification.label', default: 'Trade')}" />
             </div>
         </div>
         <div class="form-group">
@@ -49,13 +49,13 @@
         </div>
     </g:if>
 
-    <div class="content-container col-lg-12">
+    <g:if test="${CandidateList.size() > 0}">
+        <div class="content-container col-lg-12">
 
-        <g:if test="${CandidateList.size() > 0}">
-            <div class="table-responsive">
-                <table class="table table-striped">
-                    <thead>
-                    <tr>
+                <div class="table-responsive">
+                    <table class="table table-striped">
+                        <thead>
+                        <tr>
 
                         <g:sortableColumn property="firstName" title="${message(code: 'candidate.firstName.label', default: 'First ')}" />
                         <g:sortableColumn property="lastName" title="${message(code: 'candidate.lastName.label', default: 'Last Name')}" />
@@ -112,12 +112,11 @@
                     </tbody>
                 </table>
             </div>
-
-        </g:if>
-        <div class="pagination">
-            <g:paginate total="${CandidateTotal}" />
+            <div class="pagination">
+                <g:paginate total="${CandidateTotal}" />
+            </div>
         </div>
-    </div>
+    </g:if>
 </div>
 
 </body>
