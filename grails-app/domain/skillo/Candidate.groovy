@@ -43,7 +43,6 @@ class Candidate implements SkilloDomainModelWithHistory {
         payroll nullable: true
 
         email email: true
-
     }
 
     static mapping = {
@@ -58,13 +57,23 @@ class Candidate implements SkilloDomainModelWithHistory {
         return true
     }
 
-    void addInsertEvent() {
+    @Override
+    void addInsertEvent(Consultant consultant) {
         def insertEvent = new CandidateEvent()
         insertEvent.candidate = this
         insertEvent.consultant = this.getConsultant()
         skilloHistoryContext.insertHistory(insertEvent)
     }
 
+    @Override
+    void addInsertEvent() {
+    }
+
+    @Override
     void addUpdateEvent(Consultant eventConsultant) {
+    }
+
+    @Override
+    void addUpdateEvent() {
     }
 }
