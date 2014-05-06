@@ -4,7 +4,7 @@
     <label for="candidate.firstName" class="col-sm-4 control-label">
         <g:message code="candidate.firstName.label" default="First Name" />
     </label>
-    <div class="col-sm-6">
+    <div class="col-sm-8">
         <g:textField name="candidate.firstName" class="form-control" value="${candidateInstance?.firstName}" />
     </div>
     %{--
@@ -17,7 +17,7 @@
     <label for="candidate.lastName" class="col-sm-4 control-label">
         <g:message code="candidate.lastName.label" default="Last Name" />
     </label>
-    <div class="col-sm-6">
+    <div class="col-sm-8">
         <g:textField name="candidate.lastName" class="form-control" value="${candidateInstance?.lastName}" />
     </div>
 </div>
@@ -46,16 +46,19 @@
     <label for="address.details" class="col-sm-4 control-label">
         <g:message code="candidate.address.label" default="Address" />
     </label>
-    <div class="col-sm-6">
+    <div class="col-sm-8">
         <g:textArea name="address.details" id="address.details" class="form-control" value="${candidateInstance?.address?.details}" />
     </div>
 </div>
 
+%{--<g:render contextPath="/address" template="/postCodeAutocompleteInput" model="${['postCodeId':candidateInstance?.address?.postCode?.id]}" />--}%
+
 <div class="form-group ${hasErrors(bean: candidateInstance, field: 'address.postCode', 'has-error')} ">
     <label for="postCode.id" class="col-sm-4 control-label">
+        ${postCodeId}
         <g:message code="postCode.code.label" default="Post Code" />
     </label>
-    <div class="col-sm-3">
+    <div class="col-sm-8">
         <g:hiddenField
                 name="postCode.id"
                 id="postCodeId"
@@ -63,13 +66,13 @@
         />
         <g:hiddenField
                 name="postCode.previousCode"
-                id="postCodeCode"
-                value="${candidateInstance?.address?.postCode?.code}"
+                id="postCodePlaceholder"
+                value="${candidateInstance?.address?.postCode?.code} - ${candidateInstance?.address?.postCode?.country}"
         />
 
         <g:javascript>
                 function formatPostCodeSelection(item) {
-                    return item.code;
+                    return item.code + ' - ' + item.country;
                 };
 
                 function formatPostCodeResult(item) {
@@ -95,7 +98,7 @@
                     initSelection: function(element, callback) {
                         var id=$("#postCodeId").val();
                         if (id!=="") {
-                            $("#s2id_postCodeId .select2-chosen").html($("#postCodeCode").val());
+                            $("#s2id_postCodeId .select2-chosen").html($("#postCodePlaceholder").val());
                         }
                     },
                     formatSelection: formatPostCodeSelection,
@@ -107,11 +110,12 @@
     </div>
 </div>
 
+
 <div class="form-group ${hasErrors(bean: candidateInstance, field: 'email', 'has-error')} ">
     <label for="candidate.email" class="col-sm-4 control-label">
         <g:message code="candidate.email.label" default="Email" />
     </label>
-    <div class="col-sm-6">
+    <div class="col-sm-8">
         <g:field type="email" name="candidate.email" class="form-control" value="${candidateInstance?.email}" />
     </div>
 </div>
@@ -121,7 +125,7 @@
         <label for="mainTradeId" class="col-sm-4 control-label">
             <g:message code="candidate.mainTrade.label" default="Main Trade" />
         </label>
-        <div class="col-sm-6">
+        <div class="col-sm-8">
             <%--
             TODO:add most used qualifications list on the right so that the user can select the qualification if not typing it
             --%>
@@ -160,7 +164,7 @@
     <label for="candidate.driver" class="col-sm-4 control-label ">
         <g:message code="candidate.driver.label" default="Driver" />
     </label>
-    <div class="col-sm-6">
+    <div class="col-sm-8">
         <g:checkBox name="candidate.driver" class="checkbox" value="${candidateInstance?.driver}" id="candidateIsDriver" data-on-label="Yes" data-off-label="No" />
     </div>
 </div>
@@ -169,7 +173,7 @@
     <label for="candidate.sponsored" class="col-sm-4 control-label">
         <g:message code="candidate.sponsored.label" default="Sponsored" />
     </label>
-    <div class="col-sm-6">
+    <div class="col-sm-8">
         <g:checkBox name="candidate.sponsored" class="checkbox" value="${candidateInstance?.sponsored}" id="candidateIsSponsored" data-on-label="Yes" data-off-label="No"/>
     </div>
 </div>
@@ -178,7 +182,7 @@
     <label for="candidate.carOwner" class="col-sm-4 control-label">
        <g:message code="candidate.carOwner.label" default="Car Owner" />
     </label>
-    <div class="col-sm-6">
+    <div class="col-sm-8">
         <g:checkBox name="candidate.carOwner" class="checkbox" value="${candidateInstance?.carOwner}" id="candidateIsCarOwner" data-on-label="Yes" data-off-label="No"/>
     </div>
 </div>
@@ -188,7 +192,7 @@
     <label for="consultant.id" class="col-sm-4 control-label">
         <g:message code="candidate.owningConsultant.label" default="By Consultant" />
     </label>
-    <div class="col-sm-6">
+    <div class="col-sm-8">
         <g:textField name="consultant.id" class="form-control" value="${candidateInstance?.consultant?.firstName + ' ' + candidateInstance?.consultant?.lastName}" disabled="disabled" />
     </div>
 </div>
