@@ -96,7 +96,7 @@
                 <label for="payrollCompanyId" class="col-sm-4 control-label">
                     <g:message code="payroll.payrollCompany.label" default="Payroll Company" />
                 </label>
-                <div class="col-sm-6">
+                <div class="col-sm-8">
                     <g:hiddenField
                             name="payroll.payrollCompany.id"
                             id="payrollCompanyId"
@@ -122,7 +122,7 @@
                 <label for="payroll.referenceNumber" class="col-sm-4 control-label">
                     <g:message code="payroll.referenceNumber.label" default="Reference Nr." />
                 </label>
-                <div class="col-sm-6">
+                <div class="col-sm-8">
                     <g:textField id="payrollReferenceNumber" name="payroll.referenceNumber" class="form-control" value="${candidateInstance?.payroll?.referenceNumber}" />
                 </div>
             </div>
@@ -130,7 +130,7 @@
                 <label for="payroll.registrationNumber" class="col-sm-4 control-label">
                     <g:message code="payroll.registrationNumber.label" default="Registration Nr." />
                 </label>
-                <div class="col-sm-6">
+                <div class="col-sm-8">
                     <g:textField id="payrollRegistrationNumber" name="payroll.registrationNumber" class="form-control" value="${candidateInstance?.payroll?.registrationNumber}" />
                 </div>
             </div>
@@ -138,7 +138,7 @@
                 <label for="payroll.unqiueTaxReferenceNumber" class="col-sm-4 control-label">
                     <g:message code="payroll.unqiueTaxReferenceNumber.label" default="Unique Tax Reference Nr." />
                 </label>
-                <div class="col-sm-6">
+                <div class="col-sm-8">
                     <g:textField id="payrollUnqiueTaxReferenceNumber" name="payroll.unqiueTaxReferenceNumber" class="form-control" value="${candidateInstance?.payroll?.unqiueTaxReferenceNumber}" />
                     <span class="help-inline">
                         ${hasErrors(bean: candidateInstance.payroll, field: 'unqiueTaxReferenceNumber', 'error')}
@@ -149,7 +149,7 @@
                 <label for="payroll.nationalInsuranceNumber" class="col-sm-4 control-label">
                     <g:message code="payroll.nationalInsuranceNumber.label" default="National Insurance Nr." />
                 </label>
-                <div class="col-sm-6">
+                <div class="col-sm-8">
                     <g:textField id="payrollNationalInsuranceNumber" name="payroll.nationalInsuranceNumber" class="form-control" value="${candidateInstance?.payroll?.nationalInsuranceNumber}" />
                 </div>
             </div>
@@ -157,7 +157,7 @@
                 <label for="payroll.registered" class="col-sm-4 control-label">
                     <g:message code="payroll.registered.label" default="Registered" />
                 </label>
-                <div class="col-sm-6">
+                <div class="col-sm-8">
                     <g:checkBox class="checkbox" name="payroll.registered" id="candidatePayrollRegistered" value="${candidateInstance?.payroll?.registered}" data-on-label="Yes" data-off-label="No" />
                 </div>
             </div>
@@ -165,7 +165,7 @@
                 <label for="payroll.inducted" class="col-sm-4 control-label">
                     <g:message code="payroll.inducted.label" default="Inducted" />
                 </label>
-                <div class="col-sm-6">
+                <div class="col-sm-8">
                     <g:checkBox class="checkbox" name="payroll.inducted" id="candidatePayrollInducted" value="${candidateInstance?.payroll?.inducted}"  data-on-label="Yes" data-off-label="No" />
                 </div>
             </div>
@@ -175,17 +175,18 @@
 
     <div class="row">
         <div class="content-container col-lg-4">
+            <div class="form-group">
+                <div class="col-sm-offset-4 col-lg-8">
 
-            <g:actionSubmit class="btn btn-primary" action="update" value="${message(code: 'default.button.update.label', default: 'Update')}" />
-            <g:actionSubmit class="btn btn-danger"  action="delete" value="${message(code: 'default.button.delete.label', default: 'Delete')}" onclick="return confirm('${message(code: 'default.button.delete.confirm.message', default: 'Are you sure?')}');" />
-            <button class="btn" type="reset"><g:message code="default.button.reset.label" default="Reset" /></button>
+                    <g:actionSubmit class="btn btn-primary" action="update" value="${message(code: 'default.button.update.label', default: 'Update')}" />
+                    <g:actionSubmit class="btn btn-danger"  action="delete" value="${message(code: 'default.button.delete.label', default: 'Delete')}" onclick="return confirm('${message(code: 'default.button.delete.confirm.message', default: 'Are you sure?')}');" />
+                    <button class="btn" type="reset"><g:message code="default.button.reset.label" default="Reset" /></button>
+
+                </div>
+            </div>
         </div>
     </div>
 </g:form>
-
-
-
-
 
 <div class="modal fade" id="newCandidateQualificationModal" role="dialog" aria-hidden="true" tabindex="-1">
     <div class="modal-dialog" >
