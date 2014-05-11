@@ -1,9 +1,9 @@
 <div class="content-container col-lg-12">
 
-    <g:if test="${searchResults.size() == 0}">
+    <g:if test="${QualificationList.size() == 0}">
 
-        <div class="col-lg-6 col-lg-offset-3 page-background-info" >
-            <h2><g:message code="candidateQualification.search.notFound.label" /></h2>
+        <div class="col-lg-6 col-lg-offset-3 page-background-info">
+            <h2><g:message code="qualification.search.notFound.label"/></h2>
         </div>
 
     </g:if>
@@ -21,10 +21,11 @@
                     <th><g:message code="qualification.description.label" default="Description"/></th>
                     <th><g:message code="qualification.mainTrade.label" default="Main Trade"/></th>
                     <th><g:message code="default.actions.label" default="Actions"/></th>
+
                 </tr>
                 </thead>
                 <tbody>
-                <g:each in="${searchResults?}" status="i" var="Qualification">
+                <g:each in="${QualificationList}" status="i" var="Qualification">
                     <tr>
                         <td>
                             ${Qualification.code}
@@ -49,8 +50,9 @@
                 </tbody>
             </table>
         </div>
-    <div class="pagination">
-        <g:paginate total="${searchCount}"/>
-    </div>
+
+        <div class="pagination">
+            <g:paginate total="${QualificationTotal}"/>
+        </div>
     </g:else>
 </div>

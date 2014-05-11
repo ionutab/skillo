@@ -42,10 +42,10 @@
 <div class="row">
     <div class="content-container col-lg-12">
         <g:if test="${QualificationList}">
-            <g:render template="list"/>
+            <g:render template="template/list"/>
         </g:if>
         <g:else>
-            <g:render template="qualificationList"/>
+            <g:render template="template/qualificationList"/>
         </g:else>
     </div>
 </div>

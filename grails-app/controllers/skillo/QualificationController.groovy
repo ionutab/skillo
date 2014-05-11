@@ -131,7 +131,7 @@ class QualificationController {
 
     def search() {
 
-        def qualificationResults
+        def qualificationResults = []
         if(params.name) {
             qualificationResults = trySearch { Qualification.findAllByNameIlike(wrapSearchParm(params.name)) }
         }
@@ -143,8 +143,8 @@ class QualificationController {
         try {
             return callable()
         } catch (Exception e) {
-            log.debug "Search Error: ${e.message}", e
-            return []
+            flash.message = "${message(code: 'qualification.search.noItems.label', args: [message(code: 'qualification.label', default: 'Qualification'), params.name])}"
+            redirect(action: "list")
         }
     }
 
