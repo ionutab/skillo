@@ -1,8 +1,10 @@
 package skillo
 
+
 class QualificationController {
 
     def scaffold = true
+    def searchableService
 
     def index() {
         redirect(action: "list")
@@ -46,8 +48,6 @@ class QualificationController {
 
     def create() {
 
-
-
         def qualificationInstance = new Qualification(params)
 
         [qualificationInstance: qualificationInstance]
@@ -56,7 +56,6 @@ class QualificationController {
     def save() {
 
         def qualificationInstance =  new Qualification(params.qualification)
-
 
         if (qualificationInstance.save( flush: true)) {
 
@@ -121,6 +120,31 @@ class QualificationController {
         else {
             flash.message = "${message(code: 'default.not.found.message', args: [message(code: 'qualification.label', default: 'Qualification'), params.id])}"
             redirect(action: "list")
+        }
+    }
+
+
+    def String wrapSearchParm(value) {
+        '%'+value+'%'
+    }
+
+
+    def search() {
+
+        def qualificationResults
+        if(params.name) {
+            qualificationResults = trySearch { Qualification.findAllByNameIlike(wrapSearchParm(params.name)) }
+        }
+
+        render(view: "list", model: [searchResults: qualificationResults, searchCount: qualificationResults.size()])
+    }
+
+    private trySearch(Closure callable) {
+        try {
+            return callable()
+        } catch (Exception e) {
+            log.debug "Search Error: ${e.message}", e
+            return []
         }
     }
 

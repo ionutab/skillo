@@ -2,6 +2,8 @@ package skillo
 
 class Qualification {
 
+    static searchable = [only: ['name']]
+
     String code
     String name
     String description
@@ -22,4 +24,5 @@ class Qualification {
         }
         return true
     }
+
 }

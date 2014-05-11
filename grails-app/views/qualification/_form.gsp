@@ -21,7 +21,7 @@
         <g:message code="qualification.description.label" default="Description" />
     </label>
     <div class="col-sm-6">
-        <g:textField name="qualification.description" class="form-control" value="${qualificationInstance?.description}" />
+        <g:textArea name="qualification.description" class="form-control" value="${qualificationInstance?.description}" />
     </div>
 </div>
 <div class="form-group  ${hasErrors(bean: qualificationInstance, field: 'canBeMainTrade', 'has-error')} ">
@@ -29,6 +29,11 @@
         <g:message code="qualification.mainTrade.label" default="Main Trade" />
     </label>
     <div class="col-sm-6">
-        <g:textField name="qualification.canBeMainTrade" class="form-control" value="${qualificationInstance?.canBeMainTrade}" />
+        <g:radioGroup name="qualification.canBeMainTrade"
+                      labels="['True','False']"
+                      values="['true', 'false']"
+                      value="${qualificationInstance?.canBeMainTrade}">
+            ${it.label} ${it.radio}
+        </g:radioGroup>
     </div>
 </div>

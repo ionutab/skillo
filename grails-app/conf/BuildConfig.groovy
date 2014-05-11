@@ -41,6 +41,8 @@ grails.project.dependency.resolution = {
         mavenLocal()
         mavenCentral()
 
+        mavenRepo "http://repo.grails.org/grails/core"
+
         // uncomment these (or add new ones) to enable remote dependency resolution from public Maven repositories
         //mavenRepo "http://snapshots.repository.codehaus.org"
         //mavenRepo "http://repository.codehaus.org"
@@ -80,5 +82,6 @@ grails.project.dependency.resolution = {
         compile ":jquery-validation-ui:1.4.9"
 //        compile ":spring-security-core:2.0-RC2"
 
+        compile ":searchable:0.6.6"
     }
 }
