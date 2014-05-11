@@ -1,5 +1,14 @@
 <div class="content-container col-lg-12">
 
+    <g:if test="${searchResults.size() == 0}">
+
+        <div class="col-lg-6 col-lg-offset-3 page-background-info" >
+            <h2><g:message code="candidateQualification.search.notFound.label" /></h2>
+        </div>
+
+    </g:if>
+    <g:else>
+
         <div class="table-responsive">
             <table class="table table-striped">
                 <thead>
@@ -43,4 +52,5 @@
     <div class="pagination">
         <g:paginate total="${searchCount}"/>
     </div>
-    </div>
+    </g:else>
+</div>
