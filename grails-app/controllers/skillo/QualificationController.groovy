@@ -4,7 +4,6 @@ package skillo
 class QualificationController {
 
     def scaffold = true
-    def searchableService
 
     def index() {
         redirect(action: "list")
@@ -20,12 +19,10 @@ class QualificationController {
 
     def show() {
 
-
-        def qualificationInstance = new Qualification(params)
+        def qualificationInstance = Qualification.get(params.id)
         if (!qualificationInstance) {
             flash.message = message(code: 'default.not.found.message', args: [message(code: 'qualification.label', default: 'Qualification'), params.id])
             redirect(action: "list")
-            return
         }
 
         [qualificationInstance: qualificationInstance]
@@ -38,12 +35,9 @@ class QualificationController {
         if (!qualificationInstance) {
             flash.message = message(code: 'default.not.found.message', args: [message(code: 'qualification.label', default: 'Qualification'), params.id])
             redirect(action: "list")
-            return
         }
 
-        log.info("Qualification { ${qualificationInstance.name} } edited")
-
-        [qualificationInstance: qualificationInstance]
+        [qualificationInstance: qualificationInstance,id: qualificationInstance.id]
     }
 
     def create() {
@@ -55,12 +49,12 @@ class QualificationController {
 
     def save() {
 
-        def qualificationInstance =  new Qualification(params.qualification)
+        def qualificationInstance = new Qualification(params)
 
         if (qualificationInstance.save( flush: true)) {
 
             flash.message = "${message(code: 'default.created.message', args: [message(code: 'qualification.label', default: 'Qualification'), qualificationInstance.name])}"
-            redirect(action: "show", params: params.qualification)
+            redirect(action: "show", id: qualificationInstance.id)
 
         } else {
 
@@ -71,8 +65,6 @@ class QualificationController {
     }
 
     def update() {
-
-
 
         def qualificationInstance =  Qualification.get(params.id)
 
@@ -88,10 +80,14 @@ class QualificationController {
                 }
             }
 
-            qualificationInstance.properties = params.qualification
+            qualificationInstance.properties = params
+            print(qualificationInstance.code)
+            print(qualificationInstance.name)
+            print(qualificationInstance.description)
+            print(qualificationInstance.canBeMainTrade)
             if(!qualificationInstance.hasErrors() && qualificationInstance.save(flush: true)){
-                flash.message = "${message(code: 'default.updated.message', args: [message(code: 'qualification.label', default: 'Qualification'), qualificationInstance.id])}"
-                redirect(action: "show", params:params.qualification)
+                flash.message = "${message(code: 'default.updated.message', args: [message(code: 'qualification.label', default: 'Qualification'), qualificationInstance.name])}"
+                redirect(action: "show", id: qualificationInstance.id,qualificationInstance: qualificationInstance)
             }else{
                 render(view: "edit", model: [qualificationInstance: qualificationInstance])
             }
@@ -109,7 +105,7 @@ class QualificationController {
         if (qualificationInstance) {
             try {
                 qualificationInstance.delete(flush: true)
-                flash.message = "${message(code: 'default.deleted.message', args: [message(code: 'qualification.label', default: 'Qualification'), params.id])}"
+                flash.message = "${message(code: 'default.deleted.message', args: [message(code: 'qualification.label', default: 'Qualification'), params.name])}"
                 redirect(action: "list")
             }
             catch (org.springframework.dao.DataIntegrityViolationException e) {
