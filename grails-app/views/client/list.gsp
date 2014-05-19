@@ -13,7 +13,7 @@
 
 <div class="row">
     <div class="content-container col-lg-12">
-    <g:form action="list" controller="client" name="searchForm" role="form">
+    <g:form action="list" controller="client" name="searchForm" role="form" method="GET">
         <legend><g:message code="client.search.label" /></legend>
 
         <div class="form-group row">
@@ -21,7 +21,8 @@
 
                 <g:textField class="form-control" name="search.name"
                              placeholder="${message(code: 'client.search.name.label', default: 'Name')}"
-                             value="${params.search?.name}" />
+                             value="${params.search?.name}"
+                             />
             </div>
             <div class="col-lg-2">
 
@@ -70,7 +71,8 @@
                         <tr>
                             <g:sortableColumn property="name" title="${message(code: 'client.name.label', default: 'Name')}" />
                             <g:sortableColumn property="registrationNumber" title="${message(code: 'client.registrationNumber.label', default: 'Registration Number')}" />
-                            <g:sortableColumn property="address.postCode.code" title="${message(code: 'address.postCode.label', default: 'Location')}" />
+                            <g:sortableColumn property="address.details" title="${message(code: 'address.details.label', default: 'Address')}" />
+                            <g:sortableColumn property="address.postCode.code" title="${message(code: 'postCode.label', default: 'Post Code')}" />
                             <th><g:message code="default.actions.label" default="Actions" /></th>
                         </tr>
                     </thead>
@@ -84,6 +86,9 @@
                                     ${Client?.registrationNumber}
                                 </td>
                                 <td>
+                                    ${Client?.address?.details}
+                                </td>
+                                <td>
                                     ${Client?.address?.postCode?.code}
                                 </td>
                                 <td>
@@ -94,8 +99,12 @@
                     </tbody>
                 </table>
             </div>
-            <div class="pagination">
-                <g:paginate total="${ClientTotal}" />
+            <div class="container">
+                <div class="center-block text-center">
+                    <div class="pagination">
+                        <g:paginate total="${ClientTotal}"/>
+                    </div>
+                </div>
             </div>
         </div>
     </g:if>
