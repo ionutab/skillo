@@ -16,7 +16,7 @@
     <form role="form" id="login-form" action='${postUrl}' method='POST' autocomplete='off' >
 
         <div class="form-group fieldcontain ">
-            <g:textField class="form-control" name="j_username" id="username" placeholder="${message(code: "springSecurity.login.username.label" )}" />
+            <g:textField class="form-control" name="j_username" id="username" placeholder="${message(code: "springSecurity.login.username.label" )}" autofocus="true" />
         </div>
 
         <div class="form-group fieldcontain ">
