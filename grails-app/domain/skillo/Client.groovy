@@ -4,10 +4,14 @@ import skillo.history.SkilloDomainModelWithHistory
 
 class Client implements SkilloDomainModelWithHistory {
 
+    static searchable = true
+
     String name
     String registrationNumber
     Address address
     Boolean active = Boolean.TRUE
+
+    String telephoneNumber
 
     static hasMany = [contacts: Contact, workSite: WorkSite, placement:Placement, clientHistory:ClientEvent]
 
