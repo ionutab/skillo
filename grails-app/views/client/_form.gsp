@@ -17,6 +17,14 @@
     </div>
 </div>
 <div class="form-group">
+    <label for="client.telephoneNumber" class="col-sm-4 control-label" >
+        <g:message code="client.telephoneNumber.label" default="Name" />
+    </label>
+    <div class="col-sm-3">
+        <g:textField name="client.telephoneNumber" class="form-control" value="${clientInstance?.telephoneNumber}" />
+    </div>
+</div>
+<div class="form-group">
     <label for="address.details" class="col-sm-4 control-label">
         <g:message code="client.address.label" default="Address" />
     </label>
