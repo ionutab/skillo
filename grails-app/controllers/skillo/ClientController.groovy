@@ -9,7 +9,7 @@ class ClientController extends BaseController {
     }
 
     def list(){
-
+        log.info("ClientController.list")
         params.max = Math.min(params.max ? params.int('max') : 10, 100)
 
         def clientList = Client.createCriteria().list(params) {}
@@ -18,7 +18,8 @@ class ClientController extends BaseController {
     }
 
     def create(){
-        [clientInstance: new Client()]
+        log.info("ClientController.create")
+        [clientInstance: new Client() ]
     }
 
     def save(){
@@ -28,8 +29,14 @@ class ClientController extends BaseController {
         def address = new Address(params.address)
         def postCode = PostCode.get(params.postCode.id)
 
-        address.postCode = postCode
-        client.address = address
+        if(postCode && address.details){
+            address.postCode = postCode
+            client.address = address
+        } else if(postCode && !address.details){
+            flash.error = "${message(code: 'default.created.message', args: [message(code: 'client.label', default: 'Client'), client.name])}"
+            redirect(action: "create")
+            return
+        }
 
         if(clientService.save(client)){
             flash.message = "${message(code: 'default.created.message', args: [message(code: 'client.label', default: 'Client'), client.name])}"
@@ -62,10 +69,12 @@ class ClientController extends BaseController {
             return
         }
 
-        client.address.properties = params.address
+        if(client.address){
+            client.address.properties = params.address
+        }
 
-        if(params.postCode?.id && !params.postCode?.id.equals(client.address.postCode.id)){
-            client.address.postCode = PostCode.get(params.postCode.id)
+        if(params.postCode?.id && !params.postCode?.id.equals(client.address?.postCode?.id)){
+            client.address?.postCode = PostCode.get(params.postCode.id)
         }
 
         client.properties = params.client
@@ -102,7 +111,6 @@ class ClientController extends BaseController {
 
         flash.message = "${message(code: 'default.deleted.message', args: [message(code: 'client.label', default: 'Client'), params.id])}"
         redirect(action:"list")
-
     }
 
 }
