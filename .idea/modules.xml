@@ -4,6 +4,7 @@
     <modules>
       <module fileurl="file://$PROJECT_DIR$/skillo.iml" filepath="$PROJECT_DIR$/skillo.iml" />
       <module fileurl="file://$PROJECT_DIR$/skillo-grailsPlugins.iml" filepath="$PROJECT_DIR$/skillo-grailsPlugins.iml" />
+      <module fileurl="file://$PROJECT_DIR$/skillo-grailsPlugins.iml" filepath="$PROJECT_DIR$/skillo-grailsPlugins.iml" />
     </modules>
   </component>
 </project>
