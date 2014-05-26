@@ -1,6 +1,20 @@
 package skillo
 
+import grails.transaction.Transactional
+import org.grails.datastore.mapping.query.api.Criteria
+
+@Transactional
 class ClientService {
+
+    def Collection<Client> list(){
+        log.info("ClientService.search")
+        return Client.list()
+    }
+
+    def Collection<Client> search(Client input){
+        log.info("ClientService.search")
+        Criteria sc = Client.createCriteria()
+    }
 
     def boolean save(Client client){
 

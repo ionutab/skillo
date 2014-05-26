@@ -1,26 +1,23 @@
 package skillo
 
+import skillo.filters.CandidateListSearch
+
 class CandidateController extends BaseController{
 
-    def scaffold = false
+    def candidateService
 
     def index() {
         redirect(action: "list")
     }
 
 	def list() {
-		params.max = Math.min(params.max ? params.int('max') : 10, 100)
+        CandidateListSearch filter = new CandidateListSearch()
+        bindData(filter, params)
 
-		def candidateList = Candidate.createCriteria().list(params){
-			if(params.firstName){
-				ilike("firstName", "%{params.firstName}%")
-			}
-            if(params.lastName){
-                ilike("lastName", "%{params.lastName}%")
-            }
-		}
+        def candidateList = candidateService.search(filter)
 
-		[CandidateList: candidateList, CandidateTotal: Candidate.count()]
+        log.info("Rendering ${candidateList.size()} Candidates of ${candidateList.totalCount}")
+        render(view: "list_split", model: [CandidateListFilter:filter, CandidateList: candidateList, CandidateTotal: candidateList.totalCount])
 	}
 
 	def create() {

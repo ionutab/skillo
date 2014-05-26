@@ -12,9 +12,12 @@ class QualificationController {
     def list() {
         params.max = Math.min(params.max ? params.int('max') : 10, 100)
 
+        log.debug("PAGINATION: max " + params.max + " offset " + params.offset )
+
         def qualificationList = Qualification.createCriteria().list(params) {}
 
-        [QualificationList: qualificationList, QualificationTotal: Qualification.count()]
+        log.info("Rendering ${qualificationList.size()} Qualifications of ${qualificationList.totalCount}")
+        [QualificationList: qualificationList, QualificationTotal: qualificationList.totalCount]
     }
 
     def show() {

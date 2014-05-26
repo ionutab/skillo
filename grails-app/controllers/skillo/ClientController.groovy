@@ -13,6 +13,8 @@ class ClientController extends BaseController {
         params.max = Math.min(params.max ? params.int('max') : 10, 100)
 
         def clientList = Client.createCriteria().list(params) {}
+        def clientList2 = clientService.list()
+        log.info("CL2: " + clientList2.size())
 
         [ClientList:clientList, ClientTotal: Client.count()]
     }

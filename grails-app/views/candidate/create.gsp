@@ -22,8 +22,9 @@
     <div class="row">
         <div class="content-container col-lg-4">
             <div class="form-group">
-                <div class="col-sm-offset-4 col-sm-3">
-                    <g:submitButton name="create" class="btn btn-primary" value="${message(code: 'default.button.save.label', default: 'Save')}" />
+                <div class="col-sm-offset-4 col-sm-8">
+                    <g:submitButton name="create" class="btn btn-primary btn-sm" value="${message(code: 'default.button.save.label', default: 'Save')}" />
+                    <button class="btn btn-sm" type="reset" ><g:message code="default.button.reset.label" default="Reset" /></button>
                 </div>
             </div>
         </div>

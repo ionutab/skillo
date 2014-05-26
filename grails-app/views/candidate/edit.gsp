@@ -178,9 +178,9 @@
             <div class="form-group">
                 <div class="col-sm-offset-4 col-lg-8">
 
-                    <g:actionSubmit class="btn btn-primary" action="update" value="${message(code: 'default.button.update.label', default: 'Update')}" />
-                    <g:actionSubmit class="btn btn-danger"  action="delete" value="${message(code: 'default.button.delete.label', default: 'Delete')}" onclick="return confirm('${message(code: 'default.button.delete.confirm.message', default: 'Are you sure?')}');" />
-                    <button class="btn" type="reset"><g:message code="default.button.reset.label" default="Reset" /></button>
+                    <g:actionSubmit class="btn btn-primary btn-sm" action="update" value="${message(code: 'default.button.update.label', default: 'Update')}" />
+                    <g:actionSubmit class="btn btn-danger btn-sm"  action="delete" value="${message(code: 'default.button.delete.label', default: 'Delete')}" onclick="return confirm('${message(code: 'default.button.delete.confirm.message', default: 'Are you sure?')}');" />
+                    <button class="btn btn-sm" type="reset"><g:message code="default.button.reset.label" default="Reset" /></button>
 
                 </div>
             </div>
@@ -203,8 +203,8 @@
                     <g:render template="candidateQualificationsForm" bean="${newCandidateQualification}"/>
                 </div>
                 <div class="modal-footer">
-                    <g:submitButton class="btn btn-primary" name="${message(code: 'default.button.save.label', default: 'Save')}" update="newCandidateQualificationForm" />
-                    <button type="button" class="btn btn-default" data-dismiss="modal">Close</button>
+                    <g:submitButton class="btn btn-primary btn-sm" name="${message(code: 'default.button.save.label', default: 'Save')}" update="newCandidateQualificationForm" />
+                    <button type="button" class="btn btn-default btn-sm" data-dismiss="modal">Close</button>
                 </div>
             </div>
         </g:formRemote>
