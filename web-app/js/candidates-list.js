@@ -1,5 +1,12 @@
 $(document).ready(function() {
 
+    var candidateSearchFormFunctions = {
+        resetForm:function($form) {
+            $form.find('input:text, input:password, input:file, select, textarea').val('');
+            $form.find('inut:radio, input:checkbox').removeAttr('checked').removeAttr('selected');
+        }
+    }
+
     $("#add-candidates-tab-button").click(function() {
         alert('duplicating');
     });
