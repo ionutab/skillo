@@ -6,16 +6,31 @@ This menu is used to show function that can be triggered on the content (an obje
 <g:if test="${ params.controller != null && params.controller != '' &&	params.controller != 'home' }">
     <div class="row">
         <div class="col-lg-12">
-            <ul id="Menu" class="nav nav-pills nav-pills-n">
+            <ul id="Menu" class="nav nav-pills nav-pills-n small">
 
                 <g:set var="entityName" value="${message(code: params.controller+'.label', default: params.controller.substring(0,1).toUpperCase() + params.controller.substring(1).toLowerCase())}" />
 
                 <li class="${ params.action == 'list' ? 'active' : '' }">
-                    <g:link action="list"><span class="glyphicon glyphicon-th-list"></span> <g:message code="default.list.label" args="[entityName]"/></g:link>
+                    <g:link action="list" ><span class="glyphicon glyphicon-th-list"></span> <g:message code="default.list.label" args="[entityName]"/></g:link>
                 </li>
+
+                %{--<g:if test="${entityName.equals("Candidate") }">--}%
+                    %{--<g:if test="${params.action == "list"}">--}%
+                        %{--<li class="${ params.action == "search" ? 'active' : '' }">--}%
+                            %{--<g:link action="search" ><span class="glyphicon glyphicon-th-list"></span> <g:message code="default.search.label" args="[entityName]"/></g:link>--}%
+                        %{--</li>--}%
+                    %{--</g:if>--}%
+                    %{--<g:if test="${params.action == "search"}">--}%
+                        %{--<li class="${ params.action == "search" ? 'active' : '' }">--}%
+                            %{--<g:link action="search" ><span class="glyphicon glyphicon-th-list"></span> <g:message code="default.search.label" args="[entityName]"/></g:link>--}%
+                        %{--</li>--}%
+                    %{--</g:if>--}%
+                %{--</g:if>--}%
+
                 <li class="${ params.action == "create" ? 'active' : '' }">
                     <g:link action="create"><span class="glyphicon glyphicon-plus"></span> <g:message code="default.new.label"  args="[entityName]"/></g:link>
                 </li>
+
 
                 <g:if test="${ params.action == 'show' || params.action == 'edit' }">
                     <!-- the item is an object (not a list) -->
