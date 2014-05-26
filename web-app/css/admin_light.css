@@ -25,7 +25,7 @@ body {
 }
 
 .sidebar-wide{
-    width: 200px;
+    width: 150px;
 }
 
 .sidebar-narrow{
@@ -48,7 +48,7 @@ body {
 }
 
 .workspace-navbar-narrow {
-    left: 200px;
+    left: 150px;
 }
 
 .navbar {
@@ -95,7 +95,7 @@ body {
     top: 40px;
     right: 0;
     bottom: 0px;
-    padding: 15px;
+    padding: 10px;
 }
 
 .workspace-wide{
@@ -103,7 +103,7 @@ body {
 }
 
 .workspace-narrow{
-    left: 200px;
+    left: 150px;
 }
 
 #full-content-container {
@@ -113,7 +113,7 @@ body {
 }
 
 .content-container {
-    margin: 15px auto 0px;
+    margin: 0px auto 0px;
 }
 
 #login-form {
@@ -256,4 +256,13 @@ input.datepicker {
 .page-background-info {
     text-align: center;
     color: #dddddd;
+}
+
+.form-group{
+    margin-bottom: 5px;
+}
+
+.table > tbody > tr > td {
+    vertical-align: middle;
+    padding: 2px;
 }
