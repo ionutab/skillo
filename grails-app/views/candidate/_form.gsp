@@ -25,7 +25,7 @@
     <label for="candidate.birthDate" class="col-sm-4 control-label">
         <g:message code="candidate.birthDate.label" default="Birth Date" />
     </label>
-    <div class="col-sm-3">
+    <div class="col-sm-4">
         <g:field type="textField" name="candidate.birthDate" id="candidateBirthDate" class="form-control datepicker" value="${formatDate(date: candidateInstance?.birthDate)}" default="none" />
     </div>
 </div>
@@ -33,11 +33,11 @@
     <label for="candidate.telephoneNumber" class="col-sm-4 control-label">
         <g:message code="candidate.telephoneNumber.label" default="Telephone Number" />
     </label>
-    <div class="col-sm-3">
+    <div class="col-sm-4">
         <g:textField type="tel" name="candidate.telephoneNumber" class="form-control" value="${candidateInstance?.telephoneNumber}" />
     </div>
     %{--
-    <div class="col-sm-3">
+    <div class="col-sm-4">
         <g:textField name="candidate.otherTelephoneNumber" class="form-control" value="${candidateInstance?.otherTelephoneNumber}" />
     </div>
     --}%
@@ -153,7 +153,7 @@
 
 %{--
 <div class="form-group">
-    <label class="col-sm-3 control-label">Remember me</label>
+    <label class="col-sm-4 control-label">Remember me</label>
     <div class="col-sm-6">
         <input type="checkbox" id="checkoff" checked>
     </div>
