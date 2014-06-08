@@ -4,14 +4,14 @@
     <facet type="web" name="GrailsWeb">
       <configuration>
         <webroots>
-          <root url="file://$USER_HOME$/.grails/2.3.7/projects/skillo/plugins/jquery-validation-1.9/web-app" relative="/" />
+          <root url="file://$USER_HOME$/.grails/2.3.7/projects/skillo/plugins/resources-1.2.1/web-app" relative="/" />
+          <root url="file://$USER_HOME$/.grails/2.3.7/projects/skillo/plugins/font-awesome-resources-4.0.3.0/web-app" relative="/" />
           <root url="file://$USER_HOME$/.grails/2.3.7/projects/skillo/plugins/twitter-bootstrap-3.0.3/web-app" relative="/" />
           <root url="file://$USER_HOME$/.grails/2.3.7/projects/skillo/plugins/jquery-1.10.2.2/web-app" relative="/" />
-          <root url="file://$USER_HOME$/.grails/2.3.7/projects/skillo/plugins/font-awesome-resources-4.0.3.0/web-app" relative="/" />
-          <root url="file://$USER_HOME$/.grails/2.3.7/projects/skillo/plugins/constraints-0.6.0/web-app" relative="/" />
           <root url="file://$USER_HOME$/.grails/2.3.7/projects/skillo/plugins/jquery-validation-ui-1.4.9/web-app" relative="/" />
           <root url="file://$USER_HOME$/.grails/2.3.7/projects/skillo/plugins/jquery-validation-ui-1.4.9/grails-app/views" relative="/" />
-          <root url="file://$USER_HOME$/.grails/2.3.7/projects/skillo/plugins/resources-1.2.1/web-app" relative="/" />
+          <root url="file://$USER_HOME$/.grails/2.3.7/projects/skillo/plugins/constraints-0.6.0/web-app" relative="/" />
+          <root url="file://$USER_HOME$/.grails/2.3.7/projects/skillo/plugins/jquery-validation-1.9/web-app" relative="/" />
         </webroots>
         <sourceRoots />
       </configuration>
@@ -20,7 +20,6 @@
       <configuration>
         <datasource-map>
           <unit-entry name="Gorm" />
-          <unit-entry name="sessionFactory" />
         </datasource-map>
         <naming-strategy-map />
       </configuration>
