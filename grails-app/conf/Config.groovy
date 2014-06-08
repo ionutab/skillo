@@ -142,7 +142,7 @@ jqueryValidationUi {
 	
 	qTip {
 		packed = true
-	  classes = 'ui-tooltip-red ui-tooltip-shadow ui-tooltip-rounded'  
+        classes = 'ui-tooltip-red ui-tooltip-shadow ui-tooltip-rounded'
 	}
 	
 	/*
@@ -206,7 +206,7 @@ jqueryValidationUi {
 		phoneUS:'true',
 		alphanumeric:'true',
 		letterswithbasicpunc:'true',
-    lettersonly:'true'
+        lettersonly:'true'
 	]	
 }
 

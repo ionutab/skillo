@@ -16,8 +16,10 @@ class CandidateController extends BaseController{
 
         def candidateList = candidateService.search(filter)
 
+        def firstCandidate = candidateList.size() > 0 ? candidateList.first() : null;
+
         log.info("Rendering ${candidateList.size()} Candidates of ${candidateList.totalCount}")
-        render(view: "list_split", model: [CandidateListFilter:filter, CandidateList: candidateList, CandidateTotal: candidateList.totalCount])
+        render(view: "list_split", model: [CandidateListFilter:filter, CandidateList: candidateList, CandidateTotal: candidateList.totalCount, CandidateShow: firstCandidate])
 	}
 
 	def create() {
@@ -158,4 +160,43 @@ class CandidateController extends BaseController{
 
     }
 
+    def display(){
+        log.info("CC.DISPLAY")
+
+        def candidate = Candidate.get(params.id)
+
+        log.info params
+        render(template: 'info', model: [CandidateShow: candidate])
+    }
+
+    def addCandidateQualification(){
+        log.info("CC.ADD CANDIDATE QUALIFICATION")
+
+        def newCandidateQualification = new CandidateQualification(params["newCandidateQualification"])
+
+        log.info(params["newCandidateQualification"] as grails.converters.JSON)
+
+        if (params["newCandidateQualification.expiryDate"]) {
+            params["newCandidateQualification.expiryDate"] = new Date(params["newCandidateQualification.expiryDate"])
+            newCandidateQualification.expiryDate = params["newCandidateQualification.expiryDate"]
+        }
+
+        if(Boolean.TRUE == newCandidateQualification.getIsMainTrade()){
+            def candidateQualifications = CandidateQualification.findAllByCandidate(Candidate.get(params.get("candidate.id")))
+            candidateQualifications.each { candidateQualification ->
+                //put the other qualifications to not be main trade
+                candidateQualification.setIsMainTrade(Boolean.FALSE)
+                candidateQualification.save()
+            }
+        }
+
+        newCandidateQualification.clearErrors()
+        if(!newCandidateQualification.save(deepvalidate:true,flush: true)){
+
+            newCandidateQualification.candidate = Candidate.get(newCandidateQualification.candidate.id)
+
+        }
+
+        redirect(action: "edit",id: params.candidate.id)
+    }
 }

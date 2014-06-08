@@ -115,4 +115,8 @@ class ClientController extends BaseController {
         redirect(action:"list")
     }
 
+    def test(){
+
+    }
+
 }

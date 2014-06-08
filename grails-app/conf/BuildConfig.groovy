@@ -68,7 +68,6 @@ grails.project.dependency.resolution = {
         compile ':cache:1.1.1'
         compile ":spring-security-core:1.2.7.3"
         compile ":jquery-validation-ui:1.4.9"
-//        compile ":spring-security-core:2.0-RC2"
 
     }
 }

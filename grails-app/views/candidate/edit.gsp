@@ -53,7 +53,8 @@
                                     </g:if>
                                 </td>
                                 <td>
-                                    <g:link controller="candidateQualification" action="edit" id="${cq.id}" class="btn btn-link"><g:message code="default.edit.label" args=" " /></g:link>
+                                    <g:link controller="candidateQualification" action="edit" id="${cq.id}" class="btn btn-link"><g:message code="default.button.edit.short.label" /></g:link>
+                                    <g:link controller="candidate" action="removeCandidateQualification" id="${cq.id}" class="btn btn-link"><g:message code="default.button.delete.short.label" /></g:link>
                                 </td>
                             </tr>
                         </g:if>
@@ -191,12 +192,12 @@
 <div class="modal fade" id="newCandidateQualificationModal" role="dialog" aria-hidden="true" tabindex="-1">
     <div class="modal-dialog" >
         %{--<g:form method="post" class="form-horizontal" id="newCandidateQualificationForm" controller="candidateQualification">--}%
-        <g:formRemote
+        <g:form
                 method="post"
                 class="form-horizontal"
                 id="newCandidateQualificationForm"
                 name="newCandidateQualificationForm"
-                url="[controller: 'candidateQualification',action: 'addCandidateQualification']"
+                url="[controller: 'candidate',action: 'addCandidateQualification']"
                 after="">
             <div class="modal-content">
                 <div class="modal-body">
@@ -207,7 +208,7 @@
                     <button type="button" class="btn btn-default btn-sm" data-dismiss="modal">Close</button>
                 </div>
             </div>
-        </g:formRemote>
+        </g:form>
     %{--</g:form>--}%
     </div>
 </div>

@@ -16,15 +16,13 @@
         <g:each in="${CandidateList}" status="i" var="Candidate">
             <tr>
                 <td >
-                    <g:link action="show" data-placement="right" data-trigger="click" id="${Candidate.id}"
-                            elementId="${Candidate.id}">${Candidate.firstName}</g:link>
-                    <g:link url="#" class="popable" data-placement="right" data-trigger="click"
-                            elementId="${Candidate.id}">${Candidate.lastName}</g:link>
+                    %{--<g:link action="show" data-placement="right" id="${Candidate.id}"
+                            elementId="${Candidate.id}">${Candidate.firstName}</g:link>--}%
+                    <g:remoteLink action="display" id="${Candidate.id}" elementId="${Candidate.id}" update="displayCandidate">${Candidate.firstName} ${Candidate.lastName}</g:remoteLink>
+%{--                    <g:link url="#" class="popable" data-placement="right" data-trigger="click" elementId="${Candidate.id}">${Candidate.lastName}</g:link>--}%
                     <div id="popover_content_wrapper_${Candidate.id}" style="display: none">
                         <div>
-                            <p><b><g:message
-                                    code="candidate.owningConsultant.label"/>:</b> ${Candidate.consultant?.firstName} ${Candidate.consultant?.lastName}
-                            </p>
+                            <p><b><g:message code="candidate.owningConsultant.label"/>:</b> ${Candidate.consultant?.firstName} ${Candidate.consultant?.lastName}</p>
 
                             <p><b><g:message code="candidate.email.label"/>:</b> ${Candidate.email}</p>
 
