@@ -10,7 +10,7 @@ class QualificationController {
     }
 
     def list() {
-        params.max = Math.min(params.max ? params.int('max') : 100, 1000)
+        params.max = Math.min(params.max ? params.int('max') : 10, 100)
 
         log.debug("PAGINATION: max " + params.max + " offset " + params.offset )
 
