@@ -51,7 +51,6 @@ grails.project.dependency.resolution = {
     plugins {
         build ':tomcat:7.0.50'
 
-        compile ":asual-lesscss-resources:0.2"
         compile ':cache:1.1.1'
         compile ":spring-security-core:1.2.7.3"
         compile ":jquery-validation-ui:1.4.9"
@@ -64,6 +63,14 @@ grails.project.dependency.resolution = {
         runtime ":font-awesome-resources:4.0.3.0"
         runtime ":twitter-bootstrap:3.0.3"
 
+        compile (":asual-lesscss-resources:0.2")
+
+        /*
+        compile(":less-resources:1.3.3.2") {
+            // depends on :resources:1.2.RC2 (and we are using a better one)
+            exclude "resources"
+        }
+        */
         // Uncomment these (or add new ones) to enable additional resources capabilities
         //runtime ":zipped-resources:1.0"
         //runtime ":cached-resources:1.0"

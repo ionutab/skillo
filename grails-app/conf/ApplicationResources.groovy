@@ -3,18 +3,24 @@ modules = {
         resource url:'js/application.js'
     }
 
-    skillo_bootstrap {
+    bootstrap_dummy { resource url: [plugin: 'twitter-bootstrap', dir: 'less', file: 'bootstrap.less'], attrs:[rel: "stylesheet/less", type:'css'] }
+
+    bootstrap_custom {
         dependsOn 'bootstrap'
-        resource url:[dir: 'less', file: 'skillo-bootstrap.less'], attrs:[rel: "stylesheet/less", type:'css']
+        resource url: 'less/custom-bootstrap.less', attrs:[rel: "stylesheet/less", type:'css']
     }
 
     admin_light {
-        dependsOn 'skillo_bootstrap', 'jquery', 'font-awesome'
+        dependsOn 'bootstrap', 'jquery', 'font-awesome'
         resource url:'css/admin_light.css'
         resource url:'css/custombox.css'
         resource url:'js/sidebar.js'
     }
-	
+
+    admin_light_simple {
+        dependsOn 'bootstrap_custom', 'jquery', 'font-awesome'
+    }
+
 	maps {
 		resource url:'css/maps/googlemaps.css'
 		resource url:'js/maps/googlemaps.js'
