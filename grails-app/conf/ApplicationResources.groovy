@@ -3,8 +3,13 @@ modules = {
         resource url:'js/application.js'
     }
 
+    skillo_bootstrap {
+        dependsOn 'bootstrap'
+        resource url:[dir: 'less', file: 'skillo-bootstrap.less'], attrs:[rel: "stylesheet/less", type:'css']
+    }
+
     admin_light {
-        dependsOn 'bootstrap', 'jquery', 'font-awesome'
+        dependsOn 'skillo_bootstrap', 'jquery', 'font-awesome'
         resource url:'css/admin_light.css'
         resource url:'css/custombox.css'
         resource url:'js/sidebar.js'

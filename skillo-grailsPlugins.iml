@@ -27,6 +27,9 @@
   </component>
   <component name="NewModuleRootManager" inherit-compiler-output="true">
     <exclude-output />
+    <content url="file://$USER_HOME$/.grails/2.3.7/projects/skillo/plugins/asual-lesscss-resources-0.2">
+      <sourceFolder url="file://$USER_HOME$/.grails/2.3.7/projects/skillo/plugins/asual-lesscss-resources-0.2/grails-app/services" isTestSource="false" />
+    </content>
     <content url="file://$USER_HOME$/.grails/2.3.7/projects/skillo/plugins/cache-1.1.1">
       <sourceFolder url="file://$USER_HOME$/.grails/2.3.7/projects/skillo/plugins/cache-1.1.1/src/java" isTestSource="false" />
       <sourceFolder url="file://$USER_HOME$/.grails/2.3.7/projects/skillo/plugins/cache-1.1.1/src/groovy" isTestSource="false" />
@@ -121,6 +124,9 @@
           <root url="jar://$MAVEN_REPOSITORY$/asm/asm/3.3.1/asm-3.3.1.jar!/" />
           <root url="jar://$MAVEN_REPOSITORY$/cglib/cglib/2.2.2/cglib-2.2.2.jar!/" />
           <root url="jar://$MAVEN_REPOSITORY$/org/apache/tomcat/embed/tomcat-embed-logging-log4j/7.0.50/tomcat-embed-logging-log4j-7.0.50.jar!/" />
+          <root url="jar://$MAVEN_REPOSITORY$/commons-logging/commons-logging/1.1.1/commons-logging-1.1.1.jar!/" />
+          <root url="jar://$MAVEN_REPOSITORY$/org/mozilla/rhino/1.7R4/rhino-1.7R4.jar!/" />
+          <root url="jar://$MAVEN_REPOSITORY$/com/asual/lesscss/lesscss-engine/1.5.0/lesscss-engine-1.5.0.jar!/" />
         </CLASSES>
         <JAVADOC />
         <SOURCES />
