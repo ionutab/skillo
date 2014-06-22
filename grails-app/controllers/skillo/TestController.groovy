@@ -6,14 +6,27 @@ package skillo
  */
 class TestController extends BaseController {
 
-    static scaffold = true
+    static scaffold = false
 
     def clientService
 
-    def testSearchClients(){
-        log.info("TC:Search Clients")
-        Client c = new Client()
+    def fff(){
 
-        clientService.search(c)
+
+        def testS = params['doc[]']
+        ArrayList<Long> testI = new ArrayList<>()
+
+        for (t in testS){
+            testI.add(Long.parseLong ( t ) )
+        }
+
+        log.info("TL: " + testI)
+/*
+
+
+
+*/
+
+
     }
 }

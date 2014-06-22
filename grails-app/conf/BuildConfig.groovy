@@ -56,12 +56,9 @@ grails.project.dependency.resolution = {
         compile ":jquery-validation-ui:1.4.9"
         compile ":scaffolding:2.0.1"
 
-//        runtime ":hibernate:$grailsVersion"
         runtime ':hibernate:3.6.10.7'
         runtime ":jquery:1.10.2.2"
         runtime ":resources:1.2.1"
-        runtime ":font-awesome-resources:4.0.3.0"
-        runtime ":twitter-bootstrap:3.0.3"
 
         compile (":asual-lesscss-resources:0.2")
 
