@@ -44,7 +44,7 @@ environments {
                 testOnBorrow=true
                 testWhileIdle=true
                 testOnReturn=true
-                max_allowed_packet=33554432
+//                max_allowed_packet=33554432
                 validationQuery="SELECT 1"
             }
         }
@@ -72,7 +72,7 @@ environments {
                 testOnBorrow=true
                 testWhileIdle=true
                 testOnReturn=true
-                max_allowed_packet=33554432
+//                max_allowed_packet=33554432
                 validationQuery="SELECT 1"
             }
             logSql = true
