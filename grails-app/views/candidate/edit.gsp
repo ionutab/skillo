@@ -9,6 +9,7 @@
 	<g:set var="entityNaturalName" value="${candidateInstance.firstName + ' ' + candidateInstance.lastName}" />
     <g:set var="page_title" value="${entityNaturalName}" scope="request"/>
 	<title><g:message code="default.edit.label" args="[entityNaturalName]" /></title>
+    <link rel="stylesheet" href="${resource(dir: 'css', file: 'customButtons.css')}"/>
     <r:require modules="forms"/>
     <r:require modules="candidates"/>
 </head>
@@ -19,7 +20,7 @@
         <div class="content-container col-lg-4">
             <g:hiddenField name="id" value="${candidateInstance?.id}" />
             <g:hiddenField name="version" value="${candidateInstance?.version}" />
-            <g:render template="form"/>
+            <g:render template="/candidate/form"/>
         </div>
         <div class="content-container col-lg-4">
             <legend><g:message code="candidate.form.competences" /> - <g:message code="candidate.info.mainTradeFirst" /></legend>
@@ -53,8 +54,8 @@
                                     </g:if>
                                 </td>
                                 <td>
-                                    <g:link controller="candidateQualification" action="edit" id="${cq.id}" class="btn btn-link"><g:message code="default.button.edit.short.label" /></g:link>
-                                    <g:link controller="candidate" action="removeCandidateQualification" id="${cq.id}" class="btn btn-link"><g:message code="default.button.delete.short.label" /></g:link>
+                                   <g:link controller="candidateQualification" action="edit" id="${cq.id}" class="btn btn-primary btn-xs"><g:message code="default.button.edit.short.label" /></g:link>
+                                   <g:link controller="candidate" action="removeCandidateQualification" id="${cq.id}" class="btn btn-danger btn-xs"><g:message code="default.button.delete.short.label" /></g:link>
                                 </td>
                             </tr>
                         </g:if>
@@ -189,6 +190,130 @@
     </div>
 </g:form>
 
+<div class="row">
+    <div class="content-container col-lg-4">
+        <div>
+            <legend><g:message code="document.upload.label"/></legend>
+        </div>
+
+        <div class="fileupload-buttonbar">
+            <g:uploadForm  id="fileupload" action="upload" controller="candidate" enctype="multipart/form-data">
+                <g:hiddenField name="candidateId" value="${candidateInstance?.id}" />
+                <g:hiddenField name="version" value="${candidateInstance?.version}" />
+                <div>
+                    <div>
+                        <div class="glyphicon glyphicon-file" id="selectedFiles"></div>
+                    </div>
+                    </br>
+                    <span class="btn btn-success btn-sm fileinput-button ">
+                        <input id="files" type="file" name="files" multiple="multiple"/>
+                        <span>${message(code: 'document.fileupload.add.files', default: 'Add files...')}</span>
+                    </span>
+                    <button type="submit" class="btn btn-primary start btn-sm" >
+                        <span>${message(code: 'document.fileupload.start.upload', default: 'Start upload')}</span>
+                    </button>
+                    <button type="submit" class="btn btn-warning start btn-sm CancelButtonClass">
+                        <span>${message(code: 'document.fileupload.cancel.upload', default: 'Cancel upload')}</span>
+                    </button>
+                    <button type="submit" class="btn btn-danger start btn-sm">
+                        <span>${message(code: 'document.fileupload.delete.file', default: 'Delete')}</span>
+                    </button>
+                    <td>
+                        <label>
+                            <input type="checkbox" id="selectAll"> Select all
+                        </label>
+                    </td>
+                </div>
+            </g:uploadForm>
+            <script>
+                var selDiv = "";
+
+                document.addEventListener("DOMContentLoaded", init, false);
+
+                function init() {
+                    document.querySelector('#files').addEventListener('change', handleFileSelect, false);
+                    selDiv = document.querySelector("#selectedFiles");
+                }
+
+                function handleFileSelect(e) {
+
+                    if(!e.target.files) return;
+
+                    selDiv.innerHTML = " ";
+
+                    var files = e.target.files;
+                    for(var i=0; i<files.length; i++) {
+                        var f = files[i];
+
+                        selDiv.innerHTML += f.name + " ";
+
+                    }
+                }
+
+                $(document).ready(function() {
+                    $('#selectAll').click(function(event) {  //on click
+                        if(this.checked) { // check select status
+                            $('.deleteDocument').each(function() { //loop through each checkbox
+                                this.checked = true;  //select all checkboxes with class "checkbox1"
+                            });
+                        }else{
+                            $('.deleteDocument').each(function() { //loop through each checkbox
+                                this.checked = false; //deselect all checkboxes with class "checkbox1"
+                            });
+                        }
+                    });
+
+                });
+
+                $(this).find(".CancelButtonClass").click(function()
+                {
+                    xhr.abort();
+                });
+            </script>
+
+        </div>
+        <g:if test="${documentInstanceList==null || documentInstanceList.size()==0 }">
+            <div class="col-lg-12 col-lg-offset-0 page-background-info">
+                <g:message code="document.notFound.label"/>
+                <br>
+                <br>
+            </div>
+        </g:if>
+        <g:else>
+            <g:form action="deleteDocument" controller="candidate">
+                <g:hiddenField name="id" value="${candidateInstance?.id}" />
+                <g:hiddenField name="version" value="${candidateInstance?.version}" />
+                <div>
+                    <table class="table">
+                        <tbody>
+                        <g:each in="${documentInstanceList}" status="i" var="documentInstance">
+                            <g:hiddenField name="documentId" value="${documentInstance?.id}" />
+
+                            <tr class="${(i % 2) == 0 ? 'active' : ''}">
+                                <td><g:link action="documentDownload"
+                                            id="${documentInstance.id}">${documentInstance.filename}</g:link></td>
+                                <td><g:formatNumber number="${documentInstance.fileSize}"/></td>
+                                <td><g:formatDate date="${documentInstance.uploadDate}"/></td>
+                                <td>
+                                    <label>
+                                        <input type="checkbox" class="deleteDocument"> Select
+                                    </label>
+                                </td>
+                            </tr>
+                        </g:each>
+                        </tbody>
+                    </table>
+                </div>
+            </g:form>
+        </g:else>
+    %{--
+    <div class="pagination">
+        <g:paginate total="${documentInstanceTotal}"/>
+    </div>
+    --}%
+    </div>
+</div>
+
 <div class="modal fade" id="newCandidateQualificationModal" role="dialog" aria-hidden="true" tabindex="-1">
     <div class="modal-dialog" >
         %{--<g:form method="post" class="form-horizontal" id="newCandidateQualificationForm" controller="candidateQualification">--}%
@@ -201,7 +326,7 @@
                 after="">
             <div class="modal-content">
                 <div class="modal-body">
-                    <g:render template="candidateQualificationsForm" bean="${newCandidateQualification}"/>
+                    <g:render template="/candidate/candidateQualificationsForm" bean="${newCandidateQualification}"/>
                 </div>
                 <div class="modal-footer">
                     <g:submitButton class="btn btn-primary btn-sm" name="${message(code: 'default.button.save.label', default: 'Save')}" update="newCandidateQualificationForm" />
@@ -212,7 +337,6 @@
     %{--</g:form>--}%
     </div>
 </div>
-
 
 
 %{--
@@ -233,7 +357,6 @@
     </div>
 </div>
 --}%
-
 
 </body>
 
