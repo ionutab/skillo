@@ -258,6 +258,6 @@ class CandidateController extends BaseController{
 
         }
 
-        redirect(action: "edit",id: params.candidate.id)
+        redirect(action: "edit",id: newCandidateQualification.candidate.id)
     }
 }

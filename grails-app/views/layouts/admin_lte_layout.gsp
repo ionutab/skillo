@@ -8,6 +8,8 @@
     <meta name="description"	content="">
     <meta name="author"			content="">
 
+    <link rel="shortcut icon" href="${resource(file: 'favicon.ico')}" type="image/x-icon" />
+
     <%-- Manual switch for the skin can be found in /view/_menu/_config.gsp --%>
     <r:require modules="skillo_admin_lte"/>
 
@@ -22,15 +24,19 @@
     <%-- For Javascript see end of body --%>
 </head>
 
-<body class="skin-blue fixed" >
+<body class="skin-blue wysihtml5-supported fixed" >
 
     <g:render template="/_menu/header" />
 
-    <div class="wrapper row-offcanvas-right">
+    <div class="wrapper row-offcanvas row-offcanvas-left">
         <g:render template="/_menu/sidebar" />
+
+        <g:if test="${!layout_full_width}">
+            <g:render template="/layouts/workspace_lte"/>
+        </g:if>
     </div>
 
-    <g:layoutBody />
+
     <r:layoutResources/>
 </body>
 </html>

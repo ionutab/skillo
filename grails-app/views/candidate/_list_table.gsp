@@ -8,6 +8,7 @@
             <th><g:message code="address.details.label" default="Address"/></th>
             <th><g:message code="address.postcode.label" default="Post Code"/></th>
             <th><g:message code="candidate.mainTrade.label" default="Main Trade"/></th>
+            <th><g:message code="default.actions.label" /></th>
             %{--<th><g:message code="default.actions.label" default="Actions"/></th>--}%
 
         </tr>
@@ -49,6 +50,9 @@
                             </g:if>
                         </g:each>
                     </g:if>
+                </td>
+                <td>
+                    <g:link controller="candidate" action="edit" id="${Candidate?.id}" class="btn btn-small" ><g:message code="default.button.edit.label" default="Edit" /></g:link>
                 </td>
                 %{--<td>
                     <g:link action="edit" id="${Candidate.id}" class="btn btn-small"><g:message

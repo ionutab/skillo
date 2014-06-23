@@ -9,9 +9,9 @@
 	<g:set var="entityNaturalName" value="${candidateInstance.firstName + ' ' + candidateInstance.lastName}" />
     <g:set var="page_title" value="${entityNaturalName}" scope="request"/>
 	<title><g:message code="default.edit.label" args="[entityNaturalName]" /></title>
-    <link rel="stylesheet" href="${resource(dir: 'css', file: 'customButtons.css')}"/>
     <r:require modules="forms"/>
     <r:require modules="candidates"/>
+    <link rel="stylesheet" href="${resource(dir: 'css', file: 'customButtons.css')}"/>
 </head>
 
 <body>
@@ -79,7 +79,8 @@
                                     </g:if>
                                 </td>
                                 <td>
-                                    <g:link controller="candidateQualification" action="edit" id="${cq.id}" class="btn btn-link"><g:message code="default.edit.label" args=" " /></g:link>
+                                    <g:link controller="candidateQualification" action="edit" id="${cq.id}" class="btn btn-primary btn-xs"><g:message code="default.button.edit.short.label" /></g:link>
+                                    <g:link controller="candidate" action="removeCandidateQualification" id="${cq.id}" class="btn btn-danger btn-xs"><g:message code="default.button.delete.short.label" /></g:link>
                                 </td>
                             </tr>
                         </g:if>
@@ -88,9 +89,14 @@
                 </table>
             </g:if>
 
-            <button class="btn btn-info" data-toggle="modal" data-target="#newCandidateQualificationModal"><span class="glyphicon glyphicon-plus"></span></button>
+            <button class="btn btn-info newCQButton" data-toggle="modal" data-target="#newCandidateQualificationModal" ><span class="glyphicon glyphicon-plus"></span></button>
             <legend><g:message code="candidate.form.candidateNotes" /></legend>
-            <button class="btn btn-info" data-toggle="modal" data-target="#newCandidateQualificationModal"><span class="glyphicon glyphicon-plus"></span></button>
+            <button class="btn btn-info newCQButton" data-toggle="modal" data-target="#newCandidateQualificationModal"><span class="glyphicon glyphicon-plus"></span></button>
+            <g:javascript>
+                $( ".newCQButton" ).click(function( event ) {
+                    event.preventDefault();
+                });
+            </g:javascript>
         </div>
         <div class="content-container col-lg-4">
             <legend><g:message code="candidate.form.payment" /></legend>
@@ -339,6 +345,7 @@
 </div>
 
 
+
 %{--
 
 <div class="modal-dialog">
@@ -357,6 +364,7 @@
     </div>
 </div>
 --}%
+
 
 </body>
 
