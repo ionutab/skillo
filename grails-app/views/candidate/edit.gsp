@@ -203,8 +203,9 @@
         </div>
 
         <div class="fileupload-buttonbar">
-            <g:uploadForm  id="fileupload" action="upload" controller="candidate" enctype="multipart/form-data">
+            <g:uploadForm  controller="candidate" enctype="multipart/form-data">
                 <g:hiddenField name="candidateId" value="${candidateInstance?.id}" />
+                <g:hiddenField name="id" value="${candidateInstance?.id}" />
                 <g:hiddenField name="version" value="${candidateInstance?.version}" />
                 <div>
                     <div>
@@ -215,15 +216,9 @@
                         <input id="files" type="file" name="files" multiple="multiple"/>
                         <span>${message(code: 'document.fileupload.add.files', default: 'Add files...')}</span>
                     </span>
-                    <button type="submit" class="btn btn-primary start btn-sm" >
-                        <span>${message(code: 'document.fileupload.start.upload', default: 'Start upload')}</span>
-                    </button>
-                    <button type="submit" class="btn btn-warning start btn-sm CancelButtonClass">
-                        <span>${message(code: 'document.fileupload.cancel.upload', default: 'Cancel upload')}</span>
-                    </button>
-                    <button type="submit" class="btn btn-danger start btn-sm">
-                        <span>${message(code: 'document.fileupload.delete.file', default: 'Delete')}</span>
-                    </button>
+                <g:actionSubmit class="btn btn-primary start btn-sm" value="${message(code: 'document.fileupload.start.upload', default: 'Start upload')}" action="upload" />
+                <g:actionSubmit class="btn btn-warning start btn-sm CancelButtonClass" value="${message(code: 'document.fileupload.cancel.upload', default: 'Cancel upload')}" action="edit"  />
+                <g:actionSubmit class="btn btn-danger start btn-sm" value="${message(code: 'document.fileupload.delete.file', default: 'Delete')}" action="deleteDocument"  />
                     <td>
                         <label>
                             <input type="checkbox" id="selectAll"> Select all
