@@ -30,14 +30,23 @@ environments {
         dataSource {
             dbCreate = "create-drop" // one of 'create', 'create-drop', 'update', 'validate', ''
             driverClassName = "com.mysql.jdbc.Driver"
-            url = "jdbc:mysql://localhost/skillo?useUnicode=yes&characterEncoding=UTF-8"
-            username = "root"
-            password = ""
-            logSql = true
-        }
-        hibernate {
-            show_sql = true
-            format_sql = true
+            url = "jdbc:mysql://us-cdbr-cb-east-01.cleardb.net:3306/cb_skillo?useUnicode=yes&characterEncoding=UTF-8"
+            username = "bb6881f1750d59"
+            password = "8208b455"
+            pooled = true
+            properties {
+                initialSize = 2
+                maxActive = 4
+                maxIdle = 2
+                minEvictableIdleTimeMillis=1800000
+                timeBetweenEvictionRunsMillis=1800000
+                numTestsPerEvictionRun=3
+                testOnBorrow=true
+                testWhileIdle=true
+                testOnReturn=true
+//                max_allowed_packet=33554432
+                validationQuery="SELECT 1"
+            }
         }
     }
 
@@ -63,6 +72,7 @@ environments {
                 testOnBorrow=true
                 testWhileIdle=true
                 testOnReturn=true
+//                max_allowed_packet=33554432
                 validationQuery="SELECT 1"
             }
             logSql = true

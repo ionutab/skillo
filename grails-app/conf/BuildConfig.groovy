@@ -49,25 +49,33 @@ grails.project.dependency.resolution = {
     }
 
     plugins {
-//        runtime ":hibernate:$grailsVersion"
-        runtime ':hibernate:3.6.10.7'
-        runtime ":resources:1.2.1"
-        runtime ":jquery:1.10.2.2"
-        runtime ":font-awesome-resources:4.0.3.0"
-        runtime ":twitter-bootstrap:3.0.3"
+        build ':tomcat:7.0.50'
+
+        compile ':cache:1.1.1'
+        compile ":spring-security-core:1.2.7.3"
+        compile ":jquery-validation-ui:1.4.9"
         compile ":scaffolding:2.0.1"
+
+        runtime ':hibernate:3.6.10.7'
+        runtime ":jquery:1.10.2.2"
+        runtime ":resources:1.2.1"
+
+        compile (":asual-lesscss-resources:0.2")
+
+        /*
+        compile(":less-resources:1.3.3.2") {
+            // depends on :resources:1.2.RC2 (and we are using a better one)
+            exclude "resources"
+        }
+        */
         // Uncomment these (or add new ones) to enable additional resources capabilities
         //runtime ":zipped-resources:1.0"
         //runtime ":cached-resources:1.0"
         //runtime ":yui-minify-resources:0.1.5"
 
 //        build ":tomcat:$grailsVersion"
-        build ':tomcat:7.0.50'
+
 //        runtime ":database-migration:1.3.2"  -- might be needed later in the development process
-        runtime ":font-awesome-resources:3.2.1.1"
-        compile ':cache:1.1.1'
-        compile ":spring-security-core:1.2.7.3"
-        compile ":jquery-validation-ui:1.4.9"
 
     }
 }

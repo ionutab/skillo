@@ -10,6 +10,9 @@ class UrlMappings {
 		"/contact"		(view:"/info/contact")
 		"/terms"		(view:"/info/terms")
         "/map"          (view:"/home/map")
+        "/testDashboard"         (view:"/testDashboard")
+        "/testCL"       (view:"/testCL")
+        "/testCS"       (view:"/testCS")
 
 		/* 
 		 * Pages with controller

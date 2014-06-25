@@ -1,5 +1,6 @@
 package skillo
 
+import org.springframework.web.multipart.commons.CommonsMultipartFile
 import skillo.filters.CandidateListSearch
 
 class CandidateController extends BaseController{
@@ -89,10 +90,13 @@ class CandidateController extends BaseController{
         def availableQualifications = Qualification.findAll()
         def availablePayRollCompanies = PayrollCompany.findAll()
 
-        [candidateInstance: candidate, newCandidateQualification: newCandidateQualification , AvailableMainTrades: availableMainTrades , AvailableQualifications: availableQualifications , AvailablePayrollCompanies: availablePayRollCompanies as grails.converters.JSON  ]
+        def documentList = listDocuments();
+
+        [candidateInstance: candidate,documentInstanceList:documentList, newCandidateQualification: newCandidateQualification , AvailableMainTrades: availableMainTrades , AvailableQualifications: availableQualifications , AvailablePayrollCompanies: availablePayRollCompanies as grails.converters.JSON  ]
     }
 
     def update(){
+
 
         def candidate = Candidate.get(params.id)
 
@@ -160,6 +164,63 @@ class CandidateController extends BaseController{
 
     }
 
+
+    def upload() {
+
+        List fileList = request.getFiles('files') // 'files' is the name of the input
+        fileList.each { file ->
+            if (file.empty) {
+                flash.message = "File cannot be empty"
+            } else {
+                def candidate = Candidate.get(params.candidateId)
+                def documentInstance = new Document()
+                documentInstance.filename = file.originalFilename
+                documentInstance.filedata = file.getBytes()
+                documentInstance.candidateId = candidate.id
+                documentInstance.fileSize = file.size
+                documentInstance.save()
+            }
+        }
+
+        redirect(action: "edit", id: params.candidateId )
+    }
+
+    def listDocuments(){
+        def candidate = Candidate.get(params.id)
+        def documentList= Document.findAll("from Document as d where d.candidateId=:candidateId", [candidateId: candidate.id])
+        return documentList
+
+    }
+
+    def documentDownload(){
+        Document documentInstance = Document.get(params.id)
+        if ( documentInstance == null) {
+            flash.message = "Document not found."
+            redirect(action: "edit", id: params.id )
+        } else {
+            response.setContentType("APPLICATION/OCTET-STREAM")
+            response.setHeader("Content-Disposition", "Attachment;Filename=\"${documentInstance.filename}\"")
+
+            def outputStream = response.getOutputStream()
+            outputStream << documentInstance.filedata
+            outputStream.flush()
+            outputStream.close()
+        }
+    }
+
+    def deleteDocument() {
+
+        print("@@@@@@@@@@@@@@@@@@@@@@@@@@@@ "+params)
+
+        def id = params.documentId
+        if (id) {
+            def document = Document.findById(Long.valueOf(id))
+            document.delete(flush: true)
+        }
+
+        redirect(action: "edit", id: params.id )
+    }
+
     def display(){
         log.info("CC.DISPLAY")
 
@@ -197,6 +258,6 @@ class CandidateController extends BaseController{
 
         }
 
-        redirect(action: "edit",id: params.candidate.id)
+        redirect(action: "edit",id: newCandidateQualification.candidate.id)
     }
 }

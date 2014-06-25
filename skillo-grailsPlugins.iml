@@ -4,14 +4,12 @@
     <facet type="web" name="GrailsWeb">
       <configuration>
         <webroots>
-          <root url="file://$USER_HOME$/.grails/2.3.7/projects/skillo/plugins/resources-1.2.1/web-app" relative="/" />
-          <root url="file://$USER_HOME$/.grails/2.3.7/projects/skillo/plugins/font-awesome-resources-4.0.3.0/web-app" relative="/" />
-          <root url="file://$USER_HOME$/.grails/2.3.7/projects/skillo/plugins/twitter-bootstrap-3.0.3/web-app" relative="/" />
-          <root url="file://$USER_HOME$/.grails/2.3.7/projects/skillo/plugins/jquery-1.10.2.2/web-app" relative="/" />
+          <root url="file://$USER_HOME$/.grails/2.3.7/projects/skillo/plugins/constraints-0.6.0/web-app" relative="/" />
           <root url="file://$USER_HOME$/.grails/2.3.7/projects/skillo/plugins/jquery-validation-ui-1.4.9/web-app" relative="/" />
           <root url="file://$USER_HOME$/.grails/2.3.7/projects/skillo/plugins/jquery-validation-ui-1.4.9/grails-app/views" relative="/" />
-          <root url="file://$USER_HOME$/.grails/2.3.7/projects/skillo/plugins/constraints-0.6.0/web-app" relative="/" />
           <root url="file://$USER_HOME$/.grails/2.3.7/projects/skillo/plugins/jquery-validation-1.9/web-app" relative="/" />
+          <root url="file://$USER_HOME$/.grails/2.3.7/projects/skillo/plugins/jquery-1.10.2.2/web-app" relative="/" />
+          <root url="file://$USER_HOME$/.grails/2.3.7/projects/skillo/plugins/resources-1.2.1/web-app" relative="/" />
         </webroots>
         <sourceRoots />
       </configuration>
@@ -28,6 +26,9 @@
   </component>
   <component name="NewModuleRootManager" inherit-compiler-output="true">
     <exclude-output />
+    <content url="file://$USER_HOME$/.grails/2.3.7/projects/skillo/plugins/asual-lesscss-resources-0.2">
+      <sourceFolder url="file://$USER_HOME$/.grails/2.3.7/projects/skillo/plugins/asual-lesscss-resources-0.2/grails-app/services" isTestSource="false" />
+    </content>
     <content url="file://$USER_HOME$/.grails/2.3.7/projects/skillo/plugins/cache-1.1.1">
       <sourceFolder url="file://$USER_HOME$/.grails/2.3.7/projects/skillo/plugins/cache-1.1.1/src/java" isTestSource="false" />
       <sourceFolder url="file://$USER_HOME$/.grails/2.3.7/projects/skillo/plugins/cache-1.1.1/src/groovy" isTestSource="false" />
@@ -39,7 +40,6 @@
       <sourceFolder url="file://$USER_HOME$/.grails/2.3.7/projects/skillo/plugins/constraints-0.6.0/grails-app/utils" isTestSource="false" />
       <sourceFolder url="file://$USER_HOME$/.grails/2.3.7/projects/skillo/plugins/constraints-0.6.0/grails-app/i18n" isTestSource="false" />
     </content>
-    <content url="file://$USER_HOME$/.grails/2.3.7/projects/skillo/plugins/font-awesome-resources-4.0.3.0" />
     <content url="file://$USER_HOME$/.grails/2.3.7/projects/skillo/plugins/hibernate-3.6.10.7">
       <sourceFolder url="file://$USER_HOME$/.grails/2.3.7/projects/skillo/plugins/hibernate-3.6.10.7/src/java" isTestSource="false" />
       <sourceFolder url="file://$USER_HOME$/.grails/2.3.7/projects/skillo/plugins/hibernate-3.6.10.7/src/groovy" isTestSource="false" />
@@ -83,10 +83,6 @@
       <sourceFolder url="file://$USER_HOME$/.grails/2.3.7/projects/skillo/plugins/tomcat-7.0.50/src/java" isTestSource="false" />
       <sourceFolder url="file://$USER_HOME$/.grails/2.3.7/projects/skillo/plugins/tomcat-7.0.50/src/groovy" isTestSource="false" />
     </content>
-    <content url="file://$USER_HOME$/.grails/2.3.7/projects/skillo/plugins/twitter-bootstrap-3.0.3">
-      <sourceFolder url="file://$USER_HOME$/.grails/2.3.7/projects/skillo/plugins/twitter-bootstrap-3.0.3/grails-app/i18n" isTestSource="false" />
-      <sourceFolder url="file://$USER_HOME$/.grails/2.3.7/projects/skillo/plugins/twitter-bootstrap-3.0.3/grails-app/taglib" isTestSource="false" />
-    </content>
     <content url="file://$USER_HOME$/.grails/2.3.7/projects/skillo/plugins/webxml-1.4.1">
       <sourceFolder url="file://$USER_HOME$/.grails/2.3.7/projects/skillo/plugins/webxml-1.4.1/src/groovy" isTestSource="false" />
     </content>
@@ -122,6 +118,9 @@
           <root url="jar://$MAVEN_REPOSITORY$/asm/asm/3.3.1/asm-3.3.1.jar!/" />
           <root url="jar://$MAVEN_REPOSITORY$/cglib/cglib/2.2.2/cglib-2.2.2.jar!/" />
           <root url="jar://$MAVEN_REPOSITORY$/org/apache/tomcat/embed/tomcat-embed-logging-log4j/7.0.50/tomcat-embed-logging-log4j-7.0.50.jar!/" />
+          <root url="jar://$MAVEN_REPOSITORY$/org/mozilla/rhino/1.7R4/rhino-1.7R4.jar!/" />
+          <root url="jar://$MAVEN_REPOSITORY$/commons-logging/commons-logging/1.1.1/commons-logging-1.1.1.jar!/" />
+          <root url="jar://$MAVEN_REPOSITORY$/com/asual/lesscss/lesscss-engine/1.5.0/lesscss-engine-1.5.0.jar!/" />
         </CLASSES>
         <JAVADOC />
         <SOURCES />

@@ -35,7 +35,7 @@ grails.mime.types = [
 //grails.urlmapping.cache.maxsize = 1000
 
 // What URL patterns should be processed by the resources plugin
-grails.resources.adhoc.patterns = ['/images/*', '/css/*', '/js/*', '/plugins/*']
+grails.resources.adhoc.patterns = ['/images/*', '/css/*', '/js/*', '/plugins/*', '/fonts/*']
 
 // The default codec used to encode data with ${}
 grails.views.default.codec = "none" // none, html, base64
@@ -105,6 +105,8 @@ grails.plugins.springsecurity.interceptUrlMap = [
         '/js/**':        ['IS_AUTHENTICATED_ANONYMOUSLY'],
         '/css/**':       ['IS_AUTHENTICATED_ANONYMOUSLY'],
         '/images/**':    ['IS_AUTHENTICATED_ANONYMOUSLY'],
+        '/img/**':       ['IS_AUTHENTICATED_ANONYMOUSLY'],
+        '/fonts/**':     ['IS_AUTHENTICATED_ANONYMOUSLY'],
         '/login/**':     ['IS_AUTHENTICATED_ANONYMOUSLY'],
         '/logout/**':    ['IS_AUTHENTICATED_ANONYMOUSLY'],
         '/**':           ['IS_AUTHENTICATED_REMEMBERED']
@@ -209,4 +211,3 @@ jqueryValidationUi {
         lettersonly:'true'
 	]	
 }
-
