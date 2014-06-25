@@ -26,6 +26,7 @@ class ClientService {
 //            client.addInsertEvent(Consultant.findByUser(springSecurityService.getCurrentUser()))
             return true
         } else {
+
             if(client.hasErrors()){
                 client.errors.each {
                     println "fielderrors: " + it

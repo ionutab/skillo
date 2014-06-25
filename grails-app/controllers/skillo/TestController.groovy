@@ -6,7 +6,7 @@ package skillo
  */
 class TestController extends BaseController {
 
-    static scaffold = true
+    static scaffold = false
 
     def clientService
 
@@ -16,4 +16,5 @@ class TestController extends BaseController {
 
         clientService.search(c)
     }
+
 }

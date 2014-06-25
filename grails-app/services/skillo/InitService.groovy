@@ -17,7 +17,7 @@ class InitService {
         this.dataSource = dataSource
     }
 
-    def serviceMethod() {
+    def loadDefaultQualificationsAndPostCodes() {
 
         log.debug("Current Post Codes " + PostCode.count())
         log.debug("Current Qualifications " + Qualification.count())
@@ -51,6 +51,19 @@ class InitService {
 
         log.info("Current Post Codes " + PostCode.count())
         log.info("Current Qualifications " + Qualification.count())
+    }
+
+    def boolean isInited(){
+        return Role.count() > 0 && User.findByUsername("skillo") != null;
+    }
+
+    def loadDefaultSuperuserAndRole(){
+        def role = new Role(authority: 'ROLE_USER').save(flush: true)
+
+        def user = new User(username: 'skillo', enabled: true, password: 'skillo').save(flush: true)
+        new Consultant(firstName: 'John', lastName: 'Shepard', email: 'bujdei_alexandru@yahoo.com', user: user ).save(flush: true)
+
+        UserRole.create user, role, true
 
     }
 }

@@ -68,4 +68,28 @@ environments {
             logSql = true
         }
     }
+
+    smrproduction {
+        dataSource {
+            dbCreate = "update"
+            driverClassName = "com.mysql.jdbc.Driver"
+            url = "jdbc:mysql://ec2-176-34-253-124.eu-west-1.compute.amazonaws.com:3306/smrskillo"
+            username = "smrskillo"
+            password = "smrskillo"
+            pooled = true
+            properties {
+                initialSize = 2
+                maxActive = 4
+                maxIdle = 2
+                minEvictableIdleTimeMillis=1800000
+                timeBetweenEvictionRunsMillis=1800000
+                numTestsPerEvictionRun=3
+                testOnBorrow=true
+                testWhileIdle=true
+                testOnReturn=true
+                validationQuery="SELECT 1"
+            }
+            logSql = true
+        }
+    }
 }
