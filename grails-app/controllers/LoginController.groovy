@@ -80,6 +80,10 @@ class LoginController {
                         postUrl: "${request.contextPath}${config.apf.filterProcessesUrl}"]
     }
 
+    def changeUserPassword = {
+        render view: 'changePassword'
+    }
+
     /**
      * Callback after a failed login. Redirects to the auth page with a warning message.
      */

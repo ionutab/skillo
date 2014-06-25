@@ -210,16 +210,23 @@ class CandidateController extends BaseController{
 
     def deleteDocument() {
 
-        print("@@@@@@@@@@@@@@@@@@@@@@@@@@@@ "+params)
 
-        def id = params.documentId
-        if (id) {
-            def document = Document.findById(Long.valueOf(id))
-            document.delete(flush: true)
+        print("@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@ "+params)
+
+        def list = params.idDocuments
+        String [] ids = list.split()
+        ids.each { id ->
+            def  document = Document.findById(Long.valueOf(id))
+            if (document) {
+                document
+                        .delete(flush: true)
+            }
+
+            print("#################################################### "+params)
+            redirect(action: "edit", id: params.id)
         }
-
-        redirect(action: "edit", id: params.id )
     }
+
 
     def display(){
         log.info("CC.DISPLAY")
