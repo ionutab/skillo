@@ -1,4 +1,5 @@
 import grails.converters.JSON
+import skillo.User
 
 import javax.servlet.http.HttpServletResponse
 
@@ -81,7 +82,55 @@ class LoginController {
     }
 
     def changeUserPassword = {
+
+        log.info params
+
         render view: 'changePassword'
+    }
+
+    def updateUserPassword = {
+
+        log.info params
+        log.info session
+        User user = springSecurityService.getCurrentUser()
+
+        log.info "user " + user
+
+        if (!user) {
+            flash.message = 'Sorry, an error has occurred'
+            redirect controller: 'login', action: 'auth'
+            return
+        }
+        String password = params.j_password
+        String newPassword = params.j_password_new
+        String newPassword2 = params.j_password_new_2
+
+        if (!password || !newPassword || !newPassword2 || newPassword != newPassword2) {
+            flash.message = 'Please enter your current password and a valid new password'
+            render view: 'passwordExpired', model: [username: session['SPRING_SECURITY_LAST_USERNAME']]
+            return
+        }
+
+        log.info("we are here")
+
+        if (!springSecurityService.getPasswordEncoder().isPasswordValid(user.password, password, null /*salt*/)) {
+            flash.message = 'Current password is incorrect'
+            render view: 'passwordExpired', model: [username: session['SPRING_SECURITY_LAST_USERNAME']]
+            return
+        }
+
+        if (springSecurityService.getPasswordEncoder().isPasswordValid(user.password, newPassword, null /*salt*/)) {
+            flash.message = 'Please choose a different password from your current one'
+            render view: 'passwordExpired', model: [username: session['SPRING_SECURITY_LAST_USERNAME']]
+            return
+        }
+
+        user.password = newPassword
+        user.passwordExpired = false
+        user.save() // if you have password constraints check them here
+
+        redirect uri: SpringSecurityUtils.securityConfig.successHandler.defaultTargetUrl
+        return
     }
 
     /**
