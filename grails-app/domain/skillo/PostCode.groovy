@@ -18,6 +18,10 @@ class PostCode {
 
     static belongsTo = Address
 
+    static mapping = {
+        code index: 'pc_code_idx'
+    }
+
 	static constraints = {
         code unique: true, blank: false, minSize: 4
 

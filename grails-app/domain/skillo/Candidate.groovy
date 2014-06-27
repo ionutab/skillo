@@ -42,7 +42,7 @@ class Candidate implements SkilloDomainModelWithHistory {
         placements nullable: true
         payroll nullable: true
 
-        email email: true
+        email nullable: true, blank: false, email: true
     }
 
     static mapping = {

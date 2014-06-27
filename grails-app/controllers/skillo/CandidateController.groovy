@@ -1,5 +1,6 @@
 package skillo
 
+import org.springframework.dao.DataIntegrityViolationException
 import org.springframework.web.multipart.commons.CommonsMultipartFile
 import skillo.filters.CandidateListSearch
 
@@ -152,6 +153,14 @@ class CandidateController extends BaseController{
             redirect(action: "list")
             return
         }
+
+//        try{
+//            candidate.delete()
+//        }
+//        catch (DataIntegrityViolationException e) {
+//            flash.message = message(code: 'default.not.deleted.message', args: [message(code: 'candidate.label', default: 'Candidate'), params.id])
+//            redirect(action: "show", id: params.id)
+//        }
 
         candidate.active = false
         if (!candidate.save(deepvalidate:true, flush: true)) {

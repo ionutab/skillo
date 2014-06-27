@@ -23,6 +23,11 @@ class CandidateService {
                 eq("telephoneNumber", filter.telephoneNumber)
             }
 
+            /**
+             * choose true or false depending on user settings/checkbox
+             */
+            eq ("active", true)
+
             if(filter.qualification){
                 sqlRestriction(" exists (" +
                         "select * " +
