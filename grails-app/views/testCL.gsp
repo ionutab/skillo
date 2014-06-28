@@ -352,5 +352,6 @@
 </div><!-- box-footer -->
 </div><!-- /.box -->
 </div><!-- /.box -->
+</div>
 </body>
 </html>

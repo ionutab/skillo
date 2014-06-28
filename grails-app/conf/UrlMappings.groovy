@@ -13,6 +13,7 @@ class UrlMappings {
         "/testDashboard"         (view:"/testDashboard")
         "/testCL"       (view:"/testCL")
         "/testCS"       (view:"/testCS")
+        "/testUS"       (view:"/testUserSettings")
 
 		/* 
 		 * Pages with controller
