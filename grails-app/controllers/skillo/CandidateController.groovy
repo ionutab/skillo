@@ -4,7 +4,7 @@ import org.springframework.dao.DataIntegrityViolationException
 import org.springframework.web.multipart.commons.CommonsMultipartFile
 import skillo.filters.CandidateListSearch
 
-class CandidateController extends BaseController{
+class CandidateController extends BaseController {
 
     def candidateService
 

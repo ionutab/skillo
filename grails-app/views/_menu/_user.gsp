@@ -35,7 +35,7 @@
 
             <ul class="dropdown-menu">
                 <li class="">
-                    <a href="${createLink(controller: 'userSetting', action: 'index')}">
+                    <a href="${createLink(controller: 'consultant', action: 'settings')}">
                         <span class="glyphicon glyphicon-cog"></span>
                         <g:message code="userSetting.multiple.label"/>
                     </a>

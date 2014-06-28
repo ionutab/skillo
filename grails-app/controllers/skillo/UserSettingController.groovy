@@ -2,7 +2,7 @@ package skillo
 
 class UserSettingController {
     
-    def scaffold = true
+    def scaffold = false
 
     def index() {
         redirect(action: "list")

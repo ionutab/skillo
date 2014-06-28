@@ -8,38 +8,34 @@
 
 <div class="row">
     <div class="col-md-12">
-        <div class="box box-solid">
             <form role="form">
-                <div class="box-body">
                     <div class="row">
                         <div class="col-xs-3">
-                            <input type="text" class="form-control" placeholder=".col-xs-5">
+                            <input type="text" class="form-control" placeholder="First Name">
                         </div>
 
                         <div class="col-xs-3">
-                            <input type="text" class="form-control" placeholder=".col-xs-5">
+                            <input type="text" class="form-control" placeholder="Last Name">
                         </div>
 
                         <div class="col-xs-2">
-                            <input type="text" class="form-control" placeholder=".col-xs-5">
+                            <input type="text" class="form-control" placeholder="Telephone nr">
                         </div>
 
                         <div class="col-xs-2">
-                            <input type="text" class="form-control" placeholder=".col-xs-5">
+                            <input type="text" class="form-control" placeholder="Main trade">
                         </div>
 
                         <div class="col-xs-2">
-                            <button type="submit" class="btn btn-primary">Submit</button>
+                            <button type="submit" class="btn btn-primary">Search</button>
                             <button onclick="candidateSearchFormFunctions.resetForm(this);" type="reset"
                                     class="btn btn-info input-sm"><span class="glyphicon glyphicon-refresh"></span>
                             </button>
                             %{--<button type="button" class="btn btn-info input-sm" data-toggle="button"><span class="glyphicon glyphicon-arrow-down"></span></button>--}%
                         </div>
                     </div>
-                </div><!-- /.box-body -->
 
             </form>
-        </div>
     </div>
 </div>
 
@@ -49,7 +45,7 @@
 <div class="box box-solid">
 <div class="box-body">
 <div class="row">
-<div class="col-md-8 col-sm-8">
+<div class="col-md-7 col-sm-7">
     <div class="table-responsive">
         <!-- THE MESSAGES -->
         <table class="table">
@@ -59,7 +55,7 @@
                 <th class="sortable"><a
                         href="/skillo/candidate/list?sort=firstName&amp;order=asc">Full Name</a>
                 </th>
-                <th>Telephone</th>
+                %{--<th>Telephone</th>--}%
                 <th>Address</th>
                 <th>Post Code</th>
                 <th>Trade</th>
@@ -90,8 +86,417 @@
                         </div>
                     </div>
                 </td>
+                %{--<td>--}%
+                    %{--40745763293--}%
+                %{--</td>--}%
                 <td>
-                    40745763293
+                    str. A. Panu, nr. 34
+                </td>
+                <td>
+                    AB10 1AG
+                </td>
+                <td>
+
+                    360 Driver Bellow 10 Tonnes
+
+                </td>
+
+            </tr>
+            <tr>
+                <td>
+
+                    <a href="/skillo/candidate/display/1"
+                       onclick="jQuery.ajax({type: 'POST', url: '/skillo/candidate/display/1', success: function (data, textStatus) {
+                           jQuery('#displayCandidate').html(data);
+                       }, error: function (XMLHttpRequest, textStatus, errorThrown) {
+                       }});
+                       return false;" id="1">Alexandru Bujdei</a>
+
+                    <div id="" style="display: none">
+                        <div>
+                            <p><b>By Consultant:</b> John Shepard</p>
+
+                            <p><b>Email:</b> bujdeialexandru@gmail.com</p>
+
+                            <p><b>Driver:</b> true</p>
+
+                            <p><b>Car Owner:</b> true</p>
+                        </div>
+                    </div>
+                </td>
+                <td>
+                    str. A. Panu, nr. 34
+                </td>
+                <td>
+                    AB10 1AG
+                </td>
+                <td>
+
+                    360 Driver Bellow 10 Tonnes
+
+                </td>
+
+            </tr><tr>
+                <td>
+
+                    <a href="/skillo/candidate/display/1"
+                       onclick="jQuery.ajax({type: 'POST', url: '/skillo/candidate/display/1', success: function (data, textStatus) {
+                           jQuery('#displayCandidate').html(data);
+                       }, error: function (XMLHttpRequest, textStatus, errorThrown) {
+                       }});
+                       return false;" id="1">Alexandru Bujdei</a>
+
+                    <div id="" style="display: none">
+                        <div>
+                            <p><b>By Consultant:</b> John Shepard</p>
+
+                            <p><b>Email:</b> bujdeialexandru@gmail.com</p>
+
+                            <p><b>Driver:</b> true</p>
+
+                            <p><b>Car Owner:</b> true</p>
+                        </div>
+                    </div>
+                </td>
+                <td>
+                    str. A. Panu, nr. 34
+                </td>
+                <td>
+                    AB10 1AG
+                </td>
+                <td>
+
+                    360 Driver Bellow 10 Tonnes
+
+                </td>
+
+            </tr><tr>
+                <td>
+
+                    <a href="/skillo/candidate/display/1"
+                       onclick="jQuery.ajax({type: 'POST', url: '/skillo/candidate/display/1', success: function (data, textStatus) {
+                           jQuery('#displayCandidate').html(data);
+                       }, error: function (XMLHttpRequest, textStatus, errorThrown) {
+                       }});
+                       return false;" id="1">Alexandru Bujdei</a>
+
+                    <div id="" style="display: none">
+                        <div>
+                            <p><b>By Consultant:</b> John Shepard</p>
+
+                            <p><b>Email:</b> bujdeialexandru@gmail.com</p>
+
+                            <p><b>Driver:</b> true</p>
+
+                            <p><b>Car Owner:</b> true</p>
+                        </div>
+                    </div>
+                </td>
+                <td>
+                    str. A. Panu, nr. 34
+                </td>
+                <td>
+                    AB10 1AG
+                </td>
+                <td>
+
+                    360 Driver Bellow 10 Tonnes
+
+                </td>
+
+            </tr><tr>
+                <td>
+
+                    <a href="/skillo/candidate/display/1"
+                       onclick="jQuery.ajax({type: 'POST', url: '/skillo/candidate/display/1', success: function (data, textStatus) {
+                           jQuery('#displayCandidate').html(data);
+                       }, error: function (XMLHttpRequest, textStatus, errorThrown) {
+                       }});
+                       return false;" id="1">Alexandru Bujdei</a>
+
+                    <div id="" style="display: none">
+                        <div>
+                            <p><b>By Consultant:</b> John Shepard</p>
+
+                            <p><b>Email:</b> bujdeialexandru@gmail.com</p>
+
+                            <p><b>Driver:</b> true</p>
+
+                            <p><b>Car Owner:</b> true</p>
+                        </div>
+                    </div>
+                </td>
+                <td>
+                    str. A. Panu, nr. 34
+                </td>
+                <td>
+                    AB10 1AG
+                </td>
+                <td>
+
+                    360 Driver Bellow 10 Tonnes
+
+                </td>
+
+            </tr><tr>
+                <td>
+
+                    <a href="/skillo/candidate/display/1"
+                       onclick="jQuery.ajax({type: 'POST', url: '/skillo/candidate/display/1', success: function (data, textStatus) {
+                           jQuery('#displayCandidate').html(data);
+                       }, error: function (XMLHttpRequest, textStatus, errorThrown) {
+                       }});
+                       return false;" id="1">Alexandru Bujdei</a>
+
+                    <div id="popover_content_wrapper_1" style="display: none">
+                        <div>
+                            <p><b>By Consultant:</b> John Shepard</p>
+
+                            <p><b>Email:</b> bujdeialexandru@gmail.com</p>
+
+                            <p><b>Driver:</b> true</p>
+
+                            <p><b>Car Owner:</b> true</p>
+                        </div>
+                    </div>
+                </td>
+                <td>
+                    str. A. Panu, nr. 34
+                </td>
+                <td>
+                    AB10 1AG
+                </td>
+                <td>
+
+                    360 Driver Bellow 10 Tonnes
+
+                </td>
+
+            </tr><tr>
+                <td>
+
+                    <a href="/skillo/candidate/display/1"
+                       onclick="jQuery.ajax({type: 'POST', url: '/skillo/candidate/display/1', success: function (data, textStatus) {
+                           jQuery('#displayCandidate').html(data);
+                       }, error: function (XMLHttpRequest, textStatus, errorThrown) {
+                       }});
+                       return false;" id="1">Alexandru Bujdei</a>
+
+                    <div id="" style="display: none">
+                        <div>
+                            <p><b>By Consultant:</b> John Shepard</p>
+
+                            <p><b>Email:</b> bujdeialexandru@gmail.com</p>
+
+                            <p><b>Driver:</b> true</p>
+
+                            <p><b>Car Owner:</b> true</p>
+                        </div>
+                    </div>
+                </td>
+                <td>
+                    str. A. Panu, nr. 34
+                </td>
+                <td>
+                    AB10 1AG
+                </td>
+                <td>
+
+                    360 Driver Bellow 10 Tonnes
+
+                </td>
+
+            </tr><tr>
+                <td>
+
+                    <a href="/skillo/candidate/display/1"
+                       onclick="jQuery.ajax({type: 'POST', url: '/skillo/candidate/display/1', success: function (data, textStatus) {
+                           jQuery('#displayCandidate').html(data);
+                       }, error: function (XMLHttpRequest, textStatus, errorThrown) {
+                       }});
+                       return false;" id="1">Alexandru Bujdei</a>
+
+                    <div id="popover_content_wrapper_1" style="display: none">
+                        <div>
+                            <p><b>By Consultant:</b> John Shepard</p>
+
+                            <p><b>Email:</b> bujdeialexandru@gmail.com</p>
+
+                            <p><b>Driver:</b> true</p>
+
+                            <p><b>Car Owner:</b> true</p>
+                        </div>
+                    </div>
+                </td>
+                <td>
+                    str. A. Panu, nr. 34
+                </td>
+                <td>
+                    AB10 1AG
+                </td>
+                <td>
+
+                    360 Driver Bellow 10 Tonnes
+
+                </td>
+
+            </tr><tr>
+                <td>
+
+                    <a href="/skillo/candidate/display/1"
+                       onclick="jQuery.ajax({type: 'POST', url: '/skillo/candidate/display/1', success: function (data, textStatus) {
+                           jQuery('#displayCandidate').html(data);
+                       }, error: function (XMLHttpRequest, textStatus, errorThrown) {
+                       }});
+                       return false;" id="1">Alexandru Bujdei</a>
+
+                    <div id="popover_content_wrapper_1" style="display: none">
+                        <div>
+                            <p><b>By Consultant:</b> John Shepard</p>
+
+                            <p><b>Email:</b> bujdeialexandru@gmail.com</p>
+
+                            <p><b>Driver:</b> true</p>
+
+                            <p><b>Car Owner:</b> true</p>
+                        </div>
+                    </div>
+                </td>
+                <td>
+                    str. A. Panu, nr. 34
+                </td>
+                <td>
+                    AB10 1AG
+                </td>
+                <td>
+
+                    360 Driver Bellow 10 Tonnes
+
+                </td>
+
+            </tr><tr>
+                <td>
+
+                    <a href="/skillo/candidate/display/1"
+                       onclick="jQuery.ajax({type: 'POST', url: '/skillo/candidate/display/1', success: function (data, textStatus) {
+                           jQuery('#displayCandidate').html(data);
+                       }, error: function (XMLHttpRequest, textStatus, errorThrown) {
+                       }});
+                       return false;" id="1">Alexandru Bujdei</a>
+
+                    <div id="popover_content_wrapper_1" style="display: none">
+                        <div>
+                            <p><b>By Consultant:</b> John Shepard</p>
+
+                            <p><b>Email:</b> bujdeialexandru@gmail.com</p>
+
+                            <p><b>Driver:</b> true</p>
+
+                            <p><b>Car Owner:</b> true</p>
+                        </div>
+                    </div>
+                </td>
+                <td>
+                    str. A. Panu, nr. 34
+                </td>
+                <td>
+                    AB10 1AG
+                </td>
+                <td>
+
+                    360 Driver Bellow 10 Tonnes
+
+                </td>
+
+            </tr><tr>
+                <td>
+
+                    <a href="/skillo/candidate/display/1"
+                       onclick="jQuery.ajax({type: 'POST', url: '/skillo/candidate/display/1', success: function (data, textStatus) {
+                           jQuery('#displayCandidate').html(data);
+                       }, error: function (XMLHttpRequest, textStatus, errorThrown) {
+                       }});
+                       return false;" id="1">Alexandru Bujdei</a>
+
+                    <div id="popover_content_wrapper_1" style="display: none">
+                        <div>
+                            <p><b>By Consultant:</b> John Shepard</p>
+
+                            <p><b>Email:</b> bujdeialexandru@gmail.com</p>
+
+                            <p><b>Driver:</b> true</p>
+
+                            <p><b>Car Owner:</b> true</p>
+                        </div>
+                    </div>
+                </td>
+                <td>
+                    str. A. Panu, nr. 34
+                </td>
+                <td>
+                    AB10 1AG
+                </td>
+                <td>
+
+                    360 Driver Bellow 10 Tonnes
+
+                </td>
+
+            </tr><tr>
+                <td>
+
+                    <a href="/skillo/candidate/display/1"
+                       onclick="jQuery.ajax({type: 'POST', url: '/skillo/candidate/display/1', success: function (data, textStatus) {
+                           jQuery('#displayCandidate').html(data);
+                       }, error: function (XMLHttpRequest, textStatus, errorThrown) {
+                       }});
+                       return false;" id="1">Alexandru Bujdei</a>
+
+                    <div id="popover_content_wrapper_1" style="display: none">
+                        <div>
+                            <p><b>By Consultant:</b> John Shepard</p>
+
+                            <p><b>Email:</b> bujdeialexandru@gmail.com</p>
+
+                            <p><b>Driver:</b> true</p>
+
+                            <p><b>Car Owner:</b> true</p>
+                        </div>
+                    </div>
+                </td>
+                <td>
+                    str. A. Panu, nr. 34
+                </td>
+                <td>
+                    AB10 1AG
+                </td>
+                <td>
+
+                    360 Driver Bellow 10 Tonnes
+
+                </td>
+
+            </tr><tr>
+                <td>
+
+                    <a href="/skillo/candidate/display/1"
+                       onclick="jQuery.ajax({type: 'POST', url: '/skillo/candidate/display/1', success: function (data, textStatus) {
+                           jQuery('#displayCandidate').html(data);
+                       }, error: function (XMLHttpRequest, textStatus, errorThrown) {
+                       }});
+                       return false;" id="1">Alexandru Bujdei</a>
+
+                    <div id="popover_content_wrapper_1" style="display: none">
+                        <div>
+                            <p><b>By Consultant:</b> John Shepard</p>
+
+                            <p><b>Email:</b> bujdeialexandru@gmail.com</p>
+
+                            <p><b>Driver:</b> true</p>
+
+                            <p><b>Car Owner:</b> true</p>
+                        </div>
+                    </div>
                 </td>
                 <td>
                     str. A. Panu, nr. 34
@@ -106,143 +511,590 @@
                 </td>
 
             </tr>
-            <tr class="unread">
-                <td class="small-col"><div class="icheckbox_minimal" aria-checked="false"
-                                           aria-disabled="false" style="position: relative;"><input
-                            type="checkbox" style="position: absolute; opacity: 0;"><ins
-                            class="iCheck-helper"
-                            style="position: absolute; top: 0%; left: 0%; display: block; width: 100%; height: 100%; margin: 0px; padding: 0px; border: 0px; opacity: 0; background: rgb(255, 255, 255);"></ins>
-                </div></td>
-                <td class="small-col"><i class="fa fa-star"></i></td>
-                <td class="name"><a href="#">John Doe</a></td>
-                <td class="subject"><a href="#">Urgent! Please read</a></td>
-                <td class="time">12:30 PM</td>
-            </tr>
             <tr>
-                <td class="small-col"><div class="icheckbox_minimal" aria-checked="false"
-                                           aria-disabled="false" style="position: relative;"><input
-                            type="checkbox" style="position: absolute; opacity: 0;"><ins
-                            class="iCheck-helper"
-                            style="position: absolute; top: 0%; left: 0%; display: block; width: 100%; height: 100%; margin: 0px; padding: 0px; border: 0px; opacity: 0; background: rgb(255, 255, 255);"></ins>
-                </div></td>
-                <td class="small-col"><i class="fa fa-star-o"></i></td>
-                <td class="name"><a href="#">John Doe</a></td>
-                <td class="subject"><a href="#">Urgent! Please read</a></td>
-                <td class="time">12:30 PM</td>
-            </tr>
-            <tr>
-                <td class="small-col"><div class="icheckbox_minimal" aria-checked="false"
-                                           aria-disabled="false" style="position: relative;"><input
-                            type="checkbox" style="position: absolute; opacity: 0;"><ins
-                            class="iCheck-helper"
-                            style="position: absolute; top: 0%; left: 0%; display: block; width: 100%; height: 100%; margin: 0px; padding: 0px; border: 0px; opacity: 0; background: rgb(255, 255, 255);"></ins>
-                </div></td>
-                <td class="small-col"><i class="fa fa-star-o"></i></td>
-                <td class="name"><a href="#">John Doe</a></td>
-                <td class="subject"><a href="#">Urgent! Please read</a></td>
-                <td class="time">12:30 PM</td>
-            </tr>
-            <tr class="unread">
-                <td class="small-col"><div class="icheckbox_minimal" aria-checked="false"
-                                           aria-disabled="false" style="position: relative;"><input
-                            type="checkbox" style="position: absolute; opacity: 0;"><ins
-                            class="iCheck-helper"
-                            style="position: absolute; top: 0%; left: 0%; display: block; width: 100%; height: 100%; margin: 0px; padding: 0px; border: 0px; opacity: 0; background: rgb(255, 255, 255);"></ins>
-                </div></td>
-                <td class="small-col"><i class="fa fa-star-o"></i></td>
-                <td class="name"><a href="#">John Doe</a></td>
-                <td class="subject"><a href="#">Urgent! Please read</a></td>
-                <td class="time">12:30 PM</td>
-            </tr>
-            <tr>
-                <td class="small-col"><div class="icheckbox_minimal" aria-checked="false"
-                                           aria-disabled="false" style="position: relative;"><input
-                            type="checkbox" style="position: absolute; opacity: 0;"><ins
-                            class="iCheck-helper"
-                            style="position: absolute; top: 0%; left: 0%; display: block; width: 100%; height: 100%; margin: 0px; padding: 0px; border: 0px; opacity: 0; background: rgb(255, 255, 255);"></ins>
-                </div></td>
-                <td class="small-col"><i class="fa fa-star"></i></td>
-                <td class="name"><a href="#">John Doe</a></td>
-                <td class="subject"><a href="#">Urgent! Please read</a></td>
-                <td class="time">12:30 PM</td>
-            </tr>
-            <tr>
-                <td class="small-col"><div class="icheckbox_minimal" aria-checked="false"
-                                           aria-disabled="false" style="position: relative;"><input
-                            type="checkbox" style="position: absolute; opacity: 0;"><ins
-                            class="iCheck-helper"
-                            style="position: absolute; top: 0%; left: 0%; display: block; width: 100%; height: 100%; margin: 0px; padding: 0px; border: 0px; opacity: 0; background: rgb(255, 255, 255);"></ins>
-                </div></td>
-                <td class="small-col"><i class="fa fa-star"></i></td>
-                <td class="name"><a href="#">John Doe</a></td>
-                <td class="subject"><a href="#">Urgent! Please read</a></td>
-                <td class="time">12:30 PM</td>
-            </tr>
-            <tr>
-                <td class="small-col"><div class="icheckbox_minimal" aria-checked="false"
-                                           aria-disabled="false" style="position: relative;"><input
-                            type="checkbox" style="position: absolute; opacity: 0;"><ins
-                            class="iCheck-helper"
-                            style="position: absolute; top: 0%; left: 0%; display: block; width: 100%; height: 100%; margin: 0px; padding: 0px; border: 0px; opacity: 0; background: rgb(255, 255, 255);"></ins>
-                </div></td>
-                <td class="small-col"><i class="fa fa-star-o"></i></td>
-                <td class="name"><a href="#">John Doe</a></td>
-                <td class="subject"><a href="#">Urgent! Please read</a></td>
-                <td class="time">12:30 PM</td>
-            </tr>
-            <tr>
-                <td class="small-col"><div class="icheckbox_minimal" aria-checked="false"
-                                           aria-disabled="false" style="position: relative;"><input
-                            type="checkbox" style="position: absolute; opacity: 0;"><ins
-                            class="iCheck-helper"
-                            style="position: absolute; top: 0%; left: 0%; display: block; width: 100%; height: 100%; margin: 0px; padding: 0px; border: 0px; opacity: 0; background: rgb(255, 255, 255);"></ins>
-                </div></td>
-                <td class="small-col"><i class="fa fa-star"></i></td>
-                <td class="name"><a href="#">John Doe</a></td>
-                <td class="subject"><a href="#">Urgent! Please read</a></td>
-                <td class="time">12:30 PM</td>
-            </tr>
-            <tr class="unread">
-                <td class="small-col"><div class="icheckbox_minimal" aria-checked="false"
-                                           aria-disabled="false" style="position: relative;"><input
-                            type="checkbox" style="position: absolute; opacity: 0;"><ins
-                            class="iCheck-helper"
-                            style="position: absolute; top: 0%; left: 0%; display: block; width: 100%; height: 100%; margin: 0px; padding: 0px; border: 0px; opacity: 0; background: rgb(255, 255, 255);"></ins>
-                </div></td>
-                <td class="small-col"><i class="fa fa-star-o"></i></td>
-                <td class="name"><a href="#">John Doe</a></td>
-                <td class="subject"><a href="#">Urgent! Please read</a></td>
-                <td class="time">12:30 PM</td>
-            </tr>
-            <tr class="unread">
-                <td class="small-col"><div class="icheckbox_minimal" aria-checked="false"
-                                           aria-disabled="false" style="position: relative;"><input
-                            type="checkbox" style="position: absolute; opacity: 0;"><ins
-                            class="iCheck-helper"
-                            style="position: absolute; top: 0%; left: 0%; display: block; width: 100%; height: 100%; margin: 0px; padding: 0px; border: 0px; opacity: 0; background: rgb(255, 255, 255);"></ins>
-                </div></td>
-                <td class="small-col"><i class="fa fa-star-o"></i></td>
-                <td class="name"><a href="#">John Doe</a></td>
-                <td class="subject"><a href="#">Urgent! Please read</a></td>
-                <td class="time">12:30 PM</td>
-            </tr>
-            <tr>
-                <td class="small-col"><div class="icheckbox_minimal" aria-checked="false"
-                                           aria-disabled="false" style="position: relative;"><input
-                            type="checkbox" style="position: absolute; opacity: 0;"><ins
-                            class="iCheck-helper"
-                            style="position: absolute; top: 0%; left: 0%; display: block; width: 100%; height: 100%; margin: 0px; padding: 0px; border: 0px; opacity: 0; background: rgb(255, 255, 255);"></ins>
-                </div></td>
-                <td class="small-col"><i class="fa fa-star-o"></i></td>
-                <td class="name"><a href="#">John Doe</a></td>
-                <td class="subject"><a href="#">Urgent! Please read</a></td>
-                <td class="time">12:30 PM</td>
+                <td>
+
+                    <a href="/skillo/candidate/display/1"
+                       onclick="jQuery.ajax({type: 'POST', url: '/skillo/candidate/display/1', success: function (data, textStatus) {
+                           jQuery('#displayCandidate').html(data);
+                       }, error: function (XMLHttpRequest, textStatus, errorThrown) {
+                       }});
+                       return false;" id="1">Alexandru Bujdei</a>
+
+                    <div id="popover_content_wrapper_1" style="display: none">
+                        <div>
+                            <p><b>By Consultant:</b> John Shepard</p>
+
+                            <p><b>Email:</b> bujdeialexandru@gmail.com</p>
+
+                            <p><b>Driver:</b> true</p>
+
+                            <p><b>Car Owner:</b> true</p>
+                        </div>
+                    </div>
+                </td>
+                <td>
+                    str. A. Panu, nr. 34
+                </td>
+                <td>
+                    AB10 1AG
+                </td>
+                <td>
+
+                    360 Driver Bellow 10 Tonnes
+
+                </td>
+
+            </tr><tr>
+                <td>
+
+                    <a href="/skillo/candidate/display/1"
+                       onclick="jQuery.ajax({type: 'POST', url: '/skillo/candidate/display/1', success: function (data, textStatus) {
+                           jQuery('#displayCandidate').html(data);
+                       }, error: function (XMLHttpRequest, textStatus, errorThrown) {
+                       }});
+                       return false;" id="1">Alexandru Bujdei</a>
+
+                    <div id="popover_content_wrapper_1" style="display: none">
+                        <div>
+                            <p><b>By Consultant:</b> John Shepard</p>
+
+                            <p><b>Email:</b> bujdeialexandru@gmail.com</p>
+
+                            <p><b>Driver:</b> true</p>
+
+                            <p><b>Car Owner:</b> true</p>
+                        </div>
+                    </div>
+                </td>
+                <td>
+                    str. A. Panu, nr. 34
+                </td>
+                <td>
+                    AB10 1AG
+                </td>
+                <td>
+
+                    360 Driver Bellow 10 Tonnes
+
+                </td>
+
+            </tr><tr>
+                <td>
+
+                    <a href="/skillo/candidate/display/1"
+                       onclick="jQuery.ajax({type: 'POST', url: '/skillo/candidate/display/1', success: function (data, textStatus) {
+                           jQuery('#displayCandidate').html(data);
+                       }, error: function (XMLHttpRequest, textStatus, errorThrown) {
+                       }});
+                       return false;" id="1">Alexandru Bujdei</a>
+
+                    <div id="popover_content_wrapper_1" style="display: none">
+                        <div>
+                            <p><b>By Consultant:</b> John Shepard</p>
+
+                            <p><b>Email:</b> bujdeialexandru@gmail.com</p>
+
+                            <p><b>Driver:</b> true</p>
+
+                            <p><b>Car Owner:</b> true</p>
+                        </div>
+                    </div>
+                </td>
+                <td>
+                    str. A. Panu, nr. 34
+                </td>
+                <td>
+                    AB10 1AG
+                </td>
+                <td>
+
+                    360 Driver Bellow 10 Tonnes
+
+                </td>
+
+            </tr><tr>
+                <td>
+
+                    <a href="/skillo/candidate/display/1"
+                       onclick="jQuery.ajax({type: 'POST', url: '/skillo/candidate/display/1', success: function (data, textStatus) {
+                           jQuery('#displayCandidate').html(data);
+                       }, error: function (XMLHttpRequest, textStatus, errorThrown) {
+                       }});
+                       return false;" id="1">Alexandru Bujdei</a>
+
+                    <div id="popover_content_wrapper_1" style="display: none">
+                        <div>
+                            <p><b>By Consultant:</b> John Shepard</p>
+
+                            <p><b>Email:</b> bujdeialexandru@gmail.com</p>
+
+                            <p><b>Driver:</b> true</p>
+
+                            <p><b>Car Owner:</b> true</p>
+                        </div>
+                    </div>
+                </td>
+                <td>
+                    str. A. Panu, nr. 34
+                </td>
+                <td>
+                    AB10 1AG
+                </td>
+                <td>
+
+                    360 Driver Bellow 10 Tonnes
+
+                </td>
+
+            </tr><tr>
+                <td>
+
+                    <a href="/skillo/candidate/display/1"
+                       onclick="jQuery.ajax({type: 'POST', url: '/skillo/candidate/display/1', success: function (data, textStatus) {
+                           jQuery('#displayCandidate').html(data);
+                       }, error: function (XMLHttpRequest, textStatus, errorThrown) {
+                       }});
+                       return false;" id="1">Alexandru Bujdei</a>
+
+                    <div id="popover_content_wrapper_1" style="display: none">
+                        <div>
+                            <p><b>By Consultant:</b> John Shepard</p>
+
+                            <p><b>Email:</b> bujdeialexandru@gmail.com</p>
+
+                            <p><b>Driver:</b> true</p>
+
+                            <p><b>Car Owner:</b> true</p>
+                        </div>
+                    </div>
+                </td>
+                <td>
+                    str. A. Panu, nr. 34
+                </td>
+                <td>
+                    AB10 1AG
+                </td>
+                <td>
+
+                    360 Driver Bellow 10 Tonnes
+
+                </td>
+
+            </tr><tr>
+                <td>
+
+                    <a href="/skillo/candidate/display/1"
+                       onclick="jQuery.ajax({type: 'POST', url: '/skillo/candidate/display/1', success: function (data, textStatus) {
+                           jQuery('#displayCandidate').html(data);
+                       }, error: function (XMLHttpRequest, textStatus, errorThrown) {
+                       }});
+                       return false;" id="1">Alexandru Bujdei</a>
+
+                    <div id="popover_content_wrapper_1" style="display: none">
+                        <div>
+                            <p><b>By Consultant:</b> John Shepard</p>
+
+                            <p><b>Email:</b> bujdeialexandru@gmail.com</p>
+
+                            <p><b>Driver:</b> true</p>
+
+                            <p><b>Car Owner:</b> true</p>
+                        </div>
+                    </div>
+                </td>
+                <td>
+                    str. A. Panu, nr. 34
+                </td>
+                <td>
+                    AB10 1AG
+                </td>
+                <td>
+
+                    360 Driver Bellow 10 Tonnes
+
+                </td>
+
+            </tr><tr>
+                <td>
+
+                    <a href="/skillo/candidate/display/1"
+                       onclick="jQuery.ajax({type: 'POST', url: '/skillo/candidate/display/1', success: function (data, textStatus) {
+                           jQuery('#displayCandidate').html(data);
+                       }, error: function (XMLHttpRequest, textStatus, errorThrown) {
+                       }});
+                       return false;" id="1">Alexandru Bujdei</a>
+
+                    <div id="popover_content_wrapper_1" style="display: none">
+                        <div>
+                            <p><b>By Consultant:</b> John Shepard</p>
+
+                            <p><b>Email:</b> bujdeialexandru@gmail.com</p>
+
+                            <p><b>Driver:</b> true</p>
+
+                            <p><b>Car Owner:</b> true</p>
+                        </div>
+                    </div>
+                </td>
+                <td>
+                    str. A. Panu, nr. 34
+                </td>
+                <td>
+                    AB10 1AG
+                </td>
+                <td>
+
+                    360 Driver Bellow 10 Tonnes
+
+                </td>
+
+            </tr><tr>
+                <td>
+
+                    <a href="/skillo/candidate/display/1"
+                       onclick="jQuery.ajax({type: 'POST', url: '/skillo/candidate/display/1', success: function (data, textStatus) {
+                           jQuery('#displayCandidate').html(data);
+                       }, error: function (XMLHttpRequest, textStatus, errorThrown) {
+                       }});
+                       return false;" id="1">Alexandru Bujdei</a>
+
+                    <div id="popover_content_wrapper_1" style="display: none">
+                        <div>
+                            <p><b>By Consultant:</b> John Shepard</p>
+
+                            <p><b>Email:</b> bujdeialexandru@gmail.com</p>
+
+                            <p><b>Driver:</b> true</p>
+
+                            <p><b>Car Owner:</b> true</p>
+                        </div>
+                    </div>
+                </td>
+                <td>
+                    str. A. Panu, nr. 34
+                </td>
+                <td>
+                    AB10 1AG
+                </td>
+                <td>
+
+                    360 Driver Bellow 10 Tonnes
+
+                </td>
+
+            </tr><tr>
+                <td>
+
+                    <a href="/skillo/candidate/display/1"
+                       onclick="jQuery.ajax({type: 'POST', url: '/skillo/candidate/display/1', success: function (data, textStatus) {
+                           jQuery('#displayCandidate').html(data);
+                       }, error: function (XMLHttpRequest, textStatus, errorThrown) {
+                       }});
+                       return false;" id="1">Alexandru Bujdei</a>
+
+                    <div id="popover_content_wrapper_1" style="display: none">
+                        <div>
+                            <p><b>By Consultant:</b> John Shepard</p>
+
+                            <p><b>Email:</b> bujdeialexandru@gmail.com</p>
+
+                            <p><b>Driver:</b> true</p>
+
+                            <p><b>Car Owner:</b> true</p>
+                        </div>
+                    </div>
+                </td>
+                <td>
+                    str. A. Panu, nr. 34
+                </td>
+                <td>
+                    AB10 1AG
+                </td>
+                <td>
+
+                    360 Driver Bellow 10 Tonnes
+
+                </td>
+
+            </tr><tr>
+                <td>
+
+                    <a href="/skillo/candidate/display/1"
+                       onclick="jQuery.ajax({type: 'POST', url: '/skillo/candidate/display/1', success: function (data, textStatus) {
+                           jQuery('#displayCandidate').html(data);
+                       }, error: function (XMLHttpRequest, textStatus, errorThrown) {
+                       }});
+                       return false;" id="1">Alexandru Bujdei</a>
+
+                    <div id="popover_content_wrapper_1" style="display: none">
+                        <div>
+                            <p><b>By Consultant:</b> John Shepard</p>
+
+                            <p><b>Email:</b> bujdeialexandru@gmail.com</p>
+
+                            <p><b>Driver:</b> true</p>
+
+                            <p><b>Car Owner:</b> true</p>
+                        </div>
+                    </div>
+                </td>
+                <td>
+                    str. A. Panu, nr. 34
+                </td>
+                <td>
+                    AB10 1AG
+                </td>
+                <td>
+
+                    360 Driver Bellow 10 Tonnes
+
+                </td>
+
+            </tr><tr>
+                <td>
+
+                    <a href="/skillo/candidate/display/1"
+                       onclick="jQuery.ajax({type: 'POST', url: '/skillo/candidate/display/1', success: function (data, textStatus) {
+                           jQuery('#displayCandidate').html(data);
+                       }, error: function (XMLHttpRequest, textStatus, errorThrown) {
+                       }});
+                       return false;" id="1">Alexandru Bujdei</a>
+
+                    <div id="popover_content_wrapper_1" style="display: none">
+                        <div>
+                            <p><b>By Consultant:</b> John Shepard</p>
+
+                            <p><b>Email:</b> bujdeialexandru@gmail.com</p>
+
+                            <p><b>Driver:</b> true</p>
+
+                            <p><b>Car Owner:</b> true</p>
+                        </div>
+                    </div>
+                </td>
+                <td>
+                    str. A. Panu, nr. 34
+                </td>
+                <td>
+                    AB10 1AG
+                </td>
+                <td>
+
+                    360 Driver Bellow 10 Tonnes
+
+                </td>
+
+            </tr><tr>
+                <td>
+
+                    <a href="/skillo/candidate/display/1"
+                       onclick="jQuery.ajax({type: 'POST', url: '/skillo/candidate/display/1', success: function (data, textStatus) {
+                           jQuery('#displayCandidate').html(data);
+                       }, error: function (XMLHttpRequest, textStatus, errorThrown) {
+                       }});
+                       return false;" id="1">Alexandru Bujdei</a>
+
+                    <div id="popover_content_wrapper_1" style="display: none">
+                        <div>
+                            <p><b>By Consultant:</b> John Shepard</p>
+
+                            <p><b>Email:</b> bujdeialexandru@gmail.com</p>
+
+                            <p><b>Driver:</b> true</p>
+
+                            <p><b>Car Owner:</b> true</p>
+                        </div>
+                    </div>
+                </td>
+                <td>
+                    str. A. Panu, nr. 34
+                </td>
+                <td>
+                    AB10 1AG
+                </td>
+                <td>
+
+                    360 Driver Bellow 10 Tonnes
+
+                </td>
+
+            </tr><tr>
+                <td>
+
+                    <a href="/skillo/candidate/display/1"
+                       onclick="jQuery.ajax({type: 'POST', url: '/skillo/candidate/display/1', success: function (data, textStatus) {
+                           jQuery('#displayCandidate').html(data);
+                       }, error: function (XMLHttpRequest, textStatus, errorThrown) {
+                       }});
+                       return false;" id="1">Alexandru Bujdei</a>
+
+                    <div id="popover_content_wrapper_1" style="display: none">
+                        <div>
+                            <p><b>By Consultant:</b> John Shepard</p>
+
+                            <p><b>Email:</b> bujdeialexandru@gmail.com</p>
+
+                            <p><b>Driver:</b> true</p>
+
+                            <p><b>Car Owner:</b> true</p>
+                        </div>
+                    </div>
+                </td>
+                <td>
+                    str. A. Panu, nr. 34
+                </td>
+                <td>
+                    AB10 1AG
+                </td>
+                <td>
+
+                    360 Driver Bellow 10 Tonnes
+
+                </td>
+
+            </tr><tr>
+                <td>
+
+                    <a href="/skillo/candidate/display/1"
+                       onclick="jQuery.ajax({type: 'POST', url: '/skillo/candidate/display/1', success: function (data, textStatus) {
+                           jQuery('#displayCandidate').html(data);
+                       }, error: function (XMLHttpRequest, textStatus, errorThrown) {
+                       }});
+                       return false;" id="1">Alexandru Bujdei</a>
+
+                    <div id="popover_content_wrapper_1" style="display: none">
+                        <div>
+                            <p><b>By Consultant:</b> John Shepard</p>
+
+                            <p><b>Email:</b> bujdeialexandru@gmail.com</p>
+
+                            <p><b>Driver:</b> true</p>
+
+                            <p><b>Car Owner:</b> true</p>
+                        </div>
+                    </div>
+                </td>
+                <td>
+                    str. A. Panu, nr. 34
+                </td>
+                <td>
+                    AB10 1AG
+                </td>
+                <td>
+
+                    360 Driver Bellow 10 Tonnes
+
+                </td>
+
+            </tr><tr>
+                <td>
+
+                    <a href="/skillo/candidate/display/1"
+                       onclick="jQuery.ajax({type: 'POST', url: '/skillo/candidate/display/1', success: function (data, textStatus) {
+                           jQuery('#displayCandidate').html(data);
+                       }, error: function (XMLHttpRequest, textStatus, errorThrown) {
+                       }});
+                       return false;" id="1">Alexandru Bujdei</a>
+
+                    <div id="popover_content_wrapper_1" style="display: none">
+                        <div>
+                            <p><b>By Consultant:</b> John Shepard</p>
+
+                            <p><b>Email:</b> bujdeialexandru@gmail.com</p>
+
+                            <p><b>Driver:</b> true</p>
+
+                            <p><b>Car Owner:</b> true</p>
+                        </div>
+                    </div>
+                </td>
+                <td>
+                    str. A. Panu, nr. 34
+                </td>
+                <td>
+                    AB10 1AG
+                </td>
+                <td>
+
+                    360 Driver Bellow 10 Tonnes
+
+                </td>
+
+            </tr><tr>
+                <td>
+
+                    <a href="/skillo/candidate/display/1"
+                       onclick="jQuery.ajax({type: 'POST', url: '/skillo/candidate/display/1', success: function (data, textStatus) {
+                           jQuery('#displayCandidate').html(data);
+                       }, error: function (XMLHttpRequest, textStatus, errorThrown) {
+                       }});
+                       return false;" id="1">Alexandru Bujdei</a>
+
+                    <div id="popover_content_wrapper_1" style="display: none">
+                        <div>
+                            <p><b>By Consultant:</b> John Shepard</p>
+
+                            <p><b>Email:</b> bujdeialexandru@gmail.com</p>
+
+                            <p><b>Driver:</b> true</p>
+
+                            <p><b>Car Owner:</b> true</p>
+                        </div>
+                    </div>
+                </td>
+                <td>
+                    str. A. Panu, nr. 34
+                </td>
+                <td>
+                    AB10 1AG
+                </td>
+                <td>
+
+                    360 Driver Bellow 10 Tonnes
+
+                </td>
+
+            </tr><tr>
+                <td>
+
+                    <a href="/skillo/candidate/display/1"
+                       onclick="jQuery.ajax({type: 'POST', url: '/skillo/candidate/display/1', success: function (data, textStatus) {
+                           jQuery('#displayCandidate').html(data);
+                       }, error: function (XMLHttpRequest, textStatus, errorThrown) {
+                       }});
+                       return false;" id="1">Alexandru Bujdei</a>
+
+                    <div id="popover_content_wrapper_1" style="display: none">
+                        <div>
+                            <p><b>By Consultant:</b> John Shepard</p>
+
+                            <p><b>Email:</b> bujdeialexandru@gmail.com</p>
+
+                            <p><b>Driver:</b> true</p>
+
+                            <p><b>Car Owner:</b> true</p>
+                        </div>
+                    </div>
+                </td>
+                <td>
+                    str. A. Panu, nr. 34
+                </td>
+                <td>
+                    AB10 1AG
+                </td>
+                <td>
+
+                    360 Driver Bellow 10 Tonnes
+
+                </td>
+
             </tr>
             </tbody>
         </table>
     </div><!-- /.table-responsive -->
 </div><!-- /.col (RIGHT) -->
-<div class="col-md-4 col-sm-4">
+<div class="col-md-5 col-sm-5">
     <!-- BOXES are complex enough to move the .box-header around.
                                                  This is an example of having the box header within the box body -->
     <div class="box-header">
@@ -274,14 +1126,18 @@
                         class="fa fa-pencil append-icon"></i> Edit</a>
                 <a class="btn btn-sm bg-yellow" %{--style="position: absolute; top: 5px; right: 5px;"--}%><i
                         class="fa fa-star append-icon"></i>Star</a>
+                <a class="btn btn-sm bg-yellow" %{--style="position: absolute; top: 5px; right: 5px;"--}%><i
+                        class="fa fa-plus-square append-icon"></i>&nbsp;Add to</a>
+                <a class="btn btn-sm bg-yellow" %{--style="position: absolute; top: 5px; right: 5px;"--}%><i
+                        class="fa fa-print append-icon"></i>&nbsp;PDF</a>
             </div>
 
         </div>
         <br />
-        <p class="text-light-blue">Main Trade qualification</p>
-        <p class="">Other Competence</p>
-        <p class="">Other Competence</p>
-        <p class="text-yellow">Qualification will expire in < 2 weeks</p>
+        <p class="text-light-blue"><b>Main Trade qualification (always first) </b></p>
+        <p class="">Other Competence ( with no set exp. date )</p>
+        <a href="#"><p class="">Other Competence </p></a>
+        <p class="text-yellow">Qualification will expire in < 2 months (setting maybe) </p>
         <p class="text-red">Qualification expired.</p>
         <div class="row">
             <div class="col-sm-3">

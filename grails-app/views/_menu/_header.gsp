@@ -277,7 +277,7 @@
         <!-- Menu Footer-->
         <li class="user-footer">
             <div class="pull-left">
-                <a href="${createLink(controller: 'userSetting', action: 'index')}" class="btn btn-default btn-flat">
+                <a href="${createLink(controller: 'consultant', action: 'index')}" class="btn btn-default btn-flat">
                     <g:message code="userSetting.multiple.label"/>
                 </a>
             </div>

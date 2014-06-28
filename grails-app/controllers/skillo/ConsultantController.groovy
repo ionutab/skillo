@@ -1,10 +1,32 @@
 package skillo
 
-class ConsultantController {
+class ConsultantController extends BaseController {
 
-    def scaffold = true
+    def settings() {
+        log.info("ConCon.settings")
+        Consultant consultant = getCurrentConsultant()
 
-    def index() {
-        redirect(action: "list")
+        render (view: "settings" , model: [consultant:consultant])
     }
+
+    def saveSettings(){
+        log.info("ConCon.saveSettings")
+        log.info(params)
+
+        def consultant = getCurrentConsultant()
+        consultant.properties = params.consultant
+
+        log.info consultant
+
+
+
+        redirect(uri: "/")
+    }
+
+
+    def uploadPhoto(){
+        log.info("ConCon.uploadPhoto")
+        redirect(action: settings())
+    }
+
 }

@@ -1,17 +1,11 @@
 <section class="content-header">
-    <ul id="Menu" class="nav nav-pills">
-        <li class="active">
-            <a href="#" ><span class="glyphicon glyphicon-th-list"></span>Candidate List</a>
-        </li>
-        <li class="">
-            <a href="#" ><span class="glyphicon glyphicon-plus"></span>New Candidate</a>
-        </li>
+            <a href="#" class="btn btn-primary" ><i class="fa fa-bars"></i>&nbsp;Candidate List</a>
+            <a href="#" class="btn btn-default" ><i class="fa fa-plus"></i>&nbsp;New Candidate</a>
         %{--
             <li class="">
                 <a href="#"><span class="glyphicon glyphicon-pencil"></span>Edit Candidate</a>
             </li>
         --}%
-    </ul>
 
 </section>
 

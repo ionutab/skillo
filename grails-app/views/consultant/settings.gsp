@@ -1,0 +1,152 @@
+<%@ page contentType="text/html;charset=UTF-8" %>
+<html>
+<head>
+    <meta name="layout" content="admin_lte_layout"/>
+    <g:set var="layout_nocontextbar" value="false" scope="request"/>
+</head>
+
+<body>
+<div class="row">
+    <div class="col-md-3">
+        <div class="box box-solid">
+            <g:form controller="consultant" action="uploadPhoto">
+                <div class="box-body">
+                    <h4 class="text-center">${consultant.firstName + " " + consultant.lastName}</h4>
+                    <div class="row">
+                        <div class="col-xs-12 text-center">
+                            <div class="img-thumbnail">
+                                <g:img dir="images/avatar" file="female-icon.jpg" />
+                            </div>
+                            <div class="box-tools text-center">
+                                <a class="btn btn-primary btn-md  bg-blue" href="javascript:void(0);">
+                                    <i class="fa fa-cloud-upload append-icon"></i> Upload
+                                </a>
+                            </div>
+
+                            <div class="box-tools">
+                                <address>
+                                    <strong>Twitter, Inc.</strong><br>
+                                    795 Folsom Ave, Suite 600<br>
+                                    San Francisco, CA 94107<br>
+                                    <abbr title="Phone">P:</abbr> (123) 456-7890
+                                </address>
+                            </div>
+
+                            <div class="box-tools">
+                                <i class="fa fa-star text-yellow fa-fw"></i><i
+                                    class="fa fa-star text-success fa-fw"></i><i
+                                    class="fa fa-star text-green fa-fw"></i><i class="fa fa-star vd_yellow fa-fw"></i><i
+                                    class="fa fa-star vd_yellow fa-fw"></i>
+                            </div>
+                        </div>
+
+                    </div>
+
+                </div>
+            </g:form>
+
+        </div>
+    </div>
+
+    <div class="col-md-9">
+        <div class="box box-solid">
+            <g:form controller="consultant" action="saveSettings" class="form-horizontal" autocomplete="off">
+                <div class="box-body">
+                    <h4><i class="fa fa-wrench"></i>&nbsp;Account settings</h4>
+                    <div class="row">
+                        <div class="col-md-12">
+                            <div class="form-group">
+                                <label for="firstName" class="col-sm-2 control-label">First name</label>
+                                <div class="col-sm-5">
+                                    <input type="text" class="form-control" id="firstName" name="consultant.firstName" placeholder="First name"
+                                           value="${consultant.firstName}">
+                                </div>
+                            </div>
+                            <div class="form-group">
+                                <label for="lastName" class="col-sm-2 control-label">Last name</label>
+                                <div class="col-sm-5">
+                                    <input type="text" class="form-control" id="lastName" name="consultant.lastName" placeholder="Last name"
+                                            value="${consultant.lastName}">
+                                </div>
+                            </div>
+                        </div>
+                    </div>
+                    <hr>
+                    <h4><i class="fa fa-globe"></i>&nbsp;Contact settings</h4>
+                    <div class="row">
+                        <div class="col-md-12">
+                            <div class="form-group">
+                                <label for="email" class="col-sm-2 control-label">Email Address</label>
+                                <div class="col-sm-5">
+                                    <input type="email" class="form-control" id="email" name="consultant.email" placeholder="Email"
+                                           value="${consultant.email}">
+                                </div>
+                            </div>
+                            <div class="form-group">
+                                <label for="telephoneNumber" class="col-sm-2 control-label">Telephone Number</label>
+                                <div class="col-sm-5">
+                                    <input type="tel" class="form-control" id="telephoneNumber" name="consultant.telephoneNumber" placeholder="Telephone Number"
+                                           value="${consultant.telephoneNumber}">
+                                </div>
+                            </div>
+                            <div class="form-group">
+                                <label for="website" class="col-sm-2 control-label">Website</label>
+                                <div class="col-sm-5">
+                                    <input type="text" class="form-control" id="website" name="consultant.website" placeholder="Website"
+                                           value="${consultant.website}">
+                                </div>
+                            </div>
+                            <div class="form-group">
+                                <label for="facebook" class="col-sm-2 control-label">Facebook</label>
+                                <div class="col-sm-5">
+                                    <input type="text" class="form-control" id="facebook" name="consultant.facebook" placeholder="Facebook"
+                                           value="${consultant.facebook}">
+                                </div>
+                            </div>
+                            <div class="form-group">
+                                <label for="twitter" class="col-sm-2 control-label">Twitter</label>
+                                <div class="col-sm-5">
+                                    <input type="text" class="form-control" id="twitter" name="consultant.twitter" placeholder="Twitter" autocomplete="off"
+                                           value="${consultant.twitter}">
+                                </div>
+                            </div>
+                        </div>
+                    </div>
+                    <hr>
+                    <h4><i class="fa fa-key"></i>&nbsp;Password settings</h4>
+                    <div class="row">
+                        <div class="col-md-12">
+                            <div class="form-group">
+                                <label for="u_password" class="col-sm-2 control-label">Password</label>
+                                <div class="col-sm-5">
+                                    <input type="password" class="form-control" id="u_password" name="user.password" placeholder="Old Password" autocomplete="off" >
+                                </div>
+                            </div>
+                            <div class="form-group">
+                                <label for="newPassword" class="col-sm-2 control-label">New password</label>
+                                <div class="col-sm-5">
+                                    <input type="password" class="form-control" id="newPassword" name="newPassword" placeholder="New password">
+                                </div>
+                            </div>
+                            <div class="form-group">
+                                <label for="retypePassword" class="col-sm-2 control-label">Re-type password</label>
+                                <div class="col-sm-5">
+                                    <input type="password" class="form-control" id="retypePassword" name="retypePassword" placeholder="Re-type password">
+                                </div>
+                            </div>
+                        </div>
+                    </div>
+                    <div class="row">
+                        <div class="col-md-12">
+                            <g:submitButton name="Finish" class="btn btn-success btn" />
+                            <g:link uri="/" class="btn btn-warning" name="Cancel" >Cancel</g:link>
+
+                        </div>
+                    </div>
+                </div>
+            </g:form>
+        </div>
+    </div>
+</div>
+</body>
+</html>

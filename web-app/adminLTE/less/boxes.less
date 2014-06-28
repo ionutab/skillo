@@ -7,7 +7,7 @@
     position: relative;
     background: #ffffff;
     border-top: 2px solid darken(@box-border-color, 20%);
-    margin-bottom: 20px;
+    margin-bottom: 10px;
     .border-radius(@box-border-radius);
     width: 100%;
     box-shadow: 0px 1px 3px rgba(0, 0, 0, 0.1);
@@ -65,8 +65,6 @@
         > .box-tools {
             padding: 5px 10px 5px 5px;
         }
-
-
     }
 
     // Box body
@@ -138,7 +136,11 @@
             margin: -9px;
         }
 
-
+        // Box Tools
+        .box-tools {
+          //CONSIDER CHANGING TO MARGIN
+          padding: 10px;
+        }
     }
 
     // Box footer
@@ -394,4 +396,7 @@
         background: transparent url('../img/ajax-loader1.gif') 50% 50% no-repeat;
     }
 
+    > .img-thumbnail {
+      margin-bottom: 10px;
+    }
 }
