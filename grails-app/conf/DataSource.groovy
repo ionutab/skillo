@@ -28,7 +28,7 @@ environments {
 
     test {
         dataSource {
-            dbCreate = "create-drop" // one of 'create', 'create-drop', 'update', 'validate', ''
+            dbCreate = "update" // one of 'create', 'create-drop', 'update', 'validate', ''
             driverClassName = "com.mysql.jdbc.Driver"
             url = "jdbc:mysql://us-cdbr-cb-east-01.cleardb.net:3306/cb_skillo?useUnicode=yes&characterEncoding=UTF-8"
             username = "bb6881f1750d59"

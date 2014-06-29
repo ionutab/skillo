@@ -40,10 +40,16 @@ class CandidateController extends BaseController {
 
         def candidate = new Candidate(params.candidate)
         def address = new Address(params.address)
-        def postCode = PostCode.get(params.postCode.id)
+
         def mainTrade = Qualification.get(params.candidateMainTrade.id)
 
-        address.postCode = postCode
+        if(params.postCode && params.postCode.id){
+            def postCode = PostCode.get(params.postCode.id)
+            if(postCode){
+                address.postCode = postCode
+            }
+        }
+
         candidate.address = address
 
         if(mainTrade != null){
@@ -108,8 +114,12 @@ class CandidateController extends BaseController {
 
         candidate.address.properties = params.address
 
-        if(params.postCode?.id && !params.postCode?.id.equals(candidate.address.postCode.id)){
-            candidate.address.postCode = PostCode.get(params.postCode.id)
+        if(params.postCode && params.postCode.id){
+            if(!params.postCode.id.equals(candidate.address?.postCode?.id)){
+                candidate.address.postCode = PostCode.get(params.postCode.id)
+            }
+        } else {
+            candidate.address.postCode = null
         }
 
         candidate.payroll.properties = params.payroll

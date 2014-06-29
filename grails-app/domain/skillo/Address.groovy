@@ -10,5 +10,6 @@ class Address {
 
     static constraints = {
         details blank: false
+        postCode nullable: true
     }
 }
