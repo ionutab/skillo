@@ -1,7 +1,8 @@
 <header class="header">
-<a href="index.html" class="logo">
+
+<g:link uri="/" class="logo">
     <g:meta name="app.title"/>
-</a>
+</g:link>
 <!-- Header Navbar: style can be found in header.less -->
 <nav class="navbar navbar-static-top " role="navigation">
 <!-- Sidebar toggle button-->

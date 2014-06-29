@@ -12,6 +12,8 @@ class User {
 	boolean accountLocked
 	boolean passwordExpired
 
+    static belongsTo = Consultant
+
 	static constraints = {
 		username blank: false, unique: true
 		password blank: false

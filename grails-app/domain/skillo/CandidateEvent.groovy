@@ -10,10 +10,12 @@ import skillo.history.DomainModelEvent
 class CandidateEvent implements DomainModelEvent {
 
     Consultant consultant
-    Candidate candidate
+
     DefaultHistoryEvent eventDetails = new DefaultHistoryEvent()
 
     static embedded = ['eventDetails']
+
+    static belongsTo = [candidate:Candidate]
 
     static constraints = {
 

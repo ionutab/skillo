@@ -27,3 +27,5 @@ INSERT INTO qualification (code, name, description, can_be_main_trade, version)
 
 update qualification set code = null where length(code) = 0 and code is not null;
 update qualification set description = null where length(description) = 0 and description is not null;
+
+UPDATE qualification SET code = REPLACE(REPLACE(code, '\r', ''), '\n', '');

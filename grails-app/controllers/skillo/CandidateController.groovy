@@ -75,10 +75,10 @@ class CandidateController extends BaseController {
     }
 
     def edit() {
-        log.info("Candidate Controller - edit ffs")
+        log.info("Candidate Controller - edit")
 
         def candidate = Candidate.get(params.id)
-        if (!candidate) {
+        if (!candidate || candidate.active == false) {
             flash.message = message(code: 'default.not.found.message', args: [message(code: 'candidate.label', default: 'Candidate'), params.id])
             redirect(action: "list")
             return
@@ -98,7 +98,6 @@ class CandidateController extends BaseController {
 
     def update(){
 
-
         def candidate = Candidate.get(params.id)
 
         if(!candidate){
@@ -117,7 +116,7 @@ class CandidateController extends BaseController {
         candidate.properties = params.candidate
 
         if(candidate.checkVersion(Long.parseLong(params.version))){
-            if (!candidate.save(deepvalidate:true, flush: true)) {
+            if (!candidate.save(deepvalidate:true )) {
 
                 if(candidate.hasErrors()){
                     candidate.errors.each {
@@ -218,7 +217,6 @@ class CandidateController extends BaseController {
     }
 
     def deleteDocument() {
-
 
         print("@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@ "+params)
 

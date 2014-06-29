@@ -53,18 +53,31 @@
         <g:form controller="consultant" action="index" class="form-horizontal" autocomplete="off">
             <div class="box-body">
                 <h4><i class="fa fa-wrench"></i>&nbsp;Account settings</h4>
+                %{--<a href="#" data-toggle="tooltip" title="Some tooltip text!">Hover over me</a>--}%
+
+                <!-- Generated markup by the plugin -->
+                <div class="tooltip top" role="tooltip">
+                <div class="tooltip-arrow"></div>
+                <div class="tooltip-inner">
+                    Some tooltip text!
+                    </div>
+                </div>
+
                 <div class="row">
                     <div class="col-md-12">
-                        <div class="form-group">
+                        <div class="form-group has-error">
                             <label for="firstName" class="col-sm-2 control-label">First name</label>
                             <div class="col-sm-5">
                                 <input type="text" class="form-control" id="firstName" name="firstName" placeholder="First name">
                             </div>
+                            <span class="help-block">some error text</span>
                         </div>
-                        <div class="form-group">
+                        <div class="form-group has-error">
                             <label for="lastName" class="col-sm-2 control-label">Last name</label>
                             <div class="col-sm-5">
                                 <input type="text" class="form-control" id="lastName" name="lastName" placeholder="Last name">
+                                %{--<label class="control-label" for="lastName" style="font-size: 10px;">Input with error</label>--}%
+                                <label class="control-label" for="lastName">Input with error</label>
                             </div>
                         </div>
                     </div>

@@ -19,13 +19,12 @@ class Consultant {
     static hasMany = [candidateNotes:CandidateNote, clientComments:ClientComment]
     
     static constraints = {
-        email email: true
+        email blank: false, email: true
 
-        firstName blank: false
-        lastName blank: false
-        email blank: false
+        firstName blank: false, matches: "[a-zA-Z-' ]+"
+        lastName blank: false, matches: "[a-zA-Z-' ]+"
 
-        telephoneNumber blank: false, nullable: true
+        telephoneNumber blank: false, nullable: true, matches: "[0-9]+"
 
         website blank: false, nullable: true
         facebook blank: false, nullable: true

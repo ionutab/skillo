@@ -55,18 +55,22 @@
                     <h4><i class="fa fa-wrench"></i>&nbsp;Account settings</h4>
                     <div class="row">
                         <div class="col-md-12">
-                            <div class="form-group">
+                            <div class="form-group ${hasErrors(bean: consultant, field: 'firstName', 'has-error')}">
                                 <label for="firstName" class="col-sm-2 control-label">First name</label>
                                 <div class="col-sm-5">
-                                    <input type="text" class="form-control" id="firstName" name="consultant.firstName" placeholder="First name"
-                                           value="${consultant.firstName}">
+                                    <input type="text" class="form-control" id="firstName" name="consultant.firstName" placeholder="First name" value="${consultant.firstName}">
+                                    <g:hasErrors bean="${consultant}" field="firstName">
+                                        <span class="control-label" ><g:message code="custom.null.message" /></span>
+                                    </g:hasErrors>
                                 </div>
                             </div>
-                            <div class="form-group">
+                            <div class="form-group ${hasErrors(bean: consultant, field: 'lastName', 'has-error')}">
                                 <label for="lastName" class="col-sm-2 control-label">Last name</label>
                                 <div class="col-sm-5">
-                                    <input type="text" class="form-control" id="lastName" name="consultant.lastName" placeholder="Last name"
-                                            value="${consultant.lastName}">
+                                    <input type="text" class="form-control" id="lastName" name="consultant.lastName" placeholder="Last name" value="${consultant.lastName}">
+                                    <g:hasErrors bean="${consultant}" field="lastName">
+                                        <span class="control-label" ><g:message code="custom.null.message" /></span>
+                                    </g:hasErrors>
                                 </div>
                             </div>
                         </div>
@@ -75,18 +79,35 @@
                     <h4><i class="fa fa-globe"></i>&nbsp;Contact settings</h4>
                     <div class="row">
                         <div class="col-md-12">
-                            <div class="form-group">
+                            <div class="form-group ${hasErrors(bean: consultant, field: 'email', 'has-error')}">
                                 <label for="email" class="col-sm-2 control-label">Email Address</label>
                                 <div class="col-sm-5">
-                                    <input type="email" class="form-control" id="email" name="consultant.email" placeholder="Email"
-                                           value="${consultant.email}">
+                                    <input type="text" class="form-control" id="email" name="consultant.email" placeholder="Email" value="${consultant.email}">
+                                    <g:eachError var="err" bean="${consultant}" field="email">
+                                        <g:if test="${err.code == 'email.invalid'}" >
+                                            <span class="control-label" ><g:message code="custom.invalid.email.message" /><span>
+                                        </g:if>
+                                        <g:if test="${err.code == 'blank'}" >
+                                            <span><g:message code="custom.null.message" /></span>
+                                        </g:if>
+                                    </g:eachError>
                                 </div>
                             </div>
-                            <div class="form-group">
-                                <label for="telephoneNumber" class="col-sm-2 control-label">Telephone Number</label>
+                            <div class="form-group ${hasErrors(bean: consultant, field: 'telephoneNumber', 'has-error')}">
+                                <label for="telephoneNumber" class="col-sm-2 control-label">Telephone</label>
                                 <div class="col-sm-5">
                                     <input type="tel" class="form-control" id="telephoneNumber" name="consultant.telephoneNumber" placeholder="Telephone Number"
                                            value="${consultant.telephoneNumber}">
+                                    <g:hasErrors bean="${consultant}" field="telephoneNumber">
+                                        <g:eachError var="err" bean="${consultant}" field="telephoneNumber">
+                                            <g:if test="${err.code == 'matches.invalid'}" >
+                                                <span class="control-label"><g:message code="custom.invalid.telephone.message"/></span>
+                                            </g:if>
+                                            <g:if test="${err.code == 'blank'}" >
+                                                <span class="control-label" ><g:message code="custom.null.message" /></span>
+                                            </g:if>
+                                        </g:eachError>
+                                    </g:hasErrors>
                                 </div>
                             </div>
                             <div class="form-group">
@@ -115,11 +136,16 @@
                     <hr>
                     <h4><i class="fa fa-key"></i>&nbsp;Password settings</h4>
                     <div class="row">
+                        <g:hasErrors bean="${consultant.user}" >
+                            <g:eachError var="err" bean="${consultant.user}" >
+                                ${err.code}
+                            </g:eachError>
+                        </g:hasErrors>
                         <div class="col-md-12">
                             <div class="form-group">
                                 <label for="u_password" class="col-sm-2 control-label">Password</label>
                                 <div class="col-sm-5">
-                                    <input type="password" class="form-control" id="u_password" name="user.password" placeholder="Old Password" autocomplete="off" >
+                                    <input type="password" class="form-control" id="u_password" name="u_password" placeholder="Old Password" autocomplete="off" >
                                 </div>
                             </div>
                             <div class="form-group">
@@ -140,7 +166,6 @@
                         <div class="col-md-12">
                             <g:submitButton name="Finish" class="btn btn-success btn" />
                             <g:link uri="/" class="btn btn-warning" name="Cancel" >Cancel</g:link>
-
                         </div>
                     </div>
                 </div>

@@ -1,10 +1,5 @@
 import grails.converters.JSON
-import skillo.User
-
-import javax.servlet.http.HttpServletResponse
-
 import org.codehaus.groovy.grails.plugins.springsecurity.SpringSecurityUtils
-
 import org.springframework.security.authentication.AccountExpiredException
 import org.springframework.security.authentication.CredentialsExpiredException
 import org.springframework.security.authentication.DisabledException
@@ -12,6 +7,9 @@ import org.springframework.security.authentication.LockedException
 import org.springframework.security.core.context.SecurityContextHolder as SCH
 import org.springframework.security.web.WebAttributes
 import org.springframework.security.web.authentication.UsernamePasswordAuthenticationFilter
+import skillo.User
+
+import javax.servlet.http.HttpServletResponse
 
 class LoginController {
 
@@ -23,13 +21,13 @@ class LoginController {
     /**
      * Dependency injection for the springSecurityService.
      */
-    def springSecurityService
+    def securityService
 
     /**
      * Default action; redirects to 'defaultTargetUrl' if logged in, /login/auth otherwise.
      */
     def index = {
-        if (springSecurityService.isLoggedIn()) {
+        if (securityService.isLoggedIn()) {
             redirect uri: SpringSecurityUtils.securityConfig.successHandler.defaultTargetUrl
         } else {
             redirect action: 'auth', params: params
@@ -43,7 +41,7 @@ class LoginController {
 
         def config = SpringSecurityUtils.securityConfig
 
-        if (springSecurityService.isLoggedIn()) {
+        if (securityService.isLoggedIn()) {
             redirect uri: config.successHandler.defaultTargetUrl
             return
         }
@@ -65,7 +63,7 @@ class LoginController {
      * Show denied page.
      */
     def denied = {
-        if (springSecurityService.isLoggedIn() && authenticationTrustResolver.isRememberMe(SCH.context?.authentication)) {
+        if (securityService.isLoggedIn() && authenticationTrustResolver.isRememberMe(SCH.context?.authentication)) {
             // have cookie but the page is guarded with IS_AUTHENTICATED_FULLY
             redirect action: 'full', params: params
         }
@@ -90,11 +88,7 @@ class LoginController {
 
     def updateUserPassword = {
 
-        log.info params
-        log.info session
-        User user = springSecurityService.getCurrentUser()
-
-        log.info "user " + user
+        User user = securityService.getCurrentUser()
 
         if (!user) {
             flash.message = 'Sorry, an error has occurred'
@@ -111,23 +105,19 @@ class LoginController {
             return
         }
 
-        log.info("we are here")
-
-        if (!springSecurityService.getPasswordEncoder().isPasswordValid(user.password, password, null /*salt*/)) {
+        if(!securityService.isPasswordValid(user, password)){
             flash.message = 'Current password is incorrect'
             render view: 'passwordExpired', model: [username: session['SPRING_SECURITY_LAST_USERNAME']]
             return
         }
 
-        if (springSecurityService.getPasswordEncoder().isPasswordValid(user.password, newPassword, null /*salt*/)) {
+        if(securityService.isPasswordValid(user, newPassword)){
             flash.message = 'Please choose a different password from your current one'
             render view: 'passwordExpired', model: [username: session['SPRING_SECURITY_LAST_USERNAME']]
             return
         }
 
-        user.password = newPassword
-        user.passwordExpired = false
-        user.save() // if you have password constraints check them here
+        securityService.updateUserPassword(user, newPassword);
 
         redirect uri: SpringSecurityUtils.securityConfig.successHandler.defaultTargetUrl
         return
@@ -157,7 +147,7 @@ class LoginController {
             }
         }
 
-        if (springSecurityService.isAjax(request)) {
+        if (securityService.isAjax(request)) {
             render([error: msg] as JSON)
         } else {
             flash.message = msg
@@ -169,7 +159,7 @@ class LoginController {
      * The Ajax success redirect url.
      */
     def ajaxSuccess = {
-        render([success: true, username: springSecurityService.authentication.name] as JSON)
+        render([success: true, username: securityService.authentication.name] as JSON)
     }
 
     /**

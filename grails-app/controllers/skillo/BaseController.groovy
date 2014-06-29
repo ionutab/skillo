@@ -4,10 +4,10 @@ abstract class BaseController {
 
     static scaffold = false
 
-    def springSecurityService
+    def securityService
 
     def getCurrentConsultant(){
-        def user = springSecurityService.getCurrentUser()
+        def user = securityService.getCurrentUser()
 
         log.info "t1"
         return Consultant.findByUser(user)

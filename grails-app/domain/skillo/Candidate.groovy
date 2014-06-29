@@ -25,11 +25,11 @@ class Candidate implements SkilloDomainModelWithHistory {
     static hasMany = [ candidateQualifications:CandidateQualification, candidateNotes:CandidateNote, jobs:Job, placements:Placement, candidateHistory:CandidateEvent ]
 
     static constraints = {
-        firstName blank: false
-        lastName blank: false
+        firstName blank: false, matches: "[a-zA-Z-' ]+"
+        lastName blank: false, matches: "[a-zA-Z-' ]+"
         nationality nullable: true, blank: false
 
-        telephoneNumber blank: false, minSize: 10
+        telephoneNumber blank: false, minSize: 10, matches: "[0-9]+"
         otherTelephoneNumber nullable: true
 
         candidateNotes nullable: true
