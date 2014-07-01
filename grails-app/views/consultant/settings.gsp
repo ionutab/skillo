@@ -118,6 +118,23 @@
                             </div>
                         </div>
 
+                        <div class="form-group ${hasErrors(bean: consultant, field: 'companyName', 'has-error')}">
+                            <label for="companyName" class="col-sm-2 control-label">Company</label>
+
+                            <div class="col-sm-5">
+                                <input type="text" class="form-control" id="companyName" name="consultant.companyName"
+                                       placeholder="Company name" value="${consultant.companyName}">
+                                <g:eachError var="err" bean="${consultant}" field="companyName">
+                                    <g:if test="${err.code == 'blank'}">
+                                        <span><g:message code="custom.null.message"/></span>
+                                    </g:if>
+                                    <g:if test="${err.code == 'nullable'}">
+                                        <span><g:message code="custom.null.message"/></span>
+                                    </g:if>
+                                </g:eachError>
+                            </div>
+                        </div>
+
                         <div class="form-group ${hasErrors(bean: consultant, field: 'telephoneNumber', 'has-error')}">
                             <label for="telephoneNumber" class="col-sm-2 control-label">Telephone</label>
 

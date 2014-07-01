@@ -61,7 +61,7 @@ class ConsultantController extends BaseController {
     def uploadPhoto(){
         log.info("ConCon.uploadPhoto")
 
-        def consultant = getCurrentConsultant()
+        /*def consultant = getCurrentConsultant()
         def photo = request.getFile('photo') // 'files' is the name of the input
             if (photo.empty) {
                 flash.message = "You must select a photo to upload"
@@ -70,7 +70,7 @@ class ConsultantController extends BaseController {
                 if(!consultant.save()) {
                     flash.message = "Failed to upload photo"
                 }
-            }
+            }*/
 
         render(view: "settings", model: [consultant: consultant])
         }
