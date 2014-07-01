@@ -15,43 +15,7 @@ class ConsultantController extends BaseController {
         def consultant = getCurrentConsultant()
         consultant.properties = params.consultant
 
-        /*
-        boolean isPasswordValid = true
-        boolean isPassword = false
-        if(params.u_password){
-            isPassword = true
-        }
-        */
-
-        /*
-        if(params.u_password && params.newPassword && params.retypePassword){
-            if(!securityService.isPasswordValid(consultant.user, params.u_password)){
-                consultant.user.errors.reject("password.invalid")
-                isPasswordValid = false
-            }
-            if(securityService.isPasswordValid(consultant.user, params.newPassword)){
-                consultant.user.errors.reject("password.old")
-                isPasswordValid = false
-            }
-        } else if(params.u_password && (params.newPassword || params.retypePassword)){
-                consultant.user.errors.reject("password.match")
-                isPasswordValid = false
-        } else if (!params.u_password && (params.newPassword || params.retypePassword)){
-            consultant.user.errors.reject("password.invalid")
-            isPasswordValid = false
-        } else if (params.u_password && !(params.newPassword == params.retypePassword)){
-            consultant.user.errors.reject("password.new")
-            isPasswordValid = false
-        }
-
-        log.info("ispassvalid = " + isPasswordValid)
-        if(isPassword && isPasswordValid){
-            consultant.user = securityService.updateUserPassword(consultant.user, params.newPassword)
-        }
-        */
-
-//        log.info("saving " + consultant.user.password)
-        if(!consultant.save(deepvalidate: true)){
+        if(!consultant.save()){
             if(consultant.hasErrors()){
                 consultant.errors.each {
                     println "    FE: " + it.fieldError.field
@@ -65,9 +29,51 @@ class ConsultantController extends BaseController {
         redirect(uri: "/")
     }
 
+    def savePassword(){
+        log.info("ConCon.savePassword")
+
+        def consultant = getCurrentConsultant()
+
+        if(!params.u_password || !securityService.isPasswordValid(consultant.user, params.u_password)){
+            print("@@@@@@@@@@@@@@@@@@  You are not authorised to change your own password")
+            consultant.user.errors.reject("password.invalid")
+            render(view: "settings", model: [consultant: consultant])
+            return
+        }else{
+            if(!params.newPassword || !params.retypePassword || params.newPassword != params.retypePassword){
+                print("@@@@@@@@@@@@@@@@@@  You didn't enter the new password correctly")
+                consultant.user.errors.reject("password.match")
+            }else{
+                consultant.user.password=params.newPassword;
+                if(!consultant.user.save(deepvalidate:true)){
+                    consultant.user.errors.each {
+                        println "    FE: " + it.fieldError.field
+                        println "    FE: " + it.fieldError.code
+                    }
+                    render(view: "settings", model: [consultant: consultant])
+                    return
+                }
+            }
+        }
+        redirect(uri: "/")
+    }
+
     def uploadPhoto(){
         log.info("ConCon.uploadPhoto")
-        redirect(action: settings())
-    }
+
+        def consultant = getCurrentConsultant()
+        def photo = request.getFile('photo') // 'files' is the name of the input
+            if (photo.empty) {
+                flash.message = "You must select a photo to upload"
+            } else {
+                consultant.photo = photo.getBytes()
+                if(!consultant.save()) {
+                    flash.message = "Failed to upload photo"
+                }
+            }
+
+        render(view: "settings", model: [consultant: consultant])
+        }
+
 
 }
