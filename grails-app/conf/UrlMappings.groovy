@@ -11,6 +11,7 @@ class UrlMappings {
 		"/terms"		(view:"/info/terms")
         "/map"          (view:"/home/map")
         "/testDashboard"         (view:"/testDashboard")
+        "/testEC"         (view:"/testEC")
         "/testCL"       (view:"/testCL")
         "/testCS"       (view:"/testCS")
         "/testUS"       (view:"/testUserSettings")

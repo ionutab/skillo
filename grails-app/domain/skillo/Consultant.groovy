@@ -7,8 +7,6 @@ class Consultant {
 
     String email
 
-    String companyName
-
     String information
 
     User user
@@ -23,7 +21,6 @@ class Consultant {
     static constraints = {
         email blank: false, email: true
 
-        companyName blank: false, nullable: false
 
         firstName blank: false, matches: "[a-zA-Z-' ]+"
         lastName blank: false, matches: "[a-zA-Z-' ]+"
