@@ -77,6 +77,27 @@
                             </div>
                         </div>
 
+                        <div class="form-group">
+                            <div class="radio">
+                                <label class="">
+                                    <div class="iradio_minimal checked" aria-checked="true" aria-disabled="false" style="position: relative;"><input type="radio" name="optionsRadios" id="optionsRadios1" value="option1" checked="" style="position: absolute; opacity: 0;"><ins class="iCheck-helper" style="position: absolute; top: 0%; left: 0%; display: block; width: 100%; height: 100%; margin: 0px; padding: 0px; border: 0px; opacity: 0; background: rgb(255, 255, 255);"></ins></div>
+                                    Option one is this and that—be sure to include why it's great
+                                </label>
+                            </div>
+                            <div class="radio">
+                                <label class="">
+                                    <div class="iradio_minimal" aria-checked="false" aria-disabled="false" style="position: relative;"><input type="radio" name="optionsRadios" id="optionsRadios2" value="option2" style="position: absolute; opacity: 0;"><ins class="iCheck-helper" style="position: absolute; top: 0%; left: 0%; display: block; width: 100%; height: 100%; margin: 0px; padding: 0px; border: 0px; opacity: 0; background: rgb(255, 255, 255);"></ins></div>
+                                    Option two can be something else and selecting it will deselect option one
+                                </label>
+                            </div>
+                            <div class="radio">
+                                <label>
+                                    <div class="iradio_minimal disabled" aria-checked="false" aria-disabled="true" style="position: relative;"><input type="radio" name="optionsRadios" id="optionsRadios3" value="option3" disabled="" style="position: absolute; opacity: 0;"><ins class="iCheck-helper" style="position: absolute; top: 0%; left: 0%; display: block; width: 100%; height: 100%; margin: 0px; padding: 0px; border: 0px; opacity: 0; background: rgb(255, 255, 255);"></ins></div>
+                                    Option three is disabled
+                                </label>
+                            </div>
+                        </div>
+
                     </div>
                 </div>
             </div>
