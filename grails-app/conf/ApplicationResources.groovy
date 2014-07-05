@@ -64,6 +64,23 @@ modules = {
     }
 
     /**
+     * font awesome basic
+     */
+    font_awesome {
+        resource url: 'font-awesome/less/font-awesome.less', attrs: [rel: "stylesheet/less",type: 'css']
+    }
+
+    iCheck {
+        resource url: 'adminLTE/js/plugins/iCheck/icheck.min.js'
+        resource url: 'adminLTE/css/iCheck/all.css'
+    }
+
+    inputMask {
+        resource url: 'adminLTE/js/input-mask/jquery.inputmask.js'
+        resource url: 'adminLTE/js/input-mask/jquery.inputmask.date.extensions.js'
+        resource url: 'adminLTE/js/input-mask/jquery.inputmask.extensions.js'
+    }
+    /**
      * admin lte bootstrap basic
      */
     admin_lte_less {
@@ -76,16 +93,6 @@ modules = {
         dependsOn 'admin_lte_less,admin_lte_js'
     }
 
-    /**
-     * font awesome basic
-     */
-    font_awesome {
-        resource url: 'font-awesome/less/font-awesome.less', attrs: [rel: "stylesheet/less",type: 'css']
-    }
-
-    /**
-     * application specific
-     */
 	maps {
 		resource url:'css/maps/googlemaps.css'
 		resource url:'js/maps/googlemaps.js'
@@ -102,16 +109,6 @@ modules = {
         resource url:'select2/select2.js'
 	}
 
-    bs_switch {
-        resource url:'css/bootstrap-switch/bootstrap-switch.css'
-        resource url:'js/bootstrap-switch/bootstrap-switch.js'
-    }
-
-    datepicker {
-        resource url:'js/eternicode-datepicker/bootstrap-datepicker.js'
-        resource url:'css/datepicker.css'
-    }
-
     forms {
         dependsOn 'select2,datepicker,bs_switch'
     }
@@ -127,14 +124,10 @@ modules = {
         dependsOn 'bootstrap','jquery'
         resource url:'css/admin_light.css'
         resource url:'css/custombox.css'
-        resource url:'js/sidebar.js'
     }
 
     skillo_admin_lte {
-        dependsOn 'bootstrap','admin_lte','jquery','font_awesome'
+        dependsOn 'bootstrap','admin_lte','jquery','font_awesome','iCheck', 'inputMask'
     }
 
-    skillo_admin_lte_basic {
-        dependsOn 'bootstrap','admin_lte','font_awesome'
-    }
 }
