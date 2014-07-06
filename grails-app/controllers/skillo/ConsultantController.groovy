@@ -35,14 +35,15 @@ class ConsultantController extends BaseController {
         def consultant = getCurrentConsultant()
 
         if(!params.u_password || !securityService.isPasswordValid(consultant.user, params.u_password)){
-            print("@@@@@@@@@@@@@@@@@@  You are not authorised to change your own password")
-            consultant.user.errors.reject("password.invalid")
+            consultant.user.errors.rejectValue("password","password.invalid")
+
             render(view: "settings", model: [consultant: consultant])
             return
         }else{
             if(!params.newPassword || !params.retypePassword || params.newPassword != params.retypePassword){
-                print("@@@@@@@@@@@@@@@@@@  You didn't enter the new password correctly")
-                consultant.user.errors.reject("password.match")
+                consultant.user.errors.rejectValue( "password","password.match")
+                render(view: "settings", model: [consultant: consultant])
+                return
             }else{
                 consultant.user.password=params.newPassword;
                 if(!consultant.user.save(deepvalidate:true)){

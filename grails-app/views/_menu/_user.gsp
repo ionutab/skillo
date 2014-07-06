@@ -39,10 +39,6 @@
                         <span class="glyphicon glyphicon-cog"></span>
                         <g:message code="userSetting.multiple.label"/>
                     </a>
-                    <a href="${createLink(controller: 'login', action: 'changeUserPassword')}">
-                        <span class="glyphicon glyphicon-cog"></span>
-                        <g:message code="springSecurity.changePassword"/>
-                    </a>
                 </li>
                 <li class="">
                     <a href="${createLink(controller: 'logout')}">

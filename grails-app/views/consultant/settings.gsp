@@ -64,7 +64,7 @@
                             <div class="col-sm-5">
                                 <input type="text" class="form-control" id="firstName" name="consultant.firstName"
                                        placeholder="First name" value="${consultant.firstName}">
-                                <g:eachError var="err" bean="${consultant}"  field="firstName">
+                                <g:eachError var="err" bean="${consultant}" field="firstName">
                                     <g:if test="${err.code == 'matches.invalid'}">
                                         <span class="control-label"><g:message
                                                 code="custom.invalid.name.message"/></span>
@@ -199,17 +199,26 @@
                         <div id="collapseOne" class="panel-collapse collapse  in">
                                 <div class="panel-body">
                                   <div class="col-md-12">
-                                        <div class="form-group">
+                                        <div class="form-group ${hasErrors(bean: consultant.user , field: 'password', 'has-error')}" >
                                             <label for="u_password" class="col-sm-2 control-label">Password</label>
 
                                             <div class="col-sm-5">
                                                 <input type="password" class="form-control" id="u_password"
                                                        name="u_password"
                                                        placeholder="Old Password" autocomplete="off">
+
+                                                <g:eachError var="err" bean="${consultant.user}" >
+                                                    <g:if test="${err.code == 'password.invalid'}">
+                                                        <span class="control-label" ><g:message
+                                                            code="custom.invalid.authorization"/><span>
+                                                    </g:if>
+                                                </g:eachError>
+
+
             </div>
         </div>
 
-            <div class="form-group">
+            <div class="form-group ${hasErrors(bean: consultant.user , field: 'password', 'has-error')}">
                 <label for="newPassword" class="col-sm-2 control-label">New password</label>
 
                 <div class="col-sm-5">
@@ -219,7 +228,7 @@
                 </div>
             </div>
 
-            <div class="form-group">
+            <div class="form-group ${hasErrors(bean: consultant.user , field: 'password', 'has-error')}">
                 <label for="retypePassword"
                        class="col-sm-2 control-label">Re-type password</label>
 
@@ -227,7 +236,14 @@
                     <input type="password" class="form-control" id="retypePassword"
                            name="retypePassword"
                            placeholder="Re-type password">
+                    <g:eachError var="err" bean="${consultant.user}" field="password" >
+                        <g:if test="${err.code == 'password.match'}">
+                            <span class="control-label" ><g:message
+                                code="custom.invalid.match.password"/><span>
+                        </g:if>
+                    </g:eachError>
                 </div>
+
             </div>
 
             <div class="row">

@@ -130,4 +130,8 @@ modules = {
         dependsOn 'bootstrap','admin_lte','jquery','font_awesome','iCheck', 'inputMask'
     }
 
+    skillo_admin_lte_basic {
+        dependsOn 'bootstrap','admin_lte','font_awesome'
+    }
+
 }
