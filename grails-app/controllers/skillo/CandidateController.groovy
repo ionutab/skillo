@@ -3,6 +3,7 @@ package skillo
 import org.springframework.dao.DataIntegrityViolationException
 import org.springframework.web.multipart.commons.CommonsMultipartFile
 import skillo.filters.CandidateListSearch
+import skillo.filters.CandidateMatch
 
 class CandidateController extends BaseController {
 
@@ -283,5 +284,15 @@ class CandidateController extends BaseController {
         }
 
         redirect(action: "edit",id: newCandidateQualification.candidate.id)
+    }
+
+    def candidateMatch(){
+
+        CandidateMatch filter = new CandidateMatch()
+        bindData(filter, params)
+
+        def candidateList = candidateService.search(filter)
+        [matchCandidates: candidateList]
+
     }
 }

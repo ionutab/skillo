@@ -3,6 +3,7 @@ package skillo
 import grails.transaction.Transactional
 import org.grails.datastore.mapping.query.api.Criteria
 import skillo.filters.CandidateListSearch
+import skillo.filters.CandidateMatch
 
 @Transactional
 class CandidateService {
@@ -42,6 +43,31 @@ class CandidateService {
         }
 
         return candidateList
+    }
+
+    def Collection<Candidate> search(CandidateMatch filter){
+
+        Criteria cc = Candidate.createCriteria()
+
+        def candidateList =  cc.list() {
+            if(filter.firstName){
+                ilike("firstName", "%$filter.firstName%")
+            }
+            if(filter.lastName){
+                ilike("lastName", "%$filter.lastName%")
+            }
+
+            if(filter.telephoneNumber){
+                ilike("telephoneNumber", "%$filter.telephoneNumber%")
+            }
+
+            eq ("active", true)
+
+            order("firstName", "asc")
+
+        }
+
+        return candidateList;
     }
 
 }
