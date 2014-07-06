@@ -144,13 +144,6 @@
                             </div>
                         </div>
 
-                        <div class="form-group">
-                            <label for="email" class="col-md-2 control-label">Add a photo</label>
-
-                            <div class="col-md-5">
-                                <input type="file" id="exampleInputFile">
-                            </div>
-                        </div>
                     </div>
                 </div>
 
@@ -468,6 +461,7 @@
 </tbody>
 </table>
 </div><!-- /.table-responsive -->
+</div>
 </div>
 </div>
 </div>
