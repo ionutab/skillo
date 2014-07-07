@@ -298,12 +298,12 @@ class CandidateController extends BaseController {
         CandidateMatch filter = new CandidateMatch()
         bindData(filter, params)
 
-        //        def candidateList = candidateService.search(filter)
+        def candidateMatches = candidateService.search(filter)
 
-        def candidateMatches = new ArrayList<Candidate>();
+     /*   def candidateMatches = new ArrayList<Candidate>();
 
         candidateMatches.add(Candidate.get(1))
-        candidateMatches.add(Candidate.get(2))
+        candidateMatches.add(Candidate.get(2))*/
 
         render(template: 'matches', model: [matchCandidates: candidateMatches])
     }

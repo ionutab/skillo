@@ -18,11 +18,11 @@
                 <div class="row">
                     <div class="col-md-12 col-sm-12">
                         <div class="form-group">
-                            <label for="candidate.firstName" class="col-md-3 control-label">
+                            <label for="firstName" class="col-md-3 control-label">
                                 <g:message code="candidate.firstName.label" default="First Name" />
                             </label>
                             <div class="col-md-9">
-                                <g:textField class="form-control" id="firstName" name="candidate.firstName" value="${candidateInstance?.firstName}" />
+                                <g:textField class="form-control" id="firstName" name="firstName" value="${candidateInstance?.firstName}" />
                             </div>
                             <g:javascript>
                                 $("#firstName").change(function() {
@@ -32,17 +32,17 @@
                         </div>
 
                         <div class="form-group">
-                            <label for="candidate.lastName" class="col-md-3 control-label">
+                            <label for="lastName" class="col-md-3 control-label">
                                 <g:message code="candidate.lastName.label" default="Last Name" />
                             </label>
 
                             <div class="col-md-9">
-                                <g:textField class="form-control" id="lastName" name="candidate.lastName" value="${candidateInstance?.lastName}" />
+                                <g:textField class="form-control" id="lastName" name="lastName" value="${candidateInstance?.lastName}" />
                             </div>
                             <g:javascript>
 
                                 $("#lastName").change(function() {
-                                    $("#candidateMatches").load("${createLink(action: 'findMatches')}?lastName="+this.value);
+                                    remoteCandidateCreateForm()
                                 });
 
                             </g:javascript>
@@ -67,7 +67,7 @@
                         </div>
 
                         <div class="form-group">
-                            <label for="candidate.telephoneNumber" class="col-md-3 control-label">
+                            <label for="telephoneNumber" class="col-md-3 control-label">
                                 <g:message code="candidate.telephoneNumber.label" default="Telephone Number" />
                             </label>
                             <div class="col-md-5">
@@ -75,13 +75,13 @@
                                     <div class="input-group-addon">
                                         <i class="fa fa-phone"></i>
                                     </div>
-                                    <g:textField type="tel" id="telephoneNumber" name="candidate.telephoneNumber" class="form-control" value="${candidateInstance?.telephoneNumber}" />
+                                    <g:textField type="tel" id="telephoneNumber" name="telephoneNumber" class="form-control" value="${candidateInstance?.telephoneNumber}" />
                                 </div>
                             </div>
                             <g:javascript>
 
                                 $("#telephoneNumber").change(function() {
-                                    $("#candidateMatches").load("${createLink(action: 'findMatches')}?telephoneNumber="+this.value);
+                                    remoteCandidateCreateForm()
                                 });
 
                             </g:javascript>
