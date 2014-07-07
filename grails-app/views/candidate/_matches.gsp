@@ -1,4 +1,4 @@
-
+<div id="candidateMatches">
 <g:if test="${matchCandidates?.size() > 0}">
     <div class="col-md-7">
         <div class="box box-solid">
@@ -50,3 +50,4 @@
         </div>
     </div>
 </g:if>
+</div>

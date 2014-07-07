@@ -14,7 +14,7 @@
 <div class="col-md-5">
     <div class="box box-solid">
         <div class="box-body">
-            <g:form controller="candidate" action="save" class="form-horizontal" autocomplete="off" name="candidateCreateForm">
+            <g:form controller="candidate" action="save" class="form-horizontal" autocomplete="off" name="candidateCreateForm" id="candidateCreateForm">
                 <div class="row">
                     <div class="col-md-12 col-sm-12">
                         <div class="form-group">
@@ -24,6 +24,11 @@
                             <div class="col-md-9">
                                 <g:textField class="form-control" id="firstName" name="candidate.firstName" value="${candidateInstance?.firstName}" />
                             </div>
+                            <g:javascript>
+                                $("#firstName").change(function() {
+                                    remoteCandidateCreateForm()
+                                });
+                            </g:javascript>
                         </div>
 
                         <div class="form-group">
@@ -34,6 +39,13 @@
                             <div class="col-md-9">
                                 <g:textField class="form-control" id="lastName" name="candidate.lastName" value="${candidateInstance?.lastName}" />
                             </div>
+                            <g:javascript>
+
+                                $("#lastName").change(function() {
+                                    $("#candidateMatches").load("${createLink(action: 'findMatches')}?lastName="+this.value);
+                                });
+
+                            </g:javascript>
                         </div>
 
                         <div class="form-group">
@@ -63,9 +75,16 @@
                                     <div class="input-group-addon">
                                         <i class="fa fa-phone"></i>
                                     </div>
-                                    <g:textField type="tel" name="candidate.telephoneNumber" class="form-control" value="${candidateInstance?.telephoneNumber}" />
+                                    <g:textField type="tel" id="telephoneNumber" name="candidate.telephoneNumber" class="form-control" value="${candidateInstance?.telephoneNumber}" />
                                 </div>
                             </div>
+                            <g:javascript>
+
+                                $("#telephoneNumber").change(function() {
+                                    $("#candidateMatches").load("${createLink(action: 'findMatches')}?telephoneNumber="+this.value);
+                                });
+
+                            </g:javascript>
                         </div>
 
                         <div class="form-group">
@@ -216,8 +235,39 @@
     </div>
 </div>
 
-<g:render template="matches" />
+<g:javascript>
+/*
+    function remoteCandidateCreateForm(){
 
+        $.ajax({
+            url: "http://localhost:8080/skillo/candidate/findMatches",
+            dataType: 'json',
+            method:'GET',
+            data: $('form#candidateCreateForm').serialize()
+        }).done(function(){
+            alert('done')
+        }).fail(function(){
+            alert('fail');
+        });
+    }
+*/
+
+function remoteCandidateCreateForm(){
+
+    $.ajax({
+        url: "${createLink( controller: 'candidate', action: 'findMatches')}",
+        type: 'POST',
+        data: $('form#candidateCreateForm').serialize(),
+        success: function (data) {
+            $("#candidateMatches").empty().append(data);
+        },
+        error: function (jqXHR, textStatus, errorThrown) {
+            $("#candidateMatches").html(jqXHR.responseText);
+        }
+    });
+}
+</g:javascript>
+<g:render template="matches" />
 </div>
 </body>
 </html>
