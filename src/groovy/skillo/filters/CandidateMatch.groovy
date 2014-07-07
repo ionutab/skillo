@@ -34,4 +34,8 @@ class CandidateMatch extends BasicPaginatedSearchFilter {
     void setTelephoneNumber(String telephoneNumber) {
         this.telephoneNumber = telephoneNumber
     }
+
+    boolean isValid(){
+        return firstName || lastName || telephoneNumber
+    }
 }

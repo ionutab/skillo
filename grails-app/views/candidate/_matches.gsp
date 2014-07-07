@@ -35,7 +35,7 @@
                                                 </g:if>
                                                 </td>
                                                 <td>
-                                                    ${match?.birthDate}
+                                                    <g:formatDate format="${message (code:'default.date.format')}" date="${match?.birthDate}"/>
                                                 </td>
                                             </tr>
                                         </g:each>

@@ -295,10 +295,14 @@ class CandidateController extends BaseController {
 
         log.info("CC.FIND POSSIBLE MATCHES");
         log.info params
+
         CandidateMatch filter = new CandidateMatch()
         bindData(filter, params)
 
-        def candidateMatches = candidateService.search(filter)
+        def candidateMatches = new ArrayList<Candidate>()
+        if(filter.isValid()){
+            candidateMatches = candidateService.search(filter)
+        }
 
      /*   def candidateMatches = new ArrayList<Candidate>();
 
