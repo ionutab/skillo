@@ -110,7 +110,7 @@ modules = {
 	}
 
     forms {
-        dependsOn 'select2,datepicker,bs_switch'
+        dependsOn 'inputMask','select2'
     }
 
     application {
@@ -127,7 +127,7 @@ modules = {
     }
 
     skillo_admin_lte {
-        dependsOn 'bootstrap','admin_lte','jquery','font_awesome','iCheck', 'inputMask'
+        dependsOn 'bootstrap','admin_lte','jquery','font_awesome','iCheck'
     }
 
     skillo_admin_lte_basic {

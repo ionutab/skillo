@@ -102,8 +102,6 @@ class QualificationController {
     }
 
     def delete(){
-
-
         def qualificationInstance =  Qualification.get(params.id)
         if (qualificationInstance) {
             try {

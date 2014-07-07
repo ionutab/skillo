@@ -30,13 +30,20 @@ class CandidateController extends BaseController {
 		candidate.driver = true
 		candidate.carOwner = true
         candidate.active = true
+        candidate.sponsored = true
 
         def availableMainTrades = Qualification.findAllByCanBeMainTrade(true)
 
-		[candidateInstance: candidate, AvailableMainTrades: availableMainTrades as grails.converters.JSON]
+        def candidateMatches = new ArrayList<Candidate>();
+
+		[candidateInstance: candidate, CandidateMatches: candidateMatches, AvailableMainTrades: availableMainTrades as grails.converters.JSON]
 	}
 
     def save() {
+
+        log.info "ONE: " + params._action_one
+        log.info "TWO: " + params._action_two
+
         log.info("CandidateController.save")
 
         def candidate = new Candidate(params.candidate)
@@ -286,13 +293,19 @@ class CandidateController extends BaseController {
         redirect(action: "edit",id: newCandidateQualification.candidate.id)
     }
 
-    def candidateMatch(){
+    def findMatches(){
+
+        log.info("CC.FIND POSSIBLE MATCHES");
+        log.info params
 
         CandidateMatch filter = new CandidateMatch()
         bindData(filter, params)
 
-        def candidateList = candidateService.search(filter)
-        [matchCandidates: candidateList]
+        //        def candidateList = candidateService.search(filter)
 
+        def candidateMatches = new ArrayList<Candidate>();
+        render(template: 'matches', model: [matchCandidates: candidateMatches])
     }
+
+
 }

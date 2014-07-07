@@ -2,7 +2,6 @@ package skillo.filters
 
 class CandidateListSearch extends CandidateMatch {
 
-
     private String qualification
 
     String getQualification() {

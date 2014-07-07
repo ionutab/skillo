@@ -53,6 +53,7 @@ class CandidateService {
             if(filter.firstName){
                 ilike("firstName", "%$filter.firstName%")
             }
+
             if(filter.lastName){
                 ilike("lastName", "%$filter.lastName%")
             }

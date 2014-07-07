@@ -25,7 +25,7 @@
                         <div class="form-group">
                             <label for="firstName" class="col-md-3 control-label">First name</label>
 
-                            <div class="col-md-7">
+                            <div class="col-md-9">
                                 <input type="text" class="form-control" id="firstName" name="candidate.firstName"
                                        placeholder="First name">
                             </div>
@@ -34,7 +34,7 @@
                         <div class="form-group">
                             <label for="lastName" class="col-md-3 control-label">Last name</label>
 
-                            <div class="col-md-7">
+                            <div class="col-md-9">
                                 <input type="text" class="form-control" id="lastName" name="candidate.lastName"
                                        placeholder="Last name">
                             </div>
@@ -43,7 +43,7 @@
                         <div class="form-group">
                             <label for="birthDate" class="col-md-3 control-label">Birth date</label>
 
-                            <div class="col-md-7">
+                            <div class="col-md-5">
                                 <div class="input-group">
                                     <div class="input-group-addon">
                                         <i class="fa fa-calendar"></i>
@@ -60,7 +60,7 @@
                         <div class="form-group">
                             <label for="telephoneNumber" class="col-md-3 control-label">Telephone</label>
 
-                            <div class="col-md-7">
+                            <div class="col-md-5">
                                 <input type="text" class="form-control" id="telephoneNumber"
                                        name="candidate.telephoneNumber" placeholder="Telephone">
                             </div>
@@ -69,7 +69,7 @@
                         <div class="form-group">
                             <label for="address" class="col-md-3 control-label">Address</label>
 
-                            <div class="col-md-7">
+                            <div class="col-md-9">
                                 <textarea rows="3" class="form-control" id="address" name="candidate.address"
                                           placeholder="Candidate address"></textarea>
                             </div>
@@ -78,7 +78,7 @@
                         <div class="form-group">
                             <label for="postCode" class="col-md-3 control-label">Post code</label>
 
-                            <div class="col-md-7">
+                            <div class="col-md-9">
                                 <input type="text" class="form-control" id="postCode" name="candidate.postCode"
                                        placeholder="Search for a post code">
                             </div>
@@ -87,7 +87,7 @@
                         <div class="form-group">
                             <label for="email" class="col-md-3 control-label">Email</label>
 
-                            <div class="col-md-7">
+                            <div class="col-md-9">
                                 <input type="text" class="form-control" id="email" name="candidate.email"
                                        placeholder="Email address">
                             </div>
@@ -96,7 +96,7 @@
                         <div class="form-group">
                             <label for="trade" class="col-md-3 control-label">Trade</label>
 
-                            <div class="col-md-7">
+                            <div class="col-md-9">
                                 <input type="text" class="form-control" id="trade" name="candidate.trade"
                                        placeholder="Search for a qualification">
                             </div>
@@ -105,7 +105,7 @@
                         <div class="form-group">
                             <label for="email" class="col-md-3 control-label">Driver</label>
 
-                            <div class="col-md-7">
+                            <div class="col-md-9">
                                 <label class="control-label">
                                     <input type="radio" name="optionsRadios" class="iradio_minimal" checked
                                            value="option1"/>
@@ -122,7 +122,7 @@
                         <div class="form-group">
                             <label for="email" class="col-md-3 control-label">Sponsored</label>
 
-                            <div class="col-md-7">
+                            <div class="col-md-9">
                                 <label class="control-label">
                                     <input type="radio" name="optionsRadios2" class="iradio_minimal" checked
                                            value="option2"/>
@@ -139,7 +139,7 @@
                         <div class="form-group">
                             <label for="email" class="col-md-3 control-label">Car owner</label>
 
-                            <div class="col-md-7">
+                            <div class="col-md-9">
                                 <label class="control-label">
                                     <input type="radio" name="optionsRadios3" class="iradio_minimal" checked
                                            value="option3"/>

@@ -55,7 +55,6 @@
 
 <div class="form-group ${hasErrors(bean: candidateInstance, field: 'address.postCode', 'has-error')} ">
     <label for="postCode.id" class="col-sm-4 control-label">
-        ${postCodeId}
         <g:message code="postCode.code.label" default="Post Code" />
     </label>
     <div class="col-sm-8">

@@ -40,7 +40,7 @@
 </div>
 
 
-<div class="row">
+<div class="row top10">
 <div class="col-md-12">
 <div class="box box-solid">
 <div class="box-body">
@@ -1125,7 +1125,7 @@
                 <a class="btn btn-sm bg-yellow" %{--style="position: absolute; top: 5px; right: 5px;"--}%><i
                         class="fa fa-pencil append-icon"></i> Edit</a>
                 <a class="btn btn-sm bg-yellow" %{--style="position: absolute; top: 5px; right: 5px;"--}%><i
-                        class="fa fa-star append-icon"></i>Star</a>
+                        class="fa fa-star append-icon"></i> Star</a>
                 <a class="btn btn-sm bg-yellow" %{--style="position: absolute; top: 5px; right: 5px;"--}%><i
                         class="fa fa-plus-square append-icon"></i>&nbsp;Add to</a>
                 <a class="btn btn-sm bg-yellow" %{--style="position: absolute; top: 5px; right: 5px;"--}%><i
