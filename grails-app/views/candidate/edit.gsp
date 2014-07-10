@@ -10,7 +10,6 @@
     <g:set var="page_title" value="${entityNaturalName}" scope="request"/>
 	<title><g:message code="default.edit.label" args="[entityNaturalName]" /></title>
     <r:require modules="forms"/>
-    <r:require modules="candidates"/>
     <link rel="stylesheet" href="${resource(dir: 'css', file: 'customButtons.css')}"/>
 </head>
 

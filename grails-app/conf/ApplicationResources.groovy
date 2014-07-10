@@ -98,11 +98,6 @@ modules = {
 		resource url:'js/maps/googlemaps.js'
 	}
 	
-	candidates {
-		resource url:'js/candidates-list.js'
-		resource url:'js/candidates-form.js'
-	}
-
 	select2 {
         resource url:'select2/select2.css'
         resource url:'select2/select2-bootstrap.css'

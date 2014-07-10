@@ -19,9 +19,13 @@
                     'home' : [uri:'/', icon:'home'],
                     'candidate' : [controller:'candidate', icon:'list'],
                     'qualifications' : [controller:'qualification', icon:'bookmark'],
-                    'clients' : [controller:'client', icon:'briefcase'],
-                    'placement' : [controller: 'placement', icon:'pushpin'],
+                    'clients' : [controller:'client', icon:'briefcase']
+                    /*
+                    ,
+                    'placement' : [controller: 'placement', icon:'pushpin']
+                    ,
                     'map' : [uri:'/map', icon:'globe']
+                    */
             ]">
                 <li class="${conf.uri && request.forwardURI.substring(request.contextPath.length()) == conf.uri || conf.controller && params.controller == conf.controller ? " active" : ""}  sidebar-item" >
                     <g:if test="${conf.controller || conf.uri}">

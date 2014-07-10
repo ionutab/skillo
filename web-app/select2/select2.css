@@ -614,3 +614,8 @@ disabled look for disabled choices in the results dropdown
       background-position: 100% -21px !important;
   }
 }
+
+.select2-container .select2-choice > .select2-chosen {
+    font-size: 14px;
+    color: #000;
+}

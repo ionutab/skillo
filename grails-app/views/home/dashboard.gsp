@@ -1,16 +1,13 @@
 <html>
 
 <head>
-	<meta name="layout" content="admin_light" />
+	<meta name="layout" content="admin_lte_layout" />
     <g:set var="page_title" value="${message(code: 'dashboard.welcome.label')}" scope="request"/>
+    <g:set var="layout_nocontextbar" value="false" scope="request" />
 </head>
 
 <body>
 
-<div class="container">
-    <div class="row">
-    </div>
-</div>
 
 </body>
 

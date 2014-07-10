@@ -57,15 +57,14 @@ class Candidate implements SkilloDomainModelWithHistory {
         return true
     }
 
+    def Integer age(){
 
-    def int age(){
+        if(this.birthDate == null){
+            return null;
+        }
 
-        def now = new GregorianCalendar()
-        def bDay = new GregorianCalendar(birthDate)
-
-        return now.YEAR-bDay.YEAR
+        return 99
     }
-
 
     @Override
     void addInsertEvent(Consultant consultant) {
@@ -85,5 +84,14 @@ class Candidate implements SkilloDomainModelWithHistory {
 
     @Override
     void addUpdateEvent() {
+    }
+
+    def CandidateQualification getMainTrade(){
+        this.candidateQualifications?.eachWithIndex{CandidateQualification cq, int i ->
+            if(cq.isMainTrade){
+                return cq
+            }
+        }
+        return null
     }
 }

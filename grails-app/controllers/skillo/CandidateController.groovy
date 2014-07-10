@@ -74,7 +74,8 @@ class CandidateController extends BaseController {
         if(!candidate.save(deepvalidate:true, flush: true)){
             if(candidate.hasErrors()){
                 candidate.errors.each {
-                    println "fielderrors: " + it
+                    println "    FE: " + it.fieldError.field
+                    println "    FE: " + it.fieldError.code
                 }
             }
 
@@ -297,7 +298,7 @@ class CandidateController extends BaseController {
         log.info params
 
         CandidateMatch filter = new CandidateMatch()
-        bindData(filter, params)
+        bindData(filter, params.candidate)
 
         def candidateMatches = new ArrayList<Candidate>()
         if(filter.isValid()){

@@ -3,7 +3,7 @@
     <div class="col-md-7">
         <div class="box box-solid">
             <div class="box-body">
-                <h4><i class="fa fa-users"></i>&nbsp;Possible match candidates. </h4>
+                <h4><i class="fa fa-users"></i>&nbsp;Possible match candidates.</h4>
                 <g:form controller="candidate" action="save" class="form-horizontal" autocomplete="off">
                     <div class="row">
                         <div class="col-md-12 col-sm-12">
@@ -43,7 +43,6 @@
                                 </table>
                             </div><!-- /.table-responsive -->
                         </div><!-- /.col (RIGHT) -->
-
                     </div>
                 </g:form>
             </div>

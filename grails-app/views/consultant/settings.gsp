@@ -69,7 +69,7 @@
                                     <span class="control-label"><g:message
                                             code="custom.invalid.name.message"/></span>
                                 </g:if>
-                                <g:if test="${err.code == 'blank'}">
+                                <g:if test="${err.code == 'nullable'}">
                                     <span class="control-label"><g:message code="custom.null.message"/></span>
                                 </g:if>
                             </g:eachError>
@@ -87,7 +87,7 @@
                                     <span class="control-label"><g:message
                                             code="custom.invalid.name.message"/></span>
                                 </g:if>
-                                <g:if test="${err.code == 'blank'}">
+                                <g:if test="${err.code == 'nullable'}">
                                     <span class="control-label"><g:message code="custom.null.message"/></span>
                                 </g:if>
                             </g:eachError>
@@ -111,7 +111,7 @@
                                     <span class="control-label" ><g:message
                                         code="custom.invalid.email.message"/><span>
                                 </g:if>
-                                <g:if test="${err.code == 'blank'}">
+                                <g:if test="${err.code == 'nullable'}">
                                     <span><g:message code="custom.null.message"/></span>
                                 </g:if>
                             </g:eachError>
@@ -230,13 +230,12 @@
                    class="col-sm-2 control-label">Re-type password</label>
 
             <div class="col-sm-5">
-                <input type="password" class="form-control" id="retypePassword"
-                       name="retypePassword"
-                       >
+                <input type="password" class="form-control" id="retypePassword" name="retypePassword" >
                 <g:eachError var="err" bean="${consultant.user}" field="password">
                     <g:if test="${err.code == 'password.match'}">
-                        <span class="control-label" ><g:message
-                            code="custom.invalid.match.password"/><span>
+                        <span class="control-label" >
+                            <g:message code="custom.invalid.match.password"/>
+                        <span>
                     </g:if>
                 </g:eachError>
             </div>
