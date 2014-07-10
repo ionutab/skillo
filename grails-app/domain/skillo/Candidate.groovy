@@ -57,6 +57,16 @@ class Candidate implements SkilloDomainModelWithHistory {
         return true
     }
 
+
+    def int age(){
+
+        def now = new GregorianCalendar()
+        def bDay = new GregorianCalendar(birthDate)
+
+        return now.YEAR-bDay.YEAR
+    }
+
+
     @Override
     void addInsertEvent(Consultant consultant) {
         def insertEvent = new CandidateEvent()
