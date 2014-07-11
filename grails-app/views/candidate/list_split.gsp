@@ -57,7 +57,9 @@
 <div class="row top10">
 <div class="col-md-12">
 <g:if test="${CandidateList.size() == 0}">
-    <h2>There are currently no candidates that match your criteria.</h2>
+    <div class="text-center">
+        <h2>There are currently no candidates that match your criteria.</h2>
+    </div>
 </g:if>
 <g:if test="${CandidateList.size() > 0}">
 

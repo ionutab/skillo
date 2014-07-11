@@ -29,7 +29,7 @@ class Candidate implements SkilloDomainModelWithHistory {
         lastName blank: false, matches: "[a-zA-Z-' ]+"
         nationality nullable: true, blank: false
 
-        telephoneNumber blank: false, nullable:true, minSize: 10, matches: "[0-9]+"
+        telephoneNumber blank: false, nullable:true, minSize: 10, matches: "[0-9]{5}-[0-9]{3}-[0-9]{3}"
         otherTelephoneNumber nullable: true
 
         candidateNotes nullable: true

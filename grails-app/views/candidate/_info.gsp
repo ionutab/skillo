@@ -24,21 +24,23 @@
             <p class="text-red"><b>${
                      CandidateShow.getMainTrade()?.qualification.name +
                     (CandidateShow.getMainTrade()?.number != null ? " " + CandidateShow.getMainTrade()?.number : "" ) +
-                    (CandidateShow.getMainTrade()?.expiryDate != null ? " " + CandidateShow.getMainTrade()?.expiryDate : "")
+                    (CandidateShow.getMainTrade()?.expiryDate != null ? " " + formatDate(date: CandidateShow.getMainTrade()?.expiryDate) : "")
             }</b></p>
         </g:if>
-        <g:if test="${CandidateShow.getMainTrade()?.willExpireSoonerThan(60)}">
-            <p class="text-yellow"><b>${
-                CandidateShow.getMainTrade()?.qualification.name +
-                        (CandidateShow.getMainTrade()?.number != null ? " " + CandidateShow.getMainTrade()?.number : "" ) +
-                        (CandidateShow.getMainTrade()?.expiryDate != null ? " " + CandidateShow.getMainTrade()?.expiryDate : "")
-            }</b></p>
+        <g:if test="${!CandidateShow.getMainTrade()?.isExpired()}">
+            <g:if test="${CandidateShow.getMainTrade()?.willExpireSoonerThan(60)}">
+                <p class="text-yellow"><b>${
+                    CandidateShow.getMainTrade()?.qualification.name +
+                            (CandidateShow.getMainTrade()?.number != null ? " " + CandidateShow.getMainTrade()?.number : "" ) +
+                            (CandidateShow.getMainTrade()?.expiryDate != null ? " " + formatDate(date: CandidateShow.getMainTrade()?.expiryDate) : "")
+                }</b></p>
+            </g:if>
         </g:if>
         <g:if test="${CandidateShow.getMainTrade()?.isMoreThenTwoMonthsValid()}">
             <p class="text-yellow"><b>${
                 CandidateShow.getMainTrade()?.qualification.name +
                         (CandidateShow.getMainTrade()?.number != null ? " " + CandidateShow.getMainTrade()?.number : "" ) +
-                        (CandidateShow.getMainTrade()?.expiryDate != null ? " " + CandidateShow.getMainTrade()?.expiryDate : "")
+                        (CandidateShow.getMainTrade()?.expiryDate != null ? " " + formatDate(date: CandidateShow.getMainTrade()?.expiryDate) : "")
             }</b></p>
         </g:if>
         <g:each in="${CandidateShow.candidateQualifications}" var="cq" >
@@ -47,21 +49,23 @@
                     <p class="text-red">${
                         cq.qualification.name +
                         (cq.number != null ? " " + cq.number : "" ) +
-                        (cq.expiryDate != null ? " " + cq.expiryDate : "")
+                        (cq.expiryDate != null ? " " + formatDate(date: cq.expiryDate) : "")
                     }</p>
                 </g:if>
-                <g:if test="${cq.willExpireSoonerThan(60)}">
-                    <p class="text-yellow">${
-                        cq.qualification.name +
-                                (cq.number != null ? " " + cq.number : "" ) +
-                                (cq.expiryDate != null ? " " + cq.expiryDate : "")
-                    }</p>
+                <g:if test="${!cq.isExpired()}">
+                    <g:if test="${cq.willExpireSoonerThan(60)}">
+                        <p class="text-yellow">${
+                            cq.qualification.name +
+                                    (cq.number != null ? " " + cq.number : "" ) +
+                                    (cq.expiryDate != null ? " " + formatDate(date: cq.expiryDate) : "")
+                        }</p>
+                    </g:if>
                 </g:if>
                 <g:if test="${cq.isMoreThenTwoMonthsValid()}">
                     <p class="text-yellow">${
                         cq.qualification.name +
                                 (cq.number != null ? " " + cq.number : "" ) +
-                                (cq.expiryDate != null ? " " + cq.expiryDate : "")
+                                (cq.expiryDate != null ? " " + formatDate(date: cq.expiryDate) : "")
                     }</p>
                 </g:if>
             </g:if>

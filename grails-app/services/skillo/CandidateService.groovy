@@ -50,17 +50,19 @@ class CandidateService {
         Criteria cc = Candidate.createCriteria()
 
         def candidateList =  cc.list() {
-            if(filter.firstName){
-                ilike("firstName", "%$filter.firstName%")
+            or {
+                if(filter.firstName){
+                    ilike("firstName", "%$filter.firstName%")
+                }
+
+                if(filter.lastName){
+                    ilike("lastName", "%$filter.lastName%")
+                }
             }
 
-            if(filter.lastName){
-                ilike("lastName", "%$filter.lastName%")
-            }
-
-            if(filter.telephoneNumber){
+            or {if(filter.telephoneNumber){
                 ilike("telephoneNumber", "%$filter.telephoneNumber%")
-            }
+            }}
 
             eq ("active", true)
 

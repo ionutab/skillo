@@ -96,7 +96,7 @@
                                     </div>
                                     <g:textField type="tel" id="telephoneNumber" name="candidate.telephoneNumber" class="form-control" value="${candidateInstance?.telephoneNumber}" />
                                     <g:javascript>
-                                        $("#telephoneNumber").inputmask("( +99 ) 9999-999-999", {"placeholder":"( +__ ) ____-___-___"});
+                                        $("#telephoneNumber").inputmask("99999-999-999", {"placeholder":"_____-___-___"});
                                     </g:javascript>
                                 </div>
                             </div>
