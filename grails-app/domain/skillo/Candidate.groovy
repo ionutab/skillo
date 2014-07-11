@@ -97,8 +97,10 @@ class Candidate implements SkilloDomainModelWithHistory {
     }
 
     def CandidateQualification getMainTrade(){
+
         this.candidateQualifications?.eachWithIndex{CandidateQualification cq, int i ->
             if(cq.isMainTrade){
+                log.info( " CQ: " + cq?.qualification?.name);
                 return cq
             }
         }

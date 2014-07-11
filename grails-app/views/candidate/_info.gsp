@@ -22,27 +22,25 @@
         %{--MAIN TRADE--}%
         <g:if test="${CandidateShow.getMainTrade()?.isExpired()}">
             <p class="text-red"><b>${
-                     CandidateShow.getMainTrade()?.qualification.name +
+                     CandidateShow.getMainTrade()?.qualification?.name +
                     (CandidateShow.getMainTrade()?.number != null ? " " + CandidateShow.getMainTrade()?.number : "" ) +
                     (CandidateShow.getMainTrade()?.expiryDate != null ? " " + formatDate(date: CandidateShow.getMainTrade()?.expiryDate) : "")
             }</b></p>
         </g:if>
-        <g:if test="${!CandidateShow.getMainTrade()?.isExpired()}">
-            <g:if test="${CandidateShow.getMainTrade()?.willExpireSoonerThan(60)}">
-                <p class="text-yellow"><b>${
-                    CandidateShow.getMainTrade()?.qualification.name +
-                            (CandidateShow.getMainTrade()?.number != null ? " " + CandidateShow.getMainTrade()?.number : "" ) +
-                            (CandidateShow.getMainTrade()?.expiryDate != null ? " " + formatDate(date: CandidateShow.getMainTrade()?.expiryDate) : "")
-                }</b></p>
-            </g:if>
-        </g:if>
-        <g:if test="${CandidateShow.getMainTrade()?.isMoreThenTwoMonthsValid()}">
+        <g:elseif test="${CandidateShow.getMainTrade()?.willExpireSoonerThanTwoMonths()}">
             <p class="text-yellow"><b>${
-                CandidateShow.getMainTrade()?.qualification.name +
+                CandidateShow.getMainTrade()?.qualification?.name +
                         (CandidateShow.getMainTrade()?.number != null ? " " + CandidateShow.getMainTrade()?.number : "" ) +
                         (CandidateShow.getMainTrade()?.expiryDate != null ? " " + formatDate(date: CandidateShow.getMainTrade()?.expiryDate) : "")
             }</b></p>
-        </g:if>
+        </g:elseif>
+        <g:else>
+            <p><b>${
+                CandidateShow.getMainTrade()?.qualification?.name +
+                        (CandidateShow.getMainTrade()?.number != null ? " " + CandidateShow.getMainTrade()?.number : "" ) +
+                        (CandidateShow.getMainTrade()?.expiryDate != null ? " " + formatDate(date: CandidateShow.getMainTrade()?.expiryDate) : "")
+            }</b></p>
+        </g:else>
         <g:each in="${CandidateShow.candidateQualifications}" var="cq" >
             <g:if test="${cq.isMainTrade == false}" >
                 <g:if test="${cq.isExpired()}">
@@ -52,44 +50,46 @@
                         (cq.expiryDate != null ? " " + formatDate(date: cq.expiryDate) : "")
                     }</p>
                 </g:if>
-                <g:if test="${!cq.isExpired()}">
-                    <g:if test="${cq.willExpireSoonerThan(60)}">
-                        <p class="text-yellow">${
-                            cq.qualification.name +
-                                    (cq.number != null ? " " + cq.number : "" ) +
-                                    (cq.expiryDate != null ? " " + formatDate(date: cq.expiryDate) : "")
-                        }</p>
-                    </g:if>
-                </g:if>
-                <g:if test="${cq.isMoreThenTwoMonthsValid()}">
+                <g:elseif test="${cq.willExpireSoonerThanTwoMonths()}">
                     <p class="text-yellow">${
                         cq.qualification.name +
                                 (cq.number != null ? " " + cq.number : "" ) +
                                 (cq.expiryDate != null ? " " + formatDate(date: cq.expiryDate) : "")
                     }</p>
-                </g:if>
+                </g:elseif>
+                <g:else>
+                    <p class="">${
+                        cq.qualification.name +
+                                (cq.number != null ? " " + cq.number : "" ) +
+                                (cq.expiryDate != null ? " " + formatDate(date: cq.expiryDate) : "")
+                    }</p>
+                </g:else>
             </g:if>
         </g:each>
 
-        <div class="row">
-            <div class="col-sm-3">
-                <label><i class="fa fa-phone"></i></label>
-            </div>
+        <g:if test="${CandidateShow.telephoneNumber != null}">
+            <div class="row">
+                <div class="col-sm-3">
+                    <label><i class="fa fa-phone"></i></label>
+                </div>
 
-            <div class="col-sm-9">
-                <p>${CandidateShow.telephoneNumber}</p>
+                <div class="col-sm-9">
+                    <p>${CandidateShow.telephoneNumber}</p>
+                </div>
             </div>
-        </div>
+        </g:if>
 
-        <div class="row">
-            <div class="col-sm-3">
-                <label><g:message code="candidate.email.label" />:</label>
-            </div>
+        <g:if test="${CandidateShow.email != null}">
+            <div class="row">
+                <div class="col-sm-3">
+                    <label><g:message code="candidate.email.label" />:</label>
+                </div>
 
-            <div class="col-sm-9">
-                <p>${CandidateShow.email}</p>
+                <div class="col-sm-9">
+                    <p>${CandidateShow.email}</p>
+                </div>
             </div>
-        </div>
+        </g:if>
 
         <div class="row">
             <div class="col-sm-3">
@@ -101,23 +101,25 @@
             </div>
         </div>
 
-        <div class="row">
-            <div class="col-sm-3">
-                <label><g:message code="candidate.birthDate.label" />:</label>
-            </div>
+        <g:if test="${CandidateShow.birthDate != null}">
+            <div class="row">
+                <div class="col-sm-3">
+                    <label><g:message code="candidate.birthDate.label" />:</label>
+                </div>
 
-            <div class="col-sm-3">
-                <p><g:formatDate date="${CandidateShow.birthDate}" /></p>
-            </div>
+                <div class="col-sm-3">
+                    <p><g:formatDate date="${CandidateShow.birthDate}" /></p>
+                </div>
 
-            <div class="col-sm-3">
-                <label><g:message code="candidate.age.label" />:</label>
-            </div>
+                <div class="col-sm-3">
+                    <label><g:message code="candidate.age.label" />:</label>
+                </div>
 
-            <div class="col-sm-3">
-                <p>${CandidateShow.age()}</p>
+                <div class="col-sm-3">
+                    <p>${CandidateShow.age() != null ? CandidateShow.age() : ""}</p>
+                </div>
             </div>
-        </div>
+        </g:if>
 
         <div class="row">
             <div class="col-sm-3">
