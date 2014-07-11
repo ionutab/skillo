@@ -12,6 +12,7 @@ grails.project.fork = [
         console: [maxMemory: 2048, minMemory: 256, debug: false, maxPerm: 256]
 ]
 
+
 grails.project.dependency.resolver = "maven" // or ivy
 grails.project.dependency.resolution = {
     // inherit Grails' default dependencies
@@ -46,6 +47,7 @@ grails.project.dependency.resolution = {
         // specify dependencies here under either 'build', 'compile', 'runtime', 'test' or 'provided' scopes e.g.
 
         runtime 'mysql:mysql-connector-java:5.1.22'
+        //compile "org.jadira.usertype:usertype.jodatime:1.9"
     }
 
     plugins {
@@ -62,6 +64,8 @@ grails.project.dependency.resolution = {
 
         compile (":asual-lesscss-resources:0.2")
 
+        compile ":joda-time:1.5"
+
         /*
         compile(":less-resources:1.3.3.2") {
             // depends on :resources:1.2.RC2 (and we are using a better one)
@@ -76,6 +80,7 @@ grails.project.dependency.resolution = {
 //        build ":tomcat:$grailsVersion"
 
 //        runtime ":database-migration:1.3.2"  -- might be needed later in the development process
+
 
     }
 }

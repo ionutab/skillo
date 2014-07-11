@@ -1,5 +1,7 @@
 package skillo
 
+import org.joda.time.DateTime
+import org.joda.time.Years
 import skillo.history.SkilloDomainModelWithHistory
 
 class Candidate implements SkilloDomainModelWithHistory {
@@ -60,10 +62,18 @@ class Candidate implements SkilloDomainModelWithHistory {
     def Integer age(){
 
         if(this.birthDate == null){
-            return null;
+            return null
         }
 
-        return 99
+        DateTime start = new DateTime(birthDate.getTime())
+        DateTime end = new DateTime()
+
+        Years years = Years.yearsBetween(start, end)
+
+
+        return years.getYears()
+
+
     }
 
     @Override
