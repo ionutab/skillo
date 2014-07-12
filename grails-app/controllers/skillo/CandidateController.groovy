@@ -20,7 +20,6 @@ class CandidateController extends BaseController {
         bindData(filter, params)
 
         def candidateList = candidateService.search(filter)
-
         def firstCandidate = candidateList.size() > 0 ? candidateList.first() : null;
 
         log.info("Rendering ${candidateList.size()} Candidates of ${candidateList.totalCount}")
@@ -42,7 +41,6 @@ class CandidateController extends BaseController {
 	}
 
     def save() {
-
         log.info("CandidateController.save")
 
         def candidate = new Candidate(params.candidate)
@@ -293,16 +291,13 @@ class CandidateController extends BaseController {
 
         newCandidateQualification.clearErrors()
         if(!newCandidateQualification.save(deepvalidate:true,flush: true)){
-
             newCandidateQualification.candidate = Candidate.get(newCandidateQualification.candidate.id)
-
         }
 
         redirect(action: "edit",id: newCandidateQualification.candidate.id)
     }
 
     def findMatches(){
-
         log.info("CC.FIND POSSIBLE MATCHES");
         log.info params
 
