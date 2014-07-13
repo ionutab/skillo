@@ -1,5 +1,8 @@
 package skillo
 
+import org.joda.time.DateTime
+import org.joda.time.LocalDate
+
 class CandidateQualification {
 
     Qualification qualification
@@ -16,27 +19,32 @@ class CandidateQualification {
         number nullable: true, blank: false
     }
 
-
     def Boolean isExpired(){
-        return expiryDate == null ? null : new Date().after(expiryDate)
+
+        if(expiryDate == null){
+            return null
+        }
+
+        DateTime now = new LocalDate().toDateTimeAtStartOfDay()
+        DateTime expDate = new DateTime(expiryDate.getTime())
+
+        return expiryDate == null ? null : expDate.isBefore(now)
     }
 
-    def Boolean willExpireSoonerThan(int days){
+    def Boolean willExpireSoonerThanTwoMonths(){
         if (expiryDate == null){
             return null
         }
 
-        Date newDate = new Date();
+        DateTime now = new LocalDate().toDateTimeAtStartOfDay()
+        DateTime nowPlusMargin = now.plusMonths(Constants.QUALIFICATION_EXPIRE_PERIOD)
 
-        GregorianCalendar calendar = new GregorianCalendar();
-        calendar.setTime(newDate);
-        calendar.add(Calendar.DATE, days);
-        newDate.setTime(calendar.getTime().getTime());
+        DateTime expDate = new DateTime(expiryDate.getTime())
 
-        return newDate.after(expiryDate)
+        return expDate.isBefore(nowPlusMargin)
     }
 
     def Boolean isMoreThenTwoMonthsValid(){
-        return !willExpireSoonerThan(60)
+        return !willExpireSoonerThanTwoMonths()
     }
 }

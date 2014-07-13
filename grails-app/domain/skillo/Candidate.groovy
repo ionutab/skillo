@@ -60,7 +60,6 @@ class Candidate implements SkilloDomainModelWithHistory {
     }
 
     def Integer age(){
-
         if(this.birthDate == null){
             return null
         }
@@ -70,10 +69,7 @@ class Candidate implements SkilloDomainModelWithHistory {
 
         Years years = Years.yearsBetween(start, end)
 
-
         return years.getYears()
-
-
     }
 
     @Override
@@ -97,11 +93,10 @@ class Candidate implements SkilloDomainModelWithHistory {
     }
 
     def CandidateQualification getMainTrade(){
-        this.candidateQualifications?.eachWithIndex{CandidateQualification cq, int i ->
+        for (CandidateQualification cq : candidateQualifications){
             if(cq.isMainTrade){
                 return cq
             }
         }
-        return null
     }
 }

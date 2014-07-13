@@ -67,7 +67,6 @@ class CandidateService {
             eq ("active", true)
 
             order("firstName", "asc")
-
         }
 
         return candidateList;

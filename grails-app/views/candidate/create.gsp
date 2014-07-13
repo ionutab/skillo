@@ -81,6 +81,9 @@
                                     <g:if test="${err.code == 'nullable'}">
                                         <span class="control-label"><g:message code="custom.null.message"/></span>
                                     </g:if>
+                                    <g:if test="${err.code == 'custom.invalid.date'}">
+                                        <span class="control-label"><g:message code="custom.invalid.date.message"/></span>
+                                    </g:if>
                                 </g:eachError>
                             </div>
                         </div>
@@ -109,12 +112,17 @@
                             </g:javascript>
                         </div>
 
-                        <div class="form-group">
+                        <div class="form-group ${hasErrors(bean: candidateInstance, field: 'address.details', 'has-error')} ">
                             <label for="address.details" class="col-md-3 control-label">
                                 <g:message code="candidate.address.label" default="Address" />
                             </label>
                             <div class="col-md-9">
                                 <g:textArea rows="2" name="address.details" id="address.details" class="form-control" value="${candidateInstance?.address?.details}" />
+                                <g:eachError var="err" bean="${candidateInstance}" field="address.details">
+                                    <g:if test="${err.code == 'nullable'}">
+                                        <span class="control-label"><g:message code="custom.null.message"/></span>
+                                    </g:if>
+                                </g:eachError>
                             </div>
                         </div>
 

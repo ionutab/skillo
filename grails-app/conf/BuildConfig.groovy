@@ -7,8 +7,8 @@ grails.project.source.level = 1.7
 
 grails.project.fork = [
         test: [maxMemory: 2048, minMemory: 256, debug: false, maxPerm: 256, daemon:true],
-        run: [maxMemory: 2048, minMemory: 256, debug: false, maxPerm: 256, forkReserve:false],
-        war: [maxMemory: 2048, minMemory: 256, debug: false, maxPerm: 256, forkReserve:false],
+        run: [maxMemory: 2048, minMemory: 256, debug: false, maxPerm: 256],
+        war: [maxMemory: 2048, minMemory: 256, debug: false, maxPerm: 256],
         console: [maxMemory: 2048, minMemory: 256, debug: false, maxPerm: 256]
 ]
 

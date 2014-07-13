@@ -1,5 +1,7 @@
 package skillo
 
+import org.joda.time.DateTime
+import org.joda.time.LocalDate
 import org.springframework.dao.DataIntegrityViolationException
 import org.springframework.web.multipart.commons.CommonsMultipartFile
 import skillo.filters.CandidateListSearch
@@ -18,7 +20,6 @@ class CandidateController extends BaseController {
         bindData(filter, params)
 
         def candidateList = candidateService.search(filter)
-
         def firstCandidate = candidateList.size() > 0 ? candidateList.first() : null;
 
         log.info("Rendering ${candidateList.size()} Candidates of ${candidateList.totalCount}")
@@ -40,10 +41,6 @@ class CandidateController extends BaseController {
 	}
 
     def save() {
-
-        log.info "ONE: " + params._action_one
-        log.info "TWO: " + params._action_two
-
         log.info("CandidateController.save")
 
         def candidate = new Candidate(params.candidate)
@@ -70,6 +67,16 @@ class CandidateController extends BaseController {
         }
 
         candidate.consultant = getCurrentConsultant()
+
+        if(candidate.birthDate != null){
+
+            DateTime now = new LocalDate().toDateTimeAtStartOfDay()
+            DateTime birthDate = new DateTime(candidate.birthDate)
+
+            if(now.isBefore(birthDate)){
+                candidate.errors.rejectValue("birthDate","custom.invalid.date")
+            }
+        }
 
         if(!candidate.save(deepvalidate:true, flush: true)){
             if(candidate.hasErrors()){
@@ -284,16 +291,13 @@ class CandidateController extends BaseController {
 
         newCandidateQualification.clearErrors()
         if(!newCandidateQualification.save(deepvalidate:true,flush: true)){
-
             newCandidateQualification.candidate = Candidate.get(newCandidateQualification.candidate.id)
-
         }
 
         redirect(action: "edit",id: newCandidateQualification.candidate.id)
     }
 
     def findMatches(){
-
         log.info("CC.FIND POSSIBLE MATCHES");
         log.info params
 
