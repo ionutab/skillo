@@ -11,6 +11,8 @@ class CandidateMatch extends BasicPaginatedSearchFilter {
 
     protected String telephoneNumber
 
+    protected Long postCodeId;
+
     String getFirstName() {
         return firstName
     }
@@ -35,7 +37,15 @@ class CandidateMatch extends BasicPaginatedSearchFilter {
         this.telephoneNumber = telephoneNumber
     }
 
+    Long getPostCodeId() {
+        return postCodeId
+    }
+
+    void setPostCodeId(Long postCodeId) {
+        this.postCodeId = postCodeId
+    }
+
     boolean isValid(){
-        return firstName || lastName || telephoneNumber
+        return firstName || lastName || telephoneNumber || postCodeId
     }
 }

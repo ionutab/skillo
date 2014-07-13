@@ -43,10 +43,19 @@
                 <div class="col-xs-2">
                     <g:submitButton name="list" class="btn btn-primary"
                                     value="${message(code: 'default.button.search.label')}"/>
-                    <button onclick="resetForm(this);" type="reset"
-                            class="btn btn-info"><span class="glyphicon glyphicon-refresh"></span>
+                    <button type="submit" id="resetCandidateSearchForm" class="btn btn-info" name="reset" value="true">
+                        <span class="glyphicon glyphicon-refresh"></span>
                     </button>
                     %{--<button type="button" class="btn btn-info input-sm" data-toggle="button"><span class="glyphicon glyphicon-arrow-down"></span></button>--}%
+                    <g:javascript>
+
+                        $('#resetCandidateSearchForm').on('click', function () {
+                            var form = $("#candidateSearchForm");
+                            var validator = form.validate(); // clear out the validation errors
+                            validator.resetForm();
+                        });
+                    </g:javascript>
+
                 </div>
             </div>
         </g:form>
@@ -107,6 +116,15 @@
 </tbody>
 </table>
 </div><!-- /.table-responsive -->
+    <div class="row">
+        <div class="col-md-4">
+            <div class="dataTables_paginate paging_bootstrap">
+                <div class="pagination">
+                    <g:paginate total="${CandidateTotal}" />
+                </div>
+            </div>
+        </div>
+    </div>
 </div><!-- /.col (RIGHT) -->
 
 <div class="col-md-5 col-sm-5" >
@@ -115,14 +133,8 @@
 
 </div><!-- /.row -->
 </div><!-- /.box-body -->
-<div class="box-footer clearfix">
-    <div class="pull-right">
-        <small>Showing 1-12/1,240</small>
-        <button class="btn btn-xs btn-primary"><i class="fa fa-caret-left"></i></button>
-        <button class="btn btn-xs btn-primary"><i class="fa fa-caret-right"></i></button>
-    </div>
-</div><!-- box-footer -->
 </div><!-- /.box -->
+
 </g:if>
 </div><!-- /.box -->
 </div>

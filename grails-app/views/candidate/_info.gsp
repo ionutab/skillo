@@ -8,7 +8,7 @@
     <div class="box-body">
         <div class="row">
             <div class="col-sm-12">
-                <g:link controller="candidate" action="edit" id="${CandidateShow.id}" class="btn btn-sm bg-yellow" ><i class="fa fa-pencil append-icon"></i>Edit</g:link>
+                <g:link controller="candidate" action="edit" id="${CandidateShow.id}" class="btn btn-sm bg-yellow" ><i class="fa fa-pencil append-icon"></i>&nbsp;Edit</g:link>
 
                 <a class="btn btn-sm bg-yellow" %{--style="position: absolute; top: 5px; right: 5px;"--}%><i
                         class="fa fa-star append-icon"></i> Star</a>
@@ -21,7 +21,7 @@
 
         </div>
         <br/>
-        <table class="table">
+        <table class="table compact">
             <tbody>
 
                 <g:set var="cqMain" value="${CandidateShow.getMainTrade()}" />
@@ -38,8 +38,8 @@
                         <td><p class="text-yellow"><b>${cqMain?.expiryDate != null ? " " + formatDate(date: cqMain?.expiryDate) : ""}</b></p></td>
                     </g:elseif>
                     <g:else>
-                        <td style="padding: 0px; border-top: none;"><p class=""><b>${cqMain?.qualification?.name}</b></p></td>
-                        <td style="padding: 0px; border-top: none;"><p class=""><b>${cqMain?.number != null ? " " + cqMain?.number : "" }</b></p></td>
+                        <td><p class=""><b>${cqMain?.qualification?.name}</b></p></td>
+                        <td><p class=""><b>${cqMain?.number != null ? " " + cqMain?.number : "" }</b></p></td>
                         <td style="padding: 0px; border-top: none;"><p class=""><b>${cqMain?.expiryDate != null ? " " + formatDate(date: cqMain?.expiryDate) : ""}</b></p></td>
                     </g:else>
                 </tr>
@@ -48,19 +48,19 @@
                     <tr>
                         <g:if test="${cq.isMainTrade == false}" >
                             <g:if test="${cq.isExpired()}">
-                                <td style="padding: 0px; border-top: none;"><p class="text-red"><b>${cq?.qualification?.name}</b></p></td>
-                                <td style="padding: 0px; border-top: none;"><p class="text-red"><b>${cq?.number != null ? " " + cq?.number : "" }</b></p></td>
-                                <td style="padding: 0px; border-top: none;"><p class="text-red"><b>${cq?.expiryDate != null ? " " + formatDate(date: cq?.expiryDate) : ""}</b></p></td>
+                                <td><p class="text-red"><b>${cq?.qualification?.name}</b></p></td>
+                                <td><p class="text-red"><b>${cq?.number != null ? " " + cq?.number : "" }</b></p></td>
+                                <td><p class="text-red"><b>${cq?.expiryDate != null ? " " + formatDate(date: cq?.expiryDate) : ""}</b></p></td>
                             </g:if>
                             <g:elseif test="${cq.willExpireSoonerThanTwoMonths()}">
-                                <td style="padding: 0px; border-top: none;"><p class="text-yellow"><b>${cq?.qualification?.name}</b></p></td>
-                                <td style="padding: 0px; border-top: none;"><p class="text-yellow"><b>${cq?.number != null ? " " + cq?.number : "" }</b></p></td>
-                                <td style="padding: 0px; border-top: none;"><p class="text-yellow"><b>${cq?.expiryDate != null ? " " + formatDate(date: cq?.expiryDate) : ""}</b></p></td>
+                                <td><p class="text-yellow"><b>${cq?.qualification?.name}</b></p></td>
+                                <td><p class="text-yellow"><b>${cq?.number != null ? " " + cq?.number : "" }</b></p></td>
+                                <td><p class="text-yellow"><b>${cq?.expiryDate != null ? " " + formatDate(date: cq?.expiryDate) : ""}</b></p></td>
                             </g:elseif>
                             <g:else>
-                                <td style="padding: 0px; border-top: none;"><p class=""><b>${cq?.qualification?.name}</b></p></td>
-                                <td style="padding: 0px; border-top: none;"><p class=""><b>${cq?.number != null ? " " + cq?.number : "" }</b></p></td>
-                                <td style="padding: 0px; border-top: none;"><p class=""><b>${cq?.expiryDate != null ? " " + formatDate(date: cq?.expiryDate) : ""}</b></p></td>
+                                <td><p class=""><b>${cq?.qualification?.name}</b></p></td>
+                                <td><p class=""><b>${cq?.number != null ? " " + cq?.number : "" }</b></p></td>
+                                <td><p class=""><b>${cq?.expiryDate != null ? " " + formatDate(date: cq?.expiryDate) : ""}</b></p></td>
                             </g:else>
                         </g:if>
                     </tr>
@@ -147,5 +147,12 @@
             </div>
         </div>
         --}%
+
+        <g:each in="${CandidateShow.candidateNotes}" var="cnote">
+        <div class="callout callout-main-details callout-info" >
+            <p><b><g:formatDate date="${cnote.note.date}" />&nbsp;${cnote.consultant.firstName + " " + cnote.consultant.lastName}</b></p>
+            <p>${cnote.note.note}</p>
+        </div>
+        </g:each>
     </div>
 </div>

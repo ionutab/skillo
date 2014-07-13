@@ -17,7 +17,7 @@
         <ul class="sidebar-menu">
             <g:each var="item,conf" in="[
                     'home' : [uri:'/', icon:'home'],
-                    'candidate' : [controller:'candidate', icon:'list'],
+                    'candidates' : [controller:'candidate', icon:'list'],
                     'qualifications' : [controller:'qualification', icon:'bookmark'],
                     'clients' : [controller:'client', icon:'briefcase']
                     /*

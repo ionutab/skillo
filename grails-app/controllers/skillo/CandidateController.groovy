@@ -18,6 +18,9 @@ class CandidateController extends BaseController {
 	def list() {
         CandidateListSearch filter = new CandidateListSearch()
         bindData(filter, params)
+        if(params.reset){
+            filter = new CandidateListSearch()
+        }
 
         def candidateList = candidateService.search(filter)
         def firstCandidate = candidateList.size() > 0 ? candidateList.first() : null;
@@ -303,6 +306,10 @@ class CandidateController extends BaseController {
 
         CandidateMatch filter = new CandidateMatch()
         bindData(filter, params.candidate)
+
+        if(params.postCode && params.postCode.id){
+            filter.postCodeId = Long.parseLong(params.postCode.id)
+        }
 
         def candidateMatches = new ArrayList<Candidate>()
         if(filter.isValid()){

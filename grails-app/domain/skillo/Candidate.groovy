@@ -24,6 +24,9 @@ class Candidate implements SkilloDomainModelWithHistory {
     Boolean active = Boolean.TRUE
     Payroll payroll = new Payroll()
 
+    Date dateCreated
+    Date lastUpdated
+
     static hasMany = [ candidateQualifications:CandidateQualification, candidateNotes:CandidateNote, jobs:Job, placements:Placement, candidateHistory:CandidateEvent ]
 
     static constraints = {
@@ -48,6 +51,7 @@ class Candidate implements SkilloDomainModelWithHistory {
     }
 
     static mapping = {
+        autoTimestamp true
         candidateQualifications cascade: "all-delete-orphan"
         candidateHistory cascade: "all-delete-orphan"
     }

@@ -49,8 +49,8 @@
                 </tbody>
             </table>
         </div>
-    <div class="pagination">
-        <g:paginate total="${searchCount}"/>
-    </div>
+        <div class="pagination">
+            <g:paginate total="${searchCount}"/>
+        </div>
     </g:else>
 </div>

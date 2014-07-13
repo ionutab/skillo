@@ -122,7 +122,7 @@ modules = {
     }
 
     skillo_admin_lte {
-        dependsOn 'bootstrap','admin_lte','jquery','font_awesome','iCheck'
+        dependsOn 'bootstrap','admin_lte','jquery','jquery-validate','jquery-validation-ui','font_awesome','iCheck'
     }
 
     skillo_admin_lte_basic {

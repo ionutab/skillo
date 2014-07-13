@@ -46,23 +46,22 @@ class CandidateService {
     }
 
     def Collection<Candidate> search(CandidateMatch filter){
-
+        log.info("CandidateService.search")
         Criteria cc = Candidate.createCriteria()
 
         def candidateList =  cc.list() {
+
             or {
                 if(filter.firstName){
                     ilike("firstName", "%$filter.firstName%")
                 }
-
                 if(filter.lastName){
                     ilike("lastName", "%$filter.lastName%")
                 }
+                if(filter.telephoneNumber){
+                    ilike("telephoneNumber", "%$filter.telephoneNumber%")
+                }
             }
-
-            or {if(filter.telephoneNumber){
-                ilike("telephoneNumber", "%$filter.telephoneNumber%")
-            }}
 
             eq ("active", true)
 

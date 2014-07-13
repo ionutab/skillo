@@ -178,6 +178,13 @@
                                             escapeMarkup: function (m) { return m; }
                                         });
                                 </g:javascript>
+                                <g:javascript>
+
+                                    $("#postCodeId").change(function() {
+                                        remoteCandidateCreateForm()
+                                    });
+
+                                </g:javascript>
                             </div>
                         </div>
 
