@@ -3,7 +3,7 @@
 <html>
 <head>
     <meta http-equiv="Content-Type" content="text/html; charset=UTF-8" />
-    <meta name="layout" content="admin_light" />
+    <meta name="layout" content="admin_lte_layout" />
     <g:set var="entityName" value="${message(code: 'candidate.label', default: 'Candidate')}" />
     <title><g:message code="client.list.label" /></title>
     <g:set var="page_title" value="${message(code: 'client.list.label')}" scope="request"/>
@@ -12,41 +12,36 @@
 <body>
 
 <div class="row">
-    <div class="content-container col-lg-12">
+    <div class="col-md-12">
     <g:form action="list" controller="client" name="searchForm" role="form" method="GET">
-        <legend><g:message code="client.search.label" /></legend>
-
-        <div class="form-group row">
-            <div class="col-lg-2">
-
+        <div class="row">
+            <div class="col-xs-2">
                 <g:textField class="form-control" name="search.name"
-                             placeholder="${message(code: 'client.search.name.label', default: 'Name')}"
-                             value="${params.search?.name}"
-                             />
+                            placeholder="${message(code: 'client.search.name.label', default: 'Name')}"
+                            value="${params.search?.name}" />
             </div>
-            <div class="col-lg-2">
 
+            <div class="col-xs-2">
                 <g:textField class="form-control" name="search.registrationNumber"
                              placeholder="${message(code: 'client.search.registrationNumber.label', default: 'Registration Number')}"
-                             value="${params.search?.registrationNumber}" />
+                             value="${params.search?.registrationNumber}"/>
             </div>
-            <div class="col-lg-2">
+
+            <div class="col-xs-2">
                 <g:textField class="form-control" name="search.address.details"
                              placeholder="${message(code: 'client.search.address.details.label', default: 'Address Details')}"
-                             value="${params.search?.postCode}" />
+                             value="${params.search?.postCode}"/>
             </div>
-            <div class="col-lg-2">
+
+            <div class="col-xs-2">
                 <g:textField class="form-control" name="search.address.postCode"
                              placeholder="${message(code: 'client.search.address.postCode.label', default: 'Post Code')}"
-                             value="${params.search?.postCode}" />
-
+                             value="${params.search?.postCode}"/>
             </div>
-
-        </div>
-
-        <div class="form-group">
-            <g:submitButton name="list" class="btn btn-primary" value="${message(code: 'default.button.search.label')}"/>
-            <button type="button" class="btn btn-info"><span class="glyphicon glyphicon-refresh"></span></button>
+            <div class="col-xs-2">
+                <g:submitButton name="list" class="btn btn-primary" value="${message(code: 'default.button.search.label')}"/>
+                <button type="button" class="btn btn-info"><span class="glyphicon glyphicon-refresh"></span></button>
+            </div>
         </div>
 
 

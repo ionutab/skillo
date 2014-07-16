@@ -3,7 +3,7 @@
 <html>
 <head>
     <meta http-equiv="Content-Type" content="text/html; charset=UTF-8" />
-    <meta name="layout" content="admin_light" />
+    <meta name="layout" content="admin_lte_layout" />
     <g:set var="entityName" value="${message(code: 'client.label', default: 'Client')}" />
     <title><g:message code="default.create.label" args="[entityName]" /></title>
     <r:require modules="forms"/>

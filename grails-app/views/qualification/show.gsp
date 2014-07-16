@@ -1,15 +1,9 @@
-<%--
-  Created by IntelliJ IDEA.
-  User: Andrei-Home
-  Date: 4/28/2014
-  Time: 11:00 PM
---%>
 <%@ page import="skillo.Qualification" %>
 <%@ page contentType="text/html;charset=UTF-8" %>
 <html>
 <head>
     <meta http-equiv="Content-Type" content="text/html; charset=UTF-8" />
-    <meta name="layout" content="admin_light" />
+    <meta name="layout" content="admin_lte_layout" />
     <g:set var="entityName" value="${message(code: 'qualification.label', default: 'Qualification')}" />
     <title><g:message code="default.show.label" args="[entityName]" /></title>
 </head>
