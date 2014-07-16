@@ -1,5 +1,7 @@
 package skillo
 
+import skillo.filters.ClientListSearch
+
 class ClientController extends BaseController {
 
     def clientService
@@ -10,13 +12,12 @@ class ClientController extends BaseController {
 
     def list(){
         log.info("ClientController.list")
-        params.max = Math.min(params.max ? params.int('max') : 10, 100)
-
-        def clientList = Client.createCriteria().list(params) {}
-        def clientList2 = clientService.list()
-        log.info("CL2: " + clientList2.size())
-
-        [ClientList:clientList, ClientTotal: Client.count()]
+        ClientListSearch filter = new ClientListSearch()
+        if(!params.reset){
+            bindData(filter,params.search)
+        }
+        def clientList = clientService.search(filter)
+        [ClientList:clientList, ClientTotal: clientList.totalCount]
     }
 
     def create(){
@@ -29,19 +30,15 @@ class ClientController extends BaseController {
 
         def client = new Client(params.client)
         def address = new Address(params.address)
-        def postCode = PostCode.get(params.postCode.id)
 
-        if(postCode && address.details){
-            address.postCode = postCode
-            client.address = address
-        } else if(postCode && !address.details){
-            flash.error = "${message(code: 'default.created.message', args: [message(code: 'client.label', default: 'Client'), client.name])}"
-            redirect(action: "create")
-            return
+        if(params.postCode && params.postCode.id){
+            def postCode = PostCode.get(params.postCode.id)
+            if(postCode){
+                address.postCode = postCode
+            }
         }
 
         if(clientService.save(client)){
-            flash.message = "${message(code: 'default.created.message', args: [message(code: 'client.label', default: 'Client'), client.name])}"
             redirect(action: "list")
         } else {
             render(view: "create", model: [clientInstance: client])

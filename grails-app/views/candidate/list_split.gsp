@@ -46,15 +46,6 @@
                     <button type="submit" id="resetCandidateSearchForm" class="btn btn-info" name="reset" value="true">
                         <span class="glyphicon glyphicon-refresh"></span>
                     </button>
-                    %{--<button type="button" class="btn btn-info input-sm" data-toggle="button"><span class="glyphicon glyphicon-arrow-down"></span></button>--}%
-                    <g:javascript>
-
-                        $('#resetCandidateSearchForm').on('click', function () {
-                            var form = $("#candidateSearchForm");
-                            var validator = form.validate(); // clear out the validation errors
-                            validator.resetForm();
-                        });
-                    </g:javascript>
 
                 </div>
             </div>
@@ -64,79 +55,73 @@
 
 
 <div class="row top10">
-<div class="col-md-12">
-<g:if test="${CandidateList.size() == 0}">
-    <div class="text-center">
-        <h2>There are currently no candidates that match your criteria.</h2>
-    </div>
-</g:if>
-<g:if test="${CandidateList.size() > 0}">
-
-<div class="box box-solid">
-<div class="box-body">
-<div class="row">
-<div class="col-md-7 col-sm-7">
-<div class="table-responsive">
-<!-- THE MESSAGES -->
-<table class="table">
-<thead>
-    <tr>
-
-        <th class="sortable"><a
-                href="/skillo/candidate/list?sort=firstName&amp;order=asc">Full Name</a>
-        </th>
-        %{--<th>Telephone</th>--}%
-        <th>Address</th>
-        <th>Post Code</th>
-        <th>Trade</th>
-
-    </tr>
-</thead>
-<tbody>
-<g:each in="${CandidateList}" status="i" var="Candidate">
-<tr>
-    <td>
-        <g:remoteLink action="display" id="${Candidate.id}" elementId="${Candidate.id}" update="displayCandidate">${Candidate.firstName} ${Candidate.lastName}</g:remoteLink>
-    </td>
-    %{--<td>--}%
-    %{--40745763293--}%
-    %{--</td>--}%
-    <td>
-        ${Candidate?.address?.details}
-    </td>
-    <td>
-        ${Candidate?.address?.postCode?.code}
-    </td>
-    <td>
-        ${Candidate?.getMainTrade()?.qualification?.name}
-    </td>
-
-</tr>
-</g:each>
-</tbody>
-</table>
-</div><!-- /.table-responsive -->
-    <div class="row">
-        <div class="col-md-4">
-            <div class="dataTables_paginate paging_bootstrap">
-                <div class="pagination">
-                    <g:paginate total="${CandidateTotal}" />
-                </div>
+    <div class="col-md-12">
+        <g:if test="${CandidateList.size() == 0}">
+            <div class="text-center">
+                <h2>There are currently no candidates that match your criteria.</h2>
             </div>
-        </div>
-    </div>
-</div><!-- /.col (RIGHT) -->
+        </g:if>
+        <g:if test="${CandidateList.size() > 0}">
+            <div class="box box-solid">
+                <div class="box-body">
+                    <div class="row">
+                        <div class="col-md-7 col-sm-7">
+                            <div class="table-responsive">
+                                <!-- THE MESSAGES -->
+                                <table class="table">
+                                    <thead>
+                                    <tr>
 
-<div class="col-md-5 col-sm-5" >
-    <g:render template="info" />
-</div>
+                                        <th class="sortable"><a
+                                                href="/skillo/candidate/list?sort=firstName&amp;order=asc">Full Name</a>
+                                        </th>
+                                        %{--<th>Telephone</th>--}%
+                                        <th>Address</th>
+                                        <th>Post Code</th>
+                                        <th>Trade</th>
 
-</div><!-- /.row -->
-</div><!-- /.box-body -->
-</div><!-- /.box -->
-
-</g:if>
-</div><!-- /.box -->
+                                    </tr>
+                                    </thead>
+                                    <tbody>
+                                    <g:each in="${CandidateList}" status="i" var="Candidate">
+                                        <tr>
+                                            <td>
+                                                <g:remoteLink action="display" id="${Candidate.id}"
+                                                              elementId="${Candidate.id}"
+                                                              update="displayCandidate">${Candidate.firstName} ${Candidate.lastName}</g:remoteLink>
+                                            </td>
+                                            <td>
+                                                ${Candidate?.address?.details}
+                                            </td>
+                                            <td>
+                                                ${Candidate?.address?.postCode?.code}
+                                            </td>
+                                            <td>
+                                                ${Candidate?.getMainTrade()?.qualification?.name}
+                                            </td>
+                                        </tr>
+                                    </g:each>
+                                    </tbody>
+                                </table>
+                            </div><!-- /.table-responsive -->
+                            <div class="row">
+                                <div class="col-md-4">
+                                    <div class="dataTables_paginate paging_bootstrap">
+                                        <div class="pagination">
+                                            <g:paginate total="${CandidateTotal}"/>
+                                        </div>
+                                    </div>
+                                </div>
+                            </div>
+                        </div><!-- /.col (RIGHT) -->
+                        <div class="col-md-5 col-sm-5">
+                            <g:render template="info"/>
+                        </div>
+                    </div><!-- /.row -->
+                </div><!-- /.box-body -->
+            </div><!-- /.box -->
+        </g:if>
+    </div><!-- /.box -->
 </div>
 
 </body>

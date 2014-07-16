@@ -16,7 +16,7 @@ class CandidateQualification {
 
     static constraints = {
         expiryDate nullable: true
-        number nullable: true, blank: false
+        number nullable: true, blank: false, matches: "[a-zA-Z0-9- ]+"
     }
 
     def Boolean isExpired(){

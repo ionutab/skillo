@@ -2,18 +2,29 @@ package skillo
 
 import grails.transaction.Transactional
 import org.grails.datastore.mapping.query.api.Criteria
+import skillo.filters.ClientListSearch
 
 @Transactional
 class ClientService {
 
-    def Collection<Client> list(){
+    def Collection<Client> search(ClientListSearch filter){
         log.info("ClientService.search")
-        return Client.list()
-    }
+        Criteria cc = Client.createCriteria()
 
-    def Collection<Client> search(Client input){
-        log.info("ClientService.search")
-        Criteria sc = Client.createCriteria()
+        def clientList = cc.list(max:filter.max, offset:filter.offset){
+
+            if(filter.name){
+                ilike("name", new String("%$filter.name%"))
+            }
+
+            if(filter.registrationNumber){
+                ilike("registrationNumber", new String("%$filter.registrationNumber%"))
+            }
+
+            eq("active", true)
+        }
+
+        return clientList
     }
 
     def boolean save(Client client){

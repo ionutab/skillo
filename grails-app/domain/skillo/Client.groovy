@@ -13,12 +13,20 @@ class Client implements SkilloDomainModelWithHistory {
 
     String telephoneNumber
 
+    Date dateCreated
+    Date lastUpdated
+
     static hasMany = [contacts: Contact, workSite: WorkSite, placement:Placement, clientHistory:ClientEvent]
 
     static constraints = {
-        name unique: true, blank: false
-        registrationNumber unique: true, blank: false
+        name unique: true, blank: false, matches: "[a-zA-Z0-9-' ]+"
+        registrationNumber unique: true, blank: false, matches: "[a-zA-Z0-9- ]+"
         address nullable: true
+    }
+
+    static mapping = {
+        autoTimestamp true
+        clientHistory cascade: "all-delete-orphan"
     }
 
     @Override

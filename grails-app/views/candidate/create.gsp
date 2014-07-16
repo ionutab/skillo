@@ -14,7 +14,7 @@
 <div class="col-md-5">
     <div class="box box-solid">
         <div class="box-body">
-            <g:form controller="candidate" action="save" class="form-horizontal" autocomplete="off" name="candidateCreateForm" id="candidateCreateForm">
+            <g:form controller="candidate" action="save" class="form form-horizontal" autocomplete="off" name="candidateCreateForm" id="candidateCreateForm">
                 <div class="row">
                     <div class="col-md-12 col-sm-12">
                         <div class="form-group ${hasErrors(bean: candidateInstance, field: 'firstName', 'has-error')}">
@@ -92,7 +92,7 @@
                             <label for="telephoneNumber" class="col-md-3 control-label">
                                 <g:message code="candidate.telephoneNumber.label" default="Telephone Number" />
                             </label>
-                            <div class="col-md-9">
+                            <div class="col-lg-9">
                                 <div class="input-group">
                                     <div class="input-group-addon">
                                         <i class="fa fa-phone"></i>

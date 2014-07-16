@@ -17,9 +17,8 @@ class CandidateController extends BaseController {
 
 	def list() {
         CandidateListSearch filter = new CandidateListSearch()
-        bindData(filter, params)
-        if(params.reset){
-            filter = new CandidateListSearch()
+        if(!params.reset){
+            bindData(filter, params)
         }
 
         def candidateList = candidateService.search(filter)

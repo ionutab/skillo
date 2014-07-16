@@ -9,23 +9,23 @@
     <r:require modules="forms"/>
 </head>
 <body>
-
-    <g:form action="save" role="form" class="form-horizontal" method="POST" >
-        <div class="row">
-            <div class="content-container col-lg-4" >
-                <g:render template="form" />
-            </div>
-        </div>
-        <div class="row">
-            <div class="content-container col-lg-4">
-                <div class="form-group">
-                    <div class="col-sm-offset-4 col-sm-3">
-                        <g:submitButton name="create" class="btn btn-primary" value="${message(code: 'default.button.save.label', default: 'Save')}" />
+<div class="row">
+    <div class="col-md-5">
+        <div class="box box-solid">
+            <div class="box-body">
+                <g:form controller="client" action="save" autocomplete="off" role="form" class="form-horizontal" method="POST" id="clientCreateForm" >
+                    <div class="row">
+                        <div class="col-md-12 col-sm-12" >
+                            <g:render template="form" />
+                            <div class="col-md-offset-3">
+                                <g:submitButton name="create" class="btn btn-success" value="${message(code: 'default.button.save.label', default: 'Save')}" />
+                            </div>
+                        </div>
                     </div>
-                </div>
+                </g:form>
             </div>
         </div>
-    </g:form>
-
+    </div>
+</div>
 </body>
 </html>
