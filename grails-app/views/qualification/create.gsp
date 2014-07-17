@@ -11,21 +11,24 @@
 </head>
 
 <body>
-<g:form action="save" role="form" class="form-horizontal">
-    <div class="row">
-        <div class="content-container col-lg-4">
-            <g:render template="template/form"/>
-        </div>
-    </div>
-    <div class="row">
-        <div class="content-container col-lg-4">
-            <div class="form-group">
-                <div class="col-sm-offset-3 col-sm-3">
-                    <g:submitButton name="create" class="btn btn-primary" value="${message(code: 'default.button.save.label', default: 'Save')}" />
+<div class="col-md-12">
+    <div class="box box-solid">
+        <g:form action="save" role="form" class="form-horizontal">
+            <div class="box-body">
+                <div class="row">
+                    <div class="col-md-12">
+
+                        <div class="col-md-4">
+                            <g:render template="template/form"/>
+                            <g:submitButton name="create" class="btn btn-primary"
+                                            value="${message(code: 'default.button.save.label', default: 'Save')}"/>
+                            <button type="submit" class="btn btn-warning" name="cancel" value="true">Cancel</button>
+                        </div>
+                    </div>
                 </div>
             </div>
-        </div>
+        </g:form>
     </div>
-</g:form>
+</div>
 </body>
 </html>
