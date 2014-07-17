@@ -1,6 +1,6 @@
 package skillo
 
-import skillo.filters.ClientListSearch
+import skillo.filters.ClientListFilter
 
 class ClientController extends BaseController {
 
@@ -12,12 +12,12 @@ class ClientController extends BaseController {
 
     def list(){
         log.info("ClientController.list")
-        ClientListSearch filter = new ClientListSearch()
+        ClientListFilter filter = new ClientListFilter()
         if(!params.reset){
             bindData(filter,params.search)
         }
         def clientList = clientService.search(filter)
-        [ClientList:clientList, ClientTotal: clientList.totalCount]
+        [clientListFilter:filter, ClientList:clientList, ClientTotal: clientList.totalCount]
     }
 
     def create(){

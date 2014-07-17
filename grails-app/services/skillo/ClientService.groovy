@@ -2,12 +2,12 @@ package skillo
 
 import grails.transaction.Transactional
 import org.grails.datastore.mapping.query.api.Criteria
-import skillo.filters.ClientListSearch
+import skillo.filters.ClientListFilter
 
 @Transactional
 class ClientService {
 
-    def Collection<Client> search(ClientListSearch filter){
+    def Collection<Client> search(ClientListFilter filter){
         log.info("ClientService.search")
         Criteria cc = Client.createCriteria()
 

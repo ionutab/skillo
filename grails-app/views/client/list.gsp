@@ -18,13 +18,13 @@
                 <div class="col-xs-2">
                     <g:textField class="form-control" name="search.name"
                                  placeholder="${message(code: 'client.search.name.label', default: 'Name')}"
-                                 value="${params.search?.name}"/>
+                                 value="${clientListFilter?.name}"/>
                 </div>
 
                 <div class="col-xs-2">
                     <g:textField class="form-control" name="search.registrationNumber"
                                  placeholder="${message(code: 'client.search.registrationNumber.label', default: 'Registration Number')}"
-                                 value="${params.search?.registrationNumber}"/>
+                                 value="${clientListFilter?.registrationNumber}"/>
                 </div>
 %{--
 

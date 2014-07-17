@@ -1,6 +1,6 @@
 package skillo.filters
 
-class ClientListSearch extends BasicPaginatedSearchFilter {
+class ClientListFilter extends BasicPaginatedSearchFilter {
 
     String name
 
