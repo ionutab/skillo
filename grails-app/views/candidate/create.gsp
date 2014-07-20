@@ -247,9 +247,9 @@
                         </div>
 
                         <div class="form-group">
-                            <label for="candidate.sponsored" class="col-md-3 control-label">Sponsored</label>
+                            <label for="candidate.carOwner" class="col-md-3 control-label">Car owner</label>
                             <div class="col-md-9">
-                                <g:radioGroup values="[true, false]" labels="['yes','no']" name="candidate.sponsored" value="${candidateInstance?.sponsored}">
+                                <g:radioGroup values="[true, false]" labels="['yes','no']" name="candidate.carOwner" value="${candidateInstance?.carOwner}">
                                     <label class="control-label">
                                         ${it.radio}&nbsp;${it.label}
                                     </label>
@@ -259,9 +259,9 @@
                         </div>
 
                         <div class="form-group">
-                            <label for="candidate.carOwner" class="col-md-3 control-label">Car owner</label>
+                            <label for="candidate.sponsored" class="col-md-3 control-label">Sponsored</label>
                             <div class="col-md-9">
-                                <g:radioGroup values="[true, false]" labels="['yes','no']" name="candidate.carOwner" value="${candidateInstance?.carOwner}">
+                                <g:radioGroup values="[true, false]" labels="['yes','no']" name="candidate.sponsored" value="${candidateInstance?.sponsored}">
                                     <label class="control-label">
                                         ${it.radio}&nbsp;${it.label}
                                     </label>

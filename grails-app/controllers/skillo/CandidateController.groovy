@@ -102,14 +102,11 @@ class CandidateController extends BaseController {
         log.info("Candidate Controller - edit")
 
         def candidate = Candidate.get(params.id)
-        if (!candidate || candidate.active == false) {
+        if (!candidate) {
             flash.message = message(code: 'default.not.found.message', args: [message(code: 'candidate.label', default: 'Candidate'), params.id])
             redirect(action: "list")
             return
         }
-
-        def newCandidateQualification = new CandidateQualification()
-        newCandidateQualification.setCandidate(candidate)
 
         def availableMainTrades = Qualification.findAllByCanBeMainTrade(true)
         def availableQualifications = Qualification.findAll()
@@ -117,7 +114,7 @@ class CandidateController extends BaseController {
 
         def documentList = listDocuments();
 
-        [candidateInstance: candidate,documentInstanceList:documentList, newCandidateQualification: newCandidateQualification , AvailableMainTrades: availableMainTrades , AvailableQualifications: availableQualifications , AvailablePayrollCompanies: availablePayRollCompanies as grails.converters.JSON  ]
+        render(view:'edit2', model: [candidateInstance: candidate,documentInstanceList:documentList, AvailableMainTrades: availableMainTrades , AvailableQualifications: availableQualifications , availablePayrollCompanies: availablePayRollCompanies as grails.converters.JSON  ])
     }
 
     def update(){
@@ -169,8 +166,14 @@ class CandidateController extends BaseController {
 			redirect(action: "list")
 			return
 		}
+        def documentList = listDocuments();
 
-		[candidateInstance: candidate]
+        def availableMainTrades = Qualification.findAllByCanBeMainTrade(true)
+        def availableQualifications = Qualification.findAll()
+        def availablePayRollCompanies = PayrollCompany.findAll()
+
+
+        render(view:'edit2', model: [candidateInstance: candidate,documentInstanceList:documentList, AvailableMainTrades: availableMainTrades , AvailableQualifications: availableQualifications , availablePayrollCompanies: availablePayRollCompanies as grails.converters.JSON  ])
 	}
 
     def delete(){

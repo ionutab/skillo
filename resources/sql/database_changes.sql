@@ -11,5 +11,9 @@ alter table note drop type_id;
 alter table candidate ADD date_created datetime;
 alter table candidate ADD last_updated datetime;
 
+update candidate set date_created = now();
+update candidate set last_updated = now();
+update client set date_created = now();
+update client set last_updated = now();
 
 -- 13/07/2014
