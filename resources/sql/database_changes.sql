@@ -17,3 +17,7 @@ update client set date_created = now();
 update client set last_updated = now();
 
 -- 13/07/2014
+
+
+# alter table tablename change oldname newname varchar (10) ;
+alter table payroll change unqiue_tax_reference_number unique_tax_reference_number varchar2(255);

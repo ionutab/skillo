@@ -1,5 +1,5 @@
+<g:set var="editable" value="${params.action == 'edit' || params.action == 'updateMainDetails' || params.action == 'updatePaymentDetails'}" />
 <g:set var="cq" value="${candidateInstance.candidateQualifications}"/>
-<g:set var="editable" value="${params.action == 'edit'}"/>
 <g:set var="cqMain" value="${candidateInstance.getMainTrade()}"/>
 <div class="col-md-12">
     <div class="box box-solid">

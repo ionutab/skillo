@@ -21,4 +21,5 @@ public interface SkilloDomainModelWithHistory extends GroovyObject {
 
     public void addUpdateEvent(Consultant consultant)
 
+
 }

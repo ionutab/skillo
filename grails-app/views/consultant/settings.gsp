@@ -16,7 +16,7 @@
                 <div class="row">
                     <div class="col-xs-12 text-center">
                         <div class="img-thumbnail">
-                            <g:img dir="images/avatar" file="female-icon.jpg"/>
+                            <g:img dir="images/avatar" file="nophoto.png"/>
                         </div>
 
                         <div class="box-tools text-center">

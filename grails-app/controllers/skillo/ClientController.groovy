@@ -79,13 +79,13 @@ class ClientController extends BaseController {
         client.properties = params.client
 
         if(client.version < Long.parseLong(params.version)){
-            flash.message = message(code: 'default.optimistic.locking.failure', args: [message(code: 'client.label', default: '${className}'), client.id])
+            log.info("badversion")
         }
 
         if(clientService.update(client)){
-            flash.message = message(code: 'default.updated.message', args: [message(code: 'client.label', default: '${className}'), client.id])
+            log.info("we are saved")
         } else {
-            flash.message = message(code: 'default.not.updated.message', args: [message(code: 'client.label', default: '${className}'), client.id])
+            log.info("badversion")
         }
 
         redirect(action: "list")
@@ -96,7 +96,6 @@ class ClientController extends BaseController {
         log.info("ClientController.delete")
         def client = Client.get(params.id)
         if(!client){
-            flash.message = message(code:'default.not.found.message', args: [message(code:'client.label', default: 'Client')])
             redirect(acion:"list")
             return
         }
@@ -104,11 +103,9 @@ class ClientController extends BaseController {
         client.active = false
 
         if(!client.save( deepvalidate:true,flush: true )){
-            flash.message = "${message(code: 'default.not.deleted.message', args: [message(code: 'client.label', default: 'Client'), params.id])}"
             redirect(action: "list")
         }
 
-        flash.message = "${message(code: 'default.deleted.message', args: [message(code: 'client.label', default: 'Client'), params.id])}"
         redirect(action:"list")
     }
 

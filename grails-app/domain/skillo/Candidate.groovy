@@ -22,10 +22,12 @@ class Candidate implements SkilloDomainModelWithHistory {
     Consultant consultant
     Address address
     Boolean active = Boolean.TRUE
-    Payroll payroll = new Payroll()
+    Payroll payroll
 
     Date dateCreated
     Date lastUpdated
+
+    transient Long currentVersion
 
     static hasMany = [ candidateQualifications:CandidateQualification, candidateNotes:CandidateNote, jobs:Job, placements:Placement, candidateHistory:CandidateEvent ]
 
@@ -48,6 +50,8 @@ class Candidate implements SkilloDomainModelWithHistory {
         payroll nullable: true
 
         email nullable: true, blank: false, email: true
+
+        currentVersion bindable: true
     }
 
     static mapping = {

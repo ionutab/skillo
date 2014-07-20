@@ -5,21 +5,20 @@ class Payroll {
     PayrollCompany payrollCompany
     
     Boolean registered = Boolean.FALSE
-    Boolean inducted
+    Boolean inducted = Boolean.FALSE
     
     String referenceNumber
     String nationalInsuranceNumber
     String registrationNumber
-    String unqiueTaxReferenceNumber
+    String uniqueTaxReferenceNumber
 
     static belongsTo = Candidate
 
     static constraints = {
-        inducted nullable: true
         payrollCompany nullable: true
         referenceNumber nullable: true, blank: false
         nationalInsuranceNumber nullable: true, blank: false
         registrationNumber nullable: true, blank: false
-        unqiueTaxReferenceNumber nullable: true, blank: false
+        uniqueTaxReferenceNumber nullable: true, blank: false
     }
 }

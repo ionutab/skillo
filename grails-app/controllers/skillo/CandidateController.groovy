@@ -16,13 +16,24 @@ class CandidateController extends BaseController {
     }
 
 	def list() {
-        CandidateListSearch filter = new CandidateListSearch()
+        //first we get from session
+        CandidateListSearch filter = session["candidateSearchFilter"] != null ? session["candidateSearchFilter"] : new CandidateListSearch()
+
         if(!params.reset){
             bindData(filter, params)
+        } else {
+            //we have to reset the filter
+            filter = new CandidateListSearch()
         }
 
+        //performing the search
         def candidateList = candidateService.search(filter)
+
+        //this candidate will be displayed in the info pane on the right
         def firstCandidate = candidateList.size() > 0 ? candidateList.first() : null;
+
+        //saving to session
+        session["candidateSearchFilter"] = filter
 
         log.info("Rendering ${candidateList.size()} Candidates of ${candidateList.totalCount}")
         render(view: "list_split", model: [CandidateListFilter:filter, CandidateList: candidateList, CandidateTotal: candidateList.totalCount, CandidateShow: firstCandidate])
@@ -64,7 +75,6 @@ class CandidateController extends BaseController {
             def candidateQualification = new CandidateQualification()
             candidateQualification.qualification = mainTrade
             candidateQualification.isMainTrade = true
-
             candidate.addToCandidateQualifications(candidateQualification)
         }
 
@@ -92,18 +102,15 @@ class CandidateController extends BaseController {
             render(view: "create", model: [candidateInstance: candidate, AvailableMainTrades: availableMainTrades as grails.converters.JSON ])
             return
         }
-//        candidate.addInsertEvent()
-        flash.message = message(code: 'default.created.message', args: [message(code: 'candidate.label', default: 'Candidate'), candidate.firstName + " " + candidate.lastName])
         redirect(action: "edit", id: candidate.id )
-
     }
 
-    def edit() {
+
+    def oldEdit() {
         log.info("Candidate Controller - edit")
 
         def candidate = Candidate.get(params.id)
         if (!candidate) {
-            flash.message = message(code: 'default.not.found.message', args: [message(code: 'candidate.label', default: 'Candidate'), params.id])
             redirect(action: "list")
             return
         }
@@ -111,10 +118,30 @@ class CandidateController extends BaseController {
         def availableMainTrades = Qualification.findAllByCanBeMainTrade(true)
         def availableQualifications = Qualification.findAll()
         def availablePayRollCompanies = PayrollCompany.findAll()
-
         def documentList = listDocuments();
 
-        render(view:'edit2', model: [candidateInstance: candidate,documentInstanceList:documentList, AvailableMainTrades: availableMainTrades , AvailableQualifications: availableQualifications , availablePayrollCompanies: availablePayRollCompanies as grails.converters.JSON  ])
+        render(view:'edit', model: [candidateInstance: candidate, documentInstanceList:documentList, AvailableMainTrades: availableMainTrades, AvailableQualifications: availableQualifications , availablePayrollCompanies: availablePayRollCompanies as grails.converters.JSON  ])
+    }
+
+    def edit() {
+        log.info("Candidate Controller - edit")
+
+        if(params.candidate){
+            log.info "CANDIDATE: " + params.candidate
+        }
+
+        def candidate = Candidate.get(params.id)
+        if (!candidate) {
+            redirect(action: "list")
+            return
+        }
+
+        def availableMainTrades = Qualification.findAllByCanBeMainTrade(true)
+        def availableQualifications = Qualification.findAll()
+        def availablePayRollCompanies = PayrollCompany.findAll()
+        def documentList = listDocuments();
+
+        render(view:'edit2', model: [candidateInstance: candidate, documentInstanceList:documentList, AvailableMainTrades: availableMainTrades, AvailableQualifications: availableQualifications , availablePayrollCompanies: availablePayRollCompanies as grails.converters.JSON  ])
     }
 
     def update(){
@@ -122,7 +149,6 @@ class CandidateController extends BaseController {
         def candidate = Candidate.get(params.id)
 
         if(!candidate){
-            flash.message = message(code: 'default.not.found.message', args: [message(code: 'candidate.label', default: 'Candidate'), params.id])
             redirect(action: "list")
             return
         }
@@ -155,14 +181,85 @@ class CandidateController extends BaseController {
 //            candidate.addUpdateEvent(getCurrentConsultant())
         }
 
-        flash.message = message(code: 'default.updated.message', args: [message(code: 'candidate.label', default: '${className}'), candidate.id])
         redirect(action: "list")
     }
 
-	def show() {
+
+    def updateMainDetails(){
+        log.info("CandidateController.saveMainDetails")
+
+        def candidate = Candidate.get(params.id)
+
+        if (!candidate) {
+            redirect(action: "list")
+            return
+        }
+
+        candidate.address.properties = params.address
+        candidate.properties = params.candidate
+
+        if(params.postCode && params.postCode.id){
+            if(!params.postCode.id.equals(candidate.address?.postCode?.id)){
+                candidate.address.postCode = PostCode.get(params.postCode.id)
+            }
+        } else {
+            candidate.address.postCode = null
+        }
+
+        if(!candidateService.update(candidate)){
+            def availableMainTrades = Qualification.findAllByCanBeMainTrade(true)
+            def availableQualifications = Qualification.findAll()
+            def availablePayRollCompanies = PayrollCompany.findAll()
+            def documentList = listDocuments();
+            render(view:'edit2', model: [candidateInstance: candidate, documentInstanceList:documentList, AvailableMainTrades: availableMainTrades, AvailableQualifications: availableQualifications , availablePayrollCompanies: availablePayRollCompanies as grails.converters.JSON  ])
+            return
+        }
+
+        log.info("CANDIDATE UPDATED ")
+        redirect(action: "list")
+    }
+
+    def updatePaymentDetails(){
+        log.info("CandidateController.savePaymentDetails")
+
+        def candidate = Candidate.get(params.id)
+
+        if (!candidate) {
+            redirect(action: "list")
+            return
+        }
+
+        log.info("PARAMS: " + params.payroll)
+
+        if(params.payroll){
+
+            def payroll = candidate.payroll
+
+            if(!payroll){
+                payroll = new Payroll()
+            }
+            bindData(payroll, params.payroll)
+
+            log.info("PAYROLL: " + payroll)
+            candidate.payroll = payroll
+        }
+
+        if(!candidateService.update(candidate)){
+            def availableMainTrades = Qualification.findAllByCanBeMainTrade(true)
+            def availableQualifications = Qualification.findAll()
+            def availablePayRollCompanies = PayrollCompany.findAll()
+            def documentList = listDocuments();
+            render( view:'edit2', model: [candidateInstance: candidate, documentInstanceList:documentList, AvailableMainTrades: availableMainTrades, AvailableQualifications: availableQualifications , availablePayrollCompanies: availablePayRollCompanies as grails.converters.JSON  ])
+            return
+        }
+
+        redirect(action: "list")
+    }
+
+
+    def show() {
 		def candidate = Candidate.get(params.id)
 		if (!candidate) {
-			flash.message = message(code: 'default.not.found.message', args: [message(code: 'candidate.label', default: 'Candidate'), params.id])
 			redirect(action: "list")
 			return
 		}
@@ -179,28 +276,16 @@ class CandidateController extends BaseController {
     def delete(){
         def candidate = Candidate.get(params.id)
         if(!candidate) {
-            flash.message = message(code: 'default.not.found.message', args: [message(code: 'candidate.label', default: 'Candidate'), params.id])
             redirect(action: "list")
             return
         }
 
-//        try{
-//            candidate.delete()
-//        }
-//        catch (DataIntegrityViolationException e) {
-//            flash.message = message(code: 'default.not.deleted.message', args: [message(code: 'candidate.label', default: 'Candidate'), params.id])
-//            redirect(action: "show", id: params.id)
-//        }
-
         candidate.active = false
         if (!candidate.save(deepvalidate:true, flush: true)) {
-            flash.message = "${message(code: 'default.not.deleted.message', args: [message(code: 'candidate.label', default: 'Candidate'), params.id])}"
             redirect(action: "list")
         }
 
-        flash.message = "${message(code: 'default.deleted.message', args: [message(code: 'candidate.label', default: 'Candidate'), params.id])}"
         redirect(action: "list")
-
     }
 
 
@@ -209,7 +294,7 @@ class CandidateController extends BaseController {
         List fileList = request.getFiles('files') // 'files' is the name of the input
         fileList.each { file ->
             if (file.empty) {
-                flash.message = "File cannot be empty"
+                log.info("file cannot be empty")
             } else {
                 def candidate = Candidate.get(params.candidateId)
                 def documentInstance = new Document()
@@ -234,7 +319,6 @@ class CandidateController extends BaseController {
     def documentDownload(){
         Document documentInstance = Document.get(params.id)
         if ( documentInstance == null) {
-            flash.message = "Document not found."
             redirect(action: "edit", id: params.id )
         } else {
             response.setContentType("APPLICATION/OCTET-STREAM")

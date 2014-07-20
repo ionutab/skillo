@@ -71,4 +71,23 @@ class CandidateService {
         return candidateList;
     }
 
+    def boolean update(Candidate candidate){
+        log.info("CandidateService.UPDATE")
+        if(!candidate.checkVersion(candidate.currentVersion)){
+            log.info("BAD VERSION: " + candidate.currentVersion)
+            return false
+        }
+        if (!candidate.save(deepvalidate:true )) {
+            log.info("CandidateService.SAVE")
+            if(candidate.hasErrors()){
+                candidate.errors.each {
+                    log.info "CANDIDATE UPDATE FIELDERRORS: " + it
+                }
+            }
+            return false
+        }
+        return true
+    }
+
+
 }

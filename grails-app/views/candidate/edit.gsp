@@ -88,7 +88,7 @@
                 </table>
             </g:if>
 
-            <button class="btn btn-info newCQButton" data-toggle="modal" data-target="#newCandidateQualificationModal" ><span class="glyphicon glyphicon-plus"></span></button>
+            <button class="btn btn-info newCQButton" data-toggle="modal" data-target="#newCandidateQualificationModal"><span class="glyphicon glyphicon-plus"></span></button>
             <legend><g:message code="candidate.form.candidateNotes" /></legend>
             <button class="btn btn-info newCQButton" data-toggle="modal" data-target="#newCandidateQualificationModal"><span class="glyphicon glyphicon-plus"></span></button>
             <g:javascript>
@@ -114,7 +114,7 @@
                     <g:javascript>
                         function formatPayrollCompanies(item) { return item.name; };
                         $("#payrollCompanyId").select2({
-                                data: {results:${AvailablePayrollCompanies}, text:'name'},
+                                data: {results:${availablePayrollCompanies}, text:'name'},
                                 formatSelection: formatPayrollCompanies,
                                 formatResult: formatPayrollCompanies,
                                 placeholder: "Select a Payroll Company",
@@ -141,14 +141,14 @@
                     <g:textField id="payrollRegistrationNumber" name="payroll.registrationNumber" class="form-control" value="${candidateInstance?.payroll?.registrationNumber}" />
                 </div>
             </div>
-            <div class="form-group ${hasErrors(bean: candidateInstance, field: 'payroll.unqiueTaxReferenceNumber', 'has-error')} ">
-                <label for="payroll.unqiueTaxReferenceNumber" class="col-sm-4 control-label">
-                    <g:message code="payroll.unqiueTaxReferenceNumber.label" default="Unique Tax Reference Nr." />
+            <div class="form-group ${hasErrors(bean: candidateInstance, field: 'payroll.uniqueTaxReferenceNumber', 'has-error')} ">
+                <label for="payroll.uniqueTaxReferenceNumber" class="col-sm-4 control-label">
+                    <g:message code="payroll.uniqueTaxReferenceNumber.label" default="Unique Tax Reference Nr." />
                 </label>
                 <div class="col-sm-8">
-                    <g:textField id="payrollUnqiueTaxReferenceNumber" name="payroll.unqiueTaxReferenceNumber" class="form-control" value="${candidateInstance?.payroll?.unqiueTaxReferenceNumber}" />
+                    <g:textField id="payrollUnqiueTaxReferenceNumber" name="payroll.uniqueTaxReferenceNumber" class="form-control" value="${candidateInstance?.payroll?.uniqueTaxReferenceNumber}" />
                     <span class="help-inline">
-                        ${hasErrors(bean: candidateInstance.payroll, field: 'unqiueTaxReferenceNumber', 'error')}
+                        ${hasErrors(bean: candidateInstance.payroll, field: 'uniqueTaxReferenceNumber', 'error')}
                     </span>
                 </div>
             </div>
@@ -316,7 +316,6 @@
 
 <div class="modal fade" id="newCandidateQualificationModal" role="dialog" aria-hidden="true" tabindex="-1">
     <div class="modal-dialog" >
-        %{--<g:form method="post" class="form-horizontal" id="newCandidateQualificationForm" controller="candidateQualification">--}%
         <g:form
                 method="post"
                 class="form-horizontal"
@@ -334,31 +333,8 @@
                 </div>
             </div>
         </g:form>
-    %{--</g:form>--}%
     </div>
 </div>
-
-
-
-%{--
-
-<div class="modal-dialog">
-    <div class="modal-content">
-        <div class="modal-header">
-            <button type="button" class="close" data-dismiss="modal" aria-hidden="true">&times;</button>
-            <h4 class="modal-title" id="myModalLabel">Modal title</h4>
-        </div>
-        <div class="modal-body">
-            ...
-        </div>
-        <div class="modal-footer">
-            <button type="button" class="btn btn-default" data-dismiss="modal">Close</button>
-            <button type="button" class="btn btn-primary">Save changes</button>
-        </div>
-    </div>
-</div>
---}%
-
 
 </body>
 

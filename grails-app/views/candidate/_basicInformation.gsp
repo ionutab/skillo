@@ -1,6 +1,6 @@
 <div class="col-xs-12 text-center">
     <div class="img-thumbnail">
-        <g:img dir="images/avatar" file="avatar04.png"/>
+        <g:img dir="images/avatar" file="nophoto.png"/>
     </div>
 
     <h2 class="bold">${candidateInstance?.firstName + " " + candidateInstance?.lastName }</h2>

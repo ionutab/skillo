@@ -1,4 +1,4 @@
-<g:set var="editable" value="${params.action == 'edit'}" />
+<g:set var="editable" value="${params.action == 'edit' || params.action == 'updateMainDetails' || params.action == 'updatePaymentDetails'}" />
 
 <div class="col-md-12">
 <div class="box box-solid">
@@ -13,10 +13,10 @@
 </div>
 
 <div class="box-body">
-    <g:form controller="candidate" action="save" class="form-horizontal" autocomplete="off">
+    <g:form controller="candidate" action="updateMainDetails" class="form-horizontal" autocomplete="off">
 
         <g:hiddenField name="id" value="${candidateInstance?.id}" />
-        <g:hiddenField name="version" value="${candidateInstance?.version}" />
+        <g:hiddenField name="candidate.currentVersion" value="${candidateInstance?.version}" />
 
         <div class="row">
             <div class="col-md-6">
@@ -239,8 +239,8 @@
         <div class="row">
             <div class="col-md-6">
                 <g:if test="${editable}">
-                    <g:submitButton name="Save" class="btn btn-success" />
-                    <g:link uri="/" class="btn btn-warning" name="Cancel">Cancel</g:link>
+                    <g:actionSubmit class="btn btn-primary" action="updateMainDetails" value="${message(code: 'default.button.update.label', default: 'Update')}" />
+                    <g:link controller="candidate" action="list" class="btn btn-warning" name="Cancel">Cancel</g:link>
                 </g:if>
             </div>
         </div>
