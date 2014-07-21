@@ -7,17 +7,23 @@
         <g:message code="qualification.label" default="Qualification" />
     </label>
     <div class="col-sm-8">
-        <g:select
+        <g:hiddenField
                 name="newCandidateQualification.qualification.id"
-                id="newCandidateQualificationQualificationId"
-                from="${AvailableQualifications}"
-                value="${newCandidateQualification?.qualification?.id}"
-                optionKey="id"
-                optionValue="name"
+                id="newCandidateQualificationId"
                 class="form-control"
-                noSelection="${['null':'']}"
-                required=""
+                value="${newCandidateQualification?.qualification?.id}"
         />
+        <g:javascript>
+            function formatCandidateQualification(item) { return item.name; };
+            $("#newCandidateQualificationId").select2({
+                    data: {results:${availableQualifications}, text:'name'},
+                    formatSelection: formatCandidateQualification,
+                    formatResult: formatCandidateQualification,
+                    placeholder: "Select a Qualification",
+                    allowClear:true
+                }
+            );
+        </g:javascript>
     </div>
 </div>
 <div class="form-group  ${hasErrors(bean: newCandidateQualification, field: 'expiryDate', 'has-error')} ">
@@ -35,23 +41,20 @@
     <label for="newCandidateQualification.number" class="col-sm-4 control-label">
         <g:message code="candidateQualification.number.label" default="Qualification Number" />
     </label>
-    <div class="col-sm-4">
+    <div class="col-sm-8">
         <g:textField name="newCandidateQualification.number" id="newCandidateQualificationNumber" class="form-control" value="${newCandidateQualification?.number}" />
     </div>
-    <span class="help-inline">
-        ${hasErrors(bean: newCandidateQualification, field: 'number', 'has-error')}
-    </span>
 </div>
 <div class="form-group">
     <label for="newCandidateQualification.isMainTrade" class="col-sm-4 control-label">
         <g:message code="candidateQualification.isMainTrade.label" default="Is Main Trade" />
     </label>
-    <div class="col-sm-6">
+    <div class="col-sm-8">
         <g:radioGroup name="newCandidateQualification.isMainTrade"
                       labels="['True', 'False']"
                       values="['true', 'false']"
-                      value="${newCandidateQualification?.isMainTrade}">
-            ${it.label} ${it.radio}
+                      value="${newCandidateQualification?.isMainTrade != null ? newCandidateQualification?.isMainTrade : false}">
+            <label class="control-label">${it.radio}&nbsp;${it.label}</label>&nbsp;
         </g:radioGroup>
     </div>
 </div>

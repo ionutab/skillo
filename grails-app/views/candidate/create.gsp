@@ -213,12 +213,12 @@
                                         name="candidateMainTrade.id"
                                         id="mainTradeId"
                                         class="form-control"
-                                        value="${candidateInstance?.candidateQualifications?.asList()?.first()?.qualification?.id}"
+                                        value="${candidateInstance?.getMainTrade()?.qualification?.id}"
                                 />
                                 <g:javascript>
                                     function formatCandidateQualification(item) { return item.name; };
                                     $("#mainTradeId").select2({
-                                            data: {results:${AvailableMainTrades}, text:'name'},
+                                            data: {results:${availableQualifications}, text:'name'},
                                             formatSelection: formatCandidateQualification,
                                             formatResult: formatCandidateQualification,
                                             placeholder: "Select a Qualification",

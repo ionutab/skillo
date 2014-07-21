@@ -11,7 +11,7 @@
     </div>
 
     <div class="box-body">
-        <g:form controller="candidate" class="form-horizontal" autocomplete="off">
+        <g:form controller="candidate" action="updatePaymentDetails" class="form-horizontal" autocomplete="off">
 
             <g:hiddenField name="id" value="${candidateInstance?.id}" />
             <g:hiddenField name="candidate.currentVersion" value="${candidateInstance?.version}" />
@@ -136,7 +136,7 @@
                 <div class="col-md-6">
                     <g:if test="${editable}">
                         <g:actionSubmit class="btn btn-primary" action="updatePaymentDetails" value="${message(code: 'default.button.update.label', default: 'Update')}" />
-                        <g:link uri="/" class="btn btn-warning" name="Cancel">Cancel</g:link>
+                        <g:link uri="/" class="btn btn-default" name="Cancel">Cancel</g:link>
                     </g:if>
                 </div>
             </div>

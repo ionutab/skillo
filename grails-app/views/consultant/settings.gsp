@@ -173,7 +173,7 @@
             <div class="row">
                 <div class="col-md-12">
                     <g:submitButton name="Finish" class="btn btn-success btn"/>
-                    <g:link uri="/" class="btn btn-warning" name="Cancel">Cancel</g:link>
+                    <g:link uri="/" class="btn btn-default" name="Cancel">Cancel</g:link>
                 </div>
             </div>
         </div>

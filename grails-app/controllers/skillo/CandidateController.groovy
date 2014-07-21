@@ -46,11 +46,10 @@ class CandidateController extends BaseController {
         candidate.active = true
         candidate.sponsored = true
 
-        def availableMainTrades = Qualification.findAllByCanBeMainTrade(true)
-
+        def availableQualifications = Qualification.list()
         def candidateMatches = new ArrayList<Candidate>();
 
-        [candidateInstance: candidate, CandidateMatches: candidateMatches, AvailableMainTrades: availableMainTrades as grails.converters.JSON]
+        [candidateInstance: candidate, CandidateMatches: candidateMatches, availableQualifications: availableQualifications as grails.converters.JSON]
     }
 
     def save() {
@@ -98,29 +97,11 @@ class CandidateController extends BaseController {
                 }
             }
 
-            def availableMainTrades = Qualification.findAllByCanBeMainTrade(true)
-            render(view: "create", model: [candidateInstance: candidate, AvailableMainTrades: availableMainTrades as grails.converters.JSON])
+            def availableQualifications = Qualification.findAllByCanBeMainTrade(true)
+            render(view: "create", model: [candidateInstance: candidate, availableQualifications: availableQualifications as grails.converters.JSON])
             return
         }
         redirect(action: "edit", id: candidate.id)
-    }
-
-
-    def oldEdit() {
-        log.info("Candidate Controller - edit")
-
-        def candidate = Candidate.get(params.id)
-        if (!candidate) {
-            redirect(action: "list")
-            return
-        }
-
-        def availableMainTrades = Qualification.findAllByCanBeMainTrade(true)
-        def availableQualifications = Qualification.findAll()
-        def availablePayRollCompanies = PayrollCompany.findAll()
-        def documentList = listDocuments();
-
-        render(view: 'edit', model: [candidateInstance: candidate, documentInstanceList: documentList, AvailableMainTrades: availableMainTrades, AvailableQualifications: availableQualifications, availablePayrollCompanies: availablePayRollCompanies as grails.converters.JSON])
     }
 
     def edit() {
@@ -136,12 +117,12 @@ class CandidateController extends BaseController {
             return
         }
 
-        def availableMainTrades = Qualification.findAllByCanBeMainTrade(true)
         def availableQualifications = Qualification.findAll()
         def availablePayRollCompanies = PayrollCompany.findAll()
         def documentList = listDocuments();
+        def newCandidateQualification = new CandidateQualification()
 
-        render(view: 'edit2', model: [candidateInstance: candidate, documentInstanceList: documentList, AvailableMainTrades: availableMainTrades, AvailableQualifications: availableQualifications, availablePayrollCompanies: availablePayRollCompanies as grails.converters.JSON])
+        render(view: 'edit2', model: [candidateInstance: candidate, documentInstanceList: documentList,  availableQualifications: availableQualifications as grails.converters.JSON, availablePayrollCompanies: availablePayRollCompanies as grails.converters.JSON], newCandidateQualification: newCandidateQualification)
     }
 
     def update() {
@@ -207,11 +188,10 @@ class CandidateController extends BaseController {
         }
 
         if (!candidateService.update(candidate)) {
-            def availableMainTrades = Qualification.findAllByCanBeMainTrade(true)
             def availableQualifications = Qualification.findAll()
             def availablePayRollCompanies = PayrollCompany.findAll()
             def documentList = listDocuments();
-            render(view: 'edit2', model: [candidateInstance: candidate, documentInstanceList: documentList, AvailableMainTrades: availableMainTrades, AvailableQualifications: availableQualifications, availablePayrollCompanies: availablePayRollCompanies as grails.converters.JSON])
+            render(view: 'edit2', model: [candidateInstance: candidate, documentInstanceList: documentList, availableQualifications: availableQualifications, availablePayrollCompanies: availablePayRollCompanies as grails.converters.JSON])
             return
         }
 
@@ -245,17 +225,15 @@ class CandidateController extends BaseController {
         }
 
         if (!candidateService.update(candidate)) {
-            def availableMainTrades = Qualification.findAllByCanBeMainTrade(true)
             def availableQualifications = Qualification.findAll()
             def availablePayRollCompanies = PayrollCompany.findAll()
             def documentList = listDocuments();
-            render(view: 'edit2', model: [candidateInstance: candidate, documentInstanceList: documentList, AvailableMainTrades: availableMainTrades, AvailableQualifications: availableQualifications, availablePayrollCompanies: availablePayRollCompanies as grails.converters.JSON])
+            render(view: 'edit2', model: [candidateInstance: candidate, documentInstanceList: documentList, availableQualifications: availableQualifications, availablePayrollCompanies: availablePayRollCompanies as grails.converters.JSON])
             return
         }
 
         redirect(action: "list")
     }
-
 
     def show() {
         def candidate = Candidate.get(params.id)
@@ -265,12 +243,10 @@ class CandidateController extends BaseController {
         }
         def documentList = listDocuments();
 
-        def availableMainTrades = Qualification.findAllByCanBeMainTrade(true)
         def availableQualifications = Qualification.findAll()
         def availablePayRollCompanies = PayrollCompany.findAll()
 
-
-        render(view: 'edit2', model: [candidateInstance: candidate, documentInstanceList: documentList, AvailableMainTrades: availableMainTrades, AvailableQualifications: availableQualifications, availablePayrollCompanies: availablePayRollCompanies as grails.converters.JSON])
+        render(view: 'edit2', model: [candidateInstance: candidate, documentInstanceList: documentList, availableQualifications: availableQualifications, availablePayrollCompanies: availablePayRollCompanies as grails.converters.JSON])
     }
 
     def delete() {
@@ -353,7 +329,6 @@ class CandidateController extends BaseController {
     def display() {
         log.info("CC.DISPLAY")
         def candidate = Candidate.get(params.id)
-        log.info params
         render(template: 'info', model: [CandidateShow: candidate])
     }
 
@@ -368,22 +343,49 @@ class CandidateController extends BaseController {
         Candidate candidate = Candidate.get(params.id)
         newCandidateQualification.candidate = candidate
 
-        if (Boolean.TRUE == newCandidateQualification.getIsMainTrade()) {
-            def candidateQualifications = CandidateQualification.findAllByCandidate(Candidate.get(params.id))
+        if (Boolean.TRUE == newCandidateQualification.isMainTrade) {
+            def candidateQualifications = CandidateQualification.findAllByCandidateAndIsMainTrade(Candidate.get(params.id), Boolean.TRUE)
             candidateQualifications.each { candidateQualification ->
-                //put the other qualifications to not be main trade
-                candidateQualification.setIsMainTrade(Boolean.FALSE)
-                candidateQualification.save()
+                if(candidateQualification != newCandidateQualification) {
+                    //put the other qualifications to not be main trade
+                    candidateQualification.setIsMainTrade(Boolean.FALSE)
+                    candidateQualification.save()
+                }
             }
         }
-
 
         if (!newCandidateQualification.save()) {
             log.info("Failed to save qualification for candidate" + candidate.id)
         }
 
         redirect(action: "edit", id: params.id)
+    }
 
+    def updateCandidateQualification(){
+        log.info("CandidateController.updateCandidateQualificationModal")
+        CandidateQualification cqe = CandidateQualification.get(params.id)
+
+        cqe.properties = params.editCandidateQualification
+
+        log.info cqe.properties.toMapString()
+        log.info cqe.id
+
+        if (Boolean.TRUE.equals(cqe.isMainTrade)) {
+            def candidateQualifications = CandidateQualification.findAllByCandidateAndIsMainTrade(Candidate.get(cqe.candidate.id), Boolean.TRUE)
+            candidateQualifications.each { candidateQualification ->
+                if(candidateQualification != cqe){
+                    //put the other qualifications to not be main trade
+                    candidateQualification.setIsMainTrade(Boolean.FALSE)
+                    candidateQualification.save()
+                }
+            }
+        }
+
+        if (!cqe.save()) {
+            log.info("Failed to save qualification for candidate" + candidate.id)
+        }
+
+        redirect(action: "edit", id: cqe.candidate.id)
     }
 
     def findMatches() {
@@ -410,5 +412,11 @@ class CandidateController extends BaseController {
         render(template: 'matches', model: [matchCandidates: candidateMatches])
     }
 
+    def getEditCandidateQualification(){
+        log.info("CandidateController.getEditCandidateQualification")
+
+        def candidateQualification = CandidateQualification.get(params.id)
+        render(template: 'editCandidateQualificationForm', model: [cqe:candidateQualification])
+    }
 
 }

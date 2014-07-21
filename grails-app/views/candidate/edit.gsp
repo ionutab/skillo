@@ -325,7 +325,7 @@
                 after="">
             <div class="modal-content">
                 <div class="modal-body">
-                    <g:render template="/candidate/candidateQualificationsForm" bean="${newCandidateQualification}"/>
+                    <g:render template="/candidate/createCandidateQualificationForm" bean="${newCandidateQualification}"/>
                 </div>
                 <div class="modal-footer">
                     <g:submitButton class="btn btn-primary btn-sm" name="${message(code: 'default.button.save.label', default: 'Save')}" update="newCandidateQualificationForm" />

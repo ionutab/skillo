@@ -107,4 +107,8 @@ class Candidate implements SkilloDomainModelWithHistory {
             }
         }
     }
+
+    def String getFullName(){
+        return firstName + " " + lastName
+    }
 }

@@ -240,7 +240,7 @@
             <div class="col-md-6">
                 <g:if test="${editable}">
                     <g:actionSubmit class="btn btn-primary" action="updateMainDetails" value="${message(code: 'default.button.update.label', default: 'Update')}" />
-                    <g:link controller="candidate" action="list" class="btn btn-warning" name="Cancel">Cancel</g:link>
+                    <g:link controller="candidate" action="list" class="btn btn-default" name="Cancel">Cancel</g:link>
                 </g:if>
             </div>
         </div>

@@ -1,7 +1,9 @@
-<g:set var="editable"
-       value="${params.action == 'edit' || params.action == 'updateMainDetails' || params.action == 'updatePaymentDetails'}"/>
+<%@ page import="skillo.CandidateQualification; skillo.Candidate" %>
+
+<g:set var="editable" value="${params.action == 'edit' || params.action == 'updateMainDetails' || params.action == 'updatePaymentDetails'}"/>
 <g:set var="cq" value="${candidateInstance.candidateQualifications}"/>
 <g:set var="cqMain" value="${candidateInstance.getMainTrade()}"/>
+
 <div class="col-md-12">
     <div class="box box-solid">
         <div class="box-body">
@@ -56,8 +58,12 @@
                                 </td>
                                 <g:if test="${editable}">
                                     <td>
-                                        <button class="btn btn-sm bg-yellow"><i
-                                                class="fa fa-pencil append-icon"></i>&nbsp;Edit</button>
+                                        <g:remoteLink controller="candidate"
+                                                      action="getEditCandidateQualification" id="${cqMain.id}"
+                                                      elementId="${cqMain.id}"
+                                                      update="editCandidateQualificationContainer"
+                                                      onComplete ="showEditCandidateQualification()"
+                                                      class="btn btn-sm bg-yellow"><i class="fa fa-pencil append-icon"></i>&nbsp;Edit</g:remoteLink>
                                     </td>
                                 </g:if>
                             </tr>
@@ -87,8 +93,12 @@
                                         </td>
                                         <g:if test="${editable}">
                                             <td>
-                                                <button class="btn btn-sm bg-yellow"><i
-                                                        class="fa fa-pencil append-icon"></i>&nbsp;Edit</button>
+                                                <g:remoteLink controller="candidate"
+                                                              action="getEditCandidateQualification" id="${cq.id}"
+                                                              elementId="${cq.id}"
+                                                              update="editCandidateQualificationContainer"
+                                                              onComplete ="showEditCandidateQualification()"
+                                                              class="btn btn-sm bg-yellow"><i class="fa fa-pencil append-icon"></i>&nbsp;Edit</g:remoteLink>
                                             </td>
                                         </g:if>
                                     </tr>
@@ -100,6 +110,22 @@
                     </g:else>
                 </div>
             </div>
+
+            <g:javascript>
+
+                function showEditCandidateQualification(){
+                    $('#editCandidateQualificationModal').modal({
+                        show: true
+                    });
+                    $("#editCandidateQualificationExpiryDate").inputmask("d/m/y", { "placeholder": "dd/mm/yyyy" });
+                    $('#editCandidateQualificationContainer').find('input').iCheck({
+                        checkboxClass: 'icheckbox_flat-blue',
+                        radioClass: 'iradio_flat-blue'
+                    });
+                }
+
+
+            </g:javascript>
 
             <div class="row">
                 <div class="col-md-6">
@@ -119,6 +145,7 @@
     </div>
 </div>
 
+<div id="newCandidateQualificationContainer">
 <div class="modal fade" id="newCandidateQualificationModal" role="dialog" aria-hidden="true" tabindex="-1">
     <div class="modal-dialog">
         <g:form
@@ -128,19 +155,26 @@
                 name="newCandidateQualificationForm"
                 url="[controller: 'candidate', action: 'addCandidateQualification']"
                 after="">
+
             <g:hiddenField name="id" value="${candidateInstance?.id}"/>
             <div class="modal-content">
                 <div class="modal-body">
-                    <g:render template="/candidate/candidateQualificationsForm" bean="${newCandidateQualification}"/>
+                    <g:render template="/candidate/createCandidateQualificationForm" />
                 </div>
 
                 <div class="modal-footer">
                     <g:submitButton class="btn btn-primary btn-sm"
                                     name="${message(code: 'default.button.save.label', default: 'Save')}"
-                                    update="newCandidateQualificationForm"/>
+                                    update="newCandidateQualificationForm" />
                     <button type="button" class="btn btn-default btn-sm" data-dismiss="modal">Close</button>
                 </div>
             </div>
         </g:form>
     </div>
+</div>
+</div>
+
+
+<div id="editCandidateQualificationContainer">
+    <g:render template="editCandidateQualificationForm" />
 </div>
