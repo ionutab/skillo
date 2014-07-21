@@ -7,7 +7,7 @@
     <h4>${candidateInstance?.getMainTrade()?.qualification?.code}(${candidateInstance?.getMainTrade()?.qualification?.name})</h4>
 
     <div class="col-xs-12">
-        <table class="table table-striped">
+        <table class="table">
             <tbody>
             <tr>
                 <td>Status</td>

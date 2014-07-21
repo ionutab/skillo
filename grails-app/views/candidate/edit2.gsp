@@ -49,6 +49,8 @@
 
                                 <g:render template="/candidate/mainDetails" />
 
+                                <hr>
+
                                 <g:render template="/candidate/candidateQualificationDetails" />
 
                             </div><!-- /.tab-pane -->

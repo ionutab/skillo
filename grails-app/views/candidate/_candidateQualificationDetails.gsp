@@ -1,101 +1,111 @@
-
+<g:set var="cq" value="${candidateInstance.candidateQualifications}"/>
+<g:set var="editable" value="${params.action == 'edit'}"/>
+<g:set var="cqMain" value="${candidateInstance.getMainTrade()}"/>
 <div class="col-md-12">
     <div class="box box-solid">
-        <div class="row">
-            <div class="col-md-6">
-                <div class="box-header">
-                    <h3 class="box-title"><i class="fa fa-file-text-o"></i>&nbsp;Qualifications</h3>
-                </div>
+        <div class="box-body">
+            <div class="row">
+                <div class="col-md-12 col-sm-12">
 
-                <div class="box-body">
-                    <div class="row">
-                        <div class="content-container">
-                            <ul class="list">
-                                <tr>
-                                    <td>
-                                        <span class="menu-icon">
-                                            <i class="fa  fa-circle-o"></i>
-                                        </span> <span class="menu-text">
-                                        360 Driver Above 10 Tonnes
-                                    </br>
-                                        <span class="menu-info">
-                                            <span class="menu-date">March 2013 ~ Now</span>
-                                        </span>
-                                    </span>
-                                    </td>
-                                </tr>
-                            </ul>
-                            <ul class="list">
-                                <tr>
-                                    <td>
-                                        <span class="menu-icon">
-                                            <i class="fa  fa-circle-o"></i>
-                                        </span> <span class="menu-text">
-                                        Asbestos Awareness
-                                    </br>
-                                        <span class="menu-info">
-                                            <span class="menu-date">Expired</span>
-                                        </span>
-                                    </span>
-                                    </td>
-                                </tr>
-                            </ul>
-                            <ul class="list">
-                                <tr>
-                                    <td>
-                                        <span class="menu-icon">
-                                            <i class="fa  fa-circle-o"></i>
-                                        </span> <span class="menu-text">
-                                        Abrasive Wheel
-                                    </br>
-                                        <span class="menu-info">
-                                            <span class="menu-date">March 2013 ~ >March 2014</span>
-                                        </span>
-                                    </span>
-                                    </td>
-                                </tr>
-                            </ul>
-                            <ul class="list">
-                                <tr>
-                                    <td>
-                                        <span class="menu-icon">
-                                            <i class="fa  fa-circle-o"></i>
-                                        </span> <span class="menu-text">
-                                        Banksman
-                                    </br>
-                                        <span class="menu-info">
-                                            <span class="menu-date">May 2013 ~ December 2014</span>
-                                        </span>
-                                    </span>
-                                    </td>
-                                </tr>
-                            </ul>
-                            <ul class="list">
-                                <tr>
-                                    <td>
-                                        <span class="menu-icon">
-                                            <i class="fa  fa-circle-o"></i>
-                                        </span> <span class="menu-text">
-                                        180 Driver
-                                    </br>
-                                        <span class="menu-info">
-                                            <span class="menu-date">March 2012 ~ March 2015</span>
-                                        </span>
-                                    </span>
-                                    </td>
-                                </tr>
-                            </ul>
+                    <g:if test="${cq == null || cq.size() <= 0}">
+
+                        <div class="col-md-12 col-lg-offset-2 page-background-info">
+                            <h2><g:message code="qualification.display.notFound.label"/></h2>
                         </div>
-                    </div>
+
+                    </g:if>
+                    <g:else>
+
+                        <table class="table">
+                            <thead>
+                            <tr>
+
+                                <th><g:message code="qualification.code.label" default="Code"></g:message>
+                                <th><g:message code="qualification.status.label" default="Status"></g:message>
+                                <th><g:message code="qualification.name.label" default="Name"></g:message>
+                                <th><g:message code="candidateQualification.number.label" default="Number"></g:message>
+                                <th><g:message code="qualification.expiryDate.label" default="Expiry Date"/></th>
+                                <g:if test="${editable}">
+                                    <th><g:message code="default.actions.label" default="Actions"/></th>
+                                </g:if>
+                            </tr>
+                            </thead>
+                            <tbody>
+                            <tr>
+                                <td>
+                                    <b>${cqMain.qualification.code}</b>
+                                </td>
+                                <g:if test="${cqMain.isExpired()}">
+                                    <td><p class="text-red"><b>Expired</b></p></td>
+                                </g:if>
+                                <g:elseif test="${cqMain.willExpireSoonerThanTwoMonths()}">
+                                    <td><p class="text-yellow"><b>Will Expire</b></p></td>
+                                </g:elseif>
+                                <g:else>
+                                    <td><p class="text-green"><b>Active</b></p></td>
+                                </g:else>
+                                <td>
+                                    <b>${cqMain.qualification.name}</b>
+                                </td>
+                                <td>
+                                    <b>${cqMain.number}</b>
+                                </td>
+                                <td>
+                                    <b><g:formatDate date="${cqMain.expiryDate}"/></b>
+                                </td>
+                                <g:if test="${editable}">
+                                    <td>
+                                        <button class="btn btn-sm bg-yellow"><i
+                                                class="fa fa-pencil append-icon"></i>&nbsp;Edit</button>
+                                    </td>
+                                </g:if>
+                            </tr>
+                            <g:each in="${candidateInstance.candidateQualifications}" status="i" var="cq">
+                                <g:if test="${cq.isMainTrade == false}">
+                                    <tr>
+                                        <td>
+                                            ${cq.qualification.code}
+                                        </td>
+                                        <g:if test="${cq.isExpired()}">
+                                            <td><p class="text-red"><b>Expired</b></p></td>
+                                        </g:if>
+                                        <g:elseif test="${cq.willExpireSoonerThanTwoMonths()}">
+                                            <td><p class="text-yellow"><b>Will Expire</b></p></td>
+                                        </g:elseif>
+                                        <g:else>
+                                            <td><p class="text-green"><b>Active</b></p></td>
+                                        </g:else>
+                                        <td>
+                                            ${cq.qualification.name}
+                                        </td>
+                                        <td>
+                                            ${cq.number}
+                                        </td>
+                                        <td>
+                                            <g:formatDate date="${cq.expiryDate}"/>
+                                        </td>
+                                        <g:if test="${editable}">
+                                            <td>
+                                                <button class="btn btn-sm bg-yellow"><i
+                                                        class="fa fa-pencil append-icon"></i>&nbsp;Edit</button>
+                                            </td>
+                                        </g:if>
+                                    </tr>
+                                </g:if>
+                            </g:each>
+                            </tbody>
+                        </table>
+
+                    </g:else>
                 </div>
-
             </div>
-
-            <div class="col-md-6">
-
+            <div class="row">
+                <div class="col-md-6">
+                    <g:if test="${editable}">
+                        <button class="btn btn-info btn-sm"><i class="fa fa-plus "></i></button>
+                    </g:if>
+                </div>
             </div>
         </div>
     </div>
-
 </div>
-
