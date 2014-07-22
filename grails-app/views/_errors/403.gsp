@@ -1,7 +1,7 @@
 <html>
 	<head>
 		<title>403 - Forbidden!</title>
-		<meta name="layout" content="admin_light" />
+		<meta name="layout" content="admin_lte_layout" />
 		<g:set var="layout_nomainmenu"		value="${true}" scope="request"/>
 		<g:set var="layout_nosecondarymenu"	value="${true}" scope="request"/>
 	</head>

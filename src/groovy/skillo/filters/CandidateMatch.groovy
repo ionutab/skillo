@@ -3,7 +3,7 @@ package skillo.filters
 /**
  * Created by Andrei-Home on 7/6/2014.
  */
-class CandidateMatch extends BasicPaginatedSearchFilter {
+class CandidateMatch extends BasicPaginatedSearchFilter implements Serializable {
 
     protected String firstName
 

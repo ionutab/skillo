@@ -56,7 +56,7 @@ class Candidate implements SkilloDomainModelWithHistory {
 
     static mapping = {
         autoTimestamp true
-        candidateQualifications cascade: "all-delete-orphan"
+        candidateQualifications cascade: "all-delete-orphan", sort:"expiryDate", order: "asc"
         candidateHistory cascade: "all-delete-orphan"
     }
 
@@ -111,4 +111,5 @@ class Candidate implements SkilloDomainModelWithHistory {
     def String getFullName(){
         return firstName + " " + lastName
     }
+
 }

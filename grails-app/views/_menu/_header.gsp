@@ -19,6 +19,8 @@
 <ul class="nav navbar-nav">
 
 <!-- Messages: style can be found in dropdown.less-->
+%{--
+
 <li class="dropdown messages-menu">
     <a href="#" class="dropdown-toggle" data-toggle="dropdown">
         <i class="fa fa-envelope"></i>
@@ -106,7 +108,11 @@
         <li class="footer"><a href="#">See All Messages</a></li>
     </ul>
 </li>
+--}%
+
 <!-- Notifications: style can be found in dropdown.less -->
+
+%{--
 <li class="dropdown notifications-menu">
     <a href="#" class="dropdown-toggle" data-toggle="dropdown">
         <i class="fa fa-warning"></i>
@@ -156,7 +162,10 @@
         <li class="footer"><a href="#">View all</a></li>
     </ul>
 </li>
+--}%
+
 <!-- Tasks: style can be found in dropdown.less -->
+%{--
 <li class="dropdown tasks-menu">
     <a href="#" class="dropdown-toggle" data-toggle="dropdown">
         <i class="fa fa-tasks"></i>
@@ -242,6 +251,7 @@
         </li>
     </ul>
 </li>
+--}%
 
 
 
@@ -253,28 +263,29 @@
     </a>
     <ul class="dropdown-menu">
         <!-- User image -->
-        <li class="user-header bg-light-blue">
-            <img src="../images/avatar/nophoto.png" class="img-circle" alt="User Image">
-
-            <p>
-                <sec:loggedInUserInfo field="username"/> - Web Developer
-                <small>Member since Nov. 2012</small>
-            </p>
-        </li>
+        %{--
+            <li class="user-header bg-light-blue">
+                <img src="../images/avatar/nophoto.png" class="img-circle" alt="User Image">
+                <p>
+                    <sec:loggedInUserInfo field="username"/> - Web Developer
+                    <small>Member since Nov. 2012</small>
+                </p>
+            </li>
+        --}%
         <!-- Menu Body -->
-        <li class="user-body">
-            <div class="col-xs-4 text-center">
-                <a href="#">Followers</a>
-            </div>
-
-            <div class="col-xs-4 text-center">
-                <a href="#">Sales</a>
-            </div>
-
-            <div class="col-xs-4 text-center">
-                <a href="#">Friends</a>
-            </div>
-        </li>
+        %{--
+            <li class="user-body">
+                <div class="col-xs-4 text-center">
+                    <a href="#">Followers</a>
+                </div>
+                <div class="col-xs-4 text-center">
+                    <a href="#">Sales</a>
+                </div>
+                <div class="col-xs-4 text-center">
+                    <a href="#">Friends</a>
+                </div>
+            </li>
+        --}%
         <!-- Menu Footer-->
         <li class="user-footer">
             <div class="pull-left">

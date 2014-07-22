@@ -2,7 +2,7 @@
 
 <head>
 	<title><g:message code="default.contact.title"/></title>
-	<meta name="layout" content="admin_light" />
+	<meta name="layout" content="admin_lte_layout" />
 </head>
 
 <body>

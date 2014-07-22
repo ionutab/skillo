@@ -20,21 +20,28 @@
 
         <div class="row">
             <div class="col-md-6">
-                <div class="form-group">
+                <div class="form-group ${hasErrors(bean: candidateInstance, field: 'firstName', 'has-error')}">
                     <label for="candidate.firstName" class="col-md-3 control-label">
                         <g:message code="candidate.firstName.label" default="First Name" />
                     </label>
 
                     <div class="col-sm-9">
                         <g:textField name="candidate.firstName" class="form-control" value="${candidateInstance?.firstName}" disabled="${!editable}" />
+                        <g:eachError var="err" bean="${candidateInstance}" field="firstName">
+                            <g:if test="${err.code == 'matches.invalid'}">
+                                <span class="control-label"><g:message
+                                        code="custom.invalid.name.message"/></span>
+                            </g:if>
+                            <g:if test="${err.code == 'nullable'}">
+                                <span class="control-label"><g:message code="custom.null.message"/></span>
+                            </g:if>
+                        </g:eachError>
                     </div>
                 </div>
 
-                <div class="form-group">
-                    <label for="candidate.birthDate"
-                           class="col-md-3 control-label">
-                        <g:message code="candidate.birthDate.label"
-                                   default="Birth Date"/>
+                <div class="form-group ${hasErrors(bean: candidateInstance, field: 'birthDate', 'has-error')}">
+                    <label for="candidate.birthDate" class="col-md-3 control-label">
+                        <g:message code="candidate.birthDate.label" default="Birth Date"/>
                     </label>
 
                     <div class="col-sm-9">
@@ -47,15 +54,21 @@
                                 $("#candidateBirthDate").inputmask("d/m/y", { "placeholder": "dd/mm/yyyy" });
                             </g:javascript>
                         </div>
+                        <g:eachError var="err" bean="${candidateInstance}" field="birthDate">
+                            <g:if test="${err.code == 'nullable'}">
+                                <span class="control-label"><g:message code="custom.null.message"/></span>
+                            </g:if>
+                            <g:if test="${err.code == 'custom.invalid.date'}">
+                                <span class="control-label"><g:message code="custom.invalid.date.message"/></span>
+                            </g:if>
+                        </g:eachError>
                     </div>
                 </div>
 
                 <div class="form-group">
                     <label for="telephoneNumber"
                            class="col-md-3 control-label">
-                        <g:message
-                                code="candidate.telephoneNumber.label"
-                                default="Telephone Number"/>
+                        <g:message code="candidate.telephoneNumber.label" default="Telephone Number"/>
                     </label>
 
                     <div class="col-md-9">
@@ -71,7 +84,7 @@
                     </div>
                 </div>
 
-                <div class="form-group">
+                <div class="form-group ${hasErrors(bean: candidateInstance, field: 'email', 'has-error')}">
                     <label for="candidate.email"
                            class="col-md-3 control-label">
                         <g:message code="candidate.email.label"
@@ -80,13 +93,18 @@
 
                     <div class="col-md-9">
                         <g:textField name="candidate.email" class="form-control" value="${candidateInstance?.email}" disabled="${!editable}" />
+                        <g:eachError var="err" bean="${candidateInstance}" field="email">
+                            <g:if test="${err.code == 'email.invalid'}">
+                                <span class="control-label" >
+                                <g:message code="custom.invalid.email.message"/>
+                                <span>
+                            </g:if>
+                        </g:eachError>
                     </div>
                 </div>
 
                 <div class="form-group">
-                    <label for="candidate.sponsored"
-                           class="col-md-3 control-label">Sponsored</label>
-
+                    <label for="candidate.sponsored" class="col-md-3 control-label">Sponsored</label>
                     <div class="col-md-9">
                         <g:if test="${editable}">
                             <g:radioGroup values="[true, false]" labels="['yes', 'no']" name="candidate.sponsored" value="${candidateInstance?.sponsored}" >
@@ -99,31 +117,43 @@
                         <g:else>
                             <label class="control-label">${candidateInstance?.sponsored ? "yes" : "no"}</label>
                         </g:else>
-
                     </div>
                 </div>
             </div>
 
             <div class="col-md-6">
-                <div class="form-group">
-                    <label for="lastName" class="col-md-3 control-label">
+                <div class="form-group ${hasErrors(bean: candidateInstance, field: 'lastName', 'has-error')}">
+                    <label for="candidate.lastName" class="col-md-3 control-label">
                         <g:message code="candidate.lastName.label" default="Last Name"/>
                     </label>
 
-                    <div class="col-sm-9">
+                    <div class="col-sm-9 ">
                         <g:textField name="candidate.lastName" class="form-control" value="${candidateInstance?.lastName}" disabled="${!editable}" />
+                        <g:eachError var="err" bean="${candidateInstance}" field="lastName">
+                            <g:if test="${err.code == 'matches.invalid'}">
+                                <span class="control-label"><g:message
+                                        code="custom.invalid.name.message"/></span>
+                            </g:if>
+                            <g:if test="${err.code == 'nullable'}">
+                                <span class="control-label"><g:message code="custom.null.message"/></span>
+                            </g:if>
+                        </g:eachError>
                     </div>
                 </div>
 
-                <div class="form-group">
+                <div class="form-group ${hasErrors(bean: candidateInstance, field: 'address.details', 'has-error')}">
                     <label for="address.details"
                            class="col-md-3 control-label">
-                        <g:message code="candidate.address.label"
-                                   default="Address"/>
+                        <g:message code="candidate.address.label" default="Address"/>
                     </label>
 
                     <div class="col-md-9">
                         <g:textArea rows="2" name="address.details" class="form-control" value="${candidateInstance?.address?.details}" disabled="${!editable}" />
+                        <g:eachError var="err" bean="${candidateInstance}" field="address.details">
+                            <g:if test="${err.code == 'nullable'}">
+                                <span class="control-label"><g:message code="custom.null.message"/></span>
+                            </g:if>
+                        </g:eachError>
                     </div>
                 </div>
 

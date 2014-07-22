@@ -131,7 +131,7 @@
                 <div class="col-md-6">
                     <g:if test="${editable}">
                         <button class="btn btn-info btn-sm" data-toggle="modal"
-                                data-target="#newCandidateQualificationModal" id="addQualification"><i
+                                data-target="#createCandidateQualificationModal" id="addQualification"><i
                                 class="fa fa-plus "></i></button>
                         <g:javascript>
                             $("#addQualification").click(function (event) {
@@ -145,24 +145,53 @@
     </div>
 </div>
 
-<div id="newCandidateQualificationContainer">
-<div class="modal fade" id="newCandidateQualificationModal" role="dialog" aria-hidden="true" tabindex="-1">
+<div class="modal fade" id="createCandidateQualificationModal" role="dialog" aria-hidden="true" tabindex="-1">
     <div class="modal-dialog">
         <g:form
                 method="post"
                 class="form-horizontal"
-                id="newCandidateQualificationForm"
-                name="newCandidateQualificationForm"
+                id="createCandidateQualificationForm"
+                name="createCandidateQualificationForm"
                 url="[controller: 'candidate', action: 'addCandidateQualification']"
                 after="">
 
             <g:hiddenField name="id" value="${candidateInstance?.id}"/>
             <div class="modal-content">
                 <div class="modal-body">
-                    <g:render template="/candidate/createCandidateQualificationForm" />
+                    <div id="createCandidateQualificationFormContainer">
+                        <g:render template="createCandidateQualificationForm" />
+                    </div>
                 </div>
-
                 <div class="modal-footer">
+                    %{--
+
+                    <g:javascript>
+                        function renderEditCandidateQualification(){
+
+                            function formatCandidateQualification(item) { return item.name; };
+                            $("#newCandidateQualificationId").select2({
+                                    data: {results:${availableQualifications}, text:'name'},
+                                    formatSelection: formatCandidateQualification,
+                                    formatResult: formatCandidateQualification,
+                                    placeholder: "Select a Qualification",
+                                    allowClear:true
+                                }
+                            );
+                            $("#newCandidateQualificationExpiryDate").inputmask("d/m/y", { "placeholder": "dd/mm/yyyy" });
+                            $('#createCandidateQualificationFormContainer').find('input').iCheck({
+                                checkboxClass: 'icheckbox_flat-blue',
+                                radioClass: 'iradio_flat-blue'
+                            });
+                        }
+                    </g:javascript>
+
+                    <g:submitToRemote
+                            url="[controller: 'candidate', action: 'addCandidateQualification']"
+                            class="btn btn-primary btn-sm"
+                            name="${message(code: 'default.button.save.label', default: 'Save')}"
+                            value="${message(code: 'default.button.save.label', default: 'Save')}"
+                            update="createCandidateQualificationFormContainer" onComplete="renderEditCandidateQualification()" />
+                    --}%
                     <g:submitButton class="btn btn-primary btn-sm"
                                     name="${message(code: 'default.button.save.label', default: 'Save')}"
                                     update="newCandidateQualificationForm" />
@@ -172,9 +201,8 @@
         </g:form>
     </div>
 </div>
-</div>
 
 
 <div id="editCandidateQualificationContainer">
-    <g:render template="editCandidateQualificationForm" />
+    <g:render template="editCandidateQualificationModal" />
 </div>

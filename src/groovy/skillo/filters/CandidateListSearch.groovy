@@ -1,6 +1,6 @@
 package skillo.filters
 
-class CandidateListSearch extends CandidateMatch {
+class CandidateListSearch extends CandidateMatch implements Serializable {
 
     private String qualification
 

@@ -2,8 +2,6 @@ package skillo
 
 import org.joda.time.DateTime
 import org.joda.time.LocalDate
-import org.springframework.dao.DataIntegrityViolationException
-import org.springframework.web.multipart.commons.CommonsMultipartFile
 import skillo.filters.CandidateListSearch
 import skillo.filters.CandidateMatch
 
@@ -122,49 +120,8 @@ class CandidateController extends BaseController {
         def documentList = listDocuments();
         def newCandidateQualification = new CandidateQualification()
 
-        render(view: 'edit2', model: [candidateInstance: candidate, documentInstanceList: documentList,  availableQualifications: availableQualifications as grails.converters.JSON, availablePayrollCompanies: availablePayRollCompanies as grails.converters.JSON], newCandidateQualification: newCandidateQualification)
+        render(view: 'edit', model: [candidateInstance: candidate, documentInstanceList: documentList,  availableQualifications: availableQualifications as grails.converters.JSON, availablePayrollCompanies: availablePayRollCompanies as grails.converters.JSON], newCandidateQualification: newCandidateQualification)
     }
-
-    def update() {
-
-        def candidate = Candidate.get(params.id)
-
-        if (!candidate) {
-            redirect(action: "list")
-            return
-        }
-
-        candidate.address.properties = params.address
-
-        if (params.postCode && params.postCode.id) {
-            if (!params.postCode.id.equals(candidate.address?.postCode?.id)) {
-                candidate.address.postCode = PostCode.get(params.postCode.id)
-            }
-        } else {
-            candidate.address.postCode = null
-        }
-
-        candidate.payroll.properties = params.payroll
-        candidate.properties = params.candidate
-
-        if (candidate.checkVersion(Long.parseLong(params.version))) {
-            if (!candidate.save(deepvalidate: true)) {
-
-                if (candidate.hasErrors()) {
-                    candidate.errors.each {
-                        println "fielderrors: " + it
-                    }
-                }
-                def availablePayRollCompanies = PayrollCompany.findAll()
-                render(view: "edit", model: [candidateInstance: candidate, AvailablePayrollCompanies: availablePayRollCompanies as grails.converters.JSON])
-                return
-            }
-//            candidate.addUpdateEvent(getCurrentConsultant())
-        }
-
-        redirect(action: "list")
-    }
-
 
     def updateMainDetails() {
         log.info("CandidateController.saveMainDetails")
@@ -178,7 +135,6 @@ class CandidateController extends BaseController {
 
         candidate.address.properties = params.address
         candidate.properties = params.candidate
-
         if (params.postCode && params.postCode.id) {
             if (!params.postCode.id.equals(candidate.address?.postCode?.id)) {
                 candidate.address.postCode = PostCode.get(params.postCode.id)
@@ -188,10 +144,12 @@ class CandidateController extends BaseController {
         }
 
         if (!candidateService.update(candidate)) {
+
             def availableQualifications = Qualification.findAll()
             def availablePayRollCompanies = PayrollCompany.findAll()
             def documentList = listDocuments();
-            render(view: 'edit2', model: [candidateInstance: candidate, documentInstanceList: documentList, availableQualifications: availableQualifications, availablePayrollCompanies: availablePayRollCompanies as grails.converters.JSON])
+
+            render(view: 'edit', model: [candidateInstance: candidate, documentInstanceList: documentList, availableQualifications: availableQualifications as grails.converters.JSON, availablePayrollCompanies: availablePayRollCompanies as grails.converters.JSON])
             return
         }
 
@@ -200,26 +158,22 @@ class CandidateController extends BaseController {
     }
 
     def updatePaymentDetails() {
-        log.info("CandidateController.savePaymentDetails")
+        log.info("CandidateController.updatePaymentDetails")
 
         def candidate = Candidate.get(params.id)
+        candidate.properties = params.candidate
 
         if (!candidate) {
             redirect(action: "list")
             return
         }
 
-        log.info("PARAMS: " + params.payroll)
-
         if (params.payroll) {
-
             def payroll = candidate.payroll
-
             if (!payroll) {
                 payroll = new Payroll()
             }
             bindData(payroll, params.payroll)
-
             log.info("PAYROLL: " + payroll)
             candidate.payroll = payroll
         }
@@ -228,10 +182,11 @@ class CandidateController extends BaseController {
             def availableQualifications = Qualification.findAll()
             def availablePayRollCompanies = PayrollCompany.findAll()
             def documentList = listDocuments();
-            render(view: 'edit2', model: [candidateInstance: candidate, documentInstanceList: documentList, availableQualifications: availableQualifications, availablePayrollCompanies: availablePayRollCompanies as grails.converters.JSON])
+            render(view: 'edit', model: [candidateInstance: candidate, documentInstanceList: documentList, availableQualifications: availableQualifications as grails.converters.JSON, availablePayrollCompanies: availablePayRollCompanies as grails.converters.JSON])
             return
         }
 
+        log.info("CANDIDATE PAYMENT DETAILS UPDATED ")
         redirect(action: "list")
     }
 
@@ -246,7 +201,7 @@ class CandidateController extends BaseController {
         def availableQualifications = Qualification.findAll()
         def availablePayRollCompanies = PayrollCompany.findAll()
 
-        render(view: 'edit2', model: [candidateInstance: candidate, documentInstanceList: documentList, availableQualifications: availableQualifications, availablePayrollCompanies: availablePayRollCompanies as grails.converters.JSON])
+        render(view: 'edit', model: [candidateInstance: candidate, documentInstanceList: documentList, availableQualifications: availableQualifications, availablePayrollCompanies: availablePayRollCompanies as grails.converters.JSON])
     }
 
     def delete() {
@@ -356,6 +311,8 @@ class CandidateController extends BaseController {
 
         if (!newCandidateQualification.save()) {
             log.info("Failed to save qualification for candidate" + candidate.id)
+//            render(template: 'createCandidateQualificationForm' ,model:[newCandidateQualification: newCandidateQualification])
+//            return
         }
 
         redirect(action: "edit", id: params.id)
@@ -404,11 +361,6 @@ class CandidateController extends BaseController {
             candidateMatches = candidateService.search(filter)
         }
 
-        /*   def candidateMatches = new ArrayList<Candidate>();
-
-           candidateMatches.add(Candidate.get(1))
-           candidateMatches.add(Candidate.get(2))*/
-
         render(template: 'matches', model: [matchCandidates: candidateMatches])
     }
 
@@ -416,7 +368,7 @@ class CandidateController extends BaseController {
         log.info("CandidateController.getEditCandidateQualification")
 
         def candidateQualification = CandidateQualification.get(params.id)
-        render(template: 'editCandidateQualificationForm', model: [cqe:candidateQualification])
+        render(template: 'editCandidateQualificationModal', model: [cqe:candidateQualification])
     }
 
 }

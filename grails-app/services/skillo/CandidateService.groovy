@@ -74,7 +74,8 @@ class CandidateService {
     def boolean update(Candidate candidate){
         log.info("CandidateService.UPDATE")
         if(!candidate.checkVersion(candidate.currentVersion)){
-            log.info("BAD VERSION: " + candidate.currentVersion)
+            log.info("BAD VERSION: " + candidate.version + "vs" + candidate.currentVersion)
+
             return false
         }
         if (!candidate.save(deepvalidate:true )) {

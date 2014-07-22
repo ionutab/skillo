@@ -1,6 +1,6 @@
 package skillo.filters
 
-abstract class BasicPaginatedSearchFilter {
+abstract class BasicPaginatedSearchFilter implements Serializable {
 
     private Long max
 

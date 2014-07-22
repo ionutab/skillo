@@ -49,19 +49,19 @@
                     <tr>
                         <g:if test="${cq.isMainTrade == false}" >
                             <g:if test="${cq.isExpired()}">
-                                <td><p class="text-red"><b>${cq?.qualification?.name}</b></p></td>
-                                <td><p class="text-red"><b>${cq?.number != null ? " " + cq?.number : "" }</b></p></td>
-                                <td><p class="text-red"><b>${cq?.expiryDate != null ? " " + formatDate(date: cq?.expiryDate) : ""}</b></p></td>
+                                <td><p class="text-red">${cq?.qualification?.name}</p></td>
+                                <td><p class="text-red">${cq?.number != null ? " " + cq?.number : "" }</p></td>
+                                <td><p class="text-red">${cq?.expiryDate != null ? " " + formatDate(date: cq?.expiryDate) : ""}</p></td>
                             </g:if>
                             <g:elseif test="${cq.willExpireSoonerThanTwoMonths()}">
-                                <td><p class="text-yellow"><b>${cq?.qualification?.name}</b></p></td>
-                                <td><p class="text-yellow"><b>${cq?.number != null ? " " + cq?.number : "" }</b></p></td>
-                                <td><p class="text-yellow"><b>${cq?.expiryDate != null ? " " + formatDate(date: cq?.expiryDate) : ""}</b></p></td>
+                                <td><p class="text-yellow">${cq?.qualification?.name}</p></td>
+                                <td><p class="text-yellow">${cq?.number != null ? " " + cq?.number : "" }</p></td>
+                                <td><p class="text-yellow">${cq?.expiryDate != null ? " " + formatDate(date: cq?.expiryDate) : ""}</p></td>
                             </g:elseif>
                             <g:else>
-                                <td><p class=""><b>${cq?.qualification?.name}</b></p></td>
-                                <td><p class=""><b>${cq?.number != null ? " " + cq?.number : "" }</b></p></td>
-                                <td><p class=""><b>${cq?.expiryDate != null ? " " + formatDate(date: cq?.expiryDate) : ""}</b></p></td>
+                                <td><p class="">${cq?.qualification?.name}</p></td>
+                                <td><p class="">${cq?.number != null ? " " + cq?.number : "" }</p></td>
+                                <td><p class="">${cq?.expiryDate != null ? " " + formatDate(date: cq?.expiryDate) : ""}</p></td>
                             </g:else>
                         </g:if>
                     </tr>
