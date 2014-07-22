@@ -26,6 +26,9 @@
     </label>
     <div class="col-sm-4">
         <g:field type="expiryDate" name="newCandidateQualification.expiryDate" id="newCandidateQualificationExpiryDate" class="datepicker form-control" value="${formatDate(date: newCandidateQualification?.expiryDate)}" default="none" precision="day" />
+        <g:javascript>
+            $("#newCandidateQualificationExpiryDate").inputmask("d/m/y", { "placeholder": "dd/mm/yyyy" });
+        </g:javascript>
    </div>
 </div>
 <div class="form-group  ${hasErrors(bean: newCandidateQualification, field: 'expiryDate', 'has-error')} ">
@@ -44,6 +47,11 @@
         <g:message code="candidateQualification.isMainTrade.label" default="Is Main Trade" />
     </label>
     <div class="col-sm-6">
-        <g:checkBox name="newCandidateQualification.isMainTrade" class="checkbox" value="${newCandidateQualification?.isMainTrade}" />
+        <g:radioGroup name="newCandidateQualification.isMainTrade"
+                      labels="['True', 'False']"
+                      values="['true', 'false']"
+                      value="${newCandidateQualification?.isMainTrade}">
+            ${it.label} ${it.radio}
+        </g:radioGroup>
     </div>
 </div>

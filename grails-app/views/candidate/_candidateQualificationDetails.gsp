@@ -1,4 +1,5 @@
-<g:set var="editable" value="${params.action == 'edit' || params.action == 'updateMainDetails' || params.action == 'updatePaymentDetails'}" />
+<g:set var="editable"
+       value="${params.action == 'edit' || params.action == 'updateMainDetails' || params.action == 'updatePaymentDetails'}"/>
 <g:set var="cq" value="${candidateInstance.candidateQualifications}"/>
 <g:set var="cqMain" value="${candidateInstance.getMainTrade()}"/>
 <div class="col-md-12">
@@ -99,13 +100,47 @@
                     </g:else>
                 </div>
             </div>
+
             <div class="row">
                 <div class="col-md-6">
                     <g:if test="${editable}">
-                        <button class="btn btn-info btn-sm"><i class="fa fa-plus "></i></button>
+                        <button class="btn btn-info btn-sm" data-toggle="modal"
+                                data-target="#newCandidateQualificationModal" id="addQualification"><i
+                                class="fa fa-plus "></i></button>
+                        <g:javascript>
+                            $("#addQualification").click(function (event) {
+                                event.preventDefault();
+                            });
+                        </g:javascript>
                     </g:if>
                 </div>
             </div>
         </div>
+    </div>
+</div>
+
+<div class="modal fade" id="newCandidateQualificationModal" role="dialog" aria-hidden="true" tabindex="-1">
+    <div class="modal-dialog">
+        <g:form
+                method="post"
+                class="form-horizontal"
+                id="newCandidateQualificationForm"
+                name="newCandidateQualificationForm"
+                url="[controller: 'candidate', action: 'addCandidateQualification']"
+                after="">
+            <g:hiddenField name="id" value="${candidateInstance?.id}"/>
+            <div class="modal-content">
+                <div class="modal-body">
+                    <g:render template="/candidate/candidateQualificationsForm" bean="${newCandidateQualification}"/>
+                </div>
+
+                <div class="modal-footer">
+                    <g:submitButton class="btn btn-primary btn-sm"
+                                    name="${message(code: 'default.button.save.label', default: 'Save')}"
+                                    update="newCandidateQualificationForm"/>
+                    <button type="button" class="btn btn-default btn-sm" data-dismiss="modal">Close</button>
+                </div>
+            </div>
+        </g:form>
     </div>
 </div>
