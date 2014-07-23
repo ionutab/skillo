@@ -40,7 +40,7 @@
                     <ul class="nav nav-tabs">
                         <li class="${tab1 ? "active" : ""}"><a href="#tab_1" data-toggle="tab">Profile</a></li>
                         <li class="${tab2 ? "active" : ""}"><a href="#tab_2" data-toggle="tab">Payment</a></li>
-                        <li class="${tab3 ? "active" : ""}"><a href="#tab_4" data-toggle="tab">Documents</a></li>
+                        <li class="${tab3 ? "active" : ""}"><a href="#tab_3" data-toggle="tab">Documents</a></li>
                     </ul>
                     <div class="tab-content">
                         <div class="tab-pane ${tab1 ? "active" : ""}" id="tab_1">
@@ -53,7 +53,18 @@
                         <div class="tab-pane ${tab2 ? "active" : ""}" id="tab_2">
                             <div class="box box-solid">
                                 <div class="row">
+
                                     <g:render template="/candidate/candidatePaymentDetails" />
+
+                                </div><!-- /.row -->
+                            </div><!-- /.row -->
+                        </div><!-- /.tab-pane -->
+                        <div class="tab-pane ${tab3 ? "active" : ""}" id="tab_3">
+                            <div class="box box-solid">
+                                <div class="row">
+
+
+
                                 </div><!-- /.row -->
                             </div><!-- /.row -->
                         </div><!-- /.tab-pane -->
