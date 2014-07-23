@@ -1,3 +1,5 @@
+<g:set var="editable" value="${params.action == 'edit' || params.action == 'updateMainDetails' || params.action == 'updatePaymentDetails'}" />
+
 <div class="col-xs-12 text-center">
     <div class="img-thumbnail">
         <g:img dir="images/avatar" file="nophoto.png"/>
@@ -49,10 +51,15 @@
                 </tbody>
             </table>
         </div>
+        <g:if test="${editable}">
         <div class="col-xs-12">
             <br/>
-            <g:actionSubmit class="btn btn-danger btn-sm" action="delete" value="${message(code: 'default.button.delete.label', default: 'Delete')}" onclick="return confirm('${message(code: 'default.button.delete.confirm.message', default: 'Are you sure?')}');" />
+            <g:form controller="candidate" method="POST">
+                <g:hiddenField name="id" value="${candidateInstance?.id}" />
+                <g:actionSubmit class="btn btn-danger btn-sm" action="delete" value="${message(code: 'default.button.delete.label', default: 'Delete')}" onclick="return confirm('${message(code: 'default.button.delete.confirm.message', default: 'Are you sure?')}');" />
+            </g:form>
         </div>
+        </g:if>
     </div>
 
 </div>

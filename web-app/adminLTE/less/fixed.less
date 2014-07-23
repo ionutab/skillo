@@ -1,11 +1,9 @@
-@iterations: 30;
+.generate-fixed(30);
 
-.loopingClass (@index) when (@index > 1) {
-  @fixedw = @index * 10
-  .fixed-@{index}{
-    width: @fixedw;
+.generate-fixed(@n, @i: 1) when (@i =< @n) {
+  @j: @i * 10;
+  .fixed-@{j} {
+    width: (10px * @i);
   }
-  .loopingClass(@index - 1);
+  .generate-fixed(@n, (@i + 1));
 }
-
-.loopingClass (@iterations);
