@@ -4,7 +4,8 @@
     <div class="img-thumbnail">
         <g:img dir="images/avatar" file="nophoto.png"/>
     </div>
-
+    <g:uploadForm controller="candidate" action="upload" enctype="multipart/form-data" method="POST">
+    </g:uploadForm>
     <h2 class="bold">${candidateInstance?.firstName + " " + candidateInstance?.lastName }</h2>
 
     <g:if test="${candidateInstance?.getMainTrade() != null}">
@@ -24,7 +25,6 @@
                     <g:else>
                         <td><span class="label label-danger">Inactive</span></td>
                     </g:else>
-
                 </tr>
                 %{--
                 <tr>

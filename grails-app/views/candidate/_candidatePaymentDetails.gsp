@@ -23,7 +23,7 @@
                             <g:message code="payroll.payrollCompany.label" default="Payroll Company"/>
                         </label>
 
-                        <div class="col-sm-9">
+                        <div class="col-sm-6">
                             <g:if test="${editable}">
                                 <g:hiddenField
                                         name="payroll.payrollCompany.id"
@@ -52,6 +52,11 @@
                                     <label class="control-label">${candidateInstance?.payroll?.payrollCompany?.name}</label>
                                 </g:else>
                             </g:else>
+                        </div>
+                        <div class="col-sm-1">
+                            <button class="btn btn-info btn-sm" data-toggle="modal"
+                                    data-target="#createCandidateQualificationModal" id="addQualification"><i
+                                    class="fa fa-plus "></i>&nbsp;Add Company</button>
                         </div>
 
                     </div>

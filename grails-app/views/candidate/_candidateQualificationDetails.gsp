@@ -134,7 +134,7 @@
                     <g:if test="${editable}">
                         <button class="btn btn-info btn-sm" data-toggle="modal"
                                 data-target="#createCandidateQualificationModal" id="addQualification"><i
-                                class="fa fa-plus "></i></button>
+                                class="fa fa-plus "></i>&nbsp;Add Candidate Qualification</button>
                         <g:javascript>
                             $("#addQualification").click(function (event) {
                                 event.preventDefault();

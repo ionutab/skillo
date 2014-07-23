@@ -19,18 +19,17 @@
 
 <g:set var="tab1" value="${params.action == 'edit' || params.action == 'show' || params.action == 'updateMainDetails'}" />
 <g:set var="tab2" value="${params.action == 'updatePaymentDetails'}" />
+<g:set var="tab3" value="${false}" />
 
 <div class="row">
 
     <div class="col-md-3">
         <div class="box box-solid">
-            <g:uploadForm controller="consultant" action="uploadPhoto" enctype="multipart/form-data" method="POST">
-                <div class="box-body">
-                    <div class="row">
-                        <g:render template="/candidate/basicInformation" />
-                    </div>
+            <div class="box-body">
+                <div class="row">
+                    <g:render template="/candidate/basicInformation" />
                 </div>
-            </g:uploadForm>
+            </div>
         </div>
     </div>
 
@@ -41,6 +40,7 @@
                     <ul class="nav nav-tabs">
                         <li class="${tab1 ? "active" : ""}"><a href="#tab_1" data-toggle="tab">Profile</a></li>
                         <li class="${tab2 ? "active" : ""}"><a href="#tab_2" data-toggle="tab">Payment</a></li>
+                        <li class="${tab3 ? "active" : ""}"><a href="#tab_4" data-toggle="tab">Documents</a></li>
                     </ul>
                     <div class="tab-content">
                         <div class="tab-pane ${tab1 ? "active" : ""}" id="tab_1">
