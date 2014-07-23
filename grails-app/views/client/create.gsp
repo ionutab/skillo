@@ -19,6 +19,7 @@
                             <g:render template="form" />
                             <div class="col-md-offset-3">
                                 <g:submitButton name="create" class="btn btn-success" value="${message(code: 'default.button.save.label', default: 'Save')}" />
+                                <g:link controller="client" action="list" class="btn" name="Cancel">Cancel</g:link>
                             </div>
                         </div>
                     </div>

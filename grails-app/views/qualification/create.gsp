@@ -20,9 +20,8 @@
 
                         <div class="col-md-4">
                             <g:render template="template/form"/>
-                            <g:submitButton name="create" class="btn btn-primary"
-                                            value="${message(code: 'default.button.save.label', default: 'Save')}"/>
-                            <button type="submit" class="btn btn-warning" name="cancel" value="true">Cancel</button>
+                            <g:submitButton name="create" class="btn btn-success" value="${message(code: 'default.button.save.label', default: 'Save')}"/>
+                            <g:link controller="qualification" action="list" class="btn" name="Cancel">Cancel</g:link>
                         </div>
                     </div>
                 </div>

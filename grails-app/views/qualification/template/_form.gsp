@@ -44,7 +44,7 @@
                       labels="['True', 'False']"
                       values="['true', 'false']"
                       value="${qualificationInstance?.canBeMainTrade}">
-            ${it.label} ${it.radio}
+             <label class="control-label">${it.radio}&nbsp;${it.label}</label>
         </g:radioGroup>
     </div>
 </div>

@@ -273,7 +273,7 @@
                         <div class="col-md-offset-3">
                             <g:submitButton name="Finish" class="btn btn-success" />
                             %{--<g:actionSubmit value="Save And Edit" action="two" class="btn btn-success" />--}%
-                            <g:link uri="/" class="btn btn-warning" name="Cancel">Cancel</g:link>
+                            <g:link controller="candidate" action="list" class="btn" name="Cancel">Cancel</g:link>
                         </div>
 
                     </div>

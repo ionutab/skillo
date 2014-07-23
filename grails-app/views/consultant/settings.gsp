@@ -27,19 +27,20 @@
 
                         <div class="box-tools">
                             <address>
-                                <strong>Twitter, Inc.</strong><br>
-                                795 Folsom Ave, Suite 600<br>
-                                San Francisco, CA 94107<br>
-                                <abbr title="Phone">P:</abbr> (123) 456-7890
+                                <strong>Company Name Inc.</strong><br>
+                                Company Address<br>
+                                Company Town<br>
+                                Company Phone:</abbr>&nbsp;55555-555-555
                             </address>
                         </div>
-
+                        %{--
                         <div class="box-tools">
                             <i class="fa fa-star text-yellow fa-fw"></i><i
                                 class="fa fa-star text-success fa-fw"></i><i
                                 class="fa fa-star text-green fa-fw"></i><i class="fa fa-star vd_yellow fa-fw"></i><i
                                 class="fa fa-star vd_yellow fa-fw"></i>
                         </div>
+                        --}%
                     </div>
 
                 </div>
@@ -120,12 +121,10 @@
 
 
                     <div class="form-group ${hasErrors(bean: consultant, field: 'telephoneNumber', 'has-error')}">
-                        <label for="telephoneNumber" class="col-sm-2 control-label">Telephone</label>
+                        <label for="consultant.telephoneNumber" class="col-sm-2 control-label">Telephone</label>
 
                         <div class="col-sm-5">
-                            <input type="tel" class="form-control" id="telephoneNumber"
-                                   name="consultant.telephoneNumber"
-                                   value="${consultant.telephoneNumber}">
+                            <g:textField name="consultant.telephoneNumber" type="tel" class="form-control" id="telephoneNumber" value="${consultant.telephoneNumber}" />
                             <g:hasErrors bean="${consultant}" field="telephoneNumber">
                                 <g:eachError var="err" bean="${consultant}" field="telephoneNumber">
                                     <g:if test="${err.code == 'matches.invalid'}">
@@ -137,6 +136,10 @@
                                     </g:if>
                                 </g:eachError>
                             </g:hasErrors>
+                            <g:javascript>
+                                $("#telephoneNumber").inputmask("99999-999-999", {"placeholder":"_____-___-___"});
+                            </g:javascript>
+
                         </div>
                     </div>
 
@@ -144,8 +147,7 @@
                         <label for="website" class="col-sm-2 control-label">Website</label>
 
                         <div class="col-sm-5">
-                            <input type="text" class="form-control" id="website" name="consultant.website"
-                                   value="${consultant.website}">
+                            <input type="text" class="form-control" id="website" name="consultant.website" value="${consultant.website}">
                         </div>
                     </div>
 
@@ -172,7 +174,7 @@
 
             <div class="row">
                 <div class="col-md-12">
-                    <g:submitButton name="Finish" class="btn btn-success btn"/>
+                    <g:submitButton name="Update" class="btn btn-primary btn"/>
                     <g:link uri="/" class="btn btn-default" name="Cancel">Cancel</g:link>
                 </div>
             </div>
@@ -244,7 +246,7 @@
 
         <div class="row">
             <div class="col-md-8">
-                <g:submitButton name="Update" class="btn btn-success btn"/>
+                <g:submitButton name="Update" class="btn btn-primary btn"/>
             </div>
         </div>
 
