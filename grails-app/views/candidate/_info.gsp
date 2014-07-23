@@ -10,13 +10,21 @@
             <div class="col-sm-12">
                 <g:link controller="candidate" action="edit" id="${CandidateShow.id}" class="btn btn-sm bg-yellow" ><i class="fa fa-pencil append-icon"></i>&nbsp;Edit</g:link>
                 <g:link controller="candidate" action="show" id="${CandidateShow.id}" class="btn btn-sm bg-yellow" ><i class="fa fa-eye append-icon"></i>&nbsp;Show</g:link>
+%{--
 
-                <a class="btn btn-sm bg-yellow" %{--style="position: absolute; top: 5px; right: 5px;"--}%><i
+                <a class="btn btn-sm bg-yellow" --}%
+%{--style="position: absolute; top: 5px; right: 5px;"--}%%{--
+><i
                         class="fa fa-star append-icon"></i> Star</a>
-                <a class="btn btn-sm bg-yellow" %{--style="position: absolute; top: 5px; right: 5px;"--}%><i
+                <a class="btn btn-sm bg-yellow" --}%
+%{--style="position: absolute; top: 5px; right: 5px;"--}%%{--
+><i
                         class="fa fa-plus-square append-icon"></i>&nbsp;Add to</a>
-                <a class="btn btn-sm bg-yellow" %{--style="position: absolute; top: 5px; right: 5px;"--}%><i
+                <a class="btn btn-sm bg-yellow" --}%
+%{--style="position: absolute; top: 5px; right: 5px;"--}%%{--
+><i
                         class="fa fa-print append-icon"></i>&nbsp;PDF</a>
+--}%
 
             </div>
 

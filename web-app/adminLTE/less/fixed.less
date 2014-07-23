@@ -1,0 +1,11 @@
+@iterations: 30;
+
+.loopingClass (@index) when (@index > 1) {
+  @fixedw = @index * 10
+  .fixed-@{index}{
+    width: @fixedw;
+  }
+  .loopingClass(@index - 1);
+}
+
+.loopingClass (@iterations);

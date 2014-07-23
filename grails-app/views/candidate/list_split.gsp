@@ -77,7 +77,7 @@
                                         </th>
                                         %{--<th>Telephone</th>--}%
                                         <th>Address</th>
-                                        <th>Post Code</th>
+                                        <th class="fixed-80">Post Code</th>
                                         <th>Trade</th>
 
                                     </tr>

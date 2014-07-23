@@ -34,39 +34,41 @@
                             </tr>
                             </thead>
                             <tbody>
-                            <tr>
-                                <td>
-                                    <b>${cqMain.qualification.code}</b>
-                                </td>
-                                <g:if test="${cqMain.isExpired()}">
-                                    <td><p class="text-red"><b>Expired</b></p></td>
-                                </g:if>
-                                <g:elseif test="${cqMain.willExpireSoonerThanTwoMonths()}">
-                                    <td><p class="text-yellow"><b>Will Expire</b></p></td>
-                                </g:elseif>
-                                <g:else>
-                                    <td><p class="text-green"><b>Active</b></p></td>
-                                </g:else>
-                                <td>
-                                    <b>${cqMain.qualification.name}</b>
-                                </td>
-                                <td>
-                                    <b>${cqMain.number}</b>
-                                </td>
-                                <td>
-                                    <b><g:formatDate date="${cqMain.expiryDate}"/></b>
-                                </td>
-                                <g:if test="${editable}">
+                            <g:if test="${cqMain != null}">
+                                <tr>
                                     <td>
-                                        <g:remoteLink controller="candidate"
-                                                      action="getEditCandidateQualification" id="${cqMain.id}"
-                                                      elementId="${cqMain.id}"
-                                                      update="editCandidateQualificationContainer"
-                                                      onComplete ="showEditCandidateQualification()"
-                                                      class="btn btn-sm bg-yellow"><i class="fa fa-pencil append-icon"></i>&nbsp;Edit</g:remoteLink>
+                                        <b>${cqMain.qualification.code}</b>
                                     </td>
-                                </g:if>
-                            </tr>
+                                    <g:if test="${cqMain.isExpired()}">
+                                        <td><p class="text-red"><b>Expired</b></p></td>
+                                    </g:if>
+                                    <g:elseif test="${cqMain.willExpireSoonerThanTwoMonths()}">
+                                        <td><p class="text-yellow"><b>Will Expire</b></p></td>
+                                    </g:elseif>
+                                    <g:else>
+                                        <td><p class="text-green"><b>Active</b></p></td>
+                                    </g:else>
+                                    <td>
+                                        <b>${cqMain.qualification.name}</b>
+                                    </td>
+                                    <td>
+                                        <b>${cqMain.number}</b>
+                                    </td>
+                                    <td>
+                                        <b><g:formatDate date="${cqMain.expiryDate}"/></b>
+                                    </td>
+                                    <g:if test="${editable}">
+                                        <td>
+                                            <g:remoteLink controller="candidate"
+                                                          action="getEditCandidateQualification" id="${cqMain.id}"
+                                                          elementId="${cqMain.id}"
+                                                          update="editCandidateQualificationContainer"
+                                                          onComplete ="showEditCandidateQualification()"
+                                                          class="btn btn-sm bg-yellow"><i class="fa fa-pencil append-icon"></i>&nbsp;Edit</g:remoteLink>
+                                        </td>
+                                    </g:if>
+                                </tr>
+                            </g:if>
                             <g:each in="${candidateInstance.candidateQualifications}" status="i" var="cq">
                                 <g:if test="${cq.isMainTrade == false}">
                                     <tr>
