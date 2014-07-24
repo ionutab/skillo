@@ -45,7 +45,7 @@
 
     <g:render template="/candidate/mainDetails" />
 
-    <g:render template="/candidate/candidateQualificationDetails" />
+    <g:render template="/candidate/candidateQualificationList" />
 
 </div><!-- /.tab-pane -->
 </div><!-- /.tab-pane -->

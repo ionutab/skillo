@@ -50,10 +50,11 @@
                     </div>
                 </div>
                 <div class="modal-footer">
-                    <g:submitButton class="btn btn-primary btn-sm"
-                                    name="${message(code: 'default.button.save.label', default: 'Save')}"
-                                    />
-                    <button type="button" class="btn btn-default btn-sm" data-dismiss="modal">Close</button>
+                    <div class="text-left">
+                        <g:submitButton class="btn btn-primary btn-sm" name="${message(code: 'default.button.save.label', default: 'Save')}" />
+                        <g:actionSubmit class="btn btn-danger btn-sm" action="deleteCandidateQualification" id="${cqe?.id}" value="${message(code: 'default.button.delete.label', default: 'Delete')}" onclick="return confirm('${message(code: 'default.button.delete.confirm.message', default: 'Are you sure?')}');" formmethod="post" />
+                        <button type="button" class="btn btn-default btn-sm" data-dismiss="modal">Close</button>
+                    </div>
                 </div>
             </div>
         </g:form>

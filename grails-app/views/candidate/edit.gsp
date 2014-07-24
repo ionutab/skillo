@@ -47,7 +47,9 @@
                             <div class="row">
                                 <g:render template="/candidate/mainDetails" />
                                 <hr>
-                                <g:render template="/candidate/candidateQualificationDetails" />
+                                <g:render template="/candidate/candidateQualificationList" />
+                                <hr>
+                                <g:render template="/candidate/candidateNotesList" />
                             </div><!-- /.tab-pane -->
                         </div><!-- /.tab-pane -->
                         <div class="tab-pane ${tab2 ? "active" : ""}" id="tab_2">

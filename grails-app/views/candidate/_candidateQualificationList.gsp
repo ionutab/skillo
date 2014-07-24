@@ -13,7 +13,7 @@
                     <g:if test="${cq == null || cq.size() <= 0}">
 
                         <div class="col-md-12 col-lg-offset-2 page-background-info">
-                            <h2><g:message code="qualification.display.notFound.label"/></h2>
+                            <h2><g:message code="candidateQualification.display.notFound.label"/></h2>
                         </div>
 
                     </g:if>
@@ -70,7 +70,7 @@
                                 </tr>
                             </g:if>
                             <g:each in="${candidateInstance.candidateQualifications}" status="i" var="cq">
-                                <g:if test="${cq.isMainTrade == false}">
+                                <g:if test="${!cq.isMainTrade && cq.active}">
                                     <tr>
                                         <td>
                                             ${cq.qualification.code}
@@ -164,7 +164,7 @@
                         <g:render template="createCandidateQualificationForm" />
                     </div>
                 </div>
-                <div class="modal-footer">
+                <div class="modal-footer text-left">
                     %{--
 
                     <g:javascript>
@@ -194,10 +194,12 @@
                             value="${message(code: 'default.button.save.label', default: 'Save')}"
                             update="createCandidateQualificationFormContainer" onComplete="renderEditCandidateQualification()" />
                     --}%
-                    <g:submitButton class="btn btn-primary btn-sm"
-                                    name="${message(code: 'default.button.save.label', default: 'Save')}"
-                                    update="newCandidateQualificationForm" />
-                    <button type="button" class="btn btn-default btn-sm" data-dismiss="modal">Close</button>
+                    <div class="text-left">
+                        <g:submitButton class="btn btn-primary btn-sm"
+                                        name="${message(code: 'default.button.save.label', default: 'Save')}"
+                                        update="newCandidateQualificationForm" />
+                        <button type="button" class="btn btn-default btn-sm" data-dismiss="modal">Close</button>
+                    </div>
                 </div>
             </div>
         </g:form>

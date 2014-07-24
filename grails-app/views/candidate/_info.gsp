@@ -54,8 +54,8 @@
                 </tr>
 
                 <g:each in="${CandidateShow.candidateQualifications}" var="cq" >
-                    <tr>
-                        <g:if test="${cq.isMainTrade == false}" >
+                    <g:if test="${!cq.isMainTrade && cq.active}" >
+                        <tr>
                             <g:if test="${cq.isExpired()}">
                                 <td><p class="text-red">${cq?.qualification?.name}</p></td>
                                 <td><p class="text-red">${cq?.number != null ? " " + cq?.number : "" }</p></td>
@@ -71,8 +71,8 @@
                                 <td><p class="">${cq?.number != null ? " " + cq?.number : "" }</p></td>
                                 <td><p class="">${cq?.expiryDate != null ? " " + formatDate(date: cq?.expiryDate) : ""}</p></td>
                             </g:else>
-                        </g:if>
-                    </tr>
+                        </tr>
+                    </g:if>
                 </g:each>
             </tbody>
         </table>
@@ -158,10 +158,10 @@
         --}%
 
         <g:each in="${CandidateShow.candidateNotes}" var="cnote">
-        <div class="callout callout-main-details callout-info" >
-            <p><b><g:formatDate date="${cnote.note.date}" />&nbsp;${cnote.consultant.firstName + " " + cnote.consultant.lastName}</b></p>
-            <p>${cnote.note.note}</p>
-        </div>
+            <div class="callout callout-main-details callout-info" >
+                <p><b><g:formatDate date="${cnote.note.date}" />&nbsp;${cnote.consultant.firstName + " " + cnote.consultant.lastName}</b></p>
+                <p>${cnote.note.note}</p>
+            </div>
         </g:each>
     </div>
 </div>

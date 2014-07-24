@@ -102,7 +102,7 @@ class Candidate implements SkilloDomainModelWithHistory {
 
     def CandidateQualification getMainTrade(){
         for (CandidateQualification cq : candidateQualifications){
-            if(cq.isMainTrade){
+            if(cq.isMainTrade && cq.active){
                 return cq
             }
         }

@@ -345,6 +345,34 @@ class CandidateController extends BaseController {
         redirect(action: "edit", id: cqe.candidate.id)
     }
 
+
+    def deleteCandidateQualification(){
+        log.info("CandidateController.DELETE")
+
+        def candidateQualification = CandidateQualification.get(params.id)
+
+        if (!candidateQualification) {
+            redirect(controller: "candidate", action: "list")
+            return
+        }
+
+        candidateQualification.active = false
+        if (!candidateQualification.save(deepvalidate: true, flush: true)) {
+            log.info("delete UNSUCCESSFUL")
+            if (candidateQualification.hasErrors()) {
+                candidateQualification.errors.each {
+                    println "    FE: " + it.fieldError.field
+                    println "    FE: " + it.fieldError.code
+                }
+            }
+            redirect(controller: "candidate", action: "edit", id: candidateQualification.candidate.id)
+            return
+        }
+        log.info("delete SUCCESSFUL")
+        redirect(controller: "candidate", action: "edit", id: candidateQualification.candidate.id)
+        return
+    }
+
     def findMatches() {
         log.info("CC.FIND POSSIBLE MATCHES");
         log.info params
