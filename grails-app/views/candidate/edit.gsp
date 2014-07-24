@@ -19,7 +19,7 @@
 
 <g:set var="tab1" value="${params.action == 'edit' || params.action == 'show' || params.action == 'updateMainDetails'}" />
 <g:set var="tab2" value="${params.action == 'updatePaymentDetails'}" />
-<g:set var="tab3" value="${false}" />
+<g:set var="tab3" value="${params.action == 'documentsUpload'}" />
 
 <div class="row">
 
@@ -63,7 +63,7 @@
                             <div class="box box-solid">
                                 <div class="row">
 
-
+                                    <g:render template="/candidate/documents" />
 
                                 </div><!-- /.row -->
                             </div><!-- /.row -->

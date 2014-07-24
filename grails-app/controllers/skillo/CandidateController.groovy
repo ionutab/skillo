@@ -220,14 +220,14 @@ class CandidateController extends BaseController {
     }
 
 
-    def upload() {
+    def documentsUpload() {
 
         List fileList = request.getFiles('files') // 'files' is the name of the input
         fileList.each { file ->
             if (file.empty) {
                 log.info("file cannot be empty")
             } else {
-                def candidate = Candidate.get(params.candidateId)
+                def candidate = Candidate.get(params.id)
                 def documentInstance = new Document()
                 documentInstance.filename = file.originalFilename
                 documentInstance.filedata = file.getBytes()
@@ -237,7 +237,7 @@ class CandidateController extends BaseController {
             }
         }
 
-        redirect(action: "edit", id: params.candidateId)
+        redirect(action: "edit", id: params.id)
     }
 
     def listDocuments() {
