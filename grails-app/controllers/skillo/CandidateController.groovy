@@ -1,5 +1,6 @@
 package skillo
 
+import core.util.DocumentUtil
 import org.joda.time.DateTime
 import org.joda.time.LocalDate
 import skillo.filters.CandidateListSearch
@@ -87,7 +88,7 @@ class CandidateController extends BaseController {
             }
         }
 
-        if (!candidate.save(deepvalidate: true, flush: true)) {
+        if (!candidate.save()) {
             if (candidate.hasErrors()) {
                 candidate.errors.each {
                     println "    FE: " + it.fieldError.field
@@ -120,7 +121,7 @@ class CandidateController extends BaseController {
         def documentList = listDocuments();
         def newCandidateQualification = new CandidateQualification()
 
-        render(view: 'edit', model: [candidateInstance: candidate, documentInstanceList: documentList,  availableQualifications: availableQualifications as grails.converters.JSON, availablePayrollCompanies: availablePayRollCompanies as grails.converters.JSON], newCandidateQualification: newCandidateQualification)
+        render(view: 'edit', model: [candidateInstance: candidate, documentInstanceList: documentList, availableQualifications: availableQualifications as grails.converters.JSON, availablePayrollCompanies: availablePayRollCompanies as grails.converters.JSON], newCandidateQualification: newCandidateQualification)
     }
 
     def updateMainDetails() {
@@ -227,13 +228,24 @@ class CandidateController extends BaseController {
             if (file.empty) {
                 log.info("file cannot be empty")
             } else {
+
                 def candidate = Candidate.get(params.id)
                 def documentInstance = new Document()
+                documentInstance.type = file.getContentType()
                 documentInstance.filename = file.originalFilename
                 documentInstance.filedata = file.getBytes()
                 documentInstance.candidateId = candidate.id
                 documentInstance.fileSize = file.size
-                documentInstance.save()
+                documentInstance.humanReadableSize = DocumentUtil.bytesToHuman(file.size);
+                if (!documentInstance.save()) {
+                    if (documentInstance.hasErrors()) {
+                        documentInstance.errors.each {
+                            if (it.fieldError.code == "maxSize.exceeded") {
+                                documentInstance.errors.rejectValue("filedata", "maxSize.exceeded")
+                            }
+                        }
+                    }
+                }
             }
         }
 
@@ -301,7 +313,7 @@ class CandidateController extends BaseController {
         if (Boolean.TRUE == newCandidateQualification.isMainTrade) {
             def candidateQualifications = CandidateQualification.findAllByCandidateAndIsMainTrade(Candidate.get(params.id), Boolean.TRUE)
             candidateQualifications.each { candidateQualification ->
-                if(candidateQualification != newCandidateQualification) {
+                if (candidateQualification != newCandidateQualification) {
                     //put the other qualifications to not be main trade
                     candidateQualification.setIsMainTrade(Boolean.FALSE)
                     candidateQualification.save()
@@ -318,7 +330,7 @@ class CandidateController extends BaseController {
         redirect(action: "edit", id: params.id)
     }
 
-    def updateCandidateQualification(){
+    def updateCandidateQualification() {
         log.info("CandidateController.updateCandidateQualificationModal")
         CandidateQualification cqe = CandidateQualification.get(params.id)
 
@@ -330,7 +342,7 @@ class CandidateController extends BaseController {
         if (Boolean.TRUE.equals(cqe.isMainTrade)) {
             def candidateQualifications = CandidateQualification.findAllByCandidateAndIsMainTrade(Candidate.get(cqe.candidate.id), Boolean.TRUE)
             candidateQualifications.each { candidateQualification ->
-                if(candidateQualification != cqe){
+                if (candidateQualification != cqe) {
                     //put the other qualifications to not be main trade
                     candidateQualification.setIsMainTrade(Boolean.FALSE)
                     candidateQualification.save()
@@ -346,7 +358,7 @@ class CandidateController extends BaseController {
     }
 
 
-    def deleteCandidateQualification(){
+    def deleteCandidateQualification() {
         log.info("CandidateController.DELETE")
 
         def candidateQualification = CandidateQualification.get(params.id)
@@ -392,11 +404,11 @@ class CandidateController extends BaseController {
         render(template: 'matches', model: [matchCandidates: candidateMatches])
     }
 
-    def getEditCandidateQualification(){
+    def getEditCandidateQualification() {
         log.info("CandidateController.getEditCandidateQualification")
 
         def candidateQualification = CandidateQualification.get(params.id)
-        render(template: 'editCandidateQualificationModal', model: [cqe:candidateQualification])
+        render(template: 'editCandidateQualificationModal', model: [cqe: candidateQualification])
     }
 
 }

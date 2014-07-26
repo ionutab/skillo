@@ -1,6 +1,7 @@
 package skillo
 
 import com.metasieve.magicnumbers.MagicNumbersMixin
+import enums.DocumentType
 import org.apache.commons.io.filefilter.MagicNumberFileFilter
 
 /**
@@ -13,7 +14,9 @@ class Document {
     Date uploadDate = new Date()
     Long candidateId
     byte[] filedata
-    Integer fileSize
+    long fileSize
+    String type
+    String humanReadableSize
 
 
     static mapping = {
@@ -22,7 +25,7 @@ class Document {
     static belongsTo =Candidate
 
     static constraints = {
-        filedata(nullable: false,maxSize: 5242880) // max of 5mb
+        filedata(nullable: false,maxSize: 10485760) // max of 10 mb
     }
 
 }

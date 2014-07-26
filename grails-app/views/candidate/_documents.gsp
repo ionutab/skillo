@@ -27,10 +27,7 @@
                                     <p class="help-block">Max 10 MB each file</p>
                                 </div>
                             </div>
-                            <hr>
 
-                            <div class="form-group">
-                            </div>
                         </div>
                     </div>
                 </g:uploadForm>
@@ -38,6 +35,7 @@
                     <div class="col-md-6">
                         <div class="form-group ">
                             <g:if test="${documentInstanceList == null || documentInstanceList.size() == 0}">
+                                <hr>
                                 <div class="col-lg-12 col-lg-offset-0 page-background-info">
                                     <g:message code="document.notFound.label"/>
                                     <br>
@@ -49,8 +47,19 @@
                                     <tbody>
                                     <g:each in="${documentInstanceList}" status="i" var="documentInstance">
                                         <td><g:link action="documentDownload" id="${documentInstance.id}">${documentInstance.filename}</g:link></td>
-                                        <td><g:formatNumber number="${documentInstance.fileSize}"/></td>
+                                        <td>${documentInstance.type}</td>
+                                        <td>${documentInstance.humanReadableSize}</td>
                                         <td><g:formatDate date="${documentInstance.uploadDate}"/></td>
+
+
+                                        <g:hasErrors bean="${documentInstance}">
+                                            <ul>
+                                                <g:eachError var="err" bean="${documentInstance}">
+                                                    <li>${err}</li>
+                                                </g:eachError>
+                                            </ul>
+                                        </g:hasErrors>
+
                                         </tr>
                                     </g:each>
                                     </tbody>
