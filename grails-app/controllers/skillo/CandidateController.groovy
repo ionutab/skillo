@@ -48,7 +48,7 @@ class CandidateController extends BaseController {
         def availableQualifications = Qualification.list()
         def candidateMatches = new ArrayList<Candidate>();
 
-        [candidateInstance: candidate, CandidateMatches: candidateMatches, availableQualifications: availableQualifications as grails.converters.JSON]
+        [candidateInstance: candidate, CandidateMatches: candidateMatches, availableQualifications: availableQualifications as grails.converters.JSON ]
     }
 
     def save() {
@@ -56,6 +56,8 @@ class CandidateController extends BaseController {
 
         def candidate = new Candidate(params.candidate)
         def address = new Address(params.address)
+
+
 
         def mainTrade = Qualification.get(params.candidateMainTrade.id)
 

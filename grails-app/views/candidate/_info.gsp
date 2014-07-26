@@ -139,6 +139,18 @@
             </div>
         </g:if>
 
+        <g:if test="${CandidateShow.nationality != null}">
+            <div class="row">
+                <div class="col-sm-3">
+                    <label><g:message code="candidate.nationality.label" />:</label>
+                </div>
+
+                <div class="col-sm-3">
+                    <p><g:message code="${CandidateShow.nationality.nationality}" /></p>
+                </div>
+            </div>
+        </g:if>
+
         <div class="row">
             <div class="col-sm-3">
                 <label><g:message code="candidate.consultant.label" />:</label>

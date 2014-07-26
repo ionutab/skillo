@@ -9,7 +9,6 @@ class Candidate implements SkilloDomainModelWithHistory {
     String firstName
     String lastName
     Date birthDate
-    String nationality
 
     Boolean driver
     Boolean sponsored
@@ -27,16 +26,18 @@ class Candidate implements SkilloDomainModelWithHistory {
     Date dateCreated
     Date lastUpdated
 
+    Country nationality
+
     transient Long currentVersion = 0L
 
-    static hasMany = [ candidateQualifications:CandidateQualification, candidateNotes:CandidateNote, jobs:Job, placements:Placement, candidateHistory:CandidateEvent ]
+    static hasMany = [candidateQualifications: CandidateQualification, candidateNotes: CandidateNote, jobs: Job, placements: Placement, candidateHistory: CandidateEvent]
 
     static constraints = {
         firstName blank: false, matches: "[a-zA-Z-' ]+"
         lastName blank: false, matches: "[a-zA-Z-' ]+"
-        nationality nullable: true, blank: false
+        nationality nullable: true
 
-        telephoneNumber blank: false, nullable:true, minSize: 10, matches: "[0-9]{5}-[0-9]{3}-[0-9]{3}"
+        telephoneNumber blank: false, nullable: true, minSize: 10, matches: "[0-9]{5}-[0-9]{3}-[0-9]{3}"
         otherTelephoneNumber nullable: true
 
         candidateNotes nullable: true
@@ -56,20 +57,19 @@ class Candidate implements SkilloDomainModelWithHistory {
 
     static mapping = {
         autoTimestamp true
-        candidateQualifications cascade: "all-delete-orphan", sort:"expiryDate", order: "asc"
-        candidateNotes cascade: "all-delete-orphan"
+        candidateQualifications cascade: "all-delete-orphan", sort: "expiryDate", order: "asc"
         candidateHistory cascade: "all-delete-orphan"
     }
 
-    def boolean checkVersion(Long version){
-        if(this.version > version){
+    def boolean checkVersion(Long version) {
+        if (this.version > version) {
             return false
         }
         return true
     }
 
-    def Integer age(){
-        if(this.birthDate == null){
+    def Integer age() {
+        if (this.birthDate == null) {
             return null
         }
 
@@ -101,15 +101,15 @@ class Candidate implements SkilloDomainModelWithHistory {
     void addUpdateEvent() {
     }
 
-    def CandidateQualification getMainTrade(){
-        for (CandidateQualification cq : candidateQualifications){
-            if(cq.isMainTrade && cq.active){
+    def CandidateQualification getMainTrade() {
+        for (CandidateQualification cq : candidateQualifications) {
+            if (cq.isMainTrade && cq.active) {
                 return cq
             }
         }
     }
 
-    def String getFullName(){
+    def String getFullName() {
         return firstName + " " + lastName
     }
 

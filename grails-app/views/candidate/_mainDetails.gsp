@@ -226,6 +226,69 @@
                 </div>
 
                 <div class="form-group">
+                    <label for="candidate.nationality" class="col-md-3 control-label">
+                        <g:message code="candidate.nationality.label" default="Nationality" />
+                    </label>
+                    <div class="col-md-9">
+                          <g:if test="${editable}">
+                        <g:hiddenField
+                                name="candidate.nationality"
+                                id="nationalityId"
+                                value="${candidateInstance?.nationality?.id}"
+                        />
+                        <g:hiddenField
+                                name="candidate.nationalityPlaceholder"
+                                id="nationalityPlaceholder"
+                                value="${candidateInstance?.nationality?.nationality}"
+                        />
+
+                        <g:javascript>
+                                        function formatNationalitySelection(item) {
+                                            return item.nationality;
+                                        };
+
+                                        function formatNationalityResult(item) {
+                                            return item.nationality;
+                                        };
+                                        function doWeHaveANationalityAlready(){
+                                            return "Search for a nationality";
+                                        }
+                                        $("#nationalityId").select2({
+                                            placeholder: doWeHaveANationalityAlready,
+                                            ajax:{
+                                                url: '<g:createLink controller="country" action="getNationality" />',
+                                                dataType: 'json',
+                                                data: function(term, page){
+                                                    return {nationality: term};
+                                                },
+                                                results: function (data, page) {
+                                                    return {nationalityResults: data};
+                                                }
+                                            },
+                                            initSelection: function(element, callback) {
+                                                var id=$("#nationalityId").val();
+                                                if (id!=="") {
+                                                    $("#s2id_nationalityId .select2-chosen").html($("#nationalityPlaceholder").val());
+                                                }
+                                            },
+                                            formatSelection: formatNationalitySelection,
+                                            formatResult: formatNationalityResult,
+                                            escapeMarkup: function (m) { return m; }
+                                        });
+                        </g:javascript>
+                          </g:if>
+                        <g:else>
+                            <g:if test="${candidateInstance?.nationality == null}">
+                                <label class="control-label">No nationality selected</label>
+                            </g:if>
+                            <g:else>
+                                <label class="control-label">${candidateInstance?.nationality?.nationality}</label>
+                            </g:else>
+                        </g:else>
+                    </div>
+                </div>
+
+                <div class="form-group">
                     <label for="candidate.driver"
                            class="col-md-3 control-label">Driver</label>
 
