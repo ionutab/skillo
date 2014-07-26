@@ -10,6 +10,10 @@ update post_code set ward_code = null where length(ward_code) = 0 and ward_code 
 update post_code set county = null where length(county) = 0 and county is not null;
 update post_code set country = null where length(country) = 0 and country is not null;
 update post_code set country_code = null where length(country_code) = 0 and country_code is not null;
-insert into payroll_company(name,version) values('ICM',0);
-insert into payroll_company(name,version) values('GUILD',0);
+
+
+
+# insert into payroll_company(name,version) values('ICM',0);
+# insert into payroll_company(name,version) values('GUILD',0);
+insert into payroll_company(name,version) values('FOSRE',0);
 

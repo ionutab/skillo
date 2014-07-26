@@ -21,3 +21,7 @@ update client set last_updated = now();
 
 # alter table tablename change oldname newname varchar (10) ;
 alter table payroll change unqiue_tax_reference_number unique_tax_reference_number varchar2(255);
+
+delete from payroll_company;
+insert into payroll_company(name) values('FOSRE');
+

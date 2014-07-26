@@ -27,7 +27,7 @@ class Candidate implements SkilloDomainModelWithHistory {
     Date dateCreated
     Date lastUpdated
 
-    transient Long currentVersion
+    transient Long currentVersion = 0L
 
     static hasMany = [ candidateQualifications:CandidateQualification, candidateNotes:CandidateNote, jobs:Job, placements:Placement, candidateHistory:CandidateEvent ]
 
@@ -57,6 +57,7 @@ class Candidate implements SkilloDomainModelWithHistory {
     static mapping = {
         autoTimestamp true
         candidateQualifications cascade: "all-delete-orphan", sort:"expiryDate", order: "asc"
+        candidateNotes cascade: "all-delete-orphan"
         candidateHistory cascade: "all-delete-orphan"
     }
 

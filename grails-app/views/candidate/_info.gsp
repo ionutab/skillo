@@ -10,6 +10,15 @@
             <div class="col-sm-12">
                 <g:link controller="candidate" action="edit" id="${CandidateShow.id}" class="btn btn-sm bg-yellow" ><i class="fa fa-pencil append-icon"></i>&nbsp;Edit</g:link>
                 <g:link controller="candidate" action="show" id="${CandidateShow.id}" class="btn btn-sm bg-yellow" ><i class="fa fa-eye append-icon"></i>&nbsp;Show</g:link>
+                <button class="btn btn-info btn-sm" data-toggle="modal"
+                        data-target="#createCandidateNoteModal" id="addCandidateNote"><i
+                        class="fa fa-plus "></i>&nbsp;Note</button>
+                <g:javascript>
+                    $("#addQualification").click(function (event) {
+                        event.preventDefault();
+                    });
+                </g:javascript>
+
 %{--
 
                 <a class="btn btn-sm bg-yellow" --}%
@@ -164,4 +173,7 @@
             </div>
         </g:each>
     </div>
+    <g:render template="createCandidateNoteModal" model="['redirect':'list','candidateInstance':CandidateShow,'newCandidateNote':newCandidateNote]" />
 </div>
+
+

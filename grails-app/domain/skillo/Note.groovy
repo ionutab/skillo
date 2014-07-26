@@ -4,7 +4,7 @@ class Note {
     
     Date date
     String note
-    Boolean active
+    Boolean active = Boolean.TRUE
     
     static constraints = {
         note nullable: true, blank: false

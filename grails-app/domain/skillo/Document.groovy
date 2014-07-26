@@ -1,9 +1,5 @@
 package skillo
 
-import com.metasieve.magicnumbers.MagicNumbersMixin
-import enums.DocumentType
-import org.apache.commons.io.filefilter.MagicNumberFileFilter
-
 /**
  * Document
  * A domain class describes the data object and it's mapping to the database

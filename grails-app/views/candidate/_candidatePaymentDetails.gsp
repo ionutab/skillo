@@ -20,18 +20,19 @@
                 <div class="col-md-6">
                     <div class="form-group">
                         <label for="payroll.payrollCompany.id" class="col-md-3 control-label">
-                            <g:message code="payroll.payrollCompany.label" default="Payroll Company"/>
+                            <g:message code="payroll.payrollCompany.short.label" default="Payroll Company"/>
                         </label>
 
-                        <div class="col-sm-6">
+                        <div class="col-sm-9">
                             <g:if test="${editable}">
                                 <g:hiddenField
                                         name="payroll.payrollCompany.id"
                                         id="payrollCompanyId"
                                         class="input-xlarge"
-                                        value="${candidateInstance?.payroll?.payrollCompany?.id}"
+                                        value="${skillo.Constants.DEFAULT_PAYROLL_COMPANY_ID}"
                                 />
-
+                                <label class="control-label">FOSRE</label>
+                                %{--
                                 <g:javascript>
                                     function formatPayrollCompanies(item) { return item.name; };
                                     $("#payrollCompanyId").select2({
@@ -43,6 +44,7 @@
                                         }
                                     );
                                 </g:javascript>
+                                --}%
                             </g:if>
                             <g:else>
                                 <g:if test="${candidateInstance?.payroll?.payrollCompany == null}">
@@ -53,18 +55,13 @@
                                 </g:else>
                             </g:else>
                         </div>
-                        <div class="col-sm-1">
-                            <button class="btn btn-info btn-sm" data-toggle="modal"
-                                    data-target="#createCandidateQualificationModal" id="addQualification"><i
-                                    class="fa fa-plus "></i>&nbsp;Add Company</button>
-                        </div>
 
                     </div>
                     <div class="form-group">
                         <label for="payroll.referenceNumber"
                                class="col-md-3 control-label">
-                            <g:message code="payroll.reference.number.label"
-                                       default="Reference Nr."/>
+                            <g:message code="payroll.reference.number.short.label"
+                                       default="Ref No"/>
                         </label>
 
                         <div class="col-sm-9">
@@ -74,7 +71,7 @@
 
                     <div class="form-group">
                         <label for="payroll.registrationNumber" class="col-md-3 control-label">
-                            <g:message code="payroll.registration.number.label" default="Registration Nr."/>
+                            <g:message code="payroll.registration.number.short.label" default="Registration Nr."/>
                         </label>
                         <div class="col-sm-9">
                             <g:textField name="payroll.registrationNumber" value="${candidateInstance?.payroll?.registrationNumber}" class="form-control" disabled="${!editable}" />
@@ -83,7 +80,7 @@
 
                     <div class="form-group">
                         <label for="payroll.uniqueTaxReferenceNumber" class="col-md-3 control-label">
-                            <g:message code="payroll.unique.tax.reference.number.label" default="Unique Tax Reference Nr."/>
+                            <g:message code="payroll.unique.tax.reference.number.short.label" default="Unique Tax Reference Nr."/>
                         </label>
                         <div class="col-sm-9">
                             <g:textField id="payrollUniqueTaxReferenceNumber" name="payroll.uniqueTaxReferenceNumber" class="form-control" value="${candidateInstance?.payroll?.uniqueTaxReferenceNumber}" disabled="${!editable}" />
@@ -92,7 +89,7 @@
 
                     <div class="form-group">
                         <label for="payroll.nationalInsuranceNumber" class="col-md-3 control-label">
-                            <g:message code="payroll.national.insurance.number.label" default="Payroll Company"/>
+                            <g:message code="payroll.national.insurance.number.short.label" default="Payroll Company"/>
                         </label>
                         <div class="col-sm-9">
                             <g:textField id="payrollNationalInsuranceNumber" name="payroll.nationalInsuranceNumber" class="form-control" value="${candidateInstance?.payroll?.nationalInsuranceNumber}" disabled="${!editable}" />

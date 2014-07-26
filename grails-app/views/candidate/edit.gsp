@@ -49,7 +49,7 @@
                                 <hr>
                                 <g:render template="/candidate/candidateQualificationList" />
                                 <hr>
-                                <g:render template="/candidate/candidateNotesList" />
+                                <g:render template="/candidate/candidateNotesList" model="['candidateInstance':candidateInstance]"/>
                             </div><!-- /.tab-pane -->
                         </div><!-- /.tab-pane -->
                         <div class="tab-pane ${tab2 ? "active" : ""}" id="tab_2">

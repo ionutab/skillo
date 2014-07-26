@@ -88,7 +88,7 @@
                                             <td>
                                                 <g:remoteLink action="display" id="${Candidate.id}"
                                                               elementId="${Candidate.id}"
-                                                              update="displayCandidate">${Candidate.firstName} ${Candidate.lastName}</g:remoteLink>
+                                                              update="infoContainer">${Candidate.firstName} ${Candidate.lastName}</g:remoteLink>
                                             </td>
                                             <td>
                                                 ${Candidate?.address?.details}
@@ -115,7 +115,9 @@
                             </div>
                         </div><!-- /.col (RIGHT) -->
                         <div class="col-md-5 col-sm-5">
+                        <div id="infoContainer">
                             <g:render template="info"/>
+                        </div>
                         </div>
                     </div><!-- /.row -->
                 </div><!-- /.box-body -->

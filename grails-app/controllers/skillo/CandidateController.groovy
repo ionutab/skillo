@@ -119,9 +119,15 @@ class CandidateController extends BaseController {
         def availableQualifications = Qualification.findAll()
         def availablePayRollCompanies = PayrollCompany.findAll()
         def documentList = listDocuments();
-        def newCandidateQualification = new CandidateQualification()
 
-        render(view: 'edit', model: [candidateInstance: candidate, documentInstanceList: documentList, availableQualifications: availableQualifications as grails.converters.JSON, availablePayrollCompanies: availablePayRollCompanies as grails.converters.JSON], newCandidateQualification: newCandidateQualification)
+        def newCandidateQualification = new CandidateQualification()
+        newCandidateQualification.candidate = candidate
+
+        render(view: 'edit', model: [candidateInstance: candidate,
+                                     documentInstanceList: documentList,
+                                     availableQualifications: availableQualifications as grails.converters.JSON,
+                                     availablePayrollCompanies: availablePayRollCompanies as grails.converters.JSON],
+                                     newCandidateQualification: newCandidateQualification)
     }
 
     def updateMainDetails() {
@@ -168,6 +174,8 @@ class CandidateController extends BaseController {
             redirect(action: "list")
             return
         }
+
+        log.info params
 
         if (params.payroll) {
             def payroll = candidate.payroll
@@ -296,7 +304,11 @@ class CandidateController extends BaseController {
     def display() {
         log.info("CC.DISPLAY")
         def candidate = Candidate.get(params.id)
-        render(template: 'info', model: [CandidateShow: candidate])
+
+        def newCandidateNote = new CandidateNote()
+        newCandidateNote.candidate = candidate
+
+        render(template: 'info', model: [CandidateShow: candidate, newCandidateNote:newCandidateNote])
     }
 
     def addCandidateQualification() {
@@ -411,4 +423,27 @@ class CandidateController extends BaseController {
         render(template: 'editCandidateQualificationModal', model: [cqe: candidateQualification])
     }
 
+    def addCandidateNote(){
+        log.info("CandidateController.AddCandidateNote")
+        log.info params
+
+        CandidateNote newCandidateNote = new CandidateNote()
+        newCandidateNote = params.newCandidateNote
+
+        //candidate
+        Candidate candidate = Candidate.get(params.candidate.id)
+        newCandidateNote.candidate = candidate
+
+        //consultant
+        Consultant consultant = getCurrentConsultant()
+        newCandidateNote.consultant = consultant
+
+        newCandidateNote.note.date = new Date()
+
+        if(!newCandidateNote.save()){
+            log.info("Failed to save note for candidate " + candidate.id + " by consultant " + consultant.id )
+        }
+
+        redirect(action: params.redirect, id: params.id)
+    }
 }
