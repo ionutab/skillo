@@ -1,6 +1,6 @@
 package skillo
 
-import net.sf.ehcache.search.aggregator.Count
+import grails.converters.JSON
 
 /**
  * CountryController
@@ -11,13 +11,16 @@ class CountryController {
     static scaffold = false
 
     def getNationality(){
-        def nationality = request.getParameter("nationality")
-        print("@@@@@@@@@@@@@@@@@@@ "+nationality)
-        if(nationality != null){
-            def nationalityList = Country.findAllByNationalityIlike("${nationality}%")
-            print("BBBBBBBBBB "+nationalityList)
-            render( nationalityList as grails.converters.JSON )
+        def nationality = request.getParameter("inputCode")
+        def nationalityList
+        if(nationality != null && nationality.size() > 0){
+            nationalityList = Country.findAllByNationalityIlike("${nationality}%")
+        } else {
+            nationalityList = Country.list()
         }
+
+        print("BBBBBBBBBB "+nationalityList)
+        render( nationalityList as grails.converters.JSON )
         return
     }
 }

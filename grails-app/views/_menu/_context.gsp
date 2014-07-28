@@ -9,5 +9,13 @@
         <g:link action="create"><i class="fa fa-plus"></i>&nbsp;<g:message code="default.new.label"  args="[entityName]"/></g:link>
     </g:elseif>
         %{--<g:link action="edit" id="${params.id}"><g:message code="default.edit.label"  args="[entityName]"/></g:link>--}%
+
+    <g:if test="${params.controller == 'candidate'}">
+        <g:if test="${params.action == 'show'}">
+            &nbsp;
+            <g:link action="edit" id="${candidateInstance.id}" ><i class="fa fa-pencil"></i>&nbsp;<g:message code="default.edit.label" args="[entityName]"/></g:link>
+        </g:if>
+    </g:if>
+
     </section>
 </g:if>

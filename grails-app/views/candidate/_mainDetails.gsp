@@ -259,10 +259,10 @@
                                                 url: '<g:createLink controller="country" action="getNationality" />',
                                                 dataType: 'json',
                                                 data: function(term, page){
-                                                    return {nationality: term};
+                                                    return {inputCode: term};
                                                 },
                                                 results: function (data, page) {
-                                                    return {nationalityResults: data};
+                                                    return {results: data};
                                                 }
                                             },
                                             initSelection: function(element, callback) {

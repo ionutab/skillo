@@ -4,7 +4,7 @@ import grails.converters.JSON
 
 class PostCodeController {
 
-    def scaffold = true
+    def scaffold = false
 
     def index() {
         redirect(action: "list")

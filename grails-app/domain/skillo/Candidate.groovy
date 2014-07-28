@@ -22,11 +22,10 @@ class Candidate implements SkilloDomainModelWithHistory {
     Address address
     Boolean active = Boolean.TRUE
     Payroll payroll
+    Country nationality
 
     Date dateCreated
     Date lastUpdated
-
-    Country nationality
 
     transient Long currentVersion = 0L
 
