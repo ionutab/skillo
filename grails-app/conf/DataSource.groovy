@@ -53,27 +53,22 @@ environments {
     production {
         dataSource {
             dbCreate = "update"
-//            url = "jdbc:h2:prodDb;MVCC=TRUE;LOCK_TIMEOUT=10000"
             driverClassName = "com.mysql.jdbc.Driver"
-            url = "jdbc:mysql://ec2-50-19-213-178.compute-1.amazonaws.com/skillo?useUnicode=yes&characterEncoding=UTF-8"
-            // url = "jdbc:mysql://localhost/skillo?useUnicode=yes&characterEncoding=UTF-8"
-            username = "skillo"
-            password = "skillo"
-            // username = "root"
-            // password = "" 
+            url = "jdbc:mysql://127.0.0.1:3306/smrskillo"
+            username = "root"
+            password = ""
             pooled = true
             properties {
                 initialSize = 2
                 maxActive = 4
                 maxIdle = 2
-                minEvictableIdleTimeMillis=1800000
-                timeBetweenEvictionRunsMillis=1800000
-                numTestsPerEvictionRun=3
-                testOnBorrow=true
-                testWhileIdle=true
-                testOnReturn=true
-//                max_allowed_packet=33554432
-                validationQuery="SELECT 1"
+                minEvictableIdleTimeMillis = 1800000
+                timeBetweenEvictionRunsMillis = 1800000
+                numTestsPerEvictionRun = 3
+                testOnBorrow = true
+                testWhileIdle = true
+                testOnReturn = true
+                validationQuery = "SELECT 1"
             }
             logSql = true
         }
@@ -102,4 +97,5 @@ environments {
             logSql = true
         }
     }
+
 }
