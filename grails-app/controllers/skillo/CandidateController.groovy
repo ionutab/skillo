@@ -3,6 +3,7 @@ package skillo
 import core.util.DocumentUtil
 import org.joda.time.DateTime
 import org.joda.time.LocalDate
+import org.springframework.web.multipart.commons.CommonsMultipartFile
 import skillo.filters.CandidateListSearch
 import skillo.filters.CandidateMatch
 
@@ -31,7 +32,7 @@ class CandidateController extends BaseController {
         def candidateList = candidateService.search(filter)
 
         //this candidate will be displayed in the info pane on the right
-        def firstCandidate = candidateList.size() > 0 ? candidateList.first() : null;
+        def firstCandidate = candidateList.size() > 0 ? candidateList.first() : null
 
         //saving to session
         session["candidateSearchFilter"] = filter
@@ -48,7 +49,7 @@ class CandidateController extends BaseController {
         candidate.sponsored = true
 
         def availableQualifications = Qualification.list()
-        def candidateMatches = new ArrayList<Candidate>();
+        def candidateMatches = new ArrayList<Candidate>()
 
         [candidateInstance: candidate, CandidateMatches: candidateMatches, availableQualifications: availableQualifications as grails.converters.JSON ]
     }
@@ -122,7 +123,7 @@ class CandidateController extends BaseController {
 
         def availableQualifications = Qualification.findAll()
         def availablePayRollCompanies = PayrollCompany.findAll()
-        def documentList = listDocuments();
+        def documentList = listDocuments()
 
         def newCandidateQualification = new CandidateQualification()
         newCandidateQualification.candidate = candidate
@@ -155,17 +156,16 @@ class CandidateController extends BaseController {
         }
 
         if (!candidateService.update(candidate)) {
-
             def availableQualifications = Qualification.findAll()
             def availablePayRollCompanies = PayrollCompany.findAll()
-            def documentList = listDocuments();
+            def documentList = listDocuments()
 
             render(view: 'edit', model: [candidateInstance: candidate, documentInstanceList: documentList, availableQualifications: availableQualifications as grails.converters.JSON, availablePayrollCompanies: availablePayRollCompanies as grails.converters.JSON])
             return
         }
 
         log.info("CANDIDATE UPDATED ")
-        redirect(action: "list")
+        redirect(action: "edit", id: candidate.id)
     }
 
     def updatePaymentDetails() {
@@ -193,14 +193,13 @@ class CandidateController extends BaseController {
 
         if (!candidateService.update(candidate)) {
             def availableQualifications = Qualification.findAll()
-            def availablePayRollCompanies = PayrollCompany.findAll()
-            def documentList = listDocuments();
-            render(view: 'edit', model: [candidateInstance: candidate, documentInstanceList: documentList, availableQualifications: availableQualifications as grails.converters.JSON, availablePayrollCompanies: availablePayRollCompanies as grails.converters.JSON])
+            def documentList = listDocuments()
+            render(view: 'edit', model: [candidateInstance: candidate, documentInstanceList: documentList, availableQualifications: availableQualifications as grails.converters.JSON])
             return
         }
 
         log.info("CANDIDATE PAYMENT DETAILS UPDATED ")
-        redirect(action: "list")
+        redirect(action: "edit", id: candidate.id)
     }
 
     def show() {
@@ -209,12 +208,11 @@ class CandidateController extends BaseController {
             redirect(action: "list")
             return
         }
-        def documentList = listDocuments();
+        def documentList = listDocuments()
 
         def availableQualifications = Qualification.findAll()
-        def availablePayRollCompanies = PayrollCompany.findAll()
 
-        render(view: 'edit', model: [candidateInstance: candidate, documentInstanceList: documentList, availableQualifications: availableQualifications, availablePayrollCompanies: availablePayRollCompanies as grails.converters.JSON])
+        render(view: 'edit', model: [candidateInstance: candidate, documentInstanceList: documentList, availableQualifications: availableQualifications])
     }
 
     def delete() {
@@ -235,33 +233,51 @@ class CandidateController extends BaseController {
 
     def documentsUpload() {
 
+        def candidate = Candidate.get(params.id)
+
         List fileList = request.getFiles('files') // 'files' is the name of the input
-        fileList.each { file ->
+
+        for (CommonsMultipartFile file : fileList) {
             if (file.empty) {
                 log.info("file cannot be empty")
             } else {
 
-                def candidate = Candidate.get(params.id)
                 def documentInstance = new Document()
                 documentInstance.type = file.getContentType()
                 documentInstance.filename = file.originalFilename
                 documentInstance.filedata = file.getBytes()
                 documentInstance.candidateId = candidate.id
                 documentInstance.fileSize = file.size
-                documentInstance.humanReadableSize = DocumentUtil.bytesToHuman(file.size);
+                documentInstance.humanReadableSize = DocumentUtil.bytesToHuman(file.size)
+
+                if(!DocumentUtil.isDocumentValidForUpload(file)){
+                    documentInstance.errors.rejectValue("filedata", "type.invalid")
+
+                    def documentList = listDocuments()
+                    def availableQualifications = Qualification.findAll()
+
+                    render(view: 'edit', model: [candidateInstance: candidate, documentInstance:documentInstance, documentInstanceList: documentList, availableQualifications: availableQualifications])
+                    return
+                }
+
                 if (!documentInstance.save()) {
+
                     if (documentInstance.hasErrors()) {
                         documentInstance.errors.each {
-                            if (it.fieldError.code == "maxSize.exceeded") {
-                                documentInstance.errors.rejectValue("filedata", "maxSize.exceeded")
-                            }
+                            log.info "FE" + it.fieldError.code
                         }
                     }
+
+                    def documentList = listDocuments()
+                    def availableQualifications = Qualification.findAll()
+
+                    render(view: 'edit', model: [candidateInstance: candidate, documentInstance:documentInstance, documentInstanceList: documentList, availableQualifications: availableQualifications])
+                    return
                 }
             }
         }
 
-        redirect(action: "edit", id: params.id)
+        redirect(action: "edit", id:candidate.id )
     }
 
     def listDocuments() {
@@ -295,8 +311,7 @@ class CandidateController extends BaseController {
         ids.each { id ->
             def document = Document.findById(Long.valueOf(id))
             if (document) {
-                document
-                        .delete(flush: true)
+                document.delete(flush: true)
             }
 
             print("#################################################### " + params)
@@ -343,7 +358,7 @@ class CandidateController extends BaseController {
 //            return
         }
 
-        redirect(action: "edit", id: params.id)
+        redirect(action: "edit", id: candidate.id)
     }
 
     def updateCandidateQualification() {
@@ -402,7 +417,7 @@ class CandidateController extends BaseController {
     }
 
     def findMatches() {
-        log.info("CC.FIND POSSIBLE MATCHES");
+        log.info("CC.FIND POSSIBLE MATCHES")
         log.info params
 
         CandidateMatch filter = new CandidateMatch()
@@ -448,6 +463,6 @@ class CandidateController extends BaseController {
             log.info("Failed to save note for candidate " + candidate.id + " by consultant " + consultant.id )
         }
 
-        redirect(action: params.redirect, id: params.id)
+        redirect(action: params.redirect, id: candidate.id)
     }
 }

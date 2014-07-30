@@ -1,12 +1,11 @@
-<g:set var="editable" value="${params.action == 'edit' || params.action == 'updateMainDetails' || params.action == 'updatePaymentDetails'}"/>
+<g:set var="editable" value="${params.action == 'edit' || params.action == 'updateMainDetails' || params.action == 'updatePaymentDetails' || params.action == 'documentsUpload'}"/>
 
 <div class="col-md-12">
     <div class="box box-solid">
         <div class="box-header">
             <div class="box-body">
                 <g:if test="${editable}">
-                    <g:uploadForm controller="candidate" action="documentsUpload" class="form-horizontal"
-                                  enctype="multipart/form-data">
+                    <g:uploadForm controller="candidate" action="documentsUpload" class="form-horizontal" enctype="multipart/form-data">
                         <g:hiddenField name="id" value="${candidateInstance?.id}"/>
                         <g:hiddenField name="candidate.currentVersion" value="${candidateInstance?.version}"/>
 
@@ -37,17 +36,29 @@
                 </g:if>
                 <div class="row">
                     <div class="col-md-6">
-                        <div class="form-group ">
-                            <g:if test="${documentInstanceList == null || documentInstanceList.size() == 0}">
-                                <hr>
 
-                                <div class="col-lg-12 col-lg-offset-0 page-background-info">
+
+                        <div class="form-group ${hasErrors(bean: documentInstance, field: 'filedata', 'has-error')}">
+                            <div class="col-lg-12">
+                                <g:hasErrors bean="${documentInstance}" field="filedata">
+                                    <g:eachError var="err" bean="${documentInstance}" field="filedata">
+                                        <g:if test="${err.code == 'maxSize.exceeded'}">
+                                            <h5 class="control-label"><g:message code="document.size.exceeded.limit" /></h5>
+                                        </g:if>
+                                        <g:if test="${err.code == 'type.invalid'}">
+                                            <h5 class="control-label"><g:message code="document.type.invalid" /></h5>
+                                        </g:if>
+                                    </g:eachError>
+                                </g:hasErrors>
+                            </div>
+                            <hr>
+                            <g:if test="${documentInstanceList == null || documentInstanceList.size() == 0}">
+                                <div class="col-lg-12">
                                     <g:message code="document.notFound.label"/>
-                                    <br>
-                                    <br>
                                 </div>
                             </g:if>
                             <g:else>
+
                                 <table class="table">
                                     <tbody>
                                     <g:each in="${documentInstanceList}" status="i" var="documentInstance">
@@ -56,18 +67,9 @@
                                         <td>${documentInstance.type}</td>
                                         <td>${documentInstance.humanReadableSize}</td>
                                         <td><g:formatDate date="${documentInstance.uploadDate}"/></td>
-
-
-                                        <g:hasErrors bean="${documentInstance}">
-                                            <ul>
-                                                <g:eachError var="err" bean="${documentInstance}">
-                                                    <li>${err}</li>
-                                                </g:eachError>
-                                            </ul>
-                                        </g:hasErrors>
-
                                         </tr>
                                     </g:each>
+
                                     </tbody>
                                 </table>
                             </g:else>

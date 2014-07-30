@@ -20,18 +20,19 @@ public class DocumentUtil {
     private static final String PNG = "png";
 
 
+    static{
+        documentUploadValidFiles.put(PDF, true);
+        documentUploadValidFiles.put(JPEG, true);
+        documentUploadValidFiles.put(JPG, true);
+        documentUploadValidFiles.put(PNG, true);
+    }
     /**
      * Can upload files only with maximum size of 10 MB
      */
     private static final long MAX_FILE_SIZE_ALLOWED = 10485760;
 
-
     public DocumentUtil() {
 
-        documentUploadValidFiles.put(PDF, true);
-        documentUploadValidFiles.put(JPEG, true);
-        documentUploadValidFiles.put(JPG, true);
-        documentUploadValidFiles.put(PNG, true);
     }
 
 
@@ -51,11 +52,12 @@ public class DocumentUtil {
 
         String name = file.getOriginalFilename();
         String extension = FilenameUtils.getExtension(file.getOriginalFilename());
+
+        System.out.println("ExTENSION: " + extension);
         isValid = documentUploadValidFiles.get(extension);
         if (isValid == null || !isValid) {
             isValid = false;
         }
-
 
         return isValid;
 
