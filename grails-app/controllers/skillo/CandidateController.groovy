@@ -15,6 +15,8 @@ class CandidateController extends BaseController {
     }
 
     def list() {
+        log.info("CandidateController.LIST")
+
         //first we get from session
         CandidateListSearch filter = session["candidateSearchFilter"] != null ? session["candidateSearchFilter"] : new CandidateListSearch()
 

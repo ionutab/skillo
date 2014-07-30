@@ -40,6 +40,9 @@ class CandidateService {
                             "and lower(q.name) like ? " +
                         ")",["%" + filter.qualification.toLowerCase() + "%"])
             }
+            if(filter.sort && filter.order){
+                order(filter.sort, filter.order)
+            }
         }
 
         return candidateList

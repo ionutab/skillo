@@ -72,9 +72,7 @@
                                     <thead>
                                     <tr>
 
-                                        <th class="sortable"><a
-                                                href="/skillo/candidate/list?sort=firstName&amp;order=asc">Full Name</a>
-                                        </th>
+                                        <g:sortableColumn property="firstName" title="Firts Name" />
                                         %{--<th>Telephone</th>--}%
                                         <th>Address</th>
                                         <th class="fixed-80">Post Code</th>

@@ -6,6 +6,10 @@ abstract class BasicPaginatedSearchFilter implements Serializable {
 
     private Long offset
 
+    private String sort
+
+    private String order
+
     public BasicPaginatedSearchFilter(){
         log.debug("BasicPaginatedSearchFilter")
         validatePaginator()
@@ -27,8 +31,25 @@ abstract class BasicPaginatedSearchFilter implements Serializable {
         this.offset = offset
     }
 
+    String getSort() {
+        return sort
+    }
+
+    void setSort(String sort) {
+        this.sort = sort
+    }
+
+    String getOrder() {
+        return order
+    }
+
+    void setOrder(String order) {
+        this.order = order
+    }
+
     private validatePaginator(){
         log.debug("BasicPaginatedSearchFilter.validatePaginator")
         this.max = Math.min(this.max ? this.max : 10, 100)
     }
+
 }
