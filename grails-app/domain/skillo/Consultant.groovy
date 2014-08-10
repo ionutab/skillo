@@ -35,4 +35,8 @@ class Consultant {
         clientComments nullable: true
         information nullable: true
     }
+
+    def getFullName(){
+        return firstName+" "+lastName
+    }
 }

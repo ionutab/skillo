@@ -93,5 +93,4 @@ class CandidateService {
         return true
     }
 
-
 }

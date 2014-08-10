@@ -29,6 +29,9 @@
                 <div class="row">
                     <g:render template="/candidate/basicInformation" />
                 </div>
+                <div class="row">
+                    <g:render template="/candidate/latestActivities" />
+                </div>
             </div>
         </div>
     </div>

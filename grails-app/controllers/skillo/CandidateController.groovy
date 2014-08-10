@@ -4,12 +4,14 @@ import core.util.DocumentUtil
 import org.joda.time.DateTime
 import org.joda.time.LocalDate
 import org.springframework.web.multipart.commons.CommonsMultipartFile
+import skillo.enums.ActivityType
 import skillo.filters.CandidateListSearch
 import skillo.filters.CandidateMatch
 
 class CandidateController extends BaseController {
 
     def candidateService
+    def activityService
 
     def index() {
         redirect(action: "list")
@@ -105,6 +107,10 @@ class CandidateController extends BaseController {
             render(view: "create", model: [candidateInstance: candidate, availableQualifications: availableQualifications as grails.converters.JSON])
             return
         }
+
+
+         activityService.logCandidateActivity(ActivityType.CREATE,getCurrentConsultant(),null,candidate)
+
         redirect(action: "edit", id: candidate.id)
     }
 
@@ -128,8 +134,12 @@ class CandidateController extends BaseController {
         def newCandidateQualification = new CandidateQualification()
         newCandidateQualification.candidate = candidate
 
+        def activities = activityService.getActivities(candidate.id)
+
+
         render(view: 'edit', model: [candidateInstance: candidate,
                                      documentInstanceList: documentList,
+                                     candidateActivities: activities,
                                      availableQualifications: availableQualifications as grails.converters.JSON,
                                      availablePayrollCompanies: availablePayRollCompanies as grails.converters.JSON],
                                      newCandidateQualification: newCandidateQualification)
@@ -222,10 +232,13 @@ class CandidateController extends BaseController {
             return
         }
 
+
         candidate.active = false
         if (!candidate.save(deepvalidate: true, flush: true)) {
             redirect(action: "list")
         }
+
+       activityService.logCandidateActivity(ActivityType.DELETE,getCurrentConsultant(),null,candidate)
 
         redirect(action: "list")
     }
