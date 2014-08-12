@@ -1,4 +1,8 @@
-package skillo
+package skillo.client
+
+import skillo.Comment
+import skillo.Consultant
+import skillo.Contact
 
 class ClientComment {
 

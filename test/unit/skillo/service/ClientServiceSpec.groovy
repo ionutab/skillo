@@ -1,7 +1,7 @@
 package skillo.service
 
 import grails.test.mixin.*
-import skillo.Client
+import skillo.client.Client
 import skillo.ClientService
 
 @TestFor(ClientService)

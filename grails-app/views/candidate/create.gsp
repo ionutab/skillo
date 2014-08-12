@@ -1,4 +1,4 @@
-<%@ page import="skillo.Candidate" %>
+<%@ page import="skillo.candidate.Candidate" %>
 <html>
 
 <head>

@@ -9,7 +9,7 @@
     <meta name="description"	content="">
     <meta name="author"			content="">
 
-    <link rel="shortcut icon" href="${resource(file: 'favicon.ico')}" type="image/x-icon" />
+    <link rel="shortcut icon" href="${resource(dir:'images',file:'favicon.ico')}" type="image/x-icon" />
 
     <%-- Manual switch for the skin can be found in /view/_menu/_config.gsp --%>
     <r:require modules="skillo_admin_lte"/>

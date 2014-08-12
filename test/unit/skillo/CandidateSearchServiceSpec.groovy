@@ -3,13 +3,13 @@ package skillo
 
 
 import grails.test.mixin.*
-import org.junit.*
+import skillo.candidate.CandidateSearchService
 
 /**
  * See the API for {@link grails.test.mixin.services.ServiceUnitTestMixin} for usage instructions
  */
-@TestFor(CandidateService)
-class CandidateServiceSpec {
+@TestFor(CandidateSearchService)
+class CandidateSearchServiceSpec {
 
     void testSomething() {
         fail "Implement me"

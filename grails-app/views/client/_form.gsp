@@ -1,4 +1,4 @@
-<!@ page import="skillo.Client %>
+<!@ page import="skillo.client.Client %>
 <div class="form-group ${hasErrors(bean: clientInstance, field: 'name', 'has-error')}"">
     <label for="client.name" class="col-md-3 control-label" >
         <g:message code="client.name.label" default="Name" />

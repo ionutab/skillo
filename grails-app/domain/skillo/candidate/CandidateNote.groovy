@@ -1,4 +1,7 @@
-package skillo
+package skillo.candidate
+
+import skillo.Consultant
+import skillo.Note
 
 class CandidateNote {
     

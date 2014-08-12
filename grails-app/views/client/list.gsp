@@ -1,4 +1,4 @@
-<%@ page import="skillo.Client" %>
+<%@ page import="skillo.client.Client" %>
 <!doctype html>
 <html>
 <head>

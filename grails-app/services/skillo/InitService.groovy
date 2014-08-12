@@ -1,8 +1,8 @@
 package skillo
 
 import groovy.sql.Sql
-
-import javax.sql.DataSource
+import skillo.user.User
+import skillo.user.UserRole
 
 class InitService {
 

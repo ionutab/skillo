@@ -1,5 +1,6 @@
 package skillo
 
+import skillo.client.Client
 import skillo.filters.ClientListFilter
 
 class ClientController extends BaseController {

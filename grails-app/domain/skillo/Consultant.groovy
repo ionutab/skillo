@@ -1,5 +1,9 @@
 package skillo
 
+import skillo.candidate.CandidateNote
+import skillo.client.ClientComment
+import skillo.user.User
+
 class Consultant {
 
     String firstName

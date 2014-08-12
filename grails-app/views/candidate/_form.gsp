@@ -1,4 +1,4 @@
-<%@ page import="skillo.Candidate"%>
+<%@ page import="skillo.candidate.Candidate"%>
 <legend><g:message code="candidate.form.basicInfo" /></legend>
 <div class="form-group  ${hasErrors(bean: candidateInstance, field: 'firstName', 'has-error')} ">
     <label for="candidate.firstName" class="col-sm-4 control-label">

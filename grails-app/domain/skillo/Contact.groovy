@@ -1,5 +1,8 @@
 package skillo
 
+import skillo.client.Client
+import skillo.client.ClientComment
+
 class Contact {
 
     String firstName

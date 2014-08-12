@@ -1,6 +1,7 @@
 package skillo
 
 import grails.plugins.springsecurity.SpringSecurityService
+import skillo.user.User
 
 class SecurityService extends SpringSecurityService {
 

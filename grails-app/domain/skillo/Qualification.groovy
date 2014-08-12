@@ -1,5 +1,7 @@
 package skillo
 
+import skillo.candidate.CandidateQualification
+
 class Qualification {
 
     static searchable = [only: ['name']]

@@ -1,6 +1,7 @@
-package skillo
+package skillo.user
 
 import org.apache.commons.lang.builder.HashCodeBuilder
+import skillo.Role
 
 class UserRole implements Serializable {
 

@@ -2,6 +2,7 @@ package skillo
 
 import grails.transaction.Transactional
 import org.grails.datastore.mapping.query.api.Criteria
+import skillo.client.Client
 import skillo.filters.ClientListFilter
 
 @Transactional
@@ -34,7 +35,6 @@ class ClientService {
         }
 
         if(client.save(deepvalidate:true, flush: true)){
-//            client.addInsertEvent(Consultant.findByUser(springSecurityService.getCurrentUser()))
             return true
         } else {
 

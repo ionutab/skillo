@@ -63,16 +63,13 @@ modules = {
         dependsOn 'bootstrap-less, bootstrap-js'
     }
 
-    /**
-     * font awesome basic
-     */
     font_awesome {
         resource url: 'font-awesome/less/font-awesome.less', attrs: [rel: "stylesheet/less",type: 'css']
     }
 
     iCheck {
         resource url: 'adminLTE/js/plugins/iCheck/icheck.min.js'
-        resource url: 'adminLTE/css/iCheck/all.css'
+        resource url: 'adminLTE/css/iCheck/flat/blue.css'
     }
 
     inputMask {
@@ -80,15 +77,15 @@ modules = {
         resource url: 'adminLTE/js/input-mask/jquery.inputmask.date.extensions.js'
         resource url: 'adminLTE/js/input-mask/jquery.inputmask.extensions.js'
     }
-    /**
-     * admin lte bootstrap basic
-     */
+
     admin_lte_less {
         resource url: 'adminLTE/less/AdminLTE.less', attrs:[rel: "stylesheet/less", type: 'css']
     }
+
     admin_lte_js {
         resource url: 'adminLTE/js/app.js'
     }
+
     admin_lte {
         dependsOn 'admin_lte_less,admin_lte_js'
     }
@@ -105,7 +102,7 @@ modules = {
 	}
 
     forms {
-        dependsOn 'inputMask','select2'
+        dependsOn 'inputMask','select2','iCheck'
     }
 
     application {
@@ -122,7 +119,7 @@ modules = {
     }
 
     skillo_admin_lte {
-        dependsOn 'bootstrap','admin_lte','jquery','jquery-validate','jquery-validation-ui','font_awesome','iCheck'
+        dependsOn 'bootstrap','admin_lte','jquery','jquery-validate','jquery-validation-ui','font_awesome'
     }
 
     skillo_admin_lte_basic {

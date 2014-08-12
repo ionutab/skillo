@@ -1,7 +1,7 @@
 package skillo.controller
 
 import grails.test.mixin.*
-import skillo.Candidate
+import skillo.candidate.Candidate
 import skillo.CandidateController
 
 @TestFor(CandidateController)

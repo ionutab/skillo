@@ -1,7 +1,7 @@
 package skillo.controller
 
 import grails.test.mixin.*
-import skillo.Client
+import skillo.client.Client
 import skillo.ClientController
 
 @TestFor(ClientController)

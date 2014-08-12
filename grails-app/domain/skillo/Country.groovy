@@ -1,5 +1,7 @@
 package skillo
 
+import skillo.candidate.Candidate
+
 /**
  * Country
  * A domain class describes the data object and it's mapping to the database

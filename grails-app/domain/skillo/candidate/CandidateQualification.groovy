@@ -1,7 +1,9 @@
-package skillo
+package skillo.candidate
 
 import org.joda.time.DateTime
 import org.joda.time.LocalDate
+import skillo.Constants
+import skillo.Qualification
 
 class CandidateQualification {
 

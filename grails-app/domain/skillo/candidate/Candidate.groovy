@@ -1,7 +1,13 @@
-package skillo
+package skillo.candidate
 
 import org.joda.time.DateTime
 import org.joda.time.Years
+import skillo.Address
+import skillo.Consultant
+import skillo.Country
+import skillo.Job
+import skillo.Payroll
+import skillo.Placement
 import skillo.history.SkilloDomainModelWithHistory
 
 class Candidate implements SkilloDomainModelWithHistory {
@@ -94,6 +100,9 @@ class Candidate implements SkilloDomainModelWithHistory {
 
     @Override
     void addUpdateEvent(Consultant eventConsultant) {
+
+
+
     }
 
     @Override

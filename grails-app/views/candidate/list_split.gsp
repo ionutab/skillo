@@ -1,4 +1,4 @@
-<%@ page import="skillo.Candidate" %>
+<%@ page import="skillo.candidate.Candidate" %>
 <!doctype html>
 <html>
 
@@ -19,25 +19,25 @@
                 <div class="col-xs-3">
                     <g:textField class="form-control" name="firstName"
                                  placeholder="${message(code: 'candidate.search.firstName.label', default: 'First Name')}"
-                                 value="${CandidateListFilter?.firstName}"/>
+                                 value="${candidateListFilter?.firstName}"/>
                 </div>
 
                 <div class="col-xs-3">
                     <g:textField class="form-control" name="lastName"
                                  placeholder="${message(code: 'candidate.search.lastName.label', default: 'Last Name')}"
-                                 value="${CandidateListFilter?.lastName}"/>
+                                 value="${candidateListFilter?.lastName}"/>
                 </div>
 
                 <div class="col-xs-2">
                     <g:textField class="form-control" name="telephoneNumber"
                                  placeholder="${message(code: 'candidate.search.telephoneNumber.label', default: 'Telephone Nr')}"
-                                 value="${CandidateListFilter?.telephoneNumber}"/>
+                                 value="${candidateListFilter?.telephoneNumber}"/>
                 </div>
 
                 <div class="col-xs-2">
                     <g:textField class="form-control" name="qualification"
                                  placeholder="${message(code: 'candidate.search.candidateQualification.label', default: 'Trade')}"
-                                 value="${CandidateListFilter?.qualification}"/>
+                                 value="${candidateListFilter?.qualification}"/>
                 </div>
 
                 <div class="col-xs-2">
@@ -56,12 +56,12 @@
 
 <div class="row top10">
     <div class="col-md-12">
-        <g:if test="${CandidateList.size() == 0}">
+        <g:if test="${candidateList.size() == 0}">
             <div class="text-center">
                 <h2>There are currently no candidates that match your criteria.</h2>
             </div>
         </g:if>
-        <g:if test="${CandidateList.size() > 0}">
+        <g:if test="${candidateList.size() > 0}">
             <div class="box box-solid">
                 <div class="box-body">
                     <div class="row">
@@ -81,7 +81,7 @@
                                     </tr>
                                     </thead>
                                     <tbody>
-                                    <g:each in="${CandidateList}" status="i" var="Candidate">
+                                    <g:each in="${candidateList}" status="i" var="Candidate">
                                         <tr>
                                             <td>
                                                 <g:remoteLink action="display" id="${Candidate.id}"
@@ -106,7 +106,7 @@
                                 <div class="col-md-4">
                                     <div class="dataTables_paginate paging_bootstrap">
                                         <div class="pagination">
-                                            <g:paginate total="${CandidateTotal}"/>
+                                            <g:paginate total="${candidateTotal}"/>
                                         </div>
                                     </div>
                                 </div>
@@ -114,7 +114,7 @@
                         </div><!-- /.col (RIGHT) -->
                         <div class="col-md-5 col-sm-5">
                         <div id="infoContainer">
-                            <g:render template="info"/>
+                            <g:render template="info" />
                         </div>
                         </div>
                     </div><!-- /.row -->

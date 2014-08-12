@@ -15,13 +15,9 @@ class UrlMappings {
         "/testCL"       (view:"/testCL")
         "/testCP"       (view:"/testCP")
 
-		/* 
-		 * Pages with controller
-		 * WARN: No domain/controller should be named "api" or "mobile" or "web"!
-		 */
 		"/$controller/$action?/$id?"{
 			constraints {
-				controller(matches:/^((?!(api|mobile|web)).*)$/)
+
 		  	}
 		}
 		

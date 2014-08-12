@@ -1,5 +1,7 @@
 package skillo
 
+import skillo.client.Client
+
 class WorkSite {
 
     Address address

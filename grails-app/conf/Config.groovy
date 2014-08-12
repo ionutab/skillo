@@ -12,30 +12,37 @@
 // }
 
 grails.project.groupId = appName // change this to alter the default package name and Maven publishing destination
+
 grails.mime.file.extensions = true // enables the parsing of file extensions from URLs into the request format
 grails.mime.use.accept.header = false
+
 grails.databinding.convertEmptyStringsToNull = true
 grails.gorm.failOnError = false
-grails.mime.types = [
-    all:           '*/*',
-    atom:          'application/atom+xml',
-    css:           'text/css',
-    csv:           'text/csv',
-    form:          'application/x-www-form-urlencoded',
-    html:          ['text/html','application/xhtml+xml'],
-    js:            'text/javascript',
-    json:          ['application/json', 'text/json'],
-    multipartForm: 'multipart/form-data',
-    rss:           'application/rss+xml',
-    text:          'text/plain',
-    xml:           ['text/xml', 'application/xml']
+
+// The ACCEPT header will not be used for content negotiation for user agents containing the following strings (defaults to the 4 major rendering engines)
+grails.mime.disable.accept.header.userAgents = ['Gecko', 'WebKit', 'Presto', 'Trident']
+grails.mime.types = [ // the first one is the default format
+      all:           '*/*', // 'all' maps to '*' or the first available format in withFormat
+      atom:          'application/atom+xml',
+      css:           'text/css',
+      csv:           'text/csv',
+      form:          'application/x-www-form-urlencoded',
+      html:          ['text/html','application/xhtml+xml'],
+      js:            'text/javascript',
+      json:          ['application/json', 'text/json'],
+      multipartForm: 'multipart/form-data',
+      rss:           'application/rss+xml',
+      text:          'text/plain',
+      hal:           ['application/hal+json','application/hal+xml'],
+      xml:           ['text/xml', 'application/xml']
 ]
 
 // URL Mapping Cache Max Size, defaults to 5000
 //grails.urlmapping.cache.maxsize = 1000
-
+grails.resources.uri.prefix = 'static'
 // What URL patterns should be processed by the resources plugin
 grails.resources.adhoc.patterns = ['/images/*', '/css/*', '/js/*', '/plugins/*', '/fonts/*']
+grails.resources.adhoc.includes = ['/images/**', '/css/**', '/js/**', '/plugins/**', '/fonts/**', '/bootstrap/**','/adminLTE/**', '/font-awesome/**', '/select2/**']
 
 // The default codec used to encode data with ${}
 grails.views.default.codec = "none" // none, html, base64
@@ -54,14 +61,12 @@ grails.enable.native2ascii = true
 grails.spring.bean.packages = []
 // whether to disable processing of multi part requests
 grails.web.disable.multipart=false
-
 // request parameters to mask when logging exceptions
 grails.exceptionresolver.params.exclude = ['password']
-
 // configure auto-caching of queries by default (if false you can cache individual queries with 'cache: true')
 grails.hibernate.cache.queries = false
-def logDirectory = "target"
 
+def logDirectory = "target"
 environments {
     development {
         grails.logging.jul.usebridge = true
@@ -70,6 +75,7 @@ environments {
         grails.logging.jul.usebridge = false
     }
 }
+
 log4j = {
     appenders {
         console name: 'stdout', layout: pattern(conversionPattern: "[%d{HH:mm:ss:SSS}] %-5p %c{2}: %m%n")
@@ -99,18 +105,20 @@ log4j = {
 grails.databinding.dateFormats = ['dd/MM/yyyy','MMddyyyy', 'yyyy-MM-dd HH:mm:ss.S', "yyyy-MM-dd'T'hh:mm:ss'Z'"]
 
 // Added by the Spring Security Core plugin:
-grails.plugins.springsecurity.userLookup.userDomainClassName = 'skillo.User'
-grails.plugins.springsecurity.userLookup.authorityJoinClassName = 'skillo.UserRole'
-grails.plugins.springsecurity.authority.className = 'skillo.Role'
+grails.plugins.springsecurity.userLookup.userDomainClassName = 'skillo.user.User'
+grails.plugins.springsecurity.userLookup.authorityJoinClassName = 'skillo.user.UserRole'
+grails.plugins.springsecurity.authority.className = 'skillo.user.Role'
 grails.plugins.springsecurity.securityConfigType = "InterceptUrlMap"
 grails.plugins.springsecurity.interceptUrlMap = [
+
+        '/login/**':     ['IS_AUTHENTICATED_ANONYMOUSLY'],
+        '/logout/**':    ['IS_AUTHENTICATED_ANONYMOUSLY'],
         '/js/**':        ['IS_AUTHENTICATED_ANONYMOUSLY'],
         '/css/**':       ['IS_AUTHENTICATED_ANONYMOUSLY'],
         '/images/**':    ['IS_AUTHENTICATED_ANONYMOUSLY'],
         '/img/**':       ['IS_AUTHENTICATED_ANONYMOUSLY'],
         '/fonts/**':     ['IS_AUTHENTICATED_ANONYMOUSLY'],
-        '/login/**':     ['IS_AUTHENTICATED_ANONYMOUSLY'],
-        '/logout/**':    ['IS_AUTHENTICATED_ANONYMOUSLY'],
+        '/about':        ['IS_AUTHENTICATED_ANONYMOUSLY'],
         '/**':           ['IS_AUTHENTICATED_REMEMBERED']
 ]
 // Uncomment and edit the following lines to start using Grails encoding & escaping improvements

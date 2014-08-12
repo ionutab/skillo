@@ -1,4 +1,4 @@
-package skillo
+package skillo.user
 
 class UserDetails {
 

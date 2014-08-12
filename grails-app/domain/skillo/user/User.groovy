@@ -1,4 +1,7 @@
-package skillo
+package skillo.user
+
+import skillo.Consultant
+import skillo.Role
 
 class User {
 

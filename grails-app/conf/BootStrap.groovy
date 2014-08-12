@@ -2,8 +2,8 @@ import skillo.Consultant
 import skillo.PostCode
 import skillo.Qualification
 import skillo.Role
-import skillo.User
-import skillo.UserRole
+import skillo.user.User
+import skillo.user.UserRole
 
 class BootStrap {
 

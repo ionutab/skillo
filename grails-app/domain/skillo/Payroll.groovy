@@ -1,5 +1,7 @@
 package skillo
 
+import skillo.candidate.Candidate
+
 class Payroll {
     
     PayrollCompany payrollCompany

@@ -1,12 +1,13 @@
-package skillo
+package skillo.candidate
 
 import grails.transaction.Transactional
 import org.grails.datastore.mapping.query.api.Criteria
+import skillo.candidate.Candidate
 import skillo.filters.CandidateListSearch
 import skillo.filters.CandidateMatch
 
 @Transactional
-class CandidateService {
+class CandidateSearchService {
 
     def Collection<Candidate> search(CandidateListSearch filter){
 
@@ -72,25 +73,6 @@ class CandidateService {
         }
 
         return candidateList;
-    }
-
-    def boolean update(Candidate candidate){
-        log.info("CandidateService.UPDATE")
-        if(!candidate.checkVersion(candidate.currentVersion)){
-            log.info("BAD VERSION: " + candidate.version + "vs" + candidate.currentVersion)
-
-            return false
-        }
-        if (!candidate.save(deepvalidate:true )) {
-            log.info("CandidateService.SAVE")
-            if(candidate.hasErrors()){
-                candidate.errors.each {
-                    log.info "CANDIDATE UPDATE FIELDERRORS: " + it
-                }
-            }
-            return false
-        }
-        return true
     }
 
 }

@@ -54,7 +54,7 @@ environments {
         dataSource {
             dbCreate = "update"
             driverClassName = "com.mysql.jdbc.Driver"
-            url = "jdbc:mysql://127.0.0.1:3306/smrskillo"
+            url = "jdbc:mysql://127.0.0.1:3306/smrskillo?useUnicode=yes&characterEncoding=UTF-8"
             username = "root"
             password = ""
             pooled = true

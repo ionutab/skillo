@@ -2,6 +2,7 @@ package skillo
 
 import skillo.activity.Activity
 import skillo.activity.FieldChange
+import skillo.candidate.Candidate
 import skillo.enums.ActivityType
 
 /**

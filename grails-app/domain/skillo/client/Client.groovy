@@ -1,5 +1,10 @@
-package skillo
+package skillo.client
 
+import skillo.Address
+import skillo.Consultant
+import skillo.Contact
+import skillo.Placement
+import skillo.WorkSite
 import skillo.history.SkilloDomainModelWithHistory
 
 class Client implements SkilloDomainModelWithHistory {

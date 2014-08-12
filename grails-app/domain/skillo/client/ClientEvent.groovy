@@ -1,33 +1,28 @@
-package skillo
+package skillo.client
 
+import skillo.Consultant
 import skillo.history.DefaultHistoryEvent
 import skillo.history.DomainModelEvent
 
-/**
- * CandidateEvent
- * A domain class describes the data object and it's mapping to the database
- */
-class CandidateEvent implements DomainModelEvent {
+class ClientEvent implements DomainModelEvent {
 
     Consultant consultant
-
+    Client client
     DefaultHistoryEvent eventDetails = new DefaultHistoryEvent()
 
     static embedded = ['eventDetails']
-
-    static belongsTo = [candidate:Candidate]
 
     static constraints = {
 
     }
 
     @Override
-    def void setEventDetails(String eventDetails) {
+    void setEventDetails(String eventDetails) {
         this.eventDetails.setDetails(eventDetails)
     }
 
     @Override
-    def void setEventDetails(DefaultHistoryEvent eventDetails) {
+    void setEventDetails(DefaultHistoryEvent eventDetails) {
         this.eventDetails = eventDetails
     }
 }
