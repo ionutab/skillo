@@ -1,5 +1,7 @@
 package skillo
 
+import skillo.activity.Activity
+import skillo.activity.FieldChange
 import skillo.enums.ActivityType
 
 /**
@@ -14,25 +16,31 @@ class ActivityService {
      * @param type
      * @param consultantId
      * @param oldCandidate
-     * @param newCandidate
+     * @param candidate
      * @return
      */
-    def  logCandidateActivity(ActivityType type, Consultant consultant, Candidate oldCandidate, Candidate newCandidate){
+    def  logCandidateActivity(ActivityType type, Consultant consultant, Candidate candidate){
 
 
         Activity activity = new Activity()
         activity.type=type
-        activity.domainModelId=newCandidate.id
-        activity.name=newCandidate.getFullName()
+        activity.domainModelId=candidate.id
+        activity.name=candidate.getFullName()
         activity.consultantId=consultant.id
         activity.consultantName=consultant.getFullName()
         activity.timestamp = new Date()
 
+        // for activities with type update, save the activity only if field changes are detected
         if(ActivityType.UPDATE==type){
-            detectChanges(oldCandidate,newCandidate)
+            if(detectChanges(activity,candidate)){
+                activity.save()
+            }
+        }else{
+            // for other CREATE and DELETE types save it anyway. No field change detection is required
+            activity.save()
         }
 
-        activity.save()
+
 
         return activity;
 
@@ -42,15 +50,31 @@ class ActivityService {
      * Detect field changes on a object
      *
      * @param oldCandidate
-     * @param newCandidate
+     * @param candidate
      */
-    def detectChanges(Candidate oldCandidate, Candidate newCandidate){
+    def detectChanges(Activity activity, Object obj) {
 
-        if(oldCandidate==null || newCandidate==null){
-            return
+        boolean isChanged =false;
+
+        if (obj == null) {
+            return false
         }
 
+        if (obj.isDirty()) {
+            for (String property : obj.dirtyPropertyNames) {
+                if (!property.equals("currentVersion")) {
+                    FieldChange fieldChange = new FieldChange()
+                    fieldChange.from = obj.getPersistentValue(property)
+                    fieldChange.to = obj.getProperty(property)
+                    activity.changes.put(property,fieldChange)
+                    isChanged=true;
+                }
+
+            }
+        }
+        return isChanged
     }
+
 
     def getActivities(Long domainModelId){
 

@@ -43,6 +43,12 @@
 
 
                                 <div class="timeline-body">
+                                    <g:if test="${activity.type == ActivityType.UPDATE}">
+                                        <g:each in="${candidateChanges}" status="j" var="change">
+                                            ${change.key} changed from ${change.value.from} to ${change.value.to}
+                                        </g:each>
+                                        ${activity.changes}
+                                    </g:if>
                                     <span class="time"><i
                                             class="fa fa-clock-o"></i>&nbsp${skillo.util.ActivityLoggingUtil.logActivityTimestamp(activity.timestamp)}
                                     </span> by ${activity.consultantName}

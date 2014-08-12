@@ -1,6 +1,7 @@
 package skillo
 
 import core.util.DocumentUtil
+import grails.transaction.Transactional
 import org.joda.time.DateTime
 import org.joda.time.LocalDate
 import org.springframework.web.multipart.commons.CommonsMultipartFile
@@ -8,6 +9,7 @@ import skillo.enums.ActivityType
 import skillo.filters.CandidateListSearch
 import skillo.filters.CandidateMatch
 
+@Transactional
 class CandidateController extends BaseController {
 
     def candidateService
@@ -53,7 +55,7 @@ class CandidateController extends BaseController {
         def availableQualifications = Qualification.list()
         def candidateMatches = new ArrayList<Candidate>()
 
-        [candidateInstance: candidate, CandidateMatches: candidateMatches, availableQualifications: availableQualifications as grails.converters.JSON ]
+        [candidateInstance: candidate, CandidateMatches: candidateMatches, availableQualifications: availableQualifications as grails.converters.JSON]
     }
 
     def save() {
@@ -109,7 +111,7 @@ class CandidateController extends BaseController {
         }
 
 
-         activityService.logCandidateActivity(ActivityType.CREATE,getCurrentConsultant(),null,candidate)
+        activityService.logCandidateActivity(ActivityType.CREATE, getCurrentConsultant(), candidate)
 
         redirect(action: "edit", id: candidate.id)
     }
@@ -137,12 +139,12 @@ class CandidateController extends BaseController {
         def activities = activityService.getActivities(candidate.id)
 
 
-        render(view: 'edit', model: [candidateInstance: candidate,
-                                     documentInstanceList: documentList,
-                                     candidateActivities: activities,
-                                     availableQualifications: availableQualifications as grails.converters.JSON,
+        render(view: 'edit', model: [candidateInstance        : candidate,
+                                     documentInstanceList     : documentList,
+                                     candidateActivities      : activities,
+                                     availableQualifications  : availableQualifications as grails.converters.JSON,
                                      availablePayrollCompanies: availablePayRollCompanies as grails.converters.JSON],
-                                     newCandidateQualification: newCandidateQualification)
+                newCandidateQualification: newCandidateQualification)
     }
 
     def updateMainDetails() {
@@ -165,6 +167,8 @@ class CandidateController extends BaseController {
             candidate.address.postCode = null
         }
 
+
+
         if (!candidateService.update(candidate)) {
             def availableQualifications = Qualification.findAll()
             def availablePayRollCompanies = PayrollCompany.findAll()
@@ -173,6 +177,9 @@ class CandidateController extends BaseController {
             render(view: 'edit', model: [candidateInstance: candidate, documentInstanceList: documentList, availableQualifications: availableQualifications as grails.converters.JSON, availablePayrollCompanies: availablePayRollCompanies as grails.converters.JSON])
             return
         }
+
+
+        activityService.logCandidateActivity(ActivityType.UPDATE, getCurrentConsultant(),candidate)
 
         log.info("CANDIDATE UPDATED ")
         redirect(action: "edit", id: candidate.id)
@@ -238,7 +245,7 @@ class CandidateController extends BaseController {
             redirect(action: "list")
         }
 
-       activityService.logCandidateActivity(ActivityType.DELETE,getCurrentConsultant(),null,candidate)
+        activityService.logCandidateActivity(ActivityType.DELETE, getCurrentConsultant(),candidate)
 
         redirect(action: "list")
     }
@@ -263,13 +270,13 @@ class CandidateController extends BaseController {
                 documentInstance.fileSize = file.size
                 documentInstance.humanReadableSize = DocumentUtil.bytesToHuman(file.size)
 
-                if(!DocumentUtil.isDocumentValidForUpload(file)){
+                if (!DocumentUtil.isDocumentValidForUpload(file)) {
                     documentInstance.errors.rejectValue("filedata", "type.invalid")
 
                     def documentList = listDocuments()
                     def availableQualifications = Qualification.findAll()
 
-                    render(view: 'edit', model: [candidateInstance: candidate, documentInstance:documentInstance, documentInstanceList: documentList, availableQualifications: availableQualifications])
+                    render(view: 'edit', model: [candidateInstance: candidate, documentInstance: documentInstance, documentInstanceList: documentList, availableQualifications: availableQualifications])
                     return
                 }
 
@@ -284,13 +291,13 @@ class CandidateController extends BaseController {
                     def documentList = listDocuments()
                     def availableQualifications = Qualification.findAll()
 
-                    render(view: 'edit', model: [candidateInstance: candidate, documentInstance:documentInstance, documentInstanceList: documentList, availableQualifications: availableQualifications])
+                    render(view: 'edit', model: [candidateInstance: candidate, documentInstance: documentInstance, documentInstanceList: documentList, availableQualifications: availableQualifications])
                     return
                 }
             }
         }
 
-        redirect(action: "edit", id:candidate.id )
+        redirect(action: "edit", id: candidate.id)
     }
 
     def listDocuments() {
@@ -340,7 +347,7 @@ class CandidateController extends BaseController {
         def newCandidateNote = new CandidateNote()
         newCandidateNote.candidate = candidate
 
-        render(template: 'info', model: [CandidateShow: candidate, newCandidateNote:newCandidateNote])
+        render(template: 'info', model: [CandidateShow: candidate, newCandidateNote: newCandidateNote])
     }
 
     def addCandidateQualification() {
@@ -455,7 +462,7 @@ class CandidateController extends BaseController {
         render(template: 'editCandidateQualificationModal', model: [cqe: candidateQualification])
     }
 
-    def addCandidateNote(){
+    def addCandidateNote() {
         log.info("CandidateController.AddCandidateNote")
         log.info params
 
@@ -472,8 +479,8 @@ class CandidateController extends BaseController {
 
         newCandidateNote.note.date = new Date()
 
-        if(!newCandidateNote.save()){
-            log.info("Failed to save note for candidate " + candidate.id + " by consultant " + consultant.id )
+        if (!newCandidateNote.save()) {
+            log.info("Failed to save note for candidate " + candidate.id + " by consultant " + consultant.id)
         }
 
         redirect(action: params.redirect, id: candidate.id)
