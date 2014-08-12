@@ -1,4 +1,4 @@
-<%@ page import="skillo.CandidateNote; skillo.candidate.Candidate" %>
+<%@ page import="skillo.candidate.CandidateNote; skillo.candidate.Candidate" %>
 
 <g:set var="editable" value="${params.action == 'edit' || params.action == 'updateMainDetails' || params.action == 'updatePaymentDetails'}"/>
 <g:set var="cn" value="${candidateInstance.candidateNotes}" />

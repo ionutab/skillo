@@ -18,6 +18,7 @@ class CandidateController extends BaseController {
     def candidateCreateService
     def candidateUpdateService
     def candidateQualificationService
+    def documentService
 
     def activityService
 
@@ -112,7 +113,7 @@ class CandidateController extends BaseController {
         }
 
         def availableQualifications = Qualification.findAll()
-        def documentList = listDocuments()
+        def documentList = documentService.listDocuments(candidate.id)
 
         def newCandidateQualification = new CandidateQualification()
         newCandidateQualification.candidate = candidate
@@ -149,7 +150,8 @@ class CandidateController extends BaseController {
 
         if (!candidateUpdateService.update(candidate)) {
             def availableQualifications = Qualification.findAll()
-            def documentList = listDocuments()
+            def documentList = documentService.listDocuments(candidate.id)
+
 
             render(view: 'edit', model: [candidateInstance: candidate, documentInstanceList: documentList, availableQualifications: availableQualifications as grails.converters.JSON])
             return
@@ -186,7 +188,8 @@ class CandidateController extends BaseController {
 
         if (!candidateUpdateService.update(candidate)) {
             def availableQualifications = Qualification.findAll()
-            def documentList = listDocuments()
+            def documentList = documentService.listDocuments(candidate.id)
+
             render(view: 'edit', model: [candidateInstance: candidate, documentInstanceList: documentList, availableQualifications: availableQualifications as grails.converters.JSON])
             return
         }
@@ -205,7 +208,7 @@ class CandidateController extends BaseController {
             return
         }
 
-        def documentList = listDocuments()
+        def documentList = documentService.listDocuments(candidate.id)
         def availableQualifications = Qualification.findAll()
 
         render(view: 'edit', model: [candidateInstance: candidate, documentInstanceList: documentList, availableQualifications: availableQualifications])
@@ -227,63 +230,32 @@ class CandidateController extends BaseController {
         redirect(action: "list")
     }
 
-
+    /**
+     * Action to upload a document for a candidate
+     * @return
+     */
     def documentsUpload() {
 
         def candidate = Candidate.get(params.id)
-
         List fileList = request.getFiles('files') // 'files' is the name of the input
 
-        for (CommonsMultipartFile file : fileList) {
-            if (file.empty) {
-                log.info("file cannot be empty")
-            } else {
-
-                def documentInstance = new Document()
-                documentInstance.type = file.getContentType()
-                documentInstance.filename = file.originalFilename
-                documentInstance.filedata = file.getBytes()
-                documentInstance.candidateId = candidate.id
-                documentInstance.fileSize = file.size
-                documentInstance.humanReadableSize = DocumentUtil.bytesToHuman(file.size)
-
-                if (!DocumentUtil.isDocumentValidForUpload(file)) {
-                    documentInstance.errors.rejectValue("filedata", "type.invalid")
-
-                    def documentList = listDocuments()
-                    def availableQualifications = Qualification.findAll()
-
-                    render(view: 'edit', model: [candidateInstance: candidate, documentInstance: documentInstance, documentInstanceList: documentList, availableQualifications: availableQualifications])
-                    return
-                }
-
-                if (!documentInstance.save()) {
-
-                    if (documentInstance.hasErrors()) {
-                        documentInstance.errors.each {
-                            log.info "FE" + it.fieldError.code
-                        }
-                    }
-
-                    def documentList = listDocuments()
-                    def availableQualifications = Qualification.findAll()
-
-                    render(view: 'edit', model: [candidateInstance: candidate, documentInstance: documentInstance, documentInstanceList: documentList, availableQualifications: availableQualifications])
-                    return
-                }
-            }
+        def documentInstance = documentService.uploadDocument(candidate,fileList)
+        // if error was encountered wile uploading documents
+        if(documentInstance!=null){
+            def documentList =documentService.listDocuments(candidate.id)
+            def availableQualifications = Qualification.findAll()
+            render(view: 'edit', model: [candidateInstance: candidate, documentInstance: documentInstance, documentInstanceList: documentList, availableQualifications: availableQualifications])
+            return
         }
+
 
         redirect(action: "edit", id: candidate.id)
     }
 
-    def listDocuments() {
-        def candidate = Candidate.get(params.id)
-        def documentList = Document.findAll("from Document as d where d.candidateId=:candidateId", [candidateId: candidate.id])
-        return documentList
-
-    }
-
+    /**
+     * Download a document for a candidate
+     * @return
+     */
     def documentDownload() {
         Document documentInstance = Document.get(params.id)
         if (documentInstance == null) {
@@ -298,24 +270,6 @@ class CandidateController extends BaseController {
             outputStream.close()
         }
     }
-
-    def deleteDocument() {
-
-        print("@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@ " + params)
-
-        def list = params.idDocuments
-        String[] ids = list.split()
-        ids.each { id ->
-            def document = Document.findById(Long.valueOf(id))
-            if (document) {
-                document.delete(flush: true)
-            }
-
-            print("#################################################### " + params)
-            redirect(action: "edit", id: params.id)
-        }
-    }
-
 
     def display() {
         log.info("CC.DISPLAY")

@@ -19,6 +19,7 @@ class Activity {
     static belongsTo = []
 
     static constraints = {
+
     }
 
 }
