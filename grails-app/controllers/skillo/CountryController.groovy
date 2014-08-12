@@ -10,7 +10,7 @@ class CountryController {
 
     static scaffold = false
 
-    def getNationality(){
+    def getNationalitiesByName(){
         def nationality = request.getParameter("inputCode")
         def nationalityList
         if(nationality != null && nationality.size() > 0){
@@ -19,7 +19,6 @@ class CountryController {
             nationalityList = Country.list()
         }
 
-        print("BBBBBBBBBB "+nationalityList)
         render( nationalityList as grails.converters.JSON )
         return
     }

@@ -14,6 +14,7 @@ class Activity {
     Date timestamp
     Long consultantId
     String consultantName
+
     def changes = [:]
 
     static belongsTo = []

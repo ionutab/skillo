@@ -23,7 +23,7 @@ class DocumentService {
      * @param files
      * @return
      */
-    def boolean uploadDocument(Candidate candidate, List files) {
+    def Document uploadDocument(Candidate candidate, List files) {
 
         for (CommonsMultipartFile file : files) {
             if (file.empty) {
@@ -39,6 +39,7 @@ class DocumentService {
 
                 // verify if document type is permitted to be uploaded
                 if (!DocumentUtil.isDocumentValidForUpload(file)) {
+                    log.info "REJECTED"
                     documentInstance.errors.rejectValue("filedata", "type.invalid")
                     return documentInstance;
                 }
@@ -57,7 +58,6 @@ class DocumentService {
         }
 
         return null
-
     }
 
     /**

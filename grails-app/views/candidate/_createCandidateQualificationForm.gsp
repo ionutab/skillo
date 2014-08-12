@@ -13,16 +13,45 @@
                 class="form-control"
                 value="${newCandidateQualification?.qualification?.id}"
         />
+        <g:hiddenField
+                name="newCandidateQualification.namePlaceholder"
+                id="candidateMainTradeName"
+                value="${candidateInstance?.nationality?.nationality}"
+        />
         <g:javascript>
-            function formatCandidateQualification(item) { return item.name; };
-            $("#newCandidateQualificationId").select2({
-                    data: {results:${availableQualifications}, text:'name'},
-                    formatSelection: formatCandidateQualification,
-                    formatResult: formatCandidateQualification,
-                    placeholder: "Select a Qualification",
-                    allowClear:true
-                }
-            );
+            function formatQualificationSelection(item) {
+                return item.name;
+            };
+
+            function formatQualificationResult(item) {
+                return item.name;
+            };
+            function doWeHaveAQualificationAlready(){
+                return "Search for a Qualification";
+            }
+            $("#mainTradeId").select2({
+                placeholder: doWeHaveAQualificationAlready,
+                allowClear: true,
+                ajax:{
+                    url: '<g:createLink controller="qualification" action="getQualificationsByName" />',
+                    dataType: 'json',
+                    data: function(term, page){
+                        return {inputCode: term};
+                    },
+                    results: function (data, page) {
+                        return {results: data};
+                    }
+                },
+                initSelection: function(element, callback) {
+                    var id=$("#mainTradeId").val();
+                    if (id!=="") {
+                        $("#s2id_nationalityId .select2-chosen").html($("#candidateMainTradeName").val());
+                    }
+                },
+                formatSelection: formatQualificationSelection,
+                formatResult: formatQualificationResult,
+                escapeMarkup: function (m) { return m; }
+            });
         </g:javascript>
     </div>
 </div>

@@ -14,13 +14,10 @@ class QualificationService {
     def Collection<Qualification> search(QualificationSearchFilter filter) {
 
         Criteria cc = Qualification.createCriteria()
-
         def qualificantionList = cc.list(max: filter.max, offset: filter.offset) {
-
             if (filter.name) {
                 ilike("name", new String("%$filter.name%"))
             }
-
         }
 
         return qualificantionList

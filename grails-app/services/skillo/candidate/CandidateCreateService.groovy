@@ -1,8 +1,10 @@
 package skillo.candidate
 
+import grails.transaction.Transactional
 import org.joda.time.DateTime
 import org.joda.time.LocalDate
 
+@Transactional
 class CandidateCreateService {
 
      def getNewDefaultCandidate(){

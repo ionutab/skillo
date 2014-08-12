@@ -34,7 +34,7 @@
                             </div>
                             <g:javascript>
                                 $("#firstName").change(function() {
-                                    remoteCandidateCreateForm()
+                                    remoteCandidateSearchForm()
                                 });
                             </g:javascript>
                         </div>
@@ -57,7 +57,7 @@
                             </div>
                             <g:javascript>
                                 $("#lastName").change(function() {
-                                    remoteCandidateCreateForm()
+                                    remoteCandidateSearchForm()
                                 });
                             </g:javascript>
                         </div>
@@ -106,7 +106,7 @@
                             <g:javascript>
 
                                 $("#telephoneNumber").change(function() {
-                                    remoteCandidateCreateForm()
+                                    remoteCandidateSearchForm()
                                 });
 
                             </g:javascript>
@@ -131,65 +131,16 @@
                                 <g:message code="postCode.code.label" default="Post Code" />
                             </label>
                             <div class="col-md-9">
-                                <g:hiddenField
-                                        name="postCode.id"
-                                        id="postCodeId"
-                                        value="${candidateInstance?.address?.postCode?.id}"
-                                />
-                                <g:hiddenField
-                                        name="postCode.previousCode"
-                                        id="postCodePlaceholder"
-                                        value="${candidateInstance?.address?.postCode?.code} - ${candidateInstance?.address?.postCode?.country}"
-                                />
-
-                                <g:javascript>
-                                        function formatPostCodeSelection(item) {
-                                            return item.code + ' - ' + item.country;
-                                        };
-
-                                        function formatPostCodeResult(item) {
-                                            return item.code + ' - ' + item.country;
-                                        };
-                                        function doWeHaveAPostCodeAlready(){
-                                            return "Search for a Post Code";
-                                        }
-                                        $("#postCodeId").select2({
-                                            placeholder: doWeHaveAPostCodeAlready,
-                        //                                  VERY IMPORTANT
-                                            minimumInputLength: 4,
-                                            ajax:{
-                                                url: '<g:createLink controller="postCode" action="getPostCodes" />',
-                                                dataType: 'json',
-                                                data: function(term, page){
-                                                    return {inputCode: term};
-                                                },
-                                                results: function (data, page) {
-                                                    return {results: data};
-                                                }
-                                            },
-                                            initSelection: function(element, callback) {
-                                                var id=$("#postCodeId").val();
-                                                if (id!=="") {
-                                                    $("#s2id_postCodeId .select2-chosen").html($("#postCodePlaceholder").val());
-                                                }
-                                            },
-                                            formatSelection: formatPostCodeSelection,
-                                            formatResult: formatPostCodeResult,
-                                            escapeMarkup: function (m) { return m; }
-                                        });
-                                </g:javascript>
+                                <g:render template="../postCode/postCodeSelector" model="['attributeName':'postCode.id','attributeId':'postCodeId' ,'postCode':candidateInstance?.address?.postCode]"/>
                                 <g:javascript>
 
                                     $("#postCodeId").change(function() {
-                                        remoteCandidateCreateForm()
+                                        remoteCandidateSearchForm()
                                     });
 
                                 </g:javascript>
                             </div>
                         </div>
-
-
-
 
                     <div class="form-group">
                         <label for="candidate.nationality" class="col-md-3 control-label">
@@ -202,48 +153,48 @@
                                     value="${candidateInstance?.nationality?.id}"
                             />
                             <g:hiddenField
-                                    name="candidate.nationalityPlaceholder"
+                                    name="candidate.previousNationality"
                                     id="nationalityPlaceholder"
                                     value="${candidateInstance?.nationality?.nationality}"
                             />
 
                             <g:javascript>
-                                        function formatNationalitySelection(item) {
-                                            return item.nationality;
-                                        };
+                                function formatNationalitySelection(item) {
+                                    return item.nationality;
+                                };
 
-                                        function formatNationalityResult(item) {
-                                            return item.nationality;
-                                        };
-                                        function doWeHaveANationalityAlready(){
-                                            return "Search for a nationality";
+                                function formatNationalityResult(item) {
+                                    return item.nationality;
+                                };
+                                function doWeHaveANationalityAlready(){
+                                    return "Search for a nationality";
+                                }
+                                $("#nationalityId").select2({
+                                    placeholder: doWeHaveANationalityAlready,
+                                    allowClear: true,
+                                    ajax:{
+                                        url: '<g:createLink controller="country" action="getNationalitiesByName" />',
+                                        dataType: 'json',
+                                        data: function(term, page){
+                                            return {inputCode: term};
+                                        },
+                                        results: function (data, page) {
+                                            return {results: data};
                                         }
-                                        $("#nationalityId").select2({
-                                            placeholder: doWeHaveANationalityAlready,
-                                            ajax:{
-                                                url: '<g:createLink controller="country" action="getNationality" />',
-                                                dataType: 'json',
-                                                data: function(term, page){
-                                                    return {inputCode: term};
-                                                },
-                                                results: function (data, page) {
-                                                    return {results: data};
-                                                }
-                                            },
-                                            initSelection: function(element, callback) {
-                                                var id=$("#nationalityId").val();
-                                                if (id!=="") {
-                                                    $("#s2id_nationalityId .select2-chosen").html($("#nationalityPlaceholder").val());
-                                                }
-                                            },
-                                            formatSelection: formatNationalitySelection,
-                                            formatResult: formatNationalityResult,
-                                            escapeMarkup: function (m) { return m; }
-                                        });
+                                    },
+                                    initSelection: function(element, callback) {
+                                        var id=$("#nationalityId").val();
+                                        if (id!=="") {
+                                            $("#s2id_nationalityId .select2-chosen").html($("#nationalityPlaceholder").val());
+                                        }
+                                    },
+                                    formatSelection: formatNationalitySelection,
+                                    formatResult: formatNationalityResult,
+                                    escapeMarkup: function (m) { return m; }
+                                });
                             </g:javascript>
                         </div>
                     </div>
-
 
                     <div class="form-group ${hasErrors(bean: candidateInstance, field: 'email', 'has-error')}">
                             <label for="candidate.email" class="col-md-3 control-label">
@@ -272,16 +223,46 @@
                                         class="form-control"
                                         value="${candidateInstance?.getMainTrade()?.qualification?.id}"
                                 />
+                                <g:hiddenField
+                                        name="candidateMainTrade.previousName"
+                                        id="candidateMainTradePlaceHolder"
+                                        value="${candidateInstance?.nationality?.nationality}"
+                                />
+
                                 <g:javascript>
-                                    function formatCandidateQualification(item) { return item.name; };
-                                    $("#mainTradeId").select2({
-                                            data: {results:${availableQualifications}, text:'name'},
-                                            formatSelection: formatCandidateQualification,
-                                            formatResult: formatCandidateQualification,
-                                            placeholder: "Select a Qualification",
-                                            allowClear:true
+                                        function formatQualificationSelection(item) {
+                                            return item.name;
+                                        };
+
+                                        function formatQualificationResult(item) {
+                                            return item.name;
+                                        };
+                                        function doWeHaveAQualificationAlready(){
+                                            return "Search for a Qualification";
                                         }
-                                    );
+                                        $("#mainTradeId").select2({
+                                            placeholder: doWeHaveAQualificationAlready,
+                                            allowClear: true,
+                                            ajax:{
+                                                url: '<g:createLink controller="qualification" action="getQualificationsByName" />',
+                                                dataType: 'json',
+                                                data: function(term, page){
+                                                    return {inputCode: term};
+                                                },
+                                                results: function (data, page) {
+                                                    return {results: data};
+                                                }
+                                            },
+                                            initSelection: function(element, callback) {
+                                                var id=$("#mainTradeId").val();
+                                                if (id!=="") {
+                                                    $("#s2id_nationalityId .select2-chosen").html($("#candidateMainTradePlaceHolder").val());
+                                                }
+                                            },
+                                            formatSelection: formatQualificationSelection,
+                                            formatResult: formatQualificationResult,
+                                            escapeMarkup: function (m) { return m; }
+                                        });
                                 </g:javascript>
                                 <g:eachError var="err" bean="${candidateInstance}" field="candidateQualifications">
                                     <g:if test="${err.code == 'nullable'}">
@@ -358,8 +339,7 @@
     }
 */
 
-function remoteCandidateCreateForm(){
-
+function remoteCandidateSearchForm(){
     $.ajax({
         url: "${createLink( controller: 'candidate', action: 'findMatches')}",
         type: 'POST',

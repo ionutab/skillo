@@ -25,3 +25,13 @@ alter table payroll change unqiue_tax_reference_number unique_tax_reference_numb
 delete from payroll_company;
 insert into payroll_company(name) values('FOSRE');
 
+-- candidate payment section details
+update payroll_company set name = 'FOSRE PAYE' where name='FOSRE';
+
+insert into payroll_company(name) values('FOSRE PAYE');
+insert into payroll_company(name) values('FOSRE CIS');
+insert into payroll_company(name) values('FOSRE EPSC');
+insert into payroll_company(name) values('FOSRE EDM');
+insert into payroll_company(name) values('OTHER');
+
+

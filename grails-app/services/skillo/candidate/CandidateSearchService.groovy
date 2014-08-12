@@ -65,6 +65,15 @@ class CandidateSearchService {
                 if(filter.telephoneNumber){
                     ilike("telephoneNumber", "%$filter.telephoneNumber%")
                 }
+                if(filter.postCodeId){
+                    sqlRestriction(" exists (" +
+                            "select id " +
+                            "from " +
+                            "address addr " +
+                            "where " +
+                            "addr.post_code_id = ? " +
+                            ")",[filter.postCodeId])
+                }
             }
 
             eq ("active", true)

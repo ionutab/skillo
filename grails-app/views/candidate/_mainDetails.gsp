@@ -176,7 +176,6 @@
                                     id="postCodePlaceholder"
                                     value="${candidateInstance?.address?.postCode?.code} - ${candidateInstance?.address?.postCode?.country}"
                             />
-
                             <g:javascript>
                                         function formatPostCodeSelection(item) {
                                             return item.code + ' - ' + item.country;
@@ -190,10 +189,11 @@
                                         }
                                         $("#postCodeId").select2({
                                             placeholder: doWeHaveAPostCodeAlready,
+                                            allowClear: true,
                         //                                  VERY IMPORTANT
                                             minimumInputLength: 4,
                                             ajax:{
-                                                url: '<g:createLink controller="postCode" action="getPostCodes" />',
+                                                url: '<g:createLink controller="postCode" action="getPostCodesByName" />',
                                                 dataType: 'json',
                                                 data: function(term, page){
                                                     return {inputCode: term};
@@ -243,38 +243,39 @@
                         />
 
                         <g:javascript>
-                                        function formatNationalitySelection(item) {
-                                            return item.nationality;
-                                        };
+                            function formatNationalitySelection(item) {
+                                return item.nationality;
+                            };
 
-                                        function formatNationalityResult(item) {
-                                            return item.nationality;
-                                        };
-                                        function doWeHaveANationalityAlready(){
-                                            return "Search for a nationality";
-                                        }
-                                        $("#nationalityId").select2({
-                                            placeholder: doWeHaveANationalityAlready,
-                                            ajax:{
-                                                url: '<g:createLink controller="country" action="getNationality" />',
-                                                dataType: 'json',
-                                                data: function(term, page){
-                                                    return {inputCode: term};
-                                                },
-                                                results: function (data, page) {
-                                                    return {results: data};
-                                                }
-                                            },
-                                            initSelection: function(element, callback) {
-                                                var id=$("#nationalityId").val();
-                                                if (id!=="") {
-                                                    $("#s2id_nationalityId .select2-chosen").html($("#nationalityPlaceholder").val());
-                                                }
-                                            },
-                                            formatSelection: formatNationalitySelection,
-                                            formatResult: formatNationalityResult,
-                                            escapeMarkup: function (m) { return m; }
-                                        });
+                            function formatNationalityResult(item) {
+                                return item.nationality;
+                            };
+                            function doWeHaveANationalityAlready(){
+                                return "Search for a nationality";
+                            }
+                            $("#nationalityId").select2({
+                                placeholder: doWeHaveANationalityAlready,
+                                allowClear: true,
+                                ajax:{
+                                    url: '<g:createLink controller="country" action="getNationalitiesByName" />',
+                                    dataType: 'json',
+                                    data: function(term, page){
+                                        return {inputCode: term};
+                                    },
+                                    results: function (data, page) {
+                                        return {results: data};
+                                    }
+                                },
+                                initSelection: function(element, callback) {
+                                    var id=$("#nationalityId").val();
+                                    if (id!=="") {
+                                        $("#s2id_nationalityId .select2-chosen").html($("#nationalityPlaceholder").val());
+                                    }
+                                },
+                                formatSelection: formatNationalitySelection,
+                                formatResult: formatNationalityResult,
+                                escapeMarkup: function (m) { return m; }
+                            });
                         </g:javascript>
                           </g:if>
                         <g:else>

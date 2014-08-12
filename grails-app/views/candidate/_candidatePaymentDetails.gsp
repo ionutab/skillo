@@ -29,7 +29,7 @@
                                         name="payroll.payrollCompany.id"
                                         id="payrollCompanyId"
                                         class="input-xlarge"
-                                        value="${skillo.Constants.DEFAULT_PAYROLL_COMPANY_ID}"
+                                        value="${candidateInstance?.payroll?.payrollCompany?.id}"
                                 />
                                 <label class="control-label">FOSRE</label>
                                 %{--

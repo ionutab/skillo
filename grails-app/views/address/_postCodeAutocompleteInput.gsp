@@ -26,7 +26,7 @@
 //                                  VERY IMPORTANT
                     //minimumInputLength: 4,
                     ajax:{
-                        url: '<g:createLink controller="postCode" action="getPostCodes" />',
+                        url: '<g:createLink controller="postCode" action="getPostCodesByName" />',
                         dataType: 'json',
                         data: function(term, page){
                             return {inputCode: term};

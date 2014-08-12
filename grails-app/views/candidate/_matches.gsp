@@ -22,7 +22,7 @@
                                     <tbody>
                                         <g:each in="${matchCandidates}" var="match">
                                             <tr>
-                                                <td>${match?.firstName + " " + match.lastName}</td>
+                                                <td><g:link action="show" id="${match?.id}" target="_blank">${match?.firstName + " " + match.lastName}</g:link></td>
                                                 <td>${match?.telephoneNumber}</td>
                                                 <td>${match?.address?.postCode?.code}</td>
                                                 <td>

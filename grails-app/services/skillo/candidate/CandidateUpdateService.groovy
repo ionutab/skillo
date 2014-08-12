@@ -7,7 +7,6 @@ import skillo.candidate.Candidate
 class CandidateUpdateService {
 
     def boolean update(Candidate candidate){
-        log.info("CandidateService.UPDATE")
         if(!candidate.checkVersion(candidate.currentVersion)){
             log.info("BAD VERSION: " + candidate.version + "vs" + candidate.currentVersion)
 
@@ -31,7 +30,7 @@ class CandidateUpdateService {
             return false
         }
         candidate.active = false
-        if (!candidate.save(deepvalidate: true, flush: true)) {
+        if (!candidate.save(deepvalidate: true)) {
             return false
         }
         return true

@@ -18,8 +18,8 @@ class CandidateController extends BaseController {
     def candidateCreateService
     def candidateUpdateService
     def candidateQualificationService
+    def candidateNoteService
     def documentService
-
     def activityService
 
     def index() {
@@ -81,15 +81,17 @@ class CandidateController extends BaseController {
         def address = new Address(params.address)
 
         // we get a new candidateQualification instance with the parameter qualification
-        def mainTrade = candidateQualificationService.initMainTradeByQualification(params.candidateMainTrade.id)
+        if(params.candidateMainTrade.id){
+            def mainTrade = candidateQualificationService.initMainTradeByQualification(Long.parseLong(params.candidateMainTrade.id))
+            if(mainTrade){
+                candidate.addToCandidateQualifications(mainTrade)
+            }
+        }
+
         def postCode = PostCode.get(params.postCode.id)
 
         address.postCode = postCode
         candidate.address = address
-
-        if(mainTrade){
-            candidate.addToCandidateQualifications(mainTrade)
-        }
 
         candidate.consultant = getCurrentConsultant()
 
@@ -146,12 +148,13 @@ class CandidateController extends BaseController {
             if (!params.postCode.id.equals(candidate.address?.postCode?.id)) {
                 candidate.address.postCode = PostCode.get(params.postCode.id)
             }
+        } else {
+            candidate.address.postCode = null
         }
 
         if (!candidateUpdateService.update(candidate)) {
             def availableQualifications = Qualification.findAll()
             def documentList = documentService.listDocuments(candidate.id)
-
 
             render(view: 'edit', model: [candidateInstance: candidate, documentInstanceList: documentList, availableQualifications: availableQualifications as grails.converters.JSON])
             return
@@ -223,6 +226,7 @@ class CandidateController extends BaseController {
             redirect(action: "list")
         }
 
+
         if(candidateUpdateService.delete()){
             activityService.logCandidateActivity(ActivityType.DELETE, getCurrentConsultant(),candidate)
         }
@@ -237,17 +241,23 @@ class CandidateController extends BaseController {
     def documentsUpload() {
 
         def candidate = Candidate.get(params.id)
+
         List fileList = request.getFiles('files') // 'files' is the name of the input
 
         def documentInstance = documentService.uploadDocument(candidate,fileList)
+
         // if error was encountered wile uploading documents
         if(documentInstance!=null){
-            def documentList =documentService.listDocuments(candidate.id)
+
+            documentInstance.errors.each {
+                println "DOCUMENT fielderrors: " + it
+            }
+
+            def documentList = documentService.listDocuments(candidate.id)
             def availableQualifications = Qualification.findAll()
             render(view: 'edit', model: [candidateInstance: candidate, documentInstance: documentInstance, documentInstanceList: documentList, availableQualifications: availableQualifications])
             return
         }
-
 
         redirect(action: "edit", id: candidate.id)
     }
@@ -271,8 +281,11 @@ class CandidateController extends BaseController {
         }
     }
 
+    /**
+     * returns the details of a candidate
+     */
     def display() {
-        log.info("CC.DISPLAY")
+        log.info("DISPLAY")
         def candidate = Candidate.get(params.id)
 
         def newCandidateNote = new CandidateNote()
@@ -281,95 +294,69 @@ class CandidateController extends BaseController {
         render(template: 'info', model: [candidateShow: candidate, newCandidateNote: newCandidateNote])
     }
 
+    /**
+     * adds a new candidateQualification
+     */
     def addCandidateQualification() {
-        log.info("CC.ADD CANDIDATE QUALIFICATION")
+        log.info("add candidate qualification")
 
         //the new created qualification
         CandidateQualification newCandidateQualification = new CandidateQualification()
         newCandidateQualification = params.newCandidateQualification
 
-        //candidate
-        Candidate candidate = Candidate.get(params.id)
-        newCandidateQualification.candidate = candidate
-
-        if (Boolean.TRUE == newCandidateQualification.isMainTrade) {
-            def candidateQualifications = CandidateQualification.findAllByCandidateAndIsMainTrade(Candidate.get(params.id), Boolean.TRUE)
-            candidateQualifications.each { candidateQualification ->
-                if (candidateQualification != newCandidateQualification) {
-                    //put the other qualifications to not be main trade
-                    candidateQualification.setIsMainTrade(Boolean.FALSE)
-                    candidateQualification.save()
-                }
-            }
+        Long candidateId = null
+        if(params.id){
+            candidateId = Long.parseLong(params.id)
+        }
+        if (candidateQualificationService.save(newCandidateQualification, candidateId)) {
+            redirect(action: "edit", id: candidateId)
         }
 
-        if (!newCandidateQualification.save()) {
-            log.info("Failed to save qualification for candidate" + candidate.id)
-//            render(template: 'createCandidateQualificationForm' ,model:[newCandidateQualification: newCandidateQualification])
-//            return
-        }
-
-        redirect(action: "edit", id: candidate.id)
+        log.info("Failed to save qualification for candidate" + candidateId)
     }
 
+    /**
+     * updates the details of a candidate qualification
+     */
     def updateCandidateQualification() {
-        log.info("CandidateController.updateCandidateQualificationModal")
+        log.info("updateCandidateQualificationModal")
         CandidateQualification cqe = CandidateQualification.get(params.id)
-
         cqe.properties = params.editCandidateQualification
 
-        log.info cqe.properties.toMapString()
-        log.info cqe.id
-
-        if (Boolean.TRUE.equals(cqe.isMainTrade)) {
-            def candidateQualifications = CandidateQualification.findAllByCandidateAndIsMainTrade(Candidate.get(cqe.candidate.id), Boolean.TRUE)
-            candidateQualifications.each { candidateQualification ->
-                if (candidateQualification != cqe) {
-                    //put the other qualifications to not be main trade
-                    candidateQualification.setIsMainTrade(Boolean.FALSE)
-                    candidateQualification.save()
-                }
-            }
+        if(candidateQualificationService.update(cqe)){
+            redirect(action: "edit", id: cqe.candidate.id)
+            return
         }
 
-        if (!cqe.save()) {
-            log.info("Failed to save qualification for candidate" + candidate.id)
-        }
-
-        redirect(action: "edit", id: cqe.candidate.id)
+        log.info("Failed to save qualification for candidate" + cqe.candidate.id)
     }
 
-
+    /**
+     * makes a candidate qualification inactive
+     */
     def deleteCandidateQualification() {
-        log.info("CandidateController.DELETE")
+        log.info("DELETE")
 
-        def candidateQualification = CandidateQualification.get(params.id)
-
-        if (!candidateQualification) {
-            redirect(controller: "candidate", action: "list")
+        if(!params.id){
             return
         }
 
-        candidateQualification.active = false
-        if (!candidateQualification.save(deepvalidate: true, flush: true)) {
-            log.info("delete UNSUCCESSFUL")
-            if (candidateQualification.hasErrors()) {
-                candidateQualification.errors.each {
-                    println "    FE: " + it.fieldError.field
-                    println "    FE: " + it.fieldError.code
-                }
-            }
-            redirect(controller: "candidate", action: "edit", id: candidateQualification.candidate.id)
-            return
+        CandidateQualification cqDelete = CandidateQualification.get(params.id)
+
+        if(candidateQualificationService.delete(cqDelete)) {
+            log.info("delete SUCCESSFUL")
         }
-        log.info("delete SUCCESSFUL")
-        redirect(controller: "candidate", action: "edit", id: candidateQualification.candidate.id)
+
+        redirect(controller: "candidate", action: "edit", id: cqDelete.candidate.id)
         return
+
     }
 
+    /**
+     * finds candidates that are similar to the input fields
+     */
     def findMatches() {
-        log.info("CC.FIND POSSIBLE MATCHES")
-        log.info params
+        log.info("FIND MATCHES")
 
         CandidateMatch filter = new CandidateMatch()
         bindData(filter, params.candidate)
@@ -386,6 +373,9 @@ class CandidateController extends BaseController {
         render(template: 'matches', model: [matchCandidates: candidateMatches])
     }
 
+    /**
+     * returns a candidate qualification
+     */
     def getEditCandidateQualification() {
         log.info("CandidateController.getEditCandidateQualification")
 
@@ -393,6 +383,9 @@ class CandidateController extends BaseController {
         render(template: 'editCandidateQualificationModal', model: [cqe: candidateQualification])
     }
 
+    /**
+     * inserts a new candidate note
+     */
     def addCandidateNote() {
         log.info("CandidateController.AddCandidateNote")
 
@@ -409,8 +402,9 @@ class CandidateController extends BaseController {
         newCandidateNote.consultant = consultant
         newCandidateNote.note.date = new Date()
 
-        if (!newCandidateNote.save()) {
-            log.info("Failed to save note for candidate " + candidate.id + " by consultant " + consultant.id)
+        if (candidateNoteService.save(newCandidateNote, candidate.id)){
+            redirect(action: params.redirect, id: candidate.id)
+            return
         }
 
         redirect(action: params.redirect, id: candidate.id)

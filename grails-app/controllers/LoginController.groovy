@@ -80,9 +80,6 @@ class LoginController {
     }
 
     def changeUserPassword = {
-
-        log.info params
-
         render view: 'changePassword'
     }
 

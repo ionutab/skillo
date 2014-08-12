@@ -76,7 +76,6 @@ class QualificationController extends BaseController {
                 def version = params.version.toLong()
                 // log error if the instance was modified by somebody elseQualification
                 if (qualificationInstance.version > version) {
-
                     qualificationInstance.errors.rejectValue("version", "default.optimistic.locking.failure", [message(code: 'qualification.label', default: 'Qualification')] as Object[], "Another user has updated this Qualification while you were editing")
                     render(view: "edit", model: [qualificationInstance: qualificationInstance])
                     return
@@ -84,18 +83,13 @@ class QualificationController extends BaseController {
             }
 
             qualificationInstance.properties = params
-            print(qualificationInstance.code)
-            print(qualificationInstance.name)
-            print(qualificationInstance.description)
-            print(qualificationInstance.canBeMainTrade)
+
             if (!qualificationInstance.hasErrors() && qualificationInstance.save(flush: true)) {
-                flash.message = "${message(code: 'default.updated.message', args: [message(code: 'qualification.label', default: 'Qualification'), qualificationInstance.name])}"
                 redirect(action: "list")
             } else {
                 render(view: "edit", model: [qualificationInstance: qualificationInstance])
             }
         } else {
-            flash.message = "${message(code: 'default.not.found.message', args: [message(code: 'qualification.label', default: 'Qualification'), params.id])}"
             redirect(action: "list")
         }
 
@@ -119,4 +113,17 @@ class QualificationController extends BaseController {
         }
     }
 
+    def getQualificationsByName(){
+        def qualification = request.getParameter("inputCode")
+        def qualificationList
+
+        if(qualification != null && qualification.size() > 0){
+            qualificationList = Qualification.findAllByNameIlike("%${qualification}%")
+        } else {
+            qualificationList = Qualification.list()
+        }
+
+        render( qualificationList as grails.converters.JSON )
+        return
+    }
 }

@@ -34,7 +34,7 @@ class ClientService {
             return false
         }
 
-        if(client.save(deepvalidate:true, flush: true)){
+        if(client.save(deepvalidate:true)){
             return true
         } else {
 
@@ -49,7 +49,7 @@ class ClientService {
 
     def boolean update(Client client){
 
-        if (!client.save(deepvalidate:true, flush: true)) {
+        if (!client.save(deepvalidate:true)) {
             if(client.hasErrors()){
                 client.errors.each {
                     println "fielderrors: " + it
@@ -57,7 +57,6 @@ class ClientService {
             }
             return false
         }
-//        client.addUpdateEvent(Consultant.findByUser(springSecurityService.getCurrentUser()))
         return true
     }
 
