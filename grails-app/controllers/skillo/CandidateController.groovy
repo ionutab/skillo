@@ -120,7 +120,7 @@ class CandidateController extends BaseController {
         def newCandidateQualification = new CandidateQualification()
         newCandidateQualification.candidate = candidate
 
-        def activities = activityService.getActivities(candidate.id)
+        def activities = activityService.getCandidateActivities(candidate.id)
 
         render(view: 'edit', model: [candidateInstance        : candidate,
                                      documentInstanceList     : documentList,

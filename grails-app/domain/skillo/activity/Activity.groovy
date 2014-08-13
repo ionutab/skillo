@@ -8,16 +8,8 @@ import skillo.enums.ActivityType
  */
 class Activity {
 
-    Long domainModelId
-    String name
     ActivityType type
     Date timestamp
-    Long consultantId
-    String consultantName
-
-    def changes = [:]
-
-    static belongsTo = []
 
     static constraints = {
 
