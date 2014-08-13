@@ -8,9 +8,11 @@ class CandidateFieldChange {
     // the field of the candidate changed
     String fieldName
     //old field value
-    String from
+    String valueFrom
     //new field value
-    String to
+    String valueTo
+    // the activity which belongs
+    CandidateActivity activity
 
     static belongsTo = [activity:CandidateActivity]
 

@@ -17,14 +17,7 @@ CREATE TABLE `skillo`.`post_code_temp` (
 ) ENGINE=InnoDB CHARSET=latin1;
 
 -- be sure to replace file location to server file location
-LOAD DATA LOCAL INFILE 'C:/s/short.csv'
-INTO TABLE SKILLO.POST_CODE_TEMP
-FIELDS TERMINATED BY ','
-OPTIONALLY ENCLOSED BY '"'
-ESCAPED BY ''
-LINES TERMINATED BY '\n'
-IGNORE 1 LINES
-(postcode,latitude,longitude,easting,northing,grind_ref,county,district,ward,district_code,ward_code,country,country_code);
+
 
 LOAD DATA LOCAL INFILE 'C:/s/postcodes.csv'
 INTO TABLE SKILLO.POST_CODE_TEMP

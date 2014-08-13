@@ -1,6 +1,7 @@
 package skillo
 
 import skillo.activity.Activity
+import skillo.activity.CandidateActivity
 
 /**
  * DashboardController
@@ -8,12 +9,11 @@ import skillo.activity.Activity
  */
 class HomeController {
 
-    static scaffold = true
+    def activityService
 
     def list(){
-        print("################################ called")
-        def activities = Activity.listOrderByTimestamp(offset:10, max:20)
-        render(view: "/dashboard", model: [ Activity: activities])
+        def activities = activityService.getAllActivities()
+        render(view: "/home/dashboard", model: [ candidateActivities: activities])
     }
 
 }

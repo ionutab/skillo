@@ -1,10 +1,7 @@
 package skillo
 
-import core.util.DocumentUtil
 import grails.transaction.Transactional
-import org.joda.time.DateTime
-import org.joda.time.LocalDate
-import org.springframework.web.multipart.commons.CommonsMultipartFile
+import skillo.activity.CandidateActivity
 import skillo.candidate.Candidate
 import skillo.candidate.CandidateNote
 import skillo.candidate.CandidateQualification
@@ -12,6 +9,7 @@ import skillo.enums.ActivityType
 import skillo.filters.CandidateListSearch
 import skillo.filters.CandidateMatch
 
+@Transactional
 class CandidateController extends BaseController {
 
     def candidateSearchService
@@ -161,6 +159,7 @@ class CandidateController extends BaseController {
         }
 
         activityService.logCandidateActivity(ActivityType.UPDATE, getCurrentConsultant(),candidate)
+
         log.info("CANDIDATE UPDATED")
         redirect(action: "edit", id: candidate.id)
     }
@@ -197,6 +196,8 @@ class CandidateController extends BaseController {
             return
         }
 
+        activityService.logPayrollActivity(ActivityType.UPDATE, getCurrentConsultant(),candidate,candidate.payroll)
+
         log.info("CANDIDATE PAYMENT DETAILS UPDATED ")
         redirect(action: "edit", id: candidate.id)
     }
@@ -214,7 +215,13 @@ class CandidateController extends BaseController {
         def documentList = documentService.listDocuments(candidate.id)
         def availableQualifications = Qualification.findAll()
 
-        render(view: 'edit', model: [candidateInstance: candidate, documentInstanceList: documentList, availableQualifications: availableQualifications])
+        def activities = activityService.getCandidateActivities(candidate.id)
+
+
+        render(view: 'edit', model: [candidateInstance: candidate,
+                                     documentInstanceList: documentList,
+                                     candidateActivities: activities,
+                                     availableQualifications: availableQualifications])
     }
 
     /**

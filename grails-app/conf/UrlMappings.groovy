@@ -5,7 +5,7 @@ class UrlMappings {
 		/* 
 		 * Pages without controller 
 		 */
-		"/"				(view:"/home/dashboard")
+		"/"				(controller: "home", action: "list")
 		"/about"		(view:"/info/about")
 		"/contact"		(view:"/info/contact")
 		"/terms"		(view:"/info/terms")
@@ -14,6 +14,7 @@ class UrlMappings {
         "/testEC"         (view:"/testEC")
         "/testCL"       (view:"/testCL")
         "/testCP"       (view:"/testCP")
+
 
 		"/$controller/$action?/$id?"{
 			constraints {
