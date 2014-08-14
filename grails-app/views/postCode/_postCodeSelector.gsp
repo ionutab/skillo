@@ -7,7 +7,7 @@
 />
 <g:hiddenField
         name="postCode.previousCode"
-        id="postCodePlaceholder"
+        id="${attributeId}Placeholder"
         value="${postCode?.code} - ${postCode?.country}"
 />
 
@@ -22,7 +22,7 @@
     function doWeHaveAPostCodeAlready(){
         return "Search for a Post Code";
     }
-    $("#postCodeId").select2({
+    $("#${attributeId}").select2({
         placeholder: doWeHaveAPostCodeAlready,
         allowClear: true,
         // VERY IMPORTANT
@@ -38,9 +38,9 @@
             }
         },
         initSelection: function(element, callback) {
-            var id=$("#postCodeId").val();
+            var id=$("${attributeId}").val();
             if (id!=="") {
-                $("#s2id_postCodeId .select2-chosen").html($("#postCodePlaceholder").val());
+                $("#s2id_${attributeId} .select2-chosen").html($("#${attributeId}Placeholder").val());
             }
         },
         formatSelection: formatPostCodeSelection,

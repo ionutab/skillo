@@ -189,8 +189,7 @@ class CandidateController extends BaseController {
 
         if (!candidateUpdateService.update(candidate)) {
             def documentList = documentService.listDocuments(candidate.id)
-
-            render(view: 'edit', model: [candidateInstance: candidate, documentInstanceList: documentList])
+            render(view: 'edit', model: [candidateInstance: candidate, documentInstanceList: documentList, availablePayrollCompanies: PayrollCompany.list() as grails.converters.JSON])
             return
         }
 
@@ -198,6 +197,51 @@ class CandidateController extends BaseController {
 
         log.info("CANDIDATE PAYMENT DETAILS UPDATED ")
         redirect(action: "edit", id: candidate.id)
+    }
+
+    /**
+     * updates the details of a candidate qualification
+     */
+    def updateCandidateQualification() {
+        log.info("updateCandidateQualificationModal")
+        CandidateQualification cqe = CandidateQualification.get(params.id)
+        cqe.properties = params.editCandidateQualification
+
+        if(candidateQualificationService.update(cqe)){
+            redirect(action: "edit", id: cqe.candidate.id)
+            return
+        }
+
+        log.info("CANDIDATE PAYMENT DETAILS UPDATED ")
+        redirect(action: "edit", id: cqe.candidate.id)
+
+    }
+
+    /**
+     * updates the next of kin section in the candidate page
+     */
+    def updateNextOfKinDetails(){
+        log.info("updateNextOfKinDetails")
+
+        def candidate = Candidate.get(params.id)
+        if (!candidate) {
+            redirect(action: "list")
+            return
+        }
+
+        if(params.nok){
+            candidate.properties = params.nok
+        }
+
+        if (!candidateUpdateService.update(candidate)) {
+            def documentList = documentService.listDocuments(candidate.id)
+            render(view: 'edit', model: [candidateInstance: candidate, documentInstanceList: documentList, availablePayrollCompanies: PayrollCompany.list() as grails.converters.JSON])
+            return
+        }
+
+        log.info("CANDIDATE PAYMENT DETAILS UPDATED ")
+        redirect(action: "edit", id: candidate.id)
+
     }
 
     /**
@@ -315,29 +359,6 @@ class CandidateController extends BaseController {
         }
 
         log.info("Failed to save qualification for candidate" + candidateId)
-    }
-
-    /**
-     * updates the details of a candidate qualification
-     */
-    def updateCandidateQualification() {
-        log.info("updateCandidateQualificationModal")
-        CandidateQualification cqe = CandidateQualification.get(params.id)
-        cqe.properties = params.editCandidateQualification
-
-        if(candidateQualificationService.update(cqe)){
-            redirect(action: "edit", id: cqe.candidate.id)
-            return
-        }
-
-        log.info("Failed to save qualification for candidate" + cqe.candidate.id)
-    }
-
-    /**
-     * updates the next of kin section in the candidate page
-     */
-    def updateNextOfKinDetails(){
-
     }
 
     /**
