@@ -8,6 +8,8 @@ import skillo.enums.SearchOperator
 import skillo.filters.CandidateListSearch
 import skillo.filters.CandidateMatch
 
+import java.util.concurrent.ArrayBlockingQueue
+
 @Transactional
 class CandidateSearchService {
 
@@ -88,78 +90,16 @@ class CandidateSearchService {
 
     def Collection<Candidate> advancedSearch(Long qualification1, SearchOperator op1, Long qualification2, SearchOperator op2, Long qualification3, Long postcode){
 
+        String query="SELECT DISTINCT cq.candidate FROM CandidateQualification cq "
 
-        Criteria cc = Candidate.createCriteria()
+            if(qualification1){
+                    query += "where cq.qualification.id=?"
+                    return Candidate.executeQuery(query, [qualification1])
+            }
 
-        def candidateList =  cc.list() {
 
-                Qualification c1 = null
-                Qualification c2 = null
 
-                if(qualification1){
-                    c1 = Qualification.get(qualification1)
-                }
-
-                if(qualification2) {
-                    c2 = Qualification.get(qualification2)
-                }
-
-                if(op1 == SearchOperator.AND){
-                    and {
-                        if(c1){
-                            sqlRestriction(" exists (" +
-                                    "select * " +
-                                    "from " +
-                                    "candidate_qualification cq, " +
-                                    "qualification q where " +
-                                    "cq.qualification_id = q.id " +
-                                    "and cq.candidate_id = this_.id " +
-                                    "and lower(q.name) like ? " +
-                                    ")",["%" + c1.name.toLowerCase() + "%"])
-                        }
-                        if(c2){
-                            sqlRestriction(" exists (" +
-                                    "select * " +
-                                    "from " +
-                                    "candidate_qualification cq, " +
-                                    "qualification q where " +
-                                    "cq.qualification_id = q.id " +
-                                    "and cq.candidate_id = this_.id " +
-                                    "and lower(q.name) like ? " +
-                                    ")", ["%" + c2.name.toLowerCase() + "%"])
-                        }
-                    }
-                } else if (op1 == SearchOperator.OR){
-                    or {
-                        if(c1){
-                            sqlRestriction(" exists (" +
-                                    "select * " +
-                                    "from " +
-                                    "candidate_qualification cq, " +
-                                    "qualification q where " +
-                                    "cq.qualification_id = q.id " +
-                                    "and cq.candidate_id = this_.id " +
-                                    "and lower(q.name) like ? " +
-                                    ")",["%" + c1.name.toLowerCase() + "%"])
-                        }
-                        if(c2){
-                            sqlRestriction(" exists (" +
-                                    "select * " +
-                                    "from " +
-                                    "candidate_qualification cq, " +
-                                    "qualification q where " +
-                                    "cq.qualification_id = q.id " +
-                                    "and cq.candidate_id = this_.id " +
-                                    "and lower(q.name) like ? " +
-                                    ")", ["%" + c2.name.toLowerCase() + "%"])
-                        }
-                    }
-                }
-
-        }
-
-        return candidateList;
-
+        return null
     }
 
 }

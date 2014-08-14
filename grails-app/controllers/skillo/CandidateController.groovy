@@ -450,13 +450,6 @@ class CandidateController extends BaseController {
     def advancedSearch(){
         log.info("CandidateController.advancedSearch")
 
-        print("@@@@@@@@@@@@@@@@ Q1 "+params.qualification1)
-        print("@@@@@@@@@@@@@@@@ selectQ1 "+params.selectQ1)
-        print("@@@@@@@@@@@@@@@@ Q2 "+params.qualification2)
-        print("@@@@@@@@@@@@@@@@ selectQ2 "+params.selectQ2)
-        print("@@@@@@@@@@@@@@@@ Q3 "+params.qualification3)
-        print("@@@@@@@@@@@@@@@@ P1 "+params.postcode1)
-
         Long q1Id = null
         if(params.qualification1){
             q1Id = Long.valueOf(params.qualification1)
@@ -485,7 +478,6 @@ class CandidateController extends BaseController {
         //performing the search
         def candidateList = candidateSearchService.advancedSearch(q1Id,s1,q2Id,s2,q3Id,postcode)
 
-        print("!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!! "+candidateList.size())
 
         //this candidate will be displayed in the info pane on the right
         def firstCandidate = candidateList.size() > 0 ? candidateList.first() : null
