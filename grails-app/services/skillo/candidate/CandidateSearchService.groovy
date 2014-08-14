@@ -2,6 +2,7 @@ package skillo.candidate
 
 import grails.transaction.Transactional
 import org.grails.datastore.mapping.query.api.Criteria
+import skillo.Qualification
 import skillo.candidate.Candidate
 import skillo.enums.SearchOperator
 import skillo.filters.CandidateListSearch
@@ -87,15 +88,60 @@ class CandidateSearchService {
 
     def Collection<Candidate> advancedSearch(Long qualification1, SearchOperator op1, Long qualification2, SearchOperator op2, Long qualification3, Long postcode){
 
+
         Criteria cc = Candidate.createCriteria()
 
-        def result = cc.list() {
-            if(qualification1){
-                eq()
-            }
+        def candidateList =  cc.list() {
+
+                if(qualification1){
+                    Qualification c1 = Qualification.get(qualification1)
+                    sqlRestriction(" exists (" +
+                            "select * " +
+                            "from " +
+                            "candidate_qualification cq, " +
+                            "qualification q where " +
+                            "cq.qualification_id = q.id " +
+                            "and cq.candidate_id = this_.id " +
+                            "and lower(q.name) like ? " +
+                            ")",["%" + c1.name.toLowerCase() + "%"])
+                }
+
+                if(qualification2) {
+                    if (SearchOperator.AND == op1) {
+                        print("AAAAAAAAAAAAAAAAAAAAANDNNNNNNDDDDDD")
+                        and {
+                            Qualification c2 = Qualification.get(qualification2)
+                            sqlRestriction(" exists (" +
+                                    "select * " +
+                                    "from " +
+                                    "candidate_qualification cq, " +
+                                    "qualification q where " +
+                                    "cq.qualification_id = q.id " +
+                                    "and cq.candidate_id = this_.id " +
+                                    "and lower(q.name) like ? " +
+                                    ")", ["%" + c2.name.toLowerCase() + "%"])
+                        }
+                    }else if(SearchOperator.OR == op1){
+                        print("OOOOOOOOOOORRRRRRRRRRRRRRRRRRRR")
+                        or {
+                            Qualification c2 = Qualification.get(qualification2)
+                            sqlRestriction(" exists (" +
+                                    "select * " +
+                                    "from " +
+                                    "candidate_qualification cq, " +
+                                    "qualification q where " +
+                                    "cq.qualification_id = q.id " +
+                                    "and cq.candidate_id = this_.id " +
+                                    "and lower(q.name) like ? " +
+                                    ")", ["%" + c2.name.toLowerCase() + "%"])
+                        }
+                    }
+
+                }
+
         }
 
-        return result
+        return candidateList;
 
     }
 

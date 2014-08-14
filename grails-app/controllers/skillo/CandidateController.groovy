@@ -483,7 +483,9 @@ class CandidateController extends BaseController {
 
 
         //performing the search
-        def candidateList = candidateSearchService.advancedSearch(params.qualification1,params.selectQ1,params.qualification2,params.selectQ2,params.qualification3,params.postcode1)
+        def candidateList = candidateSearchService.advancedSearch(q1Id,s1,q2Id,s2,q3Id,postcode)
+
+        print("!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!! "+candidateList.size())
 
         //this candidate will be displayed in the info pane on the right
         def firstCandidate = candidateList.size() > 0 ? candidateList.first() : null
@@ -491,7 +493,7 @@ class CandidateController extends BaseController {
 
         def searchOperators = SearchOperator.values()
 
-        render(view: "list_split", model: [candidateList: candidateList, candidateTotal: candidateList.totalCount, operators:searchOperators])
+        render(view: "list_split", model: [candidateList: candidateList, candidateShow: firstCandidate, candidateTotal: candidateList.size(), operators:searchOperators])
 
 
     }

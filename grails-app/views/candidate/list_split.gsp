@@ -13,61 +13,74 @@
 
 <body>
 
-<div class="row" id="searchContent">
-    <div class="col-md-12">
-        <g:form action="list" controller="candidate" name="searchForm" id="candidateSearchForm" role="form">
-            <div class="row">
-                <div class="col-xs-3">
-                    <g:textField class="form-control" name="firstName"
-                                 placeholder="${message(code: 'candidate.search.firstName.label', default: 'First Name')}"
-                                 value="${candidateListFilter?.firstName}"/>
-                </div>
+<div class="col-md-12">
+    <div class="col-xs-10">
+        <div class="row" id="searchContent">
+            <div class="col-md-12">
+                <g:form action="list" controller="candidate" name="searchForm" id="candidateSearchForm" role="form">
+                    <div class="row">
+                        <div class="col-xs-3">
+                            <g:textField class="form-control" name="firstName"
+                                         placeholder="${message(code: 'candidate.search.firstName.label', default: 'First Name')}"
+                                         value="${candidateListFilter?.firstName}"/>
+                        </div>
 
-                <div class="col-xs-3">
-                    <g:textField class="form-control" name="lastName"
-                                 placeholder="${message(code: 'candidate.search.lastName.label', default: 'Last Name')}"
-                                 value="${candidateListFilter?.lastName}"/>
-                </div>
+                        <div class="col-xs-3">
+                            <g:textField class="form-control" name="lastName"
+                                         placeholder="${message(code: 'candidate.search.lastName.label', default: 'Last Name')}"
+                                         value="${candidateListFilter?.lastName}"/>
+                        </div>
 
-                <div class="col-xs-2">
-                    <g:textField class="form-control" name="telephoneNumber"
-                                 placeholder="${message(code: 'candidate.search.telephoneNumber.label', default: 'Telephone Nr')}"
-                                 value="${candidateListFilter?.telephoneNumber}"/>
-                </div>
+                        <div class="col-xs-2">
+                            <g:textField class="form-control" name="telephoneNumber"
+                                         placeholder="${message(code: 'candidate.search.telephoneNumber.label', default: 'Telephone Nr')}"
+                                         value="${candidateListFilter?.telephoneNumber}"/>
+                        </div>
 
-                <div class="col-xs-2">
-                    <g:textField class="form-control" name="qualification"
-                                 placeholder="${message(code: 'candidate.search.candidateQualification.label', default: 'Trade')}"
-                                 value="${candidateListFilter?.qualification}"/>
-                </div>
+                        <div class="col-xs-2">
+                            <g:textField class="form-control" name="qualification"
+                                         placeholder="${message(code: 'candidate.search.candidateQualification.label', default: 'Trade')}"
+                                         value="${candidateListFilter?.qualification}"/>
+                        </div>
 
-                <div class="col-xs-2">
-                    <g:submitButton name="list" class="btn btn-primary"
-                                    value="${message(code: 'default.button.search.label')}"/>
-                    <button type="submit" id="resetCandidateSearchForm" class="btn btn-info" name="reset" value="true">
-                        <span class="glyphicon glyphicon-refresh"></span>
-                    </button>
-                    <button type="button" id="advancedSearchButton" onclick="showhide()" class="btn btn-primary advancedSearchButton" data-toggle="button">${message(code: 'default.button.advanced.search.label')}</button>
-                    <script>
-                        function showhide()
-                        {
-                            var div = document.getElementById("advancedSearchContent");
-                            if (div.style.display !== "none") {
-                                div.style.display = "none";
-                            }
-                            else {
-                                div.style.display = "block";
-                            }
-                        }
-                    </script>
-                </div>
+                        <div class="col-xs-2">
+                            <g:submitButton name="list" class="btn btn-primary"
+                                            value="${message(code: 'default.button.search.label')}"/>
+                            <button type="submit" id="resetCandidateSearchForm" class="btn btn-info" name="reset"
+                                    value="true">
+                                <span class="glyphicon glyphicon-refresh"></span>
+                            </button>
+                        </div>
+                    </div>
+                </g:form>
             </div>
-        </g:form>
+        </div>
     </div>
+
+    <div class="col-xs-2">
+        <button type="button" id="advancedSearchButton" onclick="showhide()"
+                class="btn btn-primary advancedSearchButton"
+                data-toggle="button">${message(code: 'default.button.advanced.search.label')}</button>
+        <script>
+            function showhide() {
+                var advancedSearchDiv = document.getElementById("advancedSearchContent");
+                var searchDiv = document.getElementById("searchContent");
+                if (advancedSearchDiv.style.display !== "none") {
+                    advancedSearchDiv.style.display = "none";
+                    searchDiv.style.display= "block";
+                }
+                else {
+                    advancedSearchDiv.style.display = "block";
+                    searchDiv.style.display= "none";
+                }
+            }
+        </script>
+    </div>
+
 </div>
 
-<div class="row top10" id="advancedSearchContent" style="display: none"  >
-    <div class="col-md-12">
+<div class="row" id="advancedSearchContent" style="display: none"  >
+    <div class="col-md-12 top10">
         <div class="box-body" >
             <g:form controller="candidate" action="advancedSearch" class="form-horizontal">
                 <div class="panel-group" id="accordion">
