@@ -13,7 +13,7 @@
 
 <body>
 
-<div class="row">
+<div class="row" id="searchContent">
     <div class="col-md-12">
         <g:form action="list" controller="candidate" name="searchForm" id="candidateSearchForm" role="form">
             <div class="row">
@@ -89,10 +89,9 @@
                                                        class="col-sm-2 control-label">Where qualification</label>
 
                                                 <div class="col-md-2">
-                                                    %{--<input type="text" class="form-control" id="qualification1" name="qualification1">--}%
                                                     <g:render template="../qualification/qualificationSelector"
-                                                              model="['attributeName':'qualificationOne',
-                                                                      'attributeId':'qualificationOne' ,
+                                                              model="['attributeName':'qualification1',
+                                                                      'attributeId':'qualification1' ,
                                                                       'qualification':null]"/>
                                                 </div>
 
@@ -107,8 +106,10 @@
                                                 </g:if>
 
                                                 <div class="col-md-2">
-                                                    <input type="text" class="form-control" id="qualification2"
-                                                           name="qualification2">
+                                                    <g:render template="../qualification/qualificationSelector"
+                                                              model="['attributeName':'qualification2',
+                                                                      'attributeId':'qualification2' ,
+                                                                      'qualification':null]"/>
                                                 </div>
 
                                                 <g:if test="${operators != null && operators.size() > 0}">
@@ -122,8 +123,10 @@
                                                 </g:if>
 
                                                 <div class="col-md-2">
-                                                    <input type="text" class="form-control" id="qualification3"
-                                                           name="qualification3">
+                                                    <g:render template="../qualification/qualificationSelector"
+                                                              model="['attributeName':'qualification3',
+                                                                      'attributeId':'qualification3' ,
+                                                                      'qualification':null]"/>
                                                 </div>
                                             </div>
                                         </div>
@@ -134,8 +137,11 @@
                                                        class="col-sm-2 control-label">Where postcode</label>
 
                                                 <div class="col-md-2">
-                                                    <input type="text" class="form-control" id="postcode1"
-                                                           name="postcode1">
+
+                                                    <g:render template="../postCode/postCodeSelector"
+                                                              model="['attributeName': 'postcode1',
+                                                                      'attributeId'  : 'postcode1',
+                                                                      'postCode'     : null]"/>
                                                 </div>
 
                                             </div>
