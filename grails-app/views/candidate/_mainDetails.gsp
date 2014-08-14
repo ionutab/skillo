@@ -82,7 +82,7 @@
                 <g:textField type="tel" id="telephoneNumber" name="candidate.telephoneNumber" class="form-control"
                              value="${candidateInstance?.telephoneNumber}" disabled="${!editable}"/>
                 <g:javascript>
-                    $("#telephoneNumber").inputmask("99999-999-999", {"placeholder": "_____-___-___"});
+                    $("#telephoneNumber").inputmask("${message(code:'default.telephoneNumber.inputmask')}", {"placeholder": "${message(code:'default.telephoneNumber.placeholder')}"});
                 </g:javascript>
             </div>
         </div>
@@ -148,14 +148,12 @@
     </div>
 
     <div class="form-group ${hasErrors(bean: candidateInstance, field: 'address.details', 'has-error')}">
-        <label for="address.details"
-               class="col-md-3 control-label">
+        <label for="address.details" class="col-md-3 control-label">
             <g:message code="candidate.address.label" default="Address"/>
         </label>
 
         <div class="col-md-9">
-            <g:textArea rows="2" name="address.details" class="form-control"
-                        value="${candidateInstance?.address?.details}" disabled="${!editable}"/>
+            <g:textArea rows="2" name="address.details" class="form-control" value="${candidateInstance?.address?.details}" disabled="${!editable}"/>
             <g:eachError var="err" bean="${candidateInstance}" field="address.details">
                 <g:if test="${err.code == 'nullable'}">
                     <span class="control-label"><g:message code="custom.null.message"/></span>

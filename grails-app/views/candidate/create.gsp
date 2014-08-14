@@ -220,53 +220,10 @@
                                 <g:message code="candidate.mainTrade.label" default="Main Trade" />
                             </label>
                             <div class="col-md-9">
-                                <g:hiddenField
-                                        name="candidateMainTrade.id"
-                                        id="mainTradeId"
-                                        class="form-control"
-                                        value="${candidateInstance?.getMainTrade()?.qualification?.id}"
-                                />
-                                <g:hiddenField
-                                        name="candidateMainTrade.previousName"
-                                        id="candidateMainTradePlaceHolder"
-                                        value="${candidateInstance?.nationality?.nationality}"
-                                />
-
-                                <g:javascript>
-                                        function formatQualificationSelection(item) {
-                                            return item.name;
-                                        };
-
-                                        function formatQualificationResult(item) {
-                                            return item.name;
-                                        };
-                                        function doWeHaveAQualificationAlready(){
-                                            return "Search for a Qualification";
-                                        }
-                                        $("#mainTradeId").select2({
-                                            placeholder: doWeHaveAQualificationAlready,
-                                            allowClear: true,
-                                            ajax:{
-                                                url: '<g:createLink controller="qualification" action="getQualificationsByName" />',
-                                                dataType: 'json',
-                                                data: function(term, page){
-                                                    return {inputCode: term};
-                                                },
-                                                results: function (data, page) {
-                                                    return {results: data};
-                                                }
-                                            },
-                                            initSelection: function(element, callback) {
-                                                var id=$("#mainTradeId").val();
-                                                if (id!=="") {
-                                                    $("#s2id_nationalityId .select2-chosen").html($("#candidateMainTradePlaceHolder").val());
-                                                }
-                                            },
-                                            formatSelection: formatQualificationSelection,
-                                            formatResult: formatQualificationResult,
-                                            escapeMarkup: function (m) { return m; }
-                                        });
-                                </g:javascript>
+                                <g:render template="../qualification/qualificationSelector"
+                                          model="['attributeName':'candidateMainTrade.id',
+                                                  'attributeId':'mainTradeId' ,
+                                                  'qualification':candidateInstance?.getMainTrade()?.qualification]"/>
                                 <g:eachError var="err" bean="${candidateInstance}" field="candidateQualifications">
                                     <g:if test="${err.code == 'nullable'}">
                                         <span class="control-label"><g:message code="custom.null.message"/></span>
