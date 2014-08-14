@@ -93,8 +93,18 @@ class CandidateSearchService {
         String query="SELECT DISTINCT cq.candidate FROM CandidateQualification cq "
 
             if(qualification1){
-                    query += "where cq.qualification.id=?"
-                    return Candidate.executeQuery(query, [qualification1])
+                    if(qualification2){
+                        if(op1==SearchOperator.AND) {
+                            query += "where cq.qualification.id IN (:list)"
+                            return Candidate.executeQuery(query, [list: Arrays.asList(qualification1, qualification2)])
+                        }else if(op1 == SearchOperator.OR){
+                            query += "where cq.qualification.id=:firstQualificationId OR where cq.qualification.id=:secondQualificationId"
+                            return Candidate.executeQuery(query, [firstQualificationId:qualification1, secondQualificationId:qualification2])
+                        }
+                    }else{
+                        query += "where cq.qualification.id=?"
+                        return Candidate.executeQuery(query, [qualification1])
+                    }
             }
 
 
