@@ -46,10 +46,113 @@
                     <button type="submit" id="resetCandidateSearchForm" class="btn btn-info" name="reset" value="true">
                         <span class="glyphicon glyphicon-refresh"></span>
                     </button>
-
+                    <button type="button" id="advancedSearchButton" onclick="showhide()" class="btn btn-primary advancedSearchButton" data-toggle="button">${message(code: 'default.button.advanced.search.label')}</button>
+                    <script>
+                        function showhide()
+                        {
+                            var div = document.getElementById("advancedSearchContent");
+                            if (div.style.display !== "none") {
+                                div.style.display = "none";
+                            }
+                            else {
+                                div.style.display = "block";
+                            }
+                        }
+                    </script>
                 </div>
             </div>
         </g:form>
+    </div>
+</div>
+
+<div class="row top10" id="advancedSearchContent" style="display: none"  >
+    <div class="col-md-12">
+        <div class="box-body" >
+            <g:form controller="candidate" action="advancedSearch" class="form-horizontal">
+                <div class="panel-group" id="accordion">
+                    <div class="panel panel-default">
+                        <div class="panel-heading">
+                            <h4 class="panel-title">
+                                <a data-toggle="collapse" data-parent="#accordion" href="#collapseOne" class="">
+                                    <i class="fa fa-filter"></i>&nbsp;Filter
+                                </a>
+                            </h4>
+                        </div>
+                        <div class="row">
+                            <div id="collapseOne" class="panel-collapse collapse in">
+                                <div class="panel-body">
+                                    <div class="col-md-12">
+                                        <div class="row">
+                                            <div class="form-group ">
+                                                <label for="qualification"
+                                                       class="col-sm-2 control-label">Where qualification</label>
+
+                                                <div class="col-md-2">
+                                                    <input type="text" class="form-control" id="qualification1"
+                                                           name="qualification1">
+                                                </div>
+
+                                                <g:if test="${operators != null && operators.size() > 0}">
+                                                    <div class="col-md-1">
+                                                        <select class="form-control" name="selectQ1">
+                                                            <g:each in="${operators}" status="i" var="op">
+                                                                <option value=${op}>${op}</option>
+                                                            </g:each>
+                                                        </select>
+                                                    </div>
+                                                </g:if>
+
+                                                <div class="col-md-2">
+                                                    <input type="text" class="form-control" id="qualification2"
+                                                           name="qualification2">
+                                                </div>
+
+                                                <g:if test="${operators != null && operators.size() > 0}">
+                                                    <div class="col-md-1">
+                                                        <select class="form-control" name="selectQ2">
+                                                            <g:each in="${operators}" status="i" var="op">
+                                                                <option value=${op}>${op}</option>
+                                                            </g:each>
+                                                        </select>
+                                                    </div>
+                                                </g:if>
+
+                                                <div class="col-md-2">
+                                                    <input type="text" class="form-control" id="qualification3"
+                                                           name="qualification3">
+                                                </div>
+                                            </div>
+                                        </div>
+
+                                        <div class="row">
+                                            <div class="form-group ">
+                                                <label for="postcode"
+                                                       class="col-sm-2 control-label">Where postcode</label>
+
+                                                <div class="col-md-2">
+                                                    <input type="text" class="form-control" id="postcode1"
+                                                           name="postcode1">
+                                                </div>
+
+                                            </div>
+                                        </div>
+
+
+                                        <div class="row">
+                                            <div class="col-md-8">
+                                                <input type="submit" name="search" class="btn btn-primary btn" value="Search" id="Update">
+                                            </div>
+                                        </div>
+
+                                    </div>
+                                </div>
+
+                            </div>
+                        </div>
+                    </div>
+                </div>
+            </g:form>
+        </div>
     </div>
 </div>
 

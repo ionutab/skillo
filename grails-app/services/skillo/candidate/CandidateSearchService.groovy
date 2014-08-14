@@ -3,6 +3,7 @@ package skillo.candidate
 import grails.transaction.Transactional
 import org.grails.datastore.mapping.query.api.Criteria
 import skillo.candidate.Candidate
+import skillo.enums.SearchOperator
 import skillo.filters.CandidateListSearch
 import skillo.filters.CandidateMatch
 
@@ -82,6 +83,20 @@ class CandidateSearchService {
         }
 
         return candidateList;
+    }
+
+    def Collection<Candidate> advancedSearch(Long qualification1, SearchOperator op1, Long qualification2, SearchOperator op2, Long qualification3, Long postcode){
+
+        Criteria cc = Candidate.createCriteria()
+
+        def result = cc.list() {
+            if(qualification1){
+                eq()
+            }
+        }
+
+        return result
+
     }
 
 }

@@ -9,6 +9,7 @@ import skillo.candidate.Candidate
 import skillo.candidate.CandidateNote
 import skillo.candidate.CandidateQualification
 import skillo.enums.ActivityType
+import skillo.enums.SearchOperator
 import skillo.filters.CandidateListSearch
 import skillo.filters.CandidateMatch
 
@@ -53,8 +54,10 @@ class CandidateController extends BaseController {
         //saving to session
         session["candidateSearchFilter"] = filter
 
+        def searchOperators = SearchOperator.values()
+
         log.info("Rendering ${candidateList.size()} Candidates of ${candidateList.totalCount}")
-        render(view: "list_split", model: [candidateListFilter: filter, candidateList: candidateList, candidateTotal: candidateList.totalCount, candidateShow: firstCandidate])
+        render(view: "list_split", model: [candidateListFilter: filter, candidateList: candidateList, candidateTotal: candidateList.totalCount, candidateShow: firstCandidate, operators:searchOperators])
     }
 
     /**
@@ -439,4 +442,59 @@ class CandidateController extends BaseController {
 
         redirect(action: params.redirect, id: candidate.id)
     }
+
+    /**
+     * method used to search a candidate using multiple criteria
+     * @return
+     */
+    def advancedSearch(){
+        log.info("CandidateController.advancedSearch")
+
+        print("@@@@@@@@@@@@@@@@ Q1 "+params.qualification1)
+        print("@@@@@@@@@@@@@@@@ selectQ1 "+params.selectQ1)
+        print("@@@@@@@@@@@@@@@@ Q2 "+params.qualification2)
+        print("@@@@@@@@@@@@@@@@ selectQ2 "+params.selectQ2)
+        print("@@@@@@@@@@@@@@@@ Q3 "+params.qualification3)
+        print("@@@@@@@@@@@@@@@@ P1 "+params.postcode1)
+
+        Long q1Id = null
+        if(params.qualification1){
+            q1Id = Long.valueOf(params.qualification1)
+        }
+
+        SearchOperator s1 = SearchOperator.valueOf(params.selectQ1)
+
+        Long q2Id = null
+        if(params.qualification2){
+            q2Id = Long.valueOf(params.qualification2)
+        }
+
+        SearchOperator s2 = SearchOperator.valueOf(params.selectQ2)
+
+        Long q3Id = null
+        if(params.qualification3){
+            q3Id = Long.valueOf(params.qualification3)
+        }
+
+        Long postcode = null
+        if(params.postcode1){
+            postcode=Long.valueOf(params.postcode1)
+        }
+
+
+        //performing the search
+        def candidateList = candidateSearchService.advancedSearch(params.qualification1,params.selectQ1,params.qualification2,params.selectQ2,params.qualification3,params.postcode1)
+
+        //this candidate will be displayed in the info pane on the right
+        def firstCandidate = candidateList.size() > 0 ? candidateList.first() : null
+
+
+        def searchOperators = SearchOperator.values()
+
+        render(view: "list_split", model: [candidateList: candidateList, candidateTotal: candidateList.totalCount, operators:searchOperators])
+
+
+    }
+
+
 }
