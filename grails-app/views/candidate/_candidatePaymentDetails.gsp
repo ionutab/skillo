@@ -25,26 +25,12 @@
 
                         <div class="col-sm-9">
                             <g:if test="${editable}">
-                                <g:hiddenField
-                                        name="payroll.payrollCompany.id"
-                                        id="payrollCompanyId"
-                                        class="input-xlarge"
-                                        value="${candidateInstance?.payroll?.payrollCompany?.id}"
+                                <g:render template="../payrollCompany/payrollCompanySelectorInput"
+                                          model="['attributeName':'payroll.payrollCompany.id',
+                                                 'attributeId':'payrollCompanyId',
+                                                 'payrollCompany':candidateInstance?.payroll?.payrollCompany,
+                                                 'availablePayrollCompanies':availablePayrollCompanies]"
                                 />
-                                <label class="control-label">FOSRE</label>
-                                %{--
-                                <g:javascript>
-                                    function formatPayrollCompanies(item) { return item.name; };
-                                    $("#payrollCompanyId").select2({
-                                            data: {results:${availablePayrollCompanies}, text:'name'},
-                                            formatSelection: formatPayrollCompanies,
-                                            formatResult: formatPayrollCompanies,
-                                            placeholder: "Select a Payroll Company",
-                                            allowClear:true
-                                        }
-                                    );
-                                </g:javascript>
-                                --}%
                             </g:if>
                             <g:else>
                                 <g:if test="${candidateInstance?.payroll?.payrollCompany == null}">
@@ -60,8 +46,7 @@
                     <div class="form-group">
                         <label for="payroll.referenceNumber"
                                class="col-md-3 control-label">
-                            <g:message code="payroll.reference.number.short.label"
-                                       default="Ref No"/>
+                            <g:message code="payroll.reference.number.short.label" default="Ref No"/>
                         </label>
 
                         <div class="col-sm-9">
@@ -93,6 +78,28 @@
                         </label>
                         <div class="col-sm-9">
                             <g:textField id="payrollNationalInsuranceNumber" name="payroll.nationalInsuranceNumber" class="form-control" value="${candidateInstance?.payroll?.nationalInsuranceNumber}" disabled="${!editable}" />
+                        </div>
+                    </div>
+                    <div class="form-group">
+                        <label for="payroll.sortCode" class="col-md-3 control-label">
+                            <g:message code="payroll.sortCode.label" default="Sort Code"/>
+                        </label>
+                        <div class="col-sm-9">
+                            <g:textField id="payrollSortCode" name="payroll.sortCode" class="form-control" value="${candidateInstance?.payroll?.sortCode}" disabled="${!editable}" />
+                            <g:javascript>
+                                $("#payrollSortCode").inputmask("${message( code:'default.sortCode.inputMask')}", {"placeholder":"${message( code:'default.sortCode.placeHolder')}"});
+                            </g:javascript>
+                        </div>
+                    </div>
+                    <div class="form-group">
+                        <label for="payroll.nationalInsuranceNumber" class="col-md-3 control-label">
+                            <g:message code="payroll.accountNumber.label" default="Payroll Company"/>
+                        </label>
+                        <div class="col-sm-9">
+                            <g:textField id="payrollAccountNumber" name="payroll.accountNumber" class="form-control" value="${candidateInstance?.payroll?.accountNumber}" disabled="${!editable}" />
+                            <g:javascript>
+                                $("#payrollAccountNumber").inputmask("${message( code:'default.accNo.inputMask')}", {"placeholder":"${message( code:'default.accNo.placeHolder')}"});
+                            </g:javascript>
                         </div>
                     </div>
 

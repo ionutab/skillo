@@ -52,15 +52,16 @@
                                 <hr>
                                 <g:render template="/candidate/candidateQualificationList" />
                                 <hr>
+                                <g:render template="/candidate/candidateNextOfKinDetails" />
+                                <hr>
                                 <g:render template="/candidate/candidateNotesList" model="['candidateInstance':candidateInstance]"/>
+
                             </div><!-- /.tab-pane -->
                         </div><!-- /.tab-pane -->
                         <div class="tab-pane ${tab2 ? "active" : ""}" id="tab_2">
                             <div class="box box-solid">
                                 <div class="row">
-
-                                    <g:render template="/candidate/candidatePaymentDetails" />
-
+                                    <g:render template="/candidate/candidatePaymentDetails" model="['candidateInstance':candidateInstance, 'availablePayrollCompanies': availablePayrollCompanies]"/>
                                 </div><!-- /.row -->
                             </div><!-- /.row -->
                         </div><!-- /.tab-pane -->

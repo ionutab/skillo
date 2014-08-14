@@ -30,6 +30,12 @@ class Candidate implements SkilloDomainModelWithHistory {
     Payroll payroll
     Country nationality
 
+    //next of kin details
+    String nokName
+    String nokTelephone
+    String nokAddress
+    String nokRelationship
+
     Date dateCreated
     Date lastUpdated
 
@@ -58,6 +64,12 @@ class Candidate implements SkilloDomainModelWithHistory {
         email nullable: true, blank: false, email: true
 
         currentVersion bindable: true
+
+        nokName nullable: true, blank: false
+        nokAddress nullable: true, blank: false
+        nokTelephone nullable: true, blank: false
+        nokRelationship nullable: true, blank: false
+
     }
 
     static mapping = {

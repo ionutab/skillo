@@ -1,7 +1,10 @@
 package skillo
 
+import core.util.DocumentUtil
 import grails.transaction.Transactional
-import skillo.activity.CandidateActivity
+import org.joda.time.DateTime
+import org.joda.time.LocalDate
+import org.springframework.web.multipart.commons.CommonsMultipartFile
 import skillo.candidate.Candidate
 import skillo.candidate.CandidateNote
 import skillo.candidate.CandidateQualification
@@ -63,10 +66,9 @@ class CandidateController extends BaseController {
         //get new default candidate with initialiased boolean fields for checkboxes
         def candidate = candidateCreateService.getNewDefaultCandidate()
 
-        def availableQualifications = Qualification.list()
         def candidateMatches = new ArrayList<Candidate>()
 
-        [candidateInstance: candidate, CandidateMatches: candidateMatches, availableQualifications: availableQualifications as grails.converters.JSON]
+        [candidateInstance: candidate, CandidateMatches: candidateMatches]
     }
 
     /**
@@ -76,7 +78,13 @@ class CandidateController extends BaseController {
         log.info("save")
 
         def candidate = new Candidate(params.candidate)
-        def address = new Address(params.address)
+        def address = null
+        def postCode = PostCode.get(params.postCode.id)
+        if(params.address){
+            address = new Address(params.address)
+            address.postCode = postCode
+            candidate.address = address
+        }
 
         // we get a new candidateQualification instance with the parameter qualification
         if(params.candidateMainTrade.id){
@@ -86,19 +94,13 @@ class CandidateController extends BaseController {
             }
         }
 
-        def postCode = PostCode.get(params.postCode.id)
-
-        address.postCode = postCode
-        candidate.address = address
-
         candidate.consultant = getCurrentConsultant()
 
         if(candidateCreateService.save(candidate)){
             activityService.logCandidateActivity(ActivityType.CREATE, getCurrentConsultant(), candidate)
             redirect(action: "edit", id: candidate.id)
         } else {
-            def availableQualifications = Qualification.findAllByCanBeMainTrade(true)
-            render(view: "create", model: [candidateInstance: candidate, availableQualifications: availableQualifications as grails.converters.JSON])
+            render(view: "create", model: [candidateInstance: candidate])
         }
     }
 
@@ -112,7 +114,6 @@ class CandidateController extends BaseController {
             redirect(action: "list")
         }
 
-        def availableQualifications = Qualification.findAll()
         def documentList = documentService.listDocuments(candidate.id)
 
         def newCandidateQualification = new CandidateQualification()
@@ -123,8 +124,8 @@ class CandidateController extends BaseController {
         render(view: 'edit', model: [candidateInstance        : candidate,
                                      documentInstanceList     : documentList,
                                      candidateActivities      : activities,
-                                     availableQualifications  : availableQualifications as grails.converters.JSON,
-                                     newCandidateQualification: newCandidateQualification])
+                                     newCandidateQualification: newCandidateQualification,
+                                     availablePayrollCompanies: PayrollCompany.list() as grails.converters.JSON])
     }
 
     /**
@@ -151,15 +152,13 @@ class CandidateController extends BaseController {
         }
 
         if (!candidateUpdateService.update(candidate)) {
-            def availableQualifications = Qualification.findAll()
             def documentList = documentService.listDocuments(candidate.id)
 
-            render(view: 'edit', model: [candidateInstance: candidate, documentInstanceList: documentList, availableQualifications: availableQualifications as grails.converters.JSON])
+            render(view: 'edit', model: [candidateInstance: candidate, documentInstanceList: documentList])
             return
         }
 
         activityService.logCandidateActivity(ActivityType.UPDATE, getCurrentConsultant(),candidate)
-
         log.info("CANDIDATE UPDATED")
         redirect(action: "edit", id: candidate.id)
     }
@@ -189,10 +188,9 @@ class CandidateController extends BaseController {
         }
 
         if (!candidateUpdateService.update(candidate)) {
-            def availableQualifications = Qualification.findAll()
             def documentList = documentService.listDocuments(candidate.id)
 
-            render(view: 'edit', model: [candidateInstance: candidate, documentInstanceList: documentList, availableQualifications: availableQualifications as grails.converters.JSON])
+            render(view: 'edit', model: [candidateInstance: candidate, documentInstanceList: documentList])
             return
         }
 
@@ -213,15 +211,13 @@ class CandidateController extends BaseController {
         }
 
         def documentList = documentService.listDocuments(candidate.id)
-        def availableQualifications = Qualification.findAll()
 
         def activities = activityService.getCandidateActivities(candidate.id)
 
 
         render(view: 'edit', model: [candidateInstance: candidate,
                                      documentInstanceList: documentList,
-                                     candidateActivities: activities,
-                                     availableQualifications: availableQualifications])
+                                     candidateActivities: activities])
     }
 
     /**
@@ -261,8 +257,7 @@ class CandidateController extends BaseController {
             }
 
             def documentList = documentService.listDocuments(candidate.id)
-            def availableQualifications = Qualification.findAll()
-            render(view: 'edit', model: [candidateInstance: candidate, documentInstance: documentInstance, documentInstanceList: documentList, availableQualifications: availableQualifications])
+            render(view: 'edit', model: [candidateInstance: candidate, documentInstance: documentInstance, documentInstanceList: documentList, availablePayrollCompanies: PayrollCompany.list() as grails.converters.JSON])
             return
         }
 
@@ -336,6 +331,13 @@ class CandidateController extends BaseController {
         }
 
         log.info("Failed to save qualification for candidate" + cqe.candidate.id)
+    }
+
+    /**
+     * updates the next of kin section in the candidate page
+     */
+    def updateNextOfKinDetails(){
+
     }
 
     /**

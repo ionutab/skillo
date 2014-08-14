@@ -14,6 +14,9 @@ class Payroll {
     String registrationNumber
     String uniqueTaxReferenceNumber
 
+    String sortCode
+    String accountNumber
+
     static belongsTo = Candidate
 
     static constraints = {
@@ -22,5 +25,7 @@ class Payroll {
         nationalInsuranceNumber nullable: true, blank: false
         registrationNumber nullable: true, blank: false
         uniqueTaxReferenceNumber nullable: true, blank: false
+        sortCode nullable: true, blank: false
+        accountNumber nullable: true, blank: false
     }
 }

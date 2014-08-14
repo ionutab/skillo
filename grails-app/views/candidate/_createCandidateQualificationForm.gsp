@@ -29,7 +29,7 @@
             function doWeHaveAQualificationAlready(){
                 return "Search for a Qualification";
             }
-            $("#mainTradeId").select2({
+            $("#newCandidateQualificationId").select2({
                 placeholder: doWeHaveAQualificationAlready,
                 allowClear: true,
                 ajax:{
@@ -43,7 +43,7 @@
                     }
                 },
                 initSelection: function(element, callback) {
-                    var id=$("#mainTradeId").val();
+                    var id=$("#newCandidateQualificationId").val();
                     if (id!=="") {
                         $("#s2id_nationalityId .select2-chosen").html($("#candidateMainTradeName").val());
                     }

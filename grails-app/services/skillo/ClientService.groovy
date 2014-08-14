@@ -34,6 +34,10 @@ class ClientService {
             return false
         }
 
+        if(client.address?.details == null && client.address?.postCode != null){
+            client.errors.rejectValue("address", "custom.dependency.postCode")
+        }
+
         if(client.save(deepvalidate:true)){
             return true
         } else {

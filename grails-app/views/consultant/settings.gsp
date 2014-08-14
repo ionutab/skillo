@@ -183,8 +183,7 @@
 </div>
 
 <div class="box box-solid">
-    <g:form controller="consultant" action="savePassword" class="form-horizontal"
-            autocomplete="off">
+    <g:form controller="consultant" action="savePassword" class="form-horizontal"autocomplete="off">
         <div class="box-body ">
             <div class="panel-group" id="accordion">
                 <div class="panel panel-default">

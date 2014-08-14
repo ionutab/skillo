@@ -8,5 +8,6 @@ class Note {
     
     static constraints = {
         note nullable: true, blank: false
+        note type: 'text'
     }
 }

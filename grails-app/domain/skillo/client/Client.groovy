@@ -17,6 +17,8 @@ class Client implements SkilloDomainModelWithHistory {
     Boolean active = Boolean.TRUE
 
     String telephoneNumber
+    String faxNumber
+    String website
 
     Date dateCreated
     Date lastUpdated
@@ -26,7 +28,10 @@ class Client implements SkilloDomainModelWithHistory {
     static constraints = {
         name unique: true, blank: false, matches: "[a-zA-Z0-9-' ]+"
         registrationNumber unique: true, blank: false, matches: "[a-zA-Z0-9- ]+"
-        address nullable: true
+        address nullable: true, blank: false
+        telephoneNumber blank: false, nullable: true, minSize: 10, matches: "[0-9]{5}-[0-9]{3}-[0-9]{3}"
+        faxNumber blank: false, nullable: true, minSize: 10, matches: "[0-9]{5}-[0-9]{3}-[0-9]{3}"
+        website nullable: true, blank: false
     }
 
     static mapping = {

@@ -48,7 +48,12 @@
                                             <g:if test="${activity.activity.type == ActivityType.UPDATE}">
                                                 <g:each in="${activity.fieldChanges}" status="j" var="change">
                                                     <g:message code="candidate.${change.fieldName}.label" />
-                                                    &nbsp<g:message code="field.change.message.simple" args="${[change.valueFrom, change.valueTo]}"/>
+                                                    <g:if test="${change.valueFrom != 'null'}">
+                                                        &nbsp<g:message code="field.change.message.simple" args="${[change.valueFrom, change.valueTo]}"/>
+                                                    </g:if>
+                                                    <g:else>
+                                                        &nbsp<g:message code="field.change.message.noOld" args="${[change.valueTo]}"/>
+                                                    </g:else>
                                                 </g:each>
                                             </g:if>
                                         </div>

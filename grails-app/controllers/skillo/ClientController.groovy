@@ -30,14 +30,12 @@ class ClientController extends BaseController {
         log.info("ClientController.save")
 
         def client = new Client(params.client)
-        def address = new Address(params.address)
+        def address = null
+        def postCode = PostCode.get(params.postCode.id)
 
-        if(params.postCode && params.postCode.id){
-            def postCode = PostCode.get(params.postCode.id)
-            if(postCode){
-                address.postCode = postCode
-            }
-        }
+        address = new Address(params.address)
+        address.postCode = postCode
+        client.address = address
 
         if(clientService.save(client)){
             redirect(action: "list")
@@ -60,36 +58,37 @@ class ClientController extends BaseController {
     }
 
     def update(){
-
         def client = Client.get(params.id)
 
         if(!client){
-            flash.message = message(code: 'default.not.found.message', args: [message(code: 'client.label', default: 'Client'), params.id])
             redirect(action: "list")
             return
         }
 
-        if(client.address){
+        if(params.address != null){
+            if(client.address == null){
+                client.address = new Address()
+            }
             client.address.properties = params.address
         }
 
-        if(params.postCode?.id && !params.postCode?.id.equals(client.address?.postCode?.id)){
-            client.address?.postCode = PostCode.get(params.postCode.id)
-        }
-
         client.properties = params.client
-
-        if(client.version < Long.parseLong(params.version)){
-            log.info("badversion")
+        if(client.address){
+            if (params.postCode && params.postCode.id) {
+                if (!params.postCode.id.equals(client.address?.postCode?.id)) {
+                    client.address.postCode = PostCode.get(params.postCode.id)
+                }
+            } else {
+                client.address.postCode = null
+            }
         }
 
         if(clientService.update(client)){
-            log.info("we are saved")
+            redirect(action: "list")
         } else {
-            log.info("badversion")
+            render(view:'edit', model: ['clientInstance':client])
         }
 
-        redirect(action: "list")
         return
     }
 
@@ -97,7 +96,7 @@ class ClientController extends BaseController {
         log.info("ClientController.delete")
         def client = Client.get(params.id)
         if(!client){
-            redirect(acion:"list")
+            redirect(action:"list")
             return
         }
 
@@ -110,8 +109,15 @@ class ClientController extends BaseController {
         redirect(action:"list")
     }
 
-    def test(){
+    def show(){
+        log.info("ClientController.show")
+        def client = Client.get(params.id)
+        if(!client){
+            redirect(action:"list")
+            return
+        }
 
+        render(view:'show', model:['clientInstance':client])
     }
 
 }

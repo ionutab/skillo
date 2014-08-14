@@ -28,10 +28,18 @@ insert into payroll_company(name) values('FOSRE');
 -- candidate payment section details
 update payroll_company set name = 'FOSRE PAYE' where name='FOSRE';
 
-insert into payroll_company(name) values('FOSRE PAYE');
+-- insert into payroll_company(name) values('FOSRE PAYE');
 insert into payroll_company(name) values('FOSRE CIS');
 insert into payroll_company(name) values('FOSRE EPSC');
 insert into payroll_company(name) values('FOSRE EDM');
 insert into payroll_company(name) values('OTHER');
 
+alter table client modify telephone_number varchar(255) NULL;
+
+-- changing candidate note from varchar(255) to TEXT
+alter table candidate_note add note_new text;
+update candidate_note set note_new = note_note;
+alter table candidate_note change note_note note_old varchar(255);
+alter table candidate_note change note_new note_note text;
+alter table candidate_note drop column note_old;
 

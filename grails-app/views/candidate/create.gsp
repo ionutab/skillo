@@ -131,7 +131,10 @@
                                 <g:message code="postCode.code.label" default="Post Code" />
                             </label>
                             <div class="col-md-9">
-                                <g:render template="../postCode/postCodeSelector" model="['attributeName':'postCode.id','attributeId':'postCodeId' ,'postCode':candidateInstance?.address?.postCode]"/>
+                                <g:render template="../postCode/postCodeSelector"
+                                          model="['attributeName':'postCode.id',
+                                                  'attributeId':'postCodeId' ,
+                                                  'postCode':candidateInstance?.address?.postCode]"/>
                                 <g:javascript>
 
                                     $("#postCodeId").change(function() {

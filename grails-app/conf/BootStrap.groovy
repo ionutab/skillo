@@ -17,7 +17,6 @@ class BootStrap {
             initService.loadDefaultSuperuserAndRole()
             initService.loadDefaultQualificationsAndPostCodes()
         }
-
     }
 
     def destroy = {

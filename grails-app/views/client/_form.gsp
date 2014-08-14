@@ -7,7 +7,7 @@
         <g:textField name="client.name" class="form-control" value="${clientInstance?.name}" />
         <g:eachError var="err" bean="${clientInstance}" field="name">
             <g:if test="${err.code == 'matches.invalid'}">
-                <span class="control-label"><g:message code="custom.invalid.nonHumanName.message"/></span>
+                <span class="control-label"><g:message code="custom.invalid.name.message"/></span>
             </g:if>
             <g:if test="${err.code == 'nullable'}">
                 <span class="control-label"><g:message code="custom.null.message"/></span>
@@ -17,13 +17,13 @@
 </div>
 <div class="form-group ${hasErrors(bean: clientInstance, field: 'registrationNumber', 'has-error')}">
     <label for="client.registrationNumber" class="col-md-3 control-label" >
-        <g:message code="client.registrationNumber.label" default="Name" />
+        <g:message code="client.registrationNumber.short.label" default="Registration No" />
     </label>
     <div class="col-md-9">
         <g:textField name="client.registrationNumber" class="form-control" value="${clientInstance?.registrationNumber}" />
         <g:eachError var="err" bean="${clientInstance}" field="registrationNumber">
             <g:if test="${err.code == 'matches.invalid'}">
-                <span class="control-label"><g:message code="custom.invalid.fiscalNumber.message"/></span>
+                <span class="control-label"><g:message code="custom.invalid.match.lettersAndNumbers1"/></span>
             </g:if>
             <g:if test="${err.code == 'nullable'}">
                 <span class="control-label"><g:message code="custom.null.message"/></span>
@@ -33,7 +33,7 @@
 </div>
 <div class="form-group ${hasErrors(bean: clientInstance, field: 'telephoneNumber', 'has-error')}">
     <label for="client.telephoneNumber" class="col-md-3 control-label" >
-        <g:message code="client.telephoneNumber.label" default="Name" />
+        <g:message code="client.telephoneNumber.short.label" default="Telephone Nr" />
     </label>
     <div class="col-md-9">
         <g:textField name="client.telephoneNumber" id="telephoneNumber" class="form-control" value="${clientInstance?.telephoneNumber}" />
@@ -43,16 +43,40 @@
             </g:if>
         </g:eachError>
         <g:javascript>
-            $("#telephoneNumber").inputmask("99999-999-999", {"placeholder":"_____-___-___"});
+            $("#telephoneNumber").inputmask("${message(code: 'default.telephoneNumber.inputmask')}", {"placeholder":"${message( code: 'default.telephoneNumber.placeholder')}"});
         </g:javascript>
     </div>
 </div>
-<div class="form-group">
+<div class="form-group ${hasErrors(bean: clientInstance, field: 'faxNumber', 'has-error')}">
+    <label for="client.faxNumber" class="col-md-3 control-label" >
+        <g:message code="client.faxNumber.short.label" default="Fax Number" />
+    </label>
+    <div class="col-md-9">
+        <g:textField name="client.faxNumber" id="faxNumber" class="form-control" value="${clientInstance?.faxNumber}" />
+        <g:eachError var="err" bean="${clientInstance}" field="faxNumber">
+            <g:if test="${err.code == 'nullable'}">
+                <span class="control-label"><g:message code="custom.null.message"/></span>
+            </g:if>
+        </g:eachError>
+        <g:javascript>
+            $("#faxNumber").inputmask("${message(code: 'default.faxNumber.inputmask')}", {"placeholder":"${message( code: 'default.faxNumber.placeholder')}"});
+        </g:javascript>
+    </div>
+</div>
+<div class="form-group ${hasErrors(bean: clientInstance, field: 'address.details', 'has-error')}">
     <label for="address.details" class="col-md-3 control-label">
         <g:message code="client.address.label" default="Address" />
     </label>
     <div class="col-md-9">
         <g:textArea name="address.details" class="form-control" value="${clientInstance?.address?.details}" />
+        <g:eachError var="err" bean="${clientInstance}" field="address.details">
+            <g:if test="${err.code == 'nullable'}">
+                <span class="control-label"><g:message code="custom.null.message"/></span>
+            </g:if>
+            <g:if test="${err.code == 'custom.dependency.postCode'}">
+                <span class="control-label"><g:message code="custom.null.message"/> ( This is because you have filled in a Post Code ) </span>
+            </g:if>
+        </g:eachError>
     </div>
 </div>
 %{--<g:render contextPath="/address" template="/postCodeAutocompleteInput" model="${['postCodeId':clientInstance?.address?.postCode?.id]}"/>--}%
@@ -62,56 +86,23 @@
         <g:message code="postCode.code.label" default="Post Code" />
     </label>
     <div class="col-md-9">
-        <g:hiddenField
-                name="postCode.id"
-                id="postCodeId"
-                value="${clientInstance?.address?.postCode?.id}"
-        />
-        <g:hiddenField
-                name="postCode.previousCode"
-                id="postCodePlaceholder"
-                value="${clientInstance?.address?.postCode?.code} - ${clientInstance?.address?.postCode?.country}"
-        />
 
-        <g:javascript>
-                function formatPostCodeSelection(item) {
-                    return item.code + ' - ' + item.country;
-                };
-
-                function formatPostCodeResult(item) {
-                    return item.code + ' - ' + item.country;
-                };
-                function doWeHaveAPostCodeAlready(){
-                    return "Search for a Post Code";
-                }
-                $("#postCodeId").select2({
-                    placeholder: doWeHaveAPostCodeAlready,
-                    allowClear: true,
-//                                  VERY IMPORTANT
-                    minimumInputLength: 4,
-                    ajax:{
-                        url: '<g:createLink controller="postCode" action="getPostCodesByName" />',
-                        dataType: 'json',
-                        data: function(term, page){
-                            return {inputCode: term};
-                        },
-                        results: function (data, page) {
-                            return {results: data};
-                        }
-                    },
-                    formatSelection: formatPostCodeSelection,
-                    formatResult: formatPostCodeResult,
-                    initSelection: function(element, callback) {
-                        var id=$("#postCodeId").val();
-                        if (id!=="") {
-                            $("#s2id_postCodeId .select2-chosen").html($("#postCodePlaceholder").val());
-                        }
-                    },
-                    escapeMarkup: function (m) { return m; }
-
-                });
-
-        </g:javascript>
+        <g:render template="../postCode/postCodeSelector"
+                  model="['attributeName':'postCode.id',
+                          'attributeId':'postCodeId' ,
+                          'postCode':clientInstance?.address?.postCode]"/>
     </div>
 </div>
-
+<div class="form-group ${hasErrors(bean: clientInstance, field: 'website', 'has-error')}">
+    <label for="client.website" class="col-md-3 control-label" >
+        <g:message code="client.website.label" default="Website" />
+    </label>
+    <div class="col-md-9">
+        <g:textField name="client.website" id="website" class="form-control" value="${clientInstance?.website}" />
+        <g:eachError var="err" bean="${clientInstance}" field="website">
+            <g:if test="${err.code == 'nullable'}">
+                <span class="control-label"><g:message code="custom.null.message"/></span>
+            </g:if>
+        </g:eachError>
+    </div>
+</div>
