@@ -9,7 +9,9 @@ class Contact {
     String lastName
     String position
     String telephoneNumber
+    String landlineNumber
     String email
+    String role
 
     static belongsTo = [Client]
 
@@ -20,6 +22,8 @@ class Contact {
         lastName blank: false
         position nullable: true, blank: false
         telephoneNumber nullable: true, blank: false
+        landlineNumber nullable: true, blank: false
         email email:true, nullable: true, blank: false
+        role nullable: true, blank: false
     }
 }

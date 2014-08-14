@@ -1,4 +1,4 @@
-<%@ page import="skillo.candidate.Candidate" %>
+<%@ page import="skillo.Qualification; skillo.candidate.Candidate" %>
 <!doctype html>
 <html>
 
@@ -8,6 +8,7 @@
     <g:set var="entityName" value="${message(code: 'candidate.label', default: 'Candidate')}"/>
     <title><g:message code="candidate.list.label" args=" "/></title>
     <g:set var="page_title" value="${message(code: 'candidate.list.label')}" scope="request"/>
+    <r:require modules="search" />
 </head>
 
 <body>
@@ -88,8 +89,11 @@
                                                        class="col-sm-2 control-label">Where qualification</label>
 
                                                 <div class="col-md-2">
-                                                    <input type="text" class="form-control" id="qualification1"
-                                                           name="qualification1">
+                                                    %{--<input type="text" class="form-control" id="qualification1" name="qualification1">--}%
+                                                    <g:render template="../qualification/qualificationSelector"
+                                                              model="['attributeName':'qualificationOne',
+                                                                      'attributeId':'qualificationOne' ,
+                                                                      'qualification':null]"/>
                                                 </div>
 
                                                 <g:if test="${operators != null && operators.size() > 0}">

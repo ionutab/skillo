@@ -8,7 +8,7 @@
         value="${qualification?.id}"
 />
 <g:hiddenField
-        name="candidateMainTrade.previousName"
+        name="${attributeName}.previousName"
         id="${attributeId}Placeholder"
         value="${qualification?.name}"
 />
@@ -24,6 +24,7 @@
         function doWeHaveAQualificationAlready(){
             return "Search for a Qualification";
         }
+
         $("#${attributeId}").select2({
             placeholder: doWeHaveAQualificationAlready,
             allowClear: true,
@@ -47,4 +48,5 @@
             formatResult: formatQualificationResult,
             escapeMarkup: function (m) { return m; }
         });
+
 </g:javascript>

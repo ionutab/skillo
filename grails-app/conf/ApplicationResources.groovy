@@ -105,6 +105,10 @@ modules = {
         dependsOn 'inputMask','select2','iCheck'
     }
 
+    search {
+        dependsOn 'select2'
+    }
+
     application {
         resource url:'js/application.js'
     }

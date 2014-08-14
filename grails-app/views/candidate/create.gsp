@@ -220,10 +220,12 @@
                                 <g:message code="candidate.mainTrade.label" default="Main Trade" />
                             </label>
                             <div class="col-md-9">
+
                                 <g:render template="../qualification/qualificationSelector"
                                           model="['attributeName':'candidateMainTrade.id',
                                                   'attributeId':'mainTradeId' ,
                                                   'qualification':candidateInstance?.getMainTrade()?.qualification]"/>
+
                                 <g:eachError var="err" bean="${candidateInstance}" field="candidateQualifications">
                                     <g:if test="${err.code == 'nullable'}">
                                         <span class="control-label"><g:message code="custom.null.message"/></span>

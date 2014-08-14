@@ -6,7 +6,7 @@
         value="${postCode?.id}"
 />
 <g:hiddenField
-        name="postCode.previousCode"
+        name="${attributeName}.previousCode"
         id="${attributeId}Placeholder"
         value="${postCode?.code} - ${postCode?.country}"
 />
