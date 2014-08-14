@@ -93,24 +93,20 @@ class CandidateSearchService {
 
         def candidateList =  cc.list() {
 
+                Qualification c1 = null
+                Qualification c2 = null
+
                 if(qualification1){
-                    Qualification c1 = Qualification.get(qualification1)
-                    sqlRestriction(" exists (" +
-                            "select * " +
-                            "from " +
-                            "candidate_qualification cq, " +
-                            "qualification q where " +
-                            "cq.qualification_id = q.id " +
-                            "and cq.candidate_id = this_.id " +
-                            "and lower(q.name) like ? " +
-                            ")",["%" + c1.name.toLowerCase() + "%"])
+                    c1 = Qualification.get(qualification1)
                 }
 
                 if(qualification2) {
-                    if (SearchOperator.AND == op1) {
-                        print("AAAAAAAAAAAAAAAAAAAAANDNNNNNNDDDDDD")
-                        and {
-                            Qualification c2 = Qualification.get(qualification2)
+                    c2 = Qualification.get(qualification2)
+                }
+
+                if(op1 == SearchOperator.AND){
+                    and {
+                        if(c1){
                             sqlRestriction(" exists (" +
                                     "select * " +
                                     "from " +
@@ -119,12 +115,9 @@ class CandidateSearchService {
                                     "cq.qualification_id = q.id " +
                                     "and cq.candidate_id = this_.id " +
                                     "and lower(q.name) like ? " +
-                                    ")", ["%" + c2.name.toLowerCase() + "%"])
+                                    ")",["%" + c1.name.toLowerCase() + "%"])
                         }
-                    }else if(SearchOperator.OR == op1){
-                        print("OOOOOOOOOOORRRRRRRRRRRRRRRRRRRR")
-                        or {
-                            Qualification c2 = Qualification.get(qualification2)
+                        if(c2){
                             sqlRestriction(" exists (" +
                                     "select * " +
                                     "from " +
@@ -136,7 +129,31 @@ class CandidateSearchService {
                                     ")", ["%" + c2.name.toLowerCase() + "%"])
                         }
                     }
-
+                } else if (op1 == SearchOperator.OR){
+                    or {
+                        if(c1){
+                            sqlRestriction(" exists (" +
+                                    "select * " +
+                                    "from " +
+                                    "candidate_qualification cq, " +
+                                    "qualification q where " +
+                                    "cq.qualification_id = q.id " +
+                                    "and cq.candidate_id = this_.id " +
+                                    "and lower(q.name) like ? " +
+                                    ")",["%" + c1.name.toLowerCase() + "%"])
+                        }
+                        if(c2){
+                            sqlRestriction(" exists (" +
+                                    "select * " +
+                                    "from " +
+                                    "candidate_qualification cq, " +
+                                    "qualification q where " +
+                                    "cq.qualification_id = q.id " +
+                                    "and cq.candidate_id = this_.id " +
+                                    "and lower(q.name) like ? " +
+                                    ")", ["%" + c2.name.toLowerCase() + "%"])
+                        }
+                    }
                 }
 
         }
