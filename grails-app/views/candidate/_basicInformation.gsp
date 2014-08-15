@@ -14,10 +14,10 @@
 
     <div class="row">
         <div class="col-xs-12">
-            <table class="table">
+            <table class="table text-left">
                 <tbody>
                 <tr>
-                    <td>Status</td>
+                    <td><b>Status</b></td>
 
                     <g:if test="${candidateInstance?.active}">
                         <td><span class="label label-success">Active</span></td>
@@ -37,15 +37,15 @@
                 </tr>
                 --}%
                 <tr>
-                    <td>Member Since</td>
+                    <td><b>Member Since</b></td>
                     <td><g:formatDate date="${candidateInstance?.dateCreated}" /> </td>
                 </tr>
                 <tr>
-                    <td>Last Updated</td>
+                    <td><b>Last Updated</b></td>
                     <td><g:formatDate date="${candidateInstance?.lastUpdated}" /> </td>
                 </tr>
                 <tr>
-                    <td>Added by</td>
+                    <td><b>Added by</b></td>
                     <td>${candidateInstance?.consultant?.firstName + " " + candidateInstance?.consultant?.lastName}</td>
                 </tr>
                 </tbody>

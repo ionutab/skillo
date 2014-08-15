@@ -9,11 +9,6 @@
                     <span>Next of kin details</span>
                 </div>
             </div>
-            <g:if test="${!editable}">
-                <div class="box-tools pull-right">
-                    <g:link controller="candidate" action="edit" id="${candidateInstance?.id}" class="btn btn-sm bg-yellow"><i class="fa fa-pencil append-icon"></i>Edit</g:link>
-                </div>
-            </g:if>
         </div>
 
         <div class="box-body">

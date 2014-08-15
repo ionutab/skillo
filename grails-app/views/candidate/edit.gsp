@@ -12,7 +12,6 @@
     <title><g:message code="default.edit.label" args="[entityNaturalName]" /></title>
 
     <r:require modules="forms"/>
-    <link rel="stylesheet" href="${resource(dir: 'css', file: 'customButtons.css')}"/>
 </head>
 
 <body>
@@ -22,12 +21,11 @@
 <g:set var="tab3" value="${params.action == 'documentsUpload'}" />
 
 <div class="row">
-
     <div class="col-md-3">
         <div class="box box-solid">
             <div class="box-body">
                 <div class="row">
-                    <g:render template="/candidate/basicInformation" />
+                    <g:render template="/candidate/basicInformation" model="[candidateInstance: candidateInstance]" />
                 </div>
                 <div class="row">
                     <g:render template="/candidate/latestActivities" />

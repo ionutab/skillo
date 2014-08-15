@@ -48,7 +48,7 @@ class Candidate implements SkilloDomainModelWithHistory {
         lastName blank: false, matches: "[a-zA-Z-' ]+"
         nationality nullable: true
 
-        telephoneNumber blank: false, nullable: true, minSize: 10, matches: "[0-9]{5}-[0-9]{3}-[0-9]{3}"
+        telephoneNumber blank: false, nullable: true, minSize: 13, matches: "[0-9]{5}-[0-9]{3}-[0-9]{3}"
         otherTelephoneNumber nullable: true
 
         candidateNotes nullable: true
@@ -75,6 +75,9 @@ class Candidate implements SkilloDomainModelWithHistory {
     static mapping = {
         autoTimestamp true
         candidateQualifications cascade: "all-delete-orphan", sort: "expiryDate", order: "asc"
+
+        //must see how I can order descending by the property in the embedded note class
+        candidateNotes cascade: "all-delete-orphan"
         candidateHistory cascade: "all-delete-orphan"
     }
 

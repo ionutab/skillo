@@ -16,13 +16,10 @@
         <g:form action="save" role="form" class="form-horizontal">
             <div class="box-body">
                 <div class="row">
-                    <div class="col-md-12">
-
-                        <div class="col-md-4">
-                            <g:render template="template/form"/>
-                            <g:submitButton name="create" class="btn btn-success" value="${message(code: 'default.button.save.label', default: 'Save')}"/>
-                            <g:link controller="qualification" action="list" class="btn" name="Cancel">Cancel</g:link>
-                        </div>
+                    <div class="col-md-4">
+                        <g:render template="template/form"/>
+                        <g:submitButton name="create" class="btn btn-success" value="${message(code: 'default.button.save.label', default: 'Save')}"/>
+                        <g:link controller="qualification" action="list" class="btn" name="Cancel">Cancel</g:link>
                     </div>
                 </div>
             </div>

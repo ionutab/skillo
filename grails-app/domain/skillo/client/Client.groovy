@@ -29,8 +29,8 @@ class Client implements SkilloDomainModelWithHistory {
         name unique: true, blank: false, matches: "[a-zA-Z0-9-' ]+"
         registrationNumber unique: true, blank: false, matches: "[a-zA-Z0-9- ]+"
         address nullable: true, blank: false
-        telephoneNumber blank: false, nullable: true, minSize: 10, matches: "[0-9]{5}-[0-9]{3}-[0-9]{3}"
-        faxNumber blank: false, nullable: true, minSize: 10, matches: "[0-9]{5}-[0-9]{3}-[0-9]{3}"
+        telephoneNumber blank: false, nullable: true, minSize: 13, matches: "[0-9]{5}-[0-9]{3}-[0-9]{3}"
+        faxNumber blank: false, nullable: true, minSize: 13, matches: "[0-9]{5}-[0-9]{3}-[0-9]{3}"
         website nullable: true, blank: false
     }
 
@@ -60,5 +60,10 @@ class Client implements SkilloDomainModelWithHistory {
     @Override
     void addUpdateEvent() {
 
+    }
+
+    @Override
+    def List<Contact> getContacts(){
+        return Contact.findAllByClientAndActive(this,Boolean.TRUE)
     }
 }

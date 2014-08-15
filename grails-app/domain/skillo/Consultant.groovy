@@ -29,7 +29,7 @@ class Consultant {
         firstName blank: false, matches: "[a-zA-Z-' ]+"
         lastName blank: false, matches: "[a-zA-Z-' ]+"
 
-        telephoneNumber blank: false, nullable: true, matches: "[0-9]+"
+        telephoneNumber blank: false, nullable: true, minSize: 13, matches: "[0-9]{5}-[0-9]{3}-[0-9]{3}"
 
         website blank: false, nullable: true
         facebook blank: false, nullable: true

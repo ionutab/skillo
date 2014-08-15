@@ -15,34 +15,37 @@
 
 <div class="col-md-12">
     <div class="col-xs-10">
-        <div class="row" id="searchContent">
-            <div class="col-md-12">
+        <div id="searchContent">
                 <g:form action="list" controller="candidate" name="searchForm" id="candidateSearchForm" role="form">
                     <div class="row">
-                        <div class="col-xs-3">
+                        <div class="col-xs-4">
                             <g:textField class="form-control" name="firstName"
                                          placeholder="${message(code: 'candidate.search.firstName.label', default: 'First Name')}"
                                          value="${candidateListFilter?.firstName}"/>
                         </div>
 
-                        <div class="col-xs-3">
+                        <div class="col-xs-4">
                             <g:textField class="form-control" name="lastName"
                                          placeholder="${message(code: 'candidate.search.lastName.label', default: 'Last Name')}"
                                          value="${candidateListFilter?.lastName}"/>
                         </div>
 
                         <div class="col-xs-2">
-                            <g:textField class="form-control" name="telephoneNumber"
+                            <g:textField class="form-control" name="telephoneNumber" id="searchTelephoneNumber"
                                          placeholder="${message(code: 'candidate.search.telephoneNumber.label', default: 'Telephone Nr')}"
                                          value="${candidateListFilter?.telephoneNumber}"/>
-                        </div>
+                            <g:javascript>
+                                $("#searchTelephoneNumber").inputmask("${message(code: 'default.telephoneNumber.inputmask')}", {"placeholder":"${message(code: 'default.telephoneNumber.placeholder')}"});
+                            </g:javascript>
 
-                        <div class="col-xs-2">
-                            <g:textField class="form-control" name="qualification"
-                                         placeholder="${message(code: 'candidate.search.candidateQualification.label', default: 'Trade')}"
-                                         value="${candidateListFilter?.qualification}"/>
                         </div>
-
+                        %{--
+                            <div class="col-xs-2">
+                                <g:textField class="form-control" name="qualification"
+                                             placeholder="${message(code: 'candidate.search.candidateQualification.label', default: 'Trade')}"
+                                             value="${candidateListFilter?.qualification}"/>
+                            </div>
+                        --}%
                         <div class="col-xs-2">
                             <g:submitButton name="list" class="btn btn-primary"
                                             value="${message(code: 'default.button.search.label')}"/>
@@ -53,16 +56,14 @@
                         </div>
                     </div>
                 </g:form>
-            </div>
         </div>
     </div>
-
     <div class="col-xs-2">
-        <button type="button" id="advancedSearchButton" onclick="showhide()"
+        <button type="button" id="advancedSearchButton" onclick="showhideAdvancedSearchForm()"
                 class="btn btn-primary advancedSearchButton"
                 data-toggle="button">${message(code: 'default.button.advanced.search.label')}</button>
         <script>
-            function showhide() {
+            function showhideAdvancedSearchForm() {
                 var advancedSearchDiv = document.getElementById("advancedSearchContent");
                 var searchDiv = document.getElementById("searchContent");
                 if (advancedSearchDiv.style.display !== "none") {
@@ -76,7 +77,6 @@
             }
         </script>
     </div>
-
 </div>
 
 <div class="row" id="advancedSearchContent" style="display: none"  >
@@ -108,15 +108,7 @@
                                                                       'qualification':null]"/>
                                                 </div>
 
-                                                <g:if test="${operators != null && operators.size() > 0}">
-                                                    <div class="col-md-1">
-                                                        <select class="form-control" name="selectQ1">
-                                                            <g:each in="${operators}" status="i" var="op">
-                                                                <option value=${op}>${op}</option>
-                                                            </g:each>
-                                                        </select>
-                                                    </div>
-                                                </g:if>
+                                                <label class="col-md-1 control-label" >OR</label>
 
                                                 <div class="col-md-2">
                                                     <g:render template="../qualification/qualificationSelector"
@@ -124,21 +116,27 @@
                                                                       'attributeId':'qualification2' ,
                                                                       'qualification':null]"/>
                                                 </div>
+                                            </div>
+                                        </div>
 
-                                                <g:if test="${operators != null && operators.size() > 0}">
-                                                    <div class="col-md-1">
-                                                        <select class="form-control" name="selectQ2">
-                                                            <g:each in="${operators}" status="i" var="op">
-                                                                <option value=${op}>${op}</option>
-                                                            </g:each>
-                                                        </select>
-                                                    </div>
-                                                </g:if>
+                                        <div class="row">
+                                            <div class="form-group ">
+                                                <label for="qualification"
+                                                       class="col-sm-2 control-label">AND</label>
 
                                                 <div class="col-md-2">
                                                     <g:render template="../qualification/qualificationSelector"
                                                               model="['attributeName':'qualification3',
                                                                       'attributeId':'qualification3' ,
+                                                                      'qualification':null]"/>
+                                                </div>
+
+                                                <label class="col-md-1 control-label" >OR</label>
+
+                                                <div class="col-md-2">
+                                                    <g:render template="../qualification/qualificationSelector"
+                                                              model="['attributeName':'qualification4',
+                                                                      'attributeId':'qualification4' ,
                                                                       'qualification':null]"/>
                                                 </div>
                                             </div>
@@ -150,11 +148,7 @@
                                                        class="col-sm-2 control-label">Where postcode</label>
 
                                                 <div class="col-md-2">
-
-                                                    <g:render template="../postCode/postCodeSelector"
-                                                              model="['attributeName': 'postcode1',
-                                                                      'attributeId'  : 'postcode1',
-                                                                      'postCode'     : null]"/>
+                                                    <g:textField name="postcode1" id="postcode1" class="form-control" />
                                                 </div>
 
                                             </div>
@@ -169,7 +163,6 @@
 
                                     </div>
                                 </div>
-
                             </div>
                         </div>
                     </div>
@@ -183,7 +176,7 @@
 <div class="row top10">
     <div class="col-md-12">
         <g:if test="${candidateList.size() == 0}">
-            <div class="text-center">
+            <div class="page-background-info">
                 <h2>There are currently no candidates that match your criteria.</h2>
             </div>
         </g:if>

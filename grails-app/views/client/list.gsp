@@ -57,13 +57,13 @@
 
 <div class="row top10">
     <div class="col-md-12">
-        <g:if test="${ClientList.size() == 0}">
-            <div class="text-center">
+        <g:if test="${clientList.size() == 0}">
+            <div class="page-background-info">
                 <h2><g:message code="candidate.search.notFound.label"/></h2>
             </div>
         </g:if>
 
-        <g:if test="${ClientList.size() > 0}">
+        <g:if test="${clientList.size() > 0}">
             <div class="box box-solid">
                 <div class="box-body">
                     <div class="row">
@@ -86,25 +86,25 @@
                                     </tr>
                                     </thead>
                                     <tbody>
-                                    <g:each in="${ClientList}" status="i" var="Client">
+                                    <g:each in="${clientList}" status="i" var="clientInstance">
                                         <tr>
                                             <td>
-                                                ${Client?.name}
+                                                <g:link controller="client" action="details" id="${clientInstance.id}">${clientInstance?.name}</g:link>
                                             </td>
                                             <td>
-                                                ${Client?.registrationNumber}
+                                                ${clientInstance?.registrationNumber}
                                             </td>
                                             <td>
-                                                ${Client?.telephoneNumber}
+                                                ${clientInstance?.telephoneNumber}
                                             </td>
                                             <td>
-                                                ${Client?.address?.details}
+                                                ${clientInstance?.address?.details}
                                             </td>
                                             <td>
-                                                ${Client?.address?.postCode?.code}
+                                                ${clientInstance?.address?.postCode?.code}
                                             </td>
                                             <td>
-                                                <g:link controller="client" action="edit" id="${Client?.id}"><g:message
+                                                <g:link controller="client" action="edit" id="${clientInstance?.id}"><g:message
                                                         code="default.edit.label"
                                                         args=" "/></g:link>
                                             </td>
@@ -118,7 +118,7 @@
                                 <div class="col-md-4">
                                     <div class="dataTables_paginate paging_bootstrap">
                                         <div class="pagination">
-                                            <g:paginate total="${ClientTotal}"/>
+                                            <g:paginate total="${clientTotal}"/>
                                         </div>
                                     </div>
                                 </div>

@@ -106,7 +106,7 @@ modules = {
     }
 
     search {
-        dependsOn 'select2'
+        dependsOn 'inputMask','select2'
     }
 
     application {
@@ -116,12 +116,6 @@ modules = {
     /**
      * application COMPLETE LAYOUTS
      */
-    admin_light {
-        dependsOn 'bootstrap','jquery'
-        resource url:'css/admin_light.css'
-        resource url:'css/custombox.css'
-    }
-
     skillo_admin_lte {
         dependsOn 'bootstrap','admin_lte','jquery','jquery-validate','jquery-validation-ui','font_awesome'
     }

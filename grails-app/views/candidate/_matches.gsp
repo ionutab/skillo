@@ -1,4 +1,9 @@
 <div id="candidateMatches">
+<g:if test="${!matchCandidates || matchCandidates?.size() == 0}">
+    <div class="text-center">
+        <h2 class="page-background-info">You will be notified in this section if there are any candidates similar to the one you are currently adding.</h2>
+    </div>
+</g:if>
 <g:if test="${matchCandidates?.size() > 0}">
     <div class="col-md-7">
         <div class="box box-solid">

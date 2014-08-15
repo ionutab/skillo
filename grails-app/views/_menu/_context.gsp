@@ -11,11 +11,12 @@
         %{--<g:link action="edit" id="${params.id}"><g:message code="default.edit.label"  args="[entityName]"/></g:link>--}%
 
     <g:if test="${params.controller == 'candidate'}">
-        <g:if test="${params.action == 'show'}">
+        <g:if test="${params.action == 'details'}">
             &nbsp;
             <g:link action="edit" id="${candidateInstance.id}" ><i class="fa fa-pencil"></i>&nbsp;<g:message code="default.edit.label" args="[entityName]"/></g:link>
         </g:if>
     </g:if>
+
 
     </section>
 </g:if>

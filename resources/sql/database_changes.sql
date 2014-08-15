@@ -43,3 +43,9 @@ alter table candidate_note change note_note note_old varchar(255);
 alter table candidate_note change note_new note_note text;
 alter table candidate_note drop column note_old;
 
+alter table client modify website varchar(255) NULL;
+
+update contact set date_created = now();
+update contact set last_updated = now();
+
+drop table client_contact;

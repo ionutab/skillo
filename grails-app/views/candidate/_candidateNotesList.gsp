@@ -11,7 +11,7 @@
 
                     <g:if test="${cn == null || cn.size() <= 0}">
 
-                        <div class="col-md-12 col-lg-offset-2 page-background-info">
+                        <div class="col-md-12 page-background-info">
                             <h2><g:message code="candidateNotes.display.notFound.label"/></h2>
                         </div>
 
@@ -19,7 +19,7 @@
                     <g:else>
                         <g:each in="${candidateInstance.candidateNotes}" var="cnote" status="i">
                             <div class="callout callout-main-details callout-info" >
-                                <p><b><g:formatDate date="${cnote.note.date}" />&nbsp;${cnote.consultant.firstName + " " + cnote.consultant.lastName}</b></p>
+                                <p><b><g:formatDate date="${cnote.note.date}" />&nbsp;${cnote.consultant.getFullName()}</b></p>
                                 <p>${cnote.note.note}</p>
                             </div>
                         </g:each>

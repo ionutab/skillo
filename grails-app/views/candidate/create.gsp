@@ -99,7 +99,7 @@
                                     </div>
                                     <g:textField type="tel" id="telephoneNumber" name="candidate.telephoneNumber" class="form-control" value="${candidateInstance?.telephoneNumber}" />
                                     <g:javascript>
-                                        $("#telephoneNumber").inputmask("99999-999-999", {"placeholder":"_____-___-___"});
+                                        $("#telephoneNumber").inputmask("${message(code: 'default.telephoneNumber.inputmask')}", {"placeholder":"${message(code: 'default.telephoneNumber.placeholder')}"});
                                     </g:javascript>
                                 </div>
                             </div>
@@ -315,7 +315,7 @@ function remoteCandidateSearchForm(){
     });
 }
 </g:javascript>
-<g:render template="matches" />
+    <g:render template="matches" />
 </div>
 </body>
 </html>

@@ -88,28 +88,122 @@ class CandidateSearchService {
         return candidateList;
     }
 
-    def Collection<Candidate> advancedSearch(Long qualification1, SearchOperator op1, Long qualification2, SearchOperator op2, Long qualification3, Long postcode){
+    def Collection<Candidate> advancedSearch(Long qualification1, Long qualification2, Long qualification3, Long qualification4, String searchPostCode){
 
-        String query="SELECT DISTINCT cq.candidate FROM CandidateQualification cq "
+        Criteria cc = Candidate.createCriteria()
+
+        def candidateList =  cc.list() {
+
+            Qualification c1 = null
+            Qualification c2 = null
+            Qualification c3 = null
+            Qualification c4 = null
 
             if(qualification1){
-                    if(qualification2){
-                        if(op1==SearchOperator.AND) {
-                            query += "where cq.qualification.id IN (:list)"
-                            return Candidate.executeQuery(query, [list: Arrays.asList(qualification1, qualification2)])
-                        }else if(op1 == SearchOperator.OR){
-                            query += "where cq.qualification.id=:firstQualificationId OR where cq.qualification.id=:secondQualificationId"
-                            return Candidate.executeQuery(query, [firstQualificationId:qualification1, secondQualificationId:qualification2])
-                        }
-                    }else{
-                        query += "where cq.qualification.id=?"
-                        return Candidate.executeQuery(query, [qualification1])
-                    }
+                c1 = Qualification.get(qualification1)
             }
 
+            if(qualification2) {
+                c2 = Qualification.get(qualification2)
+            }
 
+            if(qualification3){
+                c3 = Qualification.get(qualification3)
+            }
 
-        return null
+            if(qualification4) {
+                c4 = Qualification.get(qualification4)
+            }
+
+            and {
+
+                if(c1){
+                    if(c2){
+                        or {
+                            sqlRestriction(" exists (" +
+                                    "select * " +
+                                    "from " +
+                                    "candidate_qualification cq, " +
+                                    "qualification q where " +
+                                    "cq.qualification_id = q.id " +
+                                    "and cq.candidate_id = this_.id " +
+                                    "and lower(q.name) like ? " +
+                                    ")",["%" + c1.name.toLowerCase() + "%"])
+
+                            sqlRestriction(" exists (" +
+                                    "select * " +
+                                    "from " +
+                                    "candidate_qualification cq, " +
+                                    "qualification q where " +
+                                    "cq.qualification_id = q.id " +
+                                    "and cq.candidate_id = this_.id " +
+                                    "and lower(q.name) like ? " +
+                                    ")",["%" + c2.name.toLowerCase() + "%"])
+                        }
+                    } else {
+                        sqlRestriction(" exists (" +
+                                "select * " +
+                                "from " +
+                                "candidate_qualification cq, " +
+                                "qualification q where " +
+                                "cq.qualification_id = q.id " +
+                                "and cq.candidate_id = this_.id " +
+                                "and lower(q.name) like ? " +
+                                ")",["%" + c1.name.toLowerCase() + "%"])
+                    }
+
+                }
+                if(c3){
+                    if(c4){
+
+                        or {
+                            sqlRestriction(" exists (" +
+                                    "select * " +
+                                    "from " +
+                                    "candidate_qualification cq, " +
+                                    "qualification q where " +
+                                    "cq.qualification_id = q.id " +
+                                    "and cq.candidate_id = this_.id " +
+                                    "and lower(q.name) like ? " +
+                                    ")",["%" + c3.name.toLowerCase() + "%"])
+
+                            sqlRestriction(" exists (" +
+                                    "select * " +
+                                    "from " +
+                                    "candidate_qualification cq, " +
+                                    "qualification q where " +
+                                    "cq.qualification_id = q.id " +
+                                    "and cq.candidate_id = this_.id " +
+                                    "and lower(q.name) like ? " +
+                                    ")",["%" + c4.name.toLowerCase() + "%"])
+                        }
+                    } else {
+                        sqlRestriction(" exists (" +
+                                "select * " +
+                                "from " +
+                                "candidate_qualification cq, " +
+                                "qualification q where " +
+                                "cq.qualification_id = q.id " +
+                                "and cq.candidate_id = this_.id " +
+                                "and lower(q.name) like ? " +
+                                ")", ["%" + c3.name.toLowerCase() + "%"])
+                    }
+                }
+
+                if(searchPostCode) {
+                    sqlRestriction(" exists (" +
+                            "select * " +
+                            "from " +
+                            "address addr, " +
+                            "post_code pc " +
+                            "where " +
+                            "this_.address_id = addr.id " +
+                            "and addr.post_code_id = pc.id " +
+                            "and pc.code like ? " +
+                            ")",[searchPostCode+"%"])
+                }
+
+            }
+        }
     }
-
 }

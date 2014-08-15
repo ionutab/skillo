@@ -1,11 +1,14 @@
 package skillo
 
+import grails.transaction.Transactional
 import skillo.client.Client
 import skillo.filters.ClientListFilter
 
+@Transactional
 class ClientController extends BaseController {
 
     def clientService
+    def contactService
     
     def index() {
         redirect(action: "list")
@@ -18,7 +21,7 @@ class ClientController extends BaseController {
             bindData(filter,params.search)
         }
         def clientList = clientService.search(filter)
-        [clientListFilter:filter, ClientList:clientList, ClientTotal: clientList.totalCount]
+        [clientListFilter:filter, clientList:clientList, clientTotal: clientList.totalCount]
     }
 
     def create(){
@@ -100,24 +103,48 @@ class ClientController extends BaseController {
             return
         }
 
-        client.active = false
-
-        if(!client.save( deepvalidate:true,flush: true )){
-            redirect(action: "list")
-        }
+        clientService.delete(client.id)
 
         redirect(action:"list")
     }
 
-    def show(){
-        log.info("ClientController.show")
+    def details(){
+        log.info("ClientController.details")
         def client = Client.get(params.id)
         if(!client){
             redirect(action:"list")
             return
         }
-
-        render(view:'show', model:['clientInstance':client])
+        render(view:'details', model:['clientInstance':client, 'newClientContact':new Contact()])
     }
 
+    def addClientContact(){
+        log.info("addClientContact")
+        def client = Client.get(params.client.id)
+        if(!client){
+            redirect(action:"list")
+            return
+        }
+
+        def newClientContact = new Contact(params.newClientContact)
+        newClientContact.client = client
+        if(contactService.save(newClientContact)){
+            redirect(action: 'details', id: client.id)
+        } else {
+            render(view:'details', model:['clientInstance':client, 'newClientContact':newClientContact])
+        }
+    }
+
+    def deleteClientContact(){
+        log.info("deleteClientContact")
+
+        def clientContact = Contact.get(params.clientContact.id)
+        if(contactService.delete(clientContact)) {
+            log.info("delete SUCCESSFUL")
+        }
+
+        redirect(controller: "client", action: "details", id: clientContact.client.id)
+        return
+
+    }
 }

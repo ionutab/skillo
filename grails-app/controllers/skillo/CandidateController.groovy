@@ -54,10 +54,11 @@ class CandidateController extends BaseController {
         //saving to session
         session["candidateSearchFilter"] = filter
 
-        def searchOperators = SearchOperator.values()
+//        def searchOperators = SearchOperator.values()
+//        ,qoperators:searchOperators
 
         log.info("Rendering ${candidateList.size()} Candidates of ${candidateList.totalCount}")
-        render(view: "list_split", model: [candidateListFilter: filter, candidateList: candidateList, candidateTotal: candidateList.totalCount, candidateShow: firstCandidate, operators:searchOperators])
+        render(view: "list_split", model: [candidateListFilter: filter, candidateList: candidateList, candidateTotal: candidateList.totalCount, candidateShow: firstCandidate])
     }
 
     /**
@@ -435,7 +436,7 @@ class CandidateController extends BaseController {
         newCandidateNote.consultant = consultant
         newCandidateNote.note.date = new Date()
 
-        if (candidateNoteService.save(newCandidateNote, candidate.id)){
+        if (candidateNoteService.save(newCandidateNote)){
             redirect(action: params.redirect, id: candidate.id)
             return
         }
@@ -455,28 +456,28 @@ class CandidateController extends BaseController {
             q1Id = Long.valueOf(params.qualification1)
         }
 
-        SearchOperator s1 = SearchOperator.valueOf(params.selectQ1)
-
         Long q2Id = null
         if(params.qualification2){
             q2Id = Long.valueOf(params.qualification2)
         }
-
-        SearchOperator s2 = SearchOperator.valueOf(params.selectQ2)
 
         Long q3Id = null
         if(params.qualification3){
             q3Id = Long.valueOf(params.qualification3)
         }
 
-        Long postcode = null
-        if(params.postcode1){
-            postcode=Long.valueOf(params.postcode1)
+        Long q4Id = null
+        if(params.qualification4){
+            q4Id = Long.valueOf(params.qualification4)
         }
 
+        String searchPostCode = null
+        if(params.postcode1){
+            searchPostCode=params.postcode1
+        }
 
         //performing the search
-        def candidateList = candidateSearchService.advancedSearch(q1Id,s1,q2Id,s2,q3Id,postcode)
+        def candidateList = candidateSearchService.advancedSearch(q1Id,q2Id,q3Id,q4Id,searchPostCode)
 
 
         //this candidate will be displayed in the info pane on the right

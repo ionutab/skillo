@@ -5,15 +5,12 @@ class UrlMappings {
 		/* 
 		 * Pages without controller 
 		 */
-		"/"				(controller: "home", action: "list")
-		"/about"		(view:"/info/about")
-		"/contact"		(view:"/info/contact")
-		"/terms"		(view:"/info/terms")
-        "/map"          (view:"/home/map")
-        "/testDashboard"         (view:"/testDashboard")
-        "/testEC"         (view:"/testEC")
-        "/testCL"       (view:"/testCL")
-        "/testCP"       (view:"/testCP")
+		"/"				    (controller: "home", action: "list")
+		"/about"		    (view:"/info/about")
+		"/contact"		    (view:"/info/contact")
+		"/terms"		    (view:"/info/terms")
+        "/map"              (view:"/home/map")
+        "/testDashboard"    (view:"/testDashboard")
 
 
 		"/$controller/$action?/$id?"{
