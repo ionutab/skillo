@@ -61,9 +61,4 @@ class Client implements SkilloDomainModelWithHistory {
     void addUpdateEvent() {
 
     }
-
-    @Override
-    def List<Contact> getContacts(){
-        return Contact.findAllByClientAndActive(this,Boolean.TRUE)
-    }
 }
