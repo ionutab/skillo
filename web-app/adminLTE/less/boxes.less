@@ -59,7 +59,8 @@
             //text-transform: capitalize;
         }
         a {
-            color: #444;
+          /*commented in order to leave default color here*/
+            /*color: #444;*/
         }
         // Box Tools
         > .box-tools {
@@ -69,7 +70,8 @@
 
     // Box body
     .box-body {
-        padding: 10px;
+//        padding: 10px;
+        padding: 5px;
         .border-radius(0; 0; @box-border-radius; @box-border-radius);
         // Tables within the box body
         > table, > .table {
@@ -393,11 +395,24 @@
 
     > .loading-img {
         z-index: 1020;
-        background: transparent url('../img/ajax-loader1.gif') 50% 50% no-repeat;
+        background: transparent url('../img/ajax-loader.gif') 50% 50% no-repeat;
     }
 
     > .img-thumbnail {
       margin-bottom: 10px;
       border: none;
+    }
+
+    > .small-box-footer {
+      position: relative;
+      text-align: center;
+      padding: 3px 0;
+      display: block;
+      z-index: 10;
+      text-decoration: none;
+      color:@link-color;
+      &:hover {
+        color: @link-hover-color;
+      }
     }
 }
