@@ -10,7 +10,6 @@ class UrlMappings {
 		"/contact"		    (view:"/info/contact")
 		"/terms"		    (view:"/info/terms")
         "/map"              (view:"/home/map")
-        "/testDashboard"    (view:"/testDashboard")
 
 
 		"/$controller/$action?/$id?"{
