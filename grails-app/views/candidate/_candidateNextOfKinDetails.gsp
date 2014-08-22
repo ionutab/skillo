@@ -1,5 +1,4 @@
-<g:set var="editable"
-       value="${params.action == 'edit' || params.action == 'updateMainDetails' || params.action == 'updatePaymentDetails'}"/>
+<g:set var="editable" value="${params.action == 'edit' || params.action == 'updateMainDetails' || params.action == 'updatePaymentDetails'}"/>
 
 <div class="col-md-12">
     <div class="box box-solid">
@@ -10,11 +9,10 @@
                 </div>
             </div>
         </div>
-
         <div class="box-body">
             <g:form controller="candidate" action="updateMainDetails" class="form-horizontal" autocomplete="off">
                 <g:hiddenField name="id" value="${candidateInstance?.id}"/>
-                <g:hiddenField name="candidate.currentVersion" value="${candidateInstance?.version}"/>
+                <g:hiddenField name="nok.currentVersion" value="${candidateInstance?.version}"/>
                 <div class="row">
                     <div class="col-md-6">
                         <div class="form-group">
