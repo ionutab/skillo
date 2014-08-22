@@ -7,7 +7,7 @@
     <meta name="layout" content="admin_lte_layout"/>
     <g:set var="entityName" value="${message(code: 'candidate.label', default: 'Candidate')}"/>
     <title><g:message code="candidate.list.label" args=" "/></title>
-    <g:set var="page_title" value="${message(code: 'candidate.list.label')}" scope="request"/>
+    <g:set var="pageTitle" value="${message(code: 'candidate.list.label')}" scope="request"/>
     <r:require modules="search" />
 </head>
 
@@ -47,11 +47,9 @@
                             </div>
                         --}%
                         <div class="col-xs-2">
-                            <g:submitButton name="list" class="btn btn-primary"
-                                            value="${message(code: 'default.button.search.label')}"/>
-                            <button type="submit" id="resetCandidateSearchForm" class="btn btn-info" name="reset"
-                                    value="true">
-                                <span class="glyphicon glyphicon-refresh"></span>
+                            <g:submitButton name="list" class="btn btn-primary" value="${message(code: 'default.button.search.label')}"/>
+                            <button type="submit" id="resetCandidateSearchForm" class="btn btn-info" name="reset" value="true">
+                                <i class="fa fa-refresh"></i>
                             </button>
                         </div>
                     </div>
@@ -239,6 +237,9 @@
                     </div><!-- /.row -->
                 </div><!-- /.box-body -->
             </div><!-- /.box -->
+
+
+
         </g:if>
     </div><!-- /.box -->
 </div>

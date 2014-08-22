@@ -6,7 +6,7 @@
     <meta name="layout" content="admin_lte_layout"/>
     <g:set var="entityName" value="${message(code: 'qualification.label', default: 'Qualification')}"/>
     <g:set var="entityNaturalName" value="${qualificationInstance.name}"/>
-    <g:set var="page_title" value="${entityNaturalName}" scope="request"/>
+    <g:set var="pageTitle" value="${entityNaturalName}" scope="request"/>
     <title><g:message code="default.edit.label" args="[entityNaturalName]"/></title>
 </head>
 

@@ -23,7 +23,7 @@
                     <g:submitButton name="list" class="btn btn-primary"
                                     value="${message(code: 'default.button.search.label')}"/>
                     <button type="submit" id="resetQualificationSearchForm" class="btn btn-info" name="reset" value="true">
-                        <span class="glyphicon glyphicon-refresh"></span>
+                    <i class="fa fa-refresh"></i>
                     </button>
                     <g:javascript>
 
