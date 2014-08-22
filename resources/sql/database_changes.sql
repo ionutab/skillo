@@ -49,3 +49,11 @@ update contact set date_created = now();
 update contact set last_updated = now();
 
 drop table client_contact;
+-- 17/08/2014
+
+-- set max size of allowed file to upload in the database to 10MB
+SET GLOBAL max_allowed_packet=1073741824;
+
+-- 19/08/2014
+
+
