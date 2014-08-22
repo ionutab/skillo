@@ -2,11 +2,17 @@ package skillo
 
 class Comment {
     
-    Date date
     String comment
-    Boolean active
+    Boolean active = Boolean.TRUE
+
+    Date dateCreated
+    Date lastUpdated
 
     static constraints = {
         comment blank: false
+    }
+
+    static mapping = {
+        autoTimestamp true
     }
 }

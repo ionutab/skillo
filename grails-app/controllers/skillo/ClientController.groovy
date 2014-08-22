@@ -2,6 +2,7 @@ package skillo
 
 import grails.transaction.Transactional
 import skillo.client.Client
+import skillo.contact.Contact
 import skillo.filters.ClientListFilter
 
 @Transactional
@@ -19,9 +20,45 @@ class ClientController extends BaseController {
         ClientListFilter filter = new ClientListFilter()
         if(!params.reset){
             bindData(filter,params.search)
+            filter.sort=params.sort
+            filter.order=params.order
         }
+
         def clientList = clientService.search(filter)
-        [clientListFilter:filter, clientList:clientList, clientTotal: clientList.totalCount]
+
+        def clientFirst
+
+        if(params.id){
+            clientFirst = Client.get(params.id)
+        }
+
+        if(!clientFirst){
+            clientFirst = clientList != null && clientList.size() > 0 ? clientList.first() : null
+        }
+
+        [clientListFilter:filter, clientList:clientList, clientTotal: clientList.totalCount, clientInstance: clientFirst]
+    }
+
+    def fall(){
+        log.info("ClientController.list")
+        ClientListFilter filter = new ClientListFilter()
+        if(!params.reset){
+            bindData(filter,params.search)
+        }
+
+        def clientList = clientService.search(filter)
+
+        def clientFirst
+
+        if(params.id){
+            clientFirst = Client.get(params.id)
+        }
+
+        if(!clientFirst){
+            clientFirst = clientList != null && clientList.size() > 0 ? clientList.first() : null
+        }
+
+        [clientListFilter:filter, clientList:clientList, clientTotal: clientList.totalCount, clientShow: clientFirst]
     }
 
     def create(){
@@ -95,6 +132,21 @@ class ClientController extends BaseController {
         return
     }
 
+    def display(){
+        def client = Client.get(params.id)
+        render(template: 'basicInformation', model:[clientInstance: client])
+    }
+
+    def displayContacts(){
+        def client = Client.get(params.id)
+        render(template: 'contacts', layout:'ajax', model:[clientInstance: client])
+    }
+
+    def displayContactComments(){
+        def contact = Contact.get(params.id)
+        render(template: 'contactComments', model:[clientContactShow: contact])
+    }
+
     def delete(){
         log.info("ClientController.delete")
         def client = Client.get(params.id)
@@ -108,19 +160,21 @@ class ClientController extends BaseController {
         redirect(action:"list")
     }
 
-    def details(){
+    def show(){
         log.info("ClientController.details")
         def client = Client.get(params.id)
         if(!client){
             redirect(action:"list")
             return
         }
-        render(view:'details', model:['clientInstance':client, 'newClientContact':new Contact()])
+        ['clientInstance':client, 'newClientContact':new Contact()]
     }
 
     def addClientContact(){
         log.info("addClientContact")
+
         def client = Client.get(params.client.id)
+
         if(!client){
             redirect(action:"list")
             return
@@ -128,11 +182,10 @@ class ClientController extends BaseController {
 
         def newClientContact = new Contact(params.newClientContact)
         newClientContact.client = client
-        if(contactService.save(newClientContact)){
-            redirect(action: 'details', id: client.id)
-        } else {
-            render(view:'details', model:['clientInstance':client, 'newClientContact':newClientContact])
-        }
+
+        contactService.save(newClientContact)
+        render(view:'/contact/_contactForm', model:['clientInstance':client, 'newClientContact':newClientContact])
+        return
     }
 
     def deleteClientContact(){

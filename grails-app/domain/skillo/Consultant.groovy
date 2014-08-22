@@ -1,7 +1,7 @@
 package skillo
 
 import skillo.candidate.CandidateNote
-import skillo.client.ClientComment
+import skillo.contact.ContactComment
 import skillo.user.User
 
 class Consultant {
@@ -20,7 +20,7 @@ class Consultant {
     String facebook
     String twitter
 
-    static hasMany = [candidateNotes:CandidateNote, clientComments:ClientComment]
+    static hasMany = [candidateNotes:CandidateNote, clientComments:ContactComment]
     
     static constraints = {
         email blank: false, email: true

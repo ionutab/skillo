@@ -23,6 +23,9 @@ class ClientService {
             }
 
             eq("active", true)
+            if(filter.sort && filter.order){
+                order(filter.sort, filter.order)
+            }
         }
 
         return clientList

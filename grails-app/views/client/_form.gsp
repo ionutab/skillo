@@ -20,15 +20,18 @@
         <g:message code="client.registrationNumber.short.label" default="Registration No" />
     </label>
     <div class="col-md-9">
-        <g:textField name="client.registrationNumber" class="form-control" value="${clientInstance?.registrationNumber}" />
+        <g:textField name="client.registrationNumber" id="registrationNumber" class="form-control" value="${clientInstance?.registrationNumber}" />
         <g:eachError var="err" bean="${clientInstance}" field="registrationNumber">
             <g:if test="${err.code == 'matches.invalid'}">
-                <span class="control-label"><g:message code="custom.invalid.match.lettersAndNumbers1"/></span>
+                <span class="control-label"><g:message code="custom.invalid.match.digits"/></span>
             </g:if>
             <g:if test="${err.code == 'nullable'}">
                 <span class="control-label"><g:message code="custom.null.message"/></span>
             </g:if>
         </g:eachError>
+        <g:javascript>
+            $("#registrationNumber").inputmask("${message(code: 'default.registrationNumber.inputMask')}", {"placeholder":"${message( code: 'default.registrationNumber.placeHolder')}"});
+        </g:javascript>
     </div>
 </div>
 <div class="form-group ${hasErrors(bean: clientInstance, field: 'telephoneNumber', 'has-error')}">

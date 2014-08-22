@@ -12,7 +12,7 @@ class CandidateUpdateService {
 
             return false
         }
-        if (!candidate.save(deepvalidate:true )) {
+        if (!candidate.save(deepvalidate:true)) {
             log.info("CandidateService.SAVE")
             if(candidate.hasErrors()){
                 candidate.errors.each {

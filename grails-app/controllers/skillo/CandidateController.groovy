@@ -49,7 +49,14 @@ class CandidateController extends BaseController {
         def candidateList = candidateSearchService.search(filter)
 
         //this candidate will be displayed in the info pane on the right
-        def firstCandidate = candidateList.size() > 0 ? candidateList.first() : null
+        def firstCandidate
+        if(params.id){
+            firstCandidate = Candidate.get(params.id)
+        }
+
+        if(!firstCandidate){
+            firstCandidate = candidateList.size() > 0 ? candidateList.first() : null
+        }
 
         //saving to session
         session["candidateSearchFilter"] = filter
@@ -238,6 +245,7 @@ class CandidateController extends BaseController {
         }
 
         if (!candidateUpdateService.update(candidate)) {
+            log.info("NOT UPDATED NEXT OF KIN");
             def documentList = documentService.listDocuments(candidate.id)
             render(view: 'edit', model: [candidateInstance: candidate, documentInstanceList: documentList, availablePayrollCompanies: PayrollCompany.list() as grails.converters.JSON])
             return
@@ -259,9 +267,7 @@ class CandidateController extends BaseController {
         }
 
         def documentList = documentService.listDocuments(candidate.id)
-
         def activities = activityService.getCandidateActivities(candidate.id)
-
 
         render(view: 'edit', model: [candidateInstance: candidate,
                                      documentInstanceList: documentList,
@@ -335,13 +341,12 @@ class CandidateController extends BaseController {
      * returns the details of a candidate
      */
     def display() {
-        log.info("DISPLAY")
         def candidate = Candidate.get(params.id)
 
         def newCandidateNote = new CandidateNote()
         newCandidateNote.candidate = candidate
 
-        render(template: 'info', model: [candidateShow: candidate, newCandidateNote: newCandidateNote])
+        render(template: 'info', layout: 'ajax', model: [candidateShow: candidate, newCandidateNote: newCandidateNote])
     }
 
     /**

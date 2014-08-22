@@ -1,8 +1,9 @@
-<div class="col-xs-12 text-center">
-
-    <h2 class="bold">${clientInstance?.name }</h2>
-    <h4><g:message code="client.registrationNumber.short.label" />:&nbsp;${clientInstance?.registrationNumber}</h4>
-
+<div class="row text-center">
+    <div class="col-xs-12">
+        <h2 class="bold">${clientInstance?.name }</h2>
+        <h4><g:message code="client.registrationNumber.short.label" />:&nbsp;${clientInstance?.registrationNumber}</h4>
+    </div>
+</div>
     <div class="row">
         <div class="col-xs-12">
             <table class="table text-left">
@@ -23,13 +24,7 @@
                     <g:if test="${clientInstance?.address?.details}">
                         <tr>
                             <td><b><g:message code="client.address.label" /></b></td>
-                            <td>${clientInstance?.address?.details}</td>
-                        </tr>
-                    </g:if>
-                    <g:if test="${clientInstance?.address?.postCode?.code}">
-                        <tr>
-                            <td><b><g:message code="address.postcode.label" /> </b></td>
-                            <td>${clientInstance?.address?.postCode?.code}</td>
+                            <td>${clientInstance?.address?.details}&nbsp;-&nbsp;${clientInstance?.address?.postCode?.code}</td>
                         </tr>
                     </g:if>
                     <g:if test="${clientInstance?.website}">
@@ -43,5 +38,3 @@
             </table>
         </div>
     </div>
-
-</div>

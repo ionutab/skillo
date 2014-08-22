@@ -15,7 +15,7 @@ environments {
         dataSource {
             dbCreate = "update" // one of 'create', 'create-drop', 'update', 'validate', ''
             driverClassName = "com.mysql.jdbc.Driver"
-            url = "jdbc:mysql://localhost/skillo?useUnicode=yes&characterEncoding=UTF-8"
+            url = "jdbc:mysql://localhost/smrskillo?useUnicode=yes&characterEncoding=UTF-8"
             username = "root"
             password = ""
             logSql = true

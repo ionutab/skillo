@@ -1,7 +1,7 @@
-package skillo
+package skillo.contact
 
 import skillo.client.Client
-import skillo.client.ClientComment
+import skillo.contact.ContactComment
 
 class Contact {
 
@@ -19,7 +19,7 @@ class Contact {
 
     static belongsTo = [client:Client]
 
-    static hasMany = [clientComments:ClientComment]
+    static hasMany = [contactComments:ContactComment]
     
     static constraints = {
         firstName blank: false, matches: "[a-zA-Z-' ]+"

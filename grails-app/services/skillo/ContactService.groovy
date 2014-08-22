@@ -1,6 +1,7 @@
 package skillo
 
 import grails.transaction.Transactional
+import skillo.contact.Contact
 
 /**
  * Created by ionutab on 8/14/2014.
