@@ -48,6 +48,8 @@ class CandidateSearchService {
             if(filter.sort && filter.order){
                 order(filter.sort, filter.order)
             }
+
+            order("lastUpdated", "desc")
         }
 
         return candidateList
