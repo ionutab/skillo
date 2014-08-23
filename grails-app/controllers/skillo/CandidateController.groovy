@@ -125,7 +125,7 @@ class CandidateController extends BaseController {
 
         def newCandidateQualification = new CandidateQualification()
         newCandidateQualification.candidate = candidate
-        def activities = activityService.getCandidateActivities(Long.valueOf(params.id))
+        def activities = activityService.getCandidateActivities(Long.valueOf(candidate.id))
 
         render(view: 'edit', model: [candidateInstance        : candidate,
                                      documentInstanceList     : documentList,
