@@ -113,6 +113,10 @@ modules = {
         resource url:'js/application.js'
     }
 
+    remoteNonStopPageScroll{
+        resource url: 'adminLTE/js/plugins/remote-pagination/js/remoteNonStopPageScroll.js'
+    }
+
     /**
      * application COMPLETE LAYOUTS
      */

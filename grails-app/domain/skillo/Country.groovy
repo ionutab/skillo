@@ -19,5 +19,9 @@ class Country {
     static constraints = {
     }
 
+    String toString() {
+        return this.name
+    }
+
 
 }

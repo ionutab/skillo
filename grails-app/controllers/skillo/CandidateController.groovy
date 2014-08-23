@@ -1,14 +1,13 @@
 package skillo
 
-import core.util.DocumentUtil
 import grails.transaction.Transactional
-import org.joda.time.DateTime
-import org.joda.time.LocalDate
-import org.springframework.web.multipart.commons.CommonsMultipartFile
+import skillo.activity.Activity
 import skillo.candidate.Candidate
 import skillo.candidate.CandidateNote
 import skillo.candidate.CandidateQualification
 import skillo.enums.ActivityType
+import skillo.enums.DomainActivityType
+import skillo.enums.Operation
 import skillo.enums.SearchOperator
 import skillo.filters.CandidateListSearch
 import skillo.filters.CandidateMatch
@@ -60,9 +59,6 @@ class CandidateController extends BaseController {
 
         //saving to session
         session["candidateSearchFilter"] = filter
-
-//        def searchOperators = SearchOperator.values()
-//        ,qoperators:searchOperators
 
         log.info("Rendering ${candidateList.size()} Candidates of ${candidateList.totalCount}")
         render(view: "list_split", model: [candidateListFilter: filter, candidateList: candidateList, candidateTotal: candidateList.totalCount, candidateShow: firstCandidate])
@@ -129,13 +125,12 @@ class CandidateController extends BaseController {
 
         def newCandidateQualification = new CandidateQualification()
         newCandidateQualification.candidate = candidate
-
-        def activities = activityService.getCandidateActivities(candidate.id)
+        def activities = activityService.getCandidateActivities(Long.valueOf(params.id))
 
         render(view: 'edit', model: [candidateInstance        : candidate,
                                      documentInstanceList     : documentList,
-                                     candidateActivities      : activities,
                                      newCandidateQualification: newCandidateQualification,
+                                     activityInstanceTotal:activities.size(),
                                      availablePayrollCompanies: PayrollCompany.list() as grails.converters.JSON])
     }
 
@@ -162,16 +157,16 @@ class CandidateController extends BaseController {
             candidate.address.postCode = null
         }
 
+
         if (!candidateUpdateService.update(candidate)) {
             def documentList = documentService.listDocuments(candidate.id)
-
             render(view: 'edit', model: [candidateInstance: candidate, documentInstanceList: documentList])
             return
         }
 
         activityService.logCandidateActivity(ActivityType.UPDATE, getCurrentConsultant(),candidate)
         log.info("CANDIDATE UPDATED")
-        redirect(action: "edit", id: candidate.id)
+        redirect(action: "edit", id: candidate.id,candidateInstance: candidate)
     }
 
     /**
@@ -204,10 +199,10 @@ class CandidateController extends BaseController {
             return
         }
 
-        activityService.logPayrollActivity(ActivityType.UPDATE, getCurrentConsultant(),candidate,candidate.payroll)
+        activityService.logCandidateActivity(ActivityType.UPDATE, getCurrentConsultant(),candidate)
 
         log.info("CANDIDATE PAYMENT DETAILS UPDATED ")
-        redirect(action: "edit", id: candidate.id)
+        redirect(action: "edit", id: candidate.id,candidateInstance: candidate)
     }
 
     /**
@@ -218,13 +213,15 @@ class CandidateController extends BaseController {
         CandidateQualification cqe = CandidateQualification.get(params.id)
         cqe.properties = params.editCandidateQualification
 
+
         if(candidateQualificationService.update(cqe)){
-            redirect(action: "edit", id: cqe.candidate.id)
+            activityService.logCandidateQualificationActivity(ActivityType.UPDATE,getCurrentConsultant(),cqe.candidate,cqe, Operation.UPDATE)
+            redirect(action: "edit", id: cqe.candidate.id,candidateInstance: cqe.candidate)
             return
         }
 
         log.info("CANDIDATE PAYMENT DETAILS UPDATED ")
-        redirect(action: "edit", id: cqe.candidate.id)
+        redirect(action: "edit", id: cqe.candidate.id,candidateInstance: cqe.candidate)
 
     }
 
@@ -251,8 +248,9 @@ class CandidateController extends BaseController {
             return
         }
 
+        activityService.logCandidateActivity(ActivityType.UPDATE,getCurrentConsultant(),candidate)
         log.info("CANDIDATE PAYMENT DETAILS UPDATED ")
-        redirect(action: "edit", id: candidate.id)
+        redirect(action: "edit", id: candidate.id,candidateInstance: candidate)
 
     }
 
@@ -271,6 +269,7 @@ class CandidateController extends BaseController {
 
         render(view: 'edit', model: [candidateInstance: candidate,
                                      documentInstanceList: documentList,
+                                     activityInstanceTotal:activities.size(),
                                      candidateActivities: activities])
     }
 
@@ -284,7 +283,8 @@ class CandidateController extends BaseController {
         }
 
 
-        if(candidateUpdateService.delete()){
+        if(candidateUpdateService.delete(params.id)){
+            Candidate candidate = Candidate.get(params.id)
             activityService.logCandidateActivity(ActivityType.DELETE, getCurrentConsultant(),candidate)
         }
 
@@ -301,7 +301,8 @@ class CandidateController extends BaseController {
 
         List fileList = request.getFiles('files') // 'files' is the name of the input
 
-        def documentInstance = documentService.uploadDocument(candidate,fileList)
+        List<String> uploadedDocuments = new ArrayList<>()
+        def documentInstance = documentService.uploadDocument(candidate,fileList,uploadedDocuments)
 
         // if error was encountered wile uploading documents
         if(documentInstance!=null){
@@ -315,7 +316,9 @@ class CandidateController extends BaseController {
             return
         }
 
-        redirect(action: "edit", id: candidate.id)
+        activityService.logDocumentsActivity(ActivityType.UPDATE,getCurrentConsultant(),candidate,uploadedDocuments)
+
+        redirect(action: "edit", id: candidate.id,candidateInstance: candidate)
     }
 
     /**
@@ -364,7 +367,9 @@ class CandidateController extends BaseController {
             candidateId = Long.parseLong(params.id)
         }
         if (candidateQualificationService.save(newCandidateQualification, candidateId)) {
-            redirect(action: "edit", id: candidateId)
+            activityService.logCandidateQualificationActivity(ActivityType.UPDATE,getCurrentConsultant(),newCandidateQualification.candidate,newCandidateQualification, Operation.ADD)
+            redirect(action: "edit", id: candidateId,candidateInstance: newCandidateQualification.candidate)
+            return
         }
 
         log.info("Failed to save qualification for candidate" + candidateId)
@@ -383,10 +388,11 @@ class CandidateController extends BaseController {
         CandidateQualification cqDelete = CandidateQualification.get(params.id)
 
         if(candidateQualificationService.delete(cqDelete)) {
+            activityService.logCandidateQualificationActivity(ActivityType.UPDATE,getCurrentConsultant(),cqDelete.candidate,cqDelete, Operation.DELETE)
             log.info("delete SUCCESSFUL")
         }
 
-        redirect(controller: "candidate", action: "edit", id: cqDelete.candidate.id)
+        redirect(controller: "candidate", action: "edit", id: cqDelete.candidate.id,candidateInstance: cqDelete.candidate)
         return
 
     }
@@ -446,7 +452,7 @@ class CandidateController extends BaseController {
             return
         }
 
-        redirect(action: params.redirect, id: candidate.id)
+        redirect(action: params.redirect, id: candidate.id,candidateInstance: candidate)
     }
 
     /**
@@ -494,6 +500,12 @@ class CandidateController extends BaseController {
         render(view: "list_split", model: [candidateList: candidateList, candidateShow: firstCandidate, candidateTotal: candidateList.size(), operators:searchOperators])
 
 
+    }
+
+    def filter ={
+        params.max = Math.min(params.max ? params.int('max') : 3, 100)
+        def activities = activityService.getCandidateActivities(Long.valueOf(params.id))
+        render(template: 'latestActivities', model: [candidateActivities: activities, activityInstanceTotal:activities.size()])
     }
 
 

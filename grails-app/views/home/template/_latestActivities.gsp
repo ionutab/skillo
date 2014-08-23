@@ -1,4 +1,4 @@
-<%@ page import="skillo.activity.Activity; skillo.enums.ActivityType; skillo.enums.DomainActivityType;skillo.util.ActivityLoggingUtil" %>
+<%@ page import="skillo.activity.Activity; skillo.enums.ActivityType; skillo.enums.DomainActivityType" %>
 <div class="col-xs-12">
 
     <g:if test="${candidateActivities != null && !candidateActivities.isEmpty()}">
@@ -23,35 +23,38 @@
 
 
                         <g:if test="${activity.type == ActivityType.CREATE}">
-                            <b>${activity.modifiedObjectName}</b> has been added
+                            <g:link controller="candidate" action="show"
+                                    id="${activity.ownerId}"><b>${activity.modifiedObjectName}</b></g:link> has been added
                         </g:if>
                         <g:elseif test="${activity.type == ActivityType.UPDATE}">
-                            <b>${activity.modifiedObjectName}</b> has been updated
+                            <g:link controller="candidate" action="show"
+                                    id="${activity.ownerId}"><b>${activity.modifiedObjectName}</b></g:link> has been updated
                         </g:elseif>
                         <g:else>
-                            <b>${activity.modifiedObjectName}</b> has been deleted
+                            <g:link controller="candidate" action="show"
+                                    id="${activity.ownerId}"><b>${activity.modifiedObjectName}</b></g:link>  has been deleted
                         </g:else>
                         </p>
 
                         <p>
                         <g:if test="${activity.type == ActivityType.UPDATE}">
-                                <g:if test="${activity.domainActivityType != null}">
-                                    <g:if test="${activity.domainActivityType == DomainActivityType.PAYROLL}">
-                                        <i class="fa fa-info-circle">
-                                            Candidate payroll changed
-                                        </i>
-                                    </g:if>
-                                    <g:elseif test="${activity.domainActivityType == DomainActivityType.DOCUMENT}">
-                                        <i class="fa fa-info-circle">
-                                            Candidate documents changed
-                                        </i>
-                                    </g:elseif>
-                                    <g:elseif test="${activity.domainActivityType == DomainActivityType.CANDIDATE_QUALIFICATION}">
-                                        <i class="fa fa-info-circle">
-                                            Candidate qualification changed
-                                        </i>
-                                    </g:elseif>
+                            <g:if test="${activity.domainActivityType != null}">
+                                <g:if test="${activity.domainActivityType == DomainActivityType.PAYROLL}">
+                                    <i class="fa fa-info-circle">
+                                        Candidate payroll changed
+                                    </i>
                                 </g:if>
+                                <g:elseif test="${activity.domainActivityType == DomainActivityType.DOCUMENT}">
+                                    <i class="fa fa-info-circle">
+                                        Candidate documents changed
+                                    </i>
+                                </g:elseif>
+                                <g:elseif test="${activity.domainActivityType == DomainActivityType.CANDIDATE_QUALIFICATION}">
+                                    <i class="fa fa-info-circle">
+                                        Candidate qualification changed
+                                    </i>
+                                </g:elseif>
+                            </g:if>
                             <ul>
                                 <g:each in="${activity.fieldChanges}" status="j" var="change">
                                     <li>
@@ -137,13 +140,13 @@
                         </g:if>
                         </p>
                         <p>
-                            <span class="time"><i
-                                    class="fa fa-clock-o"></i>&nbsp${ActivityLoggingUtil.logActivityTimestamp(activity.timestamp)}
-                            </span>
+                           <span class="time"><i
+                                class="fa fa-clock-o"></i>&nbsp${skillo.util.ActivityLoggingUtil.logActivityTimestamp(activity.timestamp)}
+                        </span>
                             by ${activity.consultantName}
                         </p>
 
-                        </div>
+                      </div>
                     </g:each>
                 </div>
             </div>
@@ -152,6 +155,5 @@
     </g:if>
 </div>
 
-<util:remoteNonStopPageScroll action='filter' controller="candidate" total="${activityInstanceTotal}"
-                              update="activityTemplateDivId" heightOffset="2" loadingHtml="loadingGifDivId"
-                              id="${candidateInstance?.id}"/>
+<util:remoteNonStopPageScroll action='filter' controller="home" total="${activityInstanceTotal}"
+                              update="activityTemplateDivId" heightOffset="5" loadingHtml="loadingGifDivId"/>

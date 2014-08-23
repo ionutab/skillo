@@ -56,4 +56,9 @@ class PostCode {
         log.info("making PostCode")
     }
 
+
+    String toString() {
+        return this.code + " - "+this.country;
+    }
+
 }

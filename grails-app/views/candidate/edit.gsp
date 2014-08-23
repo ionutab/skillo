@@ -12,6 +12,7 @@
     <title><g:message code="default.edit.label" args="[entityNaturalName]" /></title>
 
     <r:require modules="forms"/>
+    <r:require modules="remoteNonStopPageScroll" />
 </head>
 
 <body>
@@ -27,8 +28,8 @@
                 <div class="row">
                     <g:render template="/candidate/basicInformation" model="[candidateInstance: candidateInstance]" />
                 </div>
-                <div class="row">
-                    <g:render template="/candidate/latestActivities" />
+                <div class="row" id="activityTemplateDivId" style="overflow-y:auto; height:500px;">
+                    <g:render template="/candidate/latestActivities"  />
                 </div>
             </div>
         </div>

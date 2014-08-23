@@ -1,7 +1,7 @@
 package skillo
 
 import skillo.activity.Activity
-import skillo.activity.CandidateActivity
+import skillo.candidate.Candidate
 
 /**
  * DashboardController
@@ -12,8 +12,12 @@ class HomeController {
     def activityService
 
     def list(){
-        def activities = activityService.getAllActivities()
-        render(view: "/home/dashboard", model: [ candidateActivities: activities])
+        render(view: "/home/dashboard",model: [candidateInstanceTotal: Candidate.count(),activityInstanceTotal: Activity.count()])
+    }
+
+    def filter ={
+        params.max = Math.min(params.max ? params.int('max') : 3, 10)
+        render(template: 'template/latestActivities', model: [candidateActivities:activityService.getAllActivities(), activityInstanceTotal: Activity.count()])
     }
 
 }

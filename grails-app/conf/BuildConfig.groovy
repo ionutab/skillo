@@ -68,6 +68,8 @@ grails.project.dependency.resolution = {
 
         compile ":joda-time:1.5"
 
+        compile ":remote-pagination:0.4.8"
+
         /*
         compile(":less-resources:1.3.3.2") {
             // depends on :resources:1.2.RC2 (and we are using a better one)

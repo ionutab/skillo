@@ -23,7 +23,7 @@ class DocumentService {
      * @param files
      * @return
      */
-    def Document uploadDocument(Candidate candidate, List files) {
+    def Document uploadDocument(Candidate candidate, List files,List<String> uploadedDocuments) {
 
         for (CommonsMultipartFile file : files) {
             if (file.empty) {
@@ -54,6 +54,8 @@ class DocumentService {
 
                     return documentInstance;
                 }
+
+                uploadedDocuments.add(documentInstance.filename)
             }
         }
 

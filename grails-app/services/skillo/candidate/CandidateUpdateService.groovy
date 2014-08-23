@@ -24,7 +24,7 @@ class CandidateUpdateService {
         return true
     }
 
-    def boolean delete(Long candidateId){
+    def boolean delete(String candidateId){
         def candidate = Candidate.get(candidateId)
         if (!candidate) {
             return false

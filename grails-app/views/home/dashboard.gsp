@@ -4,12 +4,18 @@
     <meta name="layout" content="admin_lte_layout"/>
     <g:set var="pageTitle" value="${message(code: 'dashboard.welcome.label')}" scope="request"/>
     <g:set var="layout_nocontextbar" value="false" scope="request"/>
+    <r:require modules="remoteNonStopPageScroll" />
 </head>
 
 <body>
 <div class="row">
-    <div class="col-md-4">
-        <g:render template="/candidate/latestActivities" />
+    <div class="col-md-12">
+        <div class="col-md-6">
+            <g:render template="template/dashboardInformation" />
+        </div>
+        <div class="col-md-6" id="activityTemplateDivId">
+            <g:render template="template/latestActivities" />
+        </div>
     </div>
 </div>
 </body>
