@@ -3,6 +3,7 @@
 <head>
     <meta name="layout" content="admin_lte_layout"/>
     <g:set var="layout_nocontextbar" value="false" scope="request"/>
+    <r:require modules="forms" />
 </head>
 
 <body>
@@ -137,7 +138,7 @@
                                 </g:eachError>
                             </g:hasErrors>
                             <g:javascript>
-                                $("#telephoneNumber").inputmask("99999-999-999", {"placeholder":"_____-___-___"});
+                                $("#telephoneNumber").inputmask("${message(code:'default.telephoneNumber.inputmask')}", {"placeholder": "${message(code:'default.telephoneNumber.placeholder')}"});
                             </g:javascript>
 
                         </div>
