@@ -23,16 +23,31 @@
 
 
                         <g:if test="${activity.type == ActivityType.CREATE}">
-                            <g:link controller="candidate" action="show"
-                                    id="${activity.ownerId}"><b>${activity.modifiedObjectName}</b></g:link> has been added
+                            <g:if test="${showLinks == true}">
+                                <g:link controller="candidate" action="show"
+                                        id="${activity.ownerId}"><b>${activity.modifiedObjectName}</b></g:link> has been added
+                            </g:if>
+                            <g:else>
+                                <b>${activity.modifiedObjectName}</b> has been added
+                            </g:else>
                         </g:if>
                         <g:elseif test="${activity.type == ActivityType.UPDATE}">
-                            <g:link controller="candidate" action="show"
-                                    id="${activity.ownerId}"><b>${activity.modifiedObjectName}</b></g:link> has been updated
+                            <g:if test="${showLinks == true}">
+                                <g:link controller="candidate" action="show"
+                                        id="${activity.ownerId}"><b>${activity.modifiedObjectName}</b></g:link> has been updated
+                            </g:if>
+                            <g:else>
+                                <b>${activity.modifiedObjectName}</b> has been updated
+                            </g:else>
                         </g:elseif>
                         <g:else>
-                            <g:link controller="candidate" action="show"
-                                    id="${activity.ownerId}"><b>${activity.modifiedObjectName}</b></g:link>  has been deleted
+                            <g:if test="${showLinks == true}">
+                                <g:link controller="candidate" action="show"
+                                        id="${activity.ownerId}"><b>${activity.modifiedObjectName}</b></g:link>  has been deleted
+                            </g:if>
+                            <g:else>
+                                <b>${activity.modifiedObjectName}</b> has been deleted
+                            </g:else>
                         </g:else>
                         </p>
 
@@ -45,7 +60,8 @@
                                 <g:elseif test="${activity.domainActivityType == DomainActivityType.DOCUMENT}">
                                     <i class="fa fa-info-circle"></i>&nbsp;Candidate documents changed
                                 </g:elseif>
-                                <g:elseif test="${activity.domainActivityType == DomainActivityType.CANDIDATE_QUALIFICATION}">
+                                <g:elseif
+                                        test="${activity.domainActivityType == DomainActivityType.CANDIDATE_QUALIFICATION}">
                                     <i class="fa fa-info-circle"></i>&nbsp;Candidate qualification changed
                                 </g:elseif>
                             </g:if>
@@ -134,13 +150,13 @@
                         </g:if>
                         </p>
                         <p>
-                           <span class="time"><i
-                                class="fa fa-clock-o"></i>&nbsp${skillo.util.ActivityLoggingUtil.logActivityTimestamp(activity.timestamp)}
-                        </span>
+                            <span class="time"><i
+                                    class="fa fa-clock-o"></i>&nbsp${skillo.util.ActivityLoggingUtil.logActivityTimestamp(activity.timestamp)}
+                            </span>
                             by ${activity.consultantName}
                         </p>
 
-                      </div>
+                        </div>
                     </g:each>
                 </div>
             </div>
@@ -149,4 +165,5 @@
     </g:if>
 </div>
 
-<util:remoteNonStopPageScroll action='filter' controller="home" total="${candidateActivities?.size()}" update="activityTemplateDivId" heightOffset="5" loadingHtml="loadingGifDivId"/>
+<util:remoteNonStopPageScroll action='filter' controller="home" total="${candidateActivities?.size()}"
+                              update="activityTemplateDivId" heightOffset="5" loadingHtml="loadingGifDivId"/>

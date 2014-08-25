@@ -508,7 +508,7 @@ class CandidateController extends BaseController {
     def filter ={
         params.max = Math.min(params.max ? params.int('max') : 3, 100)
         def activities = activityService.getCandidateActivities(Long.valueOf(params.id))
-        render(template: 'latestActivities', model: [candidateActivities: activities, activityInstanceTotal:activities.size()])
+        render(template: '/home/template/latestActivities', model: [candidateActivities: activities, activityInstanceTotal:activities.size()])
     }
 
 

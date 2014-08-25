@@ -13,7 +13,7 @@
             <g:render template="template/dashboardInformation" />
         </div>
         <div class="col-md-6" id="activityTemplateDivId">
-            <g:render template="template/latestActivities"  />
+            <g:render template="template/latestActivities" model="[showLinks:true]"  />
         </div>
     </div>
 </div>
