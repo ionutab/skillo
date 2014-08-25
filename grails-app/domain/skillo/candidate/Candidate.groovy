@@ -116,8 +116,6 @@ class Candidate implements SkilloDomainModelWithHistory {
     @Override
     void addUpdateEvent(Consultant eventConsultant) {
 
-
-
     }
 
     @Override

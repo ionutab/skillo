@@ -49,8 +49,11 @@ class CandidateController extends BaseController {
 
         //this candidate will be displayed in the info pane on the right
         def firstCandidate
+
         if(params.id){
-            firstCandidate = Candidate.get(params.id)
+            if(((String)params.id).isNumber()){
+                firstCandidate = Candidate.findByIdAndActive(params.id,true)
+            }
         }
 
         if(!firstCandidate){
@@ -130,6 +133,7 @@ class CandidateController extends BaseController {
         render(view: 'edit', model: [candidateInstance        : candidate,
                                      documentInstanceList     : documentList,
                                      newCandidateQualification: newCandidateQualification,
+                                     candidateActivities: activities,
                                      activityInstanceTotal:activities.size(),
                                      availablePayrollCompanies: PayrollCompany.list() as grails.converters.JSON])
     }
@@ -160,7 +164,8 @@ class CandidateController extends BaseController {
 
         if (!candidateUpdateService.update(candidate)) {
             def documentList = documentService.listDocuments(candidate.id)
-            render(view: 'edit', model: [candidateInstance: candidate, documentInstanceList: documentList])
+            def activities = activityService.getCandidateActivities(Long.valueOf(candidate.id))
+            render(view: 'edit', model: [candidateInstance: candidate, documentInstanceList: documentList, activityInstanceTotal:activities.size()])
             return
         }
 
@@ -498,8 +503,6 @@ class CandidateController extends BaseController {
         def searchOperators = SearchOperator.values()
 
         render(view: "list_split", model: [candidateList: candidateList, candidateShow: firstCandidate, candidateTotal: candidateList.size(), operators:searchOperators])
-
-
     }
 
     def filter ={

@@ -29,7 +29,7 @@
                     <g:render template="/candidate/basicInformation" model="[candidateInstance: candidateInstance]" />
                 </div>
                 <div class="row" id="activityTemplateDivId" style="overflow-y:auto; height:500px;">
-                    <g:render template="/candidate/latestActivities"  />
+                    <g:render template="/candidate/latestActivities" />
                 </div>
             </div>
         </div>

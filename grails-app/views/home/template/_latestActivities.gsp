@@ -40,19 +40,13 @@
                         <g:if test="${activity.type == ActivityType.UPDATE}">
                             <g:if test="${activity.domainActivityType != null}">
                                 <g:if test="${activity.domainActivityType == DomainActivityType.PAYROLL}">
-                                    <i class="fa fa-info-circle">
-                                        Candidate payroll changed
-                                    </i>
+                                    <i class="fa fa-info-circle"></i>&nbsp;Candidate payroll changed
                                 </g:if>
                                 <g:elseif test="${activity.domainActivityType == DomainActivityType.DOCUMENT}">
-                                    <i class="fa fa-info-circle">
-                                        Candidate documents changed
-                                    </i>
+                                    <i class="fa fa-info-circle"></i>&nbsp;Candidate documents changed
                                 </g:elseif>
                                 <g:elseif test="${activity.domainActivityType == DomainActivityType.CANDIDATE_QUALIFICATION}">
-                                    <i class="fa fa-info-circle">
-                                        Candidate qualification changed
-                                    </i>
+                                    <i class="fa fa-info-circle"></i>&nbsp;Candidate qualification changed
                                 </g:elseif>
                             </g:if>
                             <ul>
@@ -155,5 +149,4 @@
     </g:if>
 </div>
 
-<util:remoteNonStopPageScroll action='filter' controller="home" total="${activityInstanceTotal}"
-                              update="activityTemplateDivId" heightOffset="5" loadingHtml="loadingGifDivId"/>
+<util:remoteNonStopPageScroll action='filter' controller="home" total="${candidateActivities?.size()}" update="activityTemplateDivId" heightOffset="5" loadingHtml="loadingGifDivId"/>

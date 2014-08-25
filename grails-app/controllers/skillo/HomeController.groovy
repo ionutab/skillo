@@ -12,10 +12,10 @@ class HomeController {
     def activityService
 
     def list(){
-        render(view: "/home/dashboard",model: [candidateInstanceTotal: Candidate.count(),activityInstanceTotal: Activity.count()])
+        render(view: "/home/dashboard",model: [candidateInstanceTotal: Candidate.count(),candidateActivities:activityService.getAllActivities(),activityInstanceTotal: Activity.count()])
     }
 
-    def filter ={
+    def filter = {
         params.max = Math.min(params.max ? params.int('max') : 3, 10)
         render(template: 'template/latestActivities', model: [candidateActivities:activityService.getAllActivities(), activityInstanceTotal: Activity.count()])
     }

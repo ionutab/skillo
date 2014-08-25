@@ -16,7 +16,7 @@
 <div class="col-md-12">
     <div class="col-xs-10">
         <div id="searchContent">
-                <g:form action="list" controller="candidate" name="searchForm" id="candidateSearchForm" role="form">
+                <g:form action="list" controller="candidate" name="searchForm" role="form">
                     <div class="row">
                         <div class="col-xs-4">
                             <g:textField class="form-control" name="firstName"

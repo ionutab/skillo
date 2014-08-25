@@ -73,9 +73,9 @@ modules = {
     }
 
     inputMask {
-        resource url: 'adminLTE/js/input-mask/jquery.inputmask.js'
-        resource url: 'adminLTE/js/input-mask/jquery.inputmask.date.extensions.js'
-        resource url: 'adminLTE/js/input-mask/jquery.inputmask.extensions.js'
+        resource url: 'adminLTE/js/plugins/input-mask/jquery.inputmask.js'
+        resource url: 'adminLTE/js/plugins/input-mask/jquery.inputmask.date.extensions.js'
+        resource url: 'adminLTE/js/plugins/input-mask/jquery.inputmask.extensions.js'
     }
 
     admin_lte_less {
@@ -114,14 +114,14 @@ modules = {
     }
 
     remoteNonStopPageScroll{
-        resource url: 'adminLTE/js/plugins/remote-pagination/js/remoteNonStopPageScroll.js'
+        resource url:[plugin:'remote-pagination-0.4.8', dir:'js', file:'remoteNonStopPageScroll.js']
     }
 
     /**
      * application COMPLETE LAYOUTS
      */
     skillo_admin_lte {
-        dependsOn 'bootstrap','admin_lte','jquery','jquery-validate','jquery-validation-ui','font_awesome'
+        dependsOn 'bootstrap','admin_lte','jquery','jquery-validate','jquery-validation-ui','font_awesome','remoteNonStopPageScroll'
     }
 
     skillo_admin_lte_basic {
