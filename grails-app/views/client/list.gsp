@@ -13,7 +13,7 @@
 	<body>
 		<div class="row">
 			<div class="col-md-6">
-				<g:form action="list" controller="client" name="searchForm" role="form" method="GET">
+				<g:form action="list" controller="client" name="searchForm" role="form">
 					<div class="row">
 						<div class="col-xs-6">
 							<g:textField class="form-control" name="search.name" placeholder="${message(code: 'client.search.name.label', default: 'Name')}" value="${clientListFilter?.name}"/>
@@ -113,7 +113,7 @@
 				</div>
 			%{-- PANEL 2 - contacts per client --}%
 				<div class="col-md-6 col-sm-6" id="panel2">
-					<g:link url="#" data-toggle="modal" data-target="#createClientContactModal"><i class="fa fa-plus"></i>&nbsp;Contact</g:link>
+					<g:link url="#" data-toggle="modal" data-target="#createClientContactDetailsModal"><i class="fa fa-plus"></i>&nbsp;Contact</g:link>
 					<br/>
 					<br/>
 					<div id="clientContainer">

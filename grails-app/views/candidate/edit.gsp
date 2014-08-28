@@ -9,7 +9,7 @@
     <g:set var="entityNaturalName" value="${candidateInstance.firstName + ' ' + candidateInstance.lastName}" />
     <g:set var="pageTitle" value="${entityNaturalName}" scope="request"/>
 
-    <title><g:message code="default.edit.label" args="[entityNaturalName]" /></title>
+    <title>${new String(params.action)+' '+ candidateInstance.getFullName()}</title>
 
     <r:require modules="forms"/>
     <r:require modules="remoteNonStopPageScroll" />

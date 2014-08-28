@@ -109,19 +109,19 @@ modules = {
         dependsOn 'inputMask','select2'
     }
 
-    application {
-        resource url:'js/application.js'
-    }
-
     remoteNonStopPageScroll{
         resource url:[plugin:'remote-pagination-0.4.8', dir:'js', file:'remoteNonStopPageScroll.js']
+    }
+
+    application {
+        resource url:'js/skillo.inputs.js'
     }
 
     /**
      * application COMPLETE LAYOUTS
      */
     skillo_admin_lte {
-        dependsOn 'bootstrap','admin_lte','jquery','jquery-validate','jquery-validation-ui','font_awesome','remoteNonStopPageScroll'
+        dependsOn 'bootstrap','admin_lte','jquery','jquery-validate','jquery-validation-ui','font_awesome','remoteNonStopPageScroll','application'
     }
 
     skillo_admin_lte_basic {

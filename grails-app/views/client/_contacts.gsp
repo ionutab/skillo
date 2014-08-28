@@ -22,9 +22,11 @@
 								&nbsp;
 								<g:remoteLink class="btn btn-sm"
 								              controller="client"
-								              action="display" id="${contact.id}"
+								              action="getClientContactModal"
+                                              id="${contact.id}"
 								              elementId="${contact.id}"
-								              update="clientContactDetailsContainer">
+								              update="clientContactDetailsContainer"
+                                              onComplete="assertModalAndOpen()">
 									<i class="fa fa-pencil"></i>
 								</g:remoteLink>
 								%{--<button class="btn btn-info btn-sm" data-widget="remove"><i class="fa fa-times"></i></button>--}%
@@ -62,6 +64,40 @@
     </g:each>
 </div>
 
-<div id="clientContactDetailsContainer">
+<div id="newClientContactDetailsContainer">
 	<g:render template="../contact/createContactModal" model="['clientInstance':clientInstance]"/>
 </div>
+<div id="clientContactDetailsContainer">
+
+</div>
+<g:javascript>
+			function assertSaveSuccessAndClose(){
+				if($('#contactModalSuccess').val()){
+					$('#createClientContactDetailsModal').modal('hide');
+					window.location.href = "${createLink(controller: 'client', action: 'list', id: clientInstance?.id)}";
+				} else {
+				    applyTelephoneInputStates()
+				}
+			};
+
+            function assertUpdateSuccessAndClose(){
+                var updateClientContactForm = $('form[name="updateClientContactForm"]');
+                var updateSuccess = updateClientContactForm.find('input[name="contactModalSuccess"]').val();
+				if(updateSuccess === 'true' ){
+					$('#editClientContactDetailsModal').modal('hide');
+					window.location.href = "${createLink(controller: 'client', action: 'list', id: clientInstance?.id)}";
+				} else {
+				    applyTelephoneInputStates()
+				}
+			};
+
+			function assertModalAndOpen(){
+			    $('#editClientContactDetailsModal').modal('show');
+			    Skillo.applyTelephoneInputStates('${message(code: 'default.telephoneNumber.inputmask')}','${message(code: 'default.telephoneNumber.placeholder')}')
+			};
+
+            function applyClientContactFormState(){
+                	$("#newContactTelephoneNumber").inputmask("${message(code: 'default.telephoneNumber.inputmask')}", {"placeholder":"${message(code: 'default.telephoneNumber.placeholder')}"});
+                    $("#newContactLandlineNumber").inputmask("${message(code: 'default.telephoneNumber.inputmask')}", {"placeholder":"${message(code: 'default.telephoneNumber.placeholder')}"});
+            };
+</g:javascript>

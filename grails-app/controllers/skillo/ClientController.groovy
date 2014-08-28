@@ -26,7 +26,7 @@ class ClientController extends BaseController {
 
         def clientList = clientService.search(filter)
 
-        def clientFirst
+        Client clientFirst
 
         if(params.id){
             clientFirst = Client.get(params.id)
@@ -167,24 +167,45 @@ class ClientController extends BaseController {
             redirect(action:"list")
             return
         }
-        ['clientInstance':client, 'newClientContact':new Contact()]
+        ['clientInstance':client, contextClientContact:new Contact()]
     }
 
     def addClientContact(){
         log.info("addClientContact")
 
-        def client = Client.get(params.client.id)
+        Client client = Client.get(params.client.id)
+        Contact newClientContact = new Contact(params.contextClientContact)
+        newClientContact.client = client
 
-        if(!client){
+        Boolean success = contactService.save(newClientContact)
+        render(view:'/contact/_contactForm', layout:'ajax', model:['clientInstance':client, contextClientContact:newClientContact, 'contactModalSuccess':success])
+        return
+    }
+
+    def updateClientContact(){
+        log.info("updateClientContact")
+
+        Contact clientContact = Contact.get(params.contextClientContact?.id)
+        if(!clientContact){
             redirect(action:"list")
             return
         }
 
-        def newClientContact = new Contact(params.newClientContact)
-        newClientContact.client = client
+        bindData(clientContact,params.contextClientContact)
 
-        contactService.save(newClientContact)
-        render(view:'/contact/_contactForm', model:['clientInstance':client, 'newClientContact':newClientContact])
+        log.info(clientContact.id)
+        log.info(clientContact.client.id)
+
+        Boolean success = contactService.save(clientContact)
+        render(view:'/contact/_contactForm', layout:'ajax', model:[contextClientContact:clientContact, 'contactModalSuccess':success])
+        return
+    }
+
+    def getClientContactModal(){
+        log.info("getClientContactForm")
+
+        def contact = Contact.get(params.id)
+        render(view:'/contact/_editContactModal', layout:'ajax', model:[contextClientContact:contact, 'contactModalSuccess':false])
         return
     }
 
