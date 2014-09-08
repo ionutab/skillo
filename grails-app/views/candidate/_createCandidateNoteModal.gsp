@@ -19,9 +19,7 @@
                 </div>
                 <div class="modal-footer">
                     <div class="text-left">
-                        <g:submitButton class="btn btn-primary btn-sm"
-                                        name="${message(code: 'default.button.save.label', default: 'Save')}"
-                                        update="newCandidateQualificationForm" />
+                        <g:submitButton class="btn btn-primary btn-sm" name="${message(code: 'default.button.save.label', default: 'Save')}" />
                         <button type="button" class="btn btn-default btn-sm" data-dismiss="modal">Close</button>
                     </div>
                 </div>

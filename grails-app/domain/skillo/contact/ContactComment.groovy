@@ -6,7 +6,6 @@ import skillo.client.Client
 class ContactComment {
 
     Contact contact
-    Client client
     Consultant consultant
 
     Date date
@@ -19,7 +18,6 @@ class ContactComment {
 
     static constraints = {
         comment type: 'text', blank:false
-
     }
 
     static mapping = {

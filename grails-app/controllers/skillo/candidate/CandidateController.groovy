@@ -1,12 +1,14 @@
-package skillo
+package skillo.candidate
 
 import grails.transaction.Transactional
-import skillo.activity.Activity
-import skillo.candidate.Candidate
-import skillo.candidate.CandidateNote
-import skillo.candidate.CandidateQualification
+import skillo.Address
+import skillo.BaseController
+import skillo.Consultant
+import skillo.Document
+import skillo.Payroll
+import skillo.PayrollCompany
+import skillo.PostCode
 import skillo.enums.ActivityType
-import skillo.enums.DomainActivityType
 import skillo.enums.Operation
 import skillo.enums.SearchOperator
 import skillo.filters.CandidateListSearch

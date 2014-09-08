@@ -3,6 +3,7 @@ package skillo
 import grails.transaction.Transactional
 import skillo.client.Client
 import skillo.contact.Contact
+import skillo.contact.ContactComment
 import skillo.filters.ClientListFilter
 
 @Transactional
@@ -161,6 +162,16 @@ class ClientController extends BaseController {
     }
 
     def show(){
+        log.info("ClientController.show")
+        def client = Client.get(params.id)
+        if(!client){
+            redirect(action:"list")
+            return
+        }
+        ['clientInstance':client, contextClientContact:new Contact()]
+    }
+
+    def details(){
         log.info("ClientController.details")
         def client = Client.get(params.id)
         if(!client){
@@ -219,6 +230,23 @@ class ClientController extends BaseController {
 
         redirect(controller: "client", action: "details", id: clientContact.client.id)
         return
+    }
+
+    def addContactComment(){
+        log.info("addContactComment")
+
+        ContactComment clientComment = new ContactComment(params.newContactComment)
+
+        //consultant
+        Consultant consultant = getCurrentConsultant()
+        clientComment.consultant = consultant
+
+        contactService.saveContactComment(clientComment)
+        redirect(controller: "client", action: "list")
+        return
+    }
+
+    def addClientChargeRate(){
 
     }
 }

@@ -1,4 +1,4 @@
-package skillo
+package skillo.candidate
 
 class CandidateNoteController {
 

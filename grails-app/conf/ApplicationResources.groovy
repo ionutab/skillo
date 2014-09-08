@@ -75,6 +75,7 @@ modules = {
     inputMask {
         resource url: 'adminLTE/js/plugins/input-mask/jquery.inputmask.js'
         resource url: 'adminLTE/js/plugins/input-mask/jquery.inputmask.date.extensions.js'
+        resource url: 'adminLTE/js/plugins/input-mask/jquery.inputmask.numeric.extensions.js'
         resource url: 'adminLTE/js/plugins/input-mask/jquery.inputmask.extensions.js'
     }
 
@@ -106,7 +107,7 @@ modules = {
     }
 
     search {
-        dependsOn 'inputMask','select2'
+        dependsOn 'inputMask','select2','iCheck'
     }
 
     remoteNonStopPageScroll{

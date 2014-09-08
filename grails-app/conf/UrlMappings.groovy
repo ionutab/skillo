@@ -11,7 +11,6 @@ class UrlMappings {
 		"/terms"		    (view:"/info/terms")
         "/map"              (view:"/home/map")
 
-
 		"/$controller/$action?/$id?"{
 			constraints {
 

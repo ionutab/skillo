@@ -48,7 +48,6 @@ abstract class BasicPaginatedSearchFilter implements Serializable {
     }
 
     private validatePaginator(){
-        log.debug("BasicPaginatedSearchFilter.validatePaginator")
         this.max = Math.min(this.max ? this.max : 10, 100)
     }
 

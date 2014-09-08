@@ -55,5 +55,5 @@ drop table client_contact;
 SET GLOBAL max_allowed_packet=1073741824;
 
 -- 19/08/2014
-
-
+ALTER TABLE `smrskillo`.`contact_comment` DROP FOREIGN KEY `FK7F1699409F1D23CD`;
+ALTER TABLE `smrskillo`.`contact_comment` DROP COLUMN `client_id`, DROP INDEX `FK7F1699409F1D23CD` ;

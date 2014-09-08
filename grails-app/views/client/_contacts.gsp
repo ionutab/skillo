@@ -72,11 +72,13 @@
 </div>
 <g:javascript>
 			function assertSaveSuccessAndClose(){
-				if($('#contactModalSuccess').val()){
+			var createClientContactForm = $('form[name="createClientContactForm"]');
+			var createSuccess = createClientContactForm.find('input[name="contactModalSuccess"]').val();
+				if(createSuccess == 'true'){
 					$('#createClientContactDetailsModal').modal('hide');
 					window.location.href = "${createLink(controller: 'client', action: 'list', id: clientInstance?.id)}";
 				} else {
-				    applyTelephoneInputStates()
+				    Skillo.applyTelephoneInputStates()
 				}
 			};
 
@@ -87,7 +89,7 @@
 					$('#editClientContactDetailsModal').modal('hide');
 					window.location.href = "${createLink(controller: 'client', action: 'list', id: clientInstance?.id)}";
 				} else {
-				    applyTelephoneInputStates()
+				    Skillo.applyTelephoneInputStates()
 				}
 			};
 
@@ -96,8 +98,4 @@
 			    Skillo.applyTelephoneInputStates('${message(code: 'default.telephoneNumber.inputmask')}','${message(code: 'default.telephoneNumber.placeholder')}')
 			};
 
-            function applyClientContactFormState(){
-                	$("#newContactTelephoneNumber").inputmask("${message(code: 'default.telephoneNumber.inputmask')}", {"placeholder":"${message(code: 'default.telephoneNumber.placeholder')}"});
-                    $("#newContactLandlineNumber").inputmask("${message(code: 'default.telephoneNumber.inputmask')}", {"placeholder":"${message(code: 'default.telephoneNumber.placeholder')}"});
-            };
 </g:javascript>

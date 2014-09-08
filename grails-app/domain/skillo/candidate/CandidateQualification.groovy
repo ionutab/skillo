@@ -10,8 +10,8 @@ class CandidateQualification {
     Qualification qualification
     Date expiryDate
     String number
-    Boolean isMainTrade
 
+    Boolean isMainTrade
     Boolean active = Boolean.TRUE
 
     static belongsTo = [candidate:Candidate]

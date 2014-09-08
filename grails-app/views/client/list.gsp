@@ -76,7 +76,7 @@
 															class="fa fa-group"></i></g:remoteLink>
 												</td>
 												<td class="fixed-140">
-													<g:link controller="client" action="show" id="${clientInstance?.id}">${clientInstance?.name}</g:link>
+													<g:link controller="client" action="details" id="${clientInstance?.id}">${clientInstance?.name}</g:link>
 												</td>
 												%{--
 												<td class="attitude fixed-110">
@@ -122,9 +122,11 @@
 				</div>
 			%{-- PANEL 3 - contact comments details --}%
 				<div class="col-md-4 col-sm-4 context-content-off" id="panel3">
-					<g:link controller="clientComment" action="create"><i class="fa fa-plus"></i>&nbsp;Comment</g:link>
+					<g:link url="#" data-toggle="modal" data-target="#createContactCommentModal" ><i class="fa fa-plus"></i>&nbsp;Comment</g:link>
+                    <br/>
+                    <br/>
 					<div id="contactCommentsContainer">
-						<g:render template="contactComments"/>
+						<g:render template="contactComments" />
 					</div>
 				</div>
 				<g:javascript>

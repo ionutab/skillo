@@ -1,9 +1,9 @@
+<%@ page contentType="text/html;charset=UTF-8" %>
 <%@ page import="skillo.Qualification; skillo.candidate.Candidate" %>
 <!doctype html>
 <html>
 
 <head>
-    <meta http-equiv="Content-Type" content="text/html; charset=UTF-8"/>
     <meta name="layout" content="admin_lte_layout"/>
     <g:set var="entityName" value="${message(code: 'candidate.label', default: 'Candidate')}"/>
     <title><g:message code="candidate.list.label" args=" "/></title>
@@ -57,119 +57,9 @@
         </div>
     </div>
     <div class="col-xs-2">
-        <button type="button" id="advancedSearchButton" onclick="showhideAdvancedSearchForm()"
-                class="btn btn-primary advancedSearchButton"
-                data-toggle="button">${message(code: 'default.button.advanced.search.label')}</button>
-        <script>
-            function showhideAdvancedSearchForm() {
-                var advancedSearchDiv = document.getElementById("advancedSearchContent");
-                var searchDiv = document.getElementById("searchContent");
-                if (advancedSearchDiv.style.display !== "none") {
-                    advancedSearchDiv.style.display = "none";
-                    searchDiv.style.display= "block";
-                }
-                else {
-                    advancedSearchDiv.style.display = "block";
-                    searchDiv.style.display= "none";
-                }
-            }
-        </script>
+        <g:link controller="candidateSearch" action="index" class="btn btn-primary">${message(code: 'default.button.advanced.search.label')}</g:link>
     </div>
 </div>
-
-<div class="row" id="advancedSearchContent" style="display: none"  >
-    <div class="col-md-12 top10">
-        <div class="box-body" >
-            <g:form controller="candidate" action="advancedSearch" class="form-horizontal">
-                <div class="panel-group" id="accordion">
-                    <div class="panel panel-default">
-                        <div class="panel-heading">
-                            <h4 class="panel-title">
-                                <a data-toggle="collapse" data-parent="#accordion" href="#collapseOne" class="">
-                                    <i class="fa fa-filter"></i>&nbsp;Filter
-                                </a>
-                            </h4>
-                        </div>
-                        <div class="row">
-                            <div id="collapseOne" class="panel-collapse collapse in">
-                                <div class="panel-body">
-                                    <div class="col-md-12">
-                                        <div class="row">
-                                            <div class="form-group ">
-                                                <label for="qualification"
-                                                       class="col-sm-2 control-label">Where qualification</label>
-
-                                                <div class="col-md-2">
-                                                    <g:render template="../qualification/qualificationSelector"
-                                                              model="['attributeName':'qualification1',
-                                                                      'attributeId':'qualification1' ,
-                                                                      'qualification':null]"/>
-                                                </div>
-
-                                                <label class="col-md-1 control-label" >OR</label>
-
-                                                <div class="col-md-2">
-                                                    <g:render template="../qualification/qualificationSelector"
-                                                              model="['attributeName':'qualification2',
-                                                                      'attributeId':'qualification2' ,
-                                                                      'qualification':null]"/>
-                                                </div>
-                                            </div>
-                                        </div>
-
-                                        <div class="row">
-                                            <div class="form-group ">
-                                                <label for="qualification"
-                                                       class="col-sm-2 control-label">AND</label>
-
-                                                <div class="col-md-2">
-                                                    <g:render template="../qualification/qualificationSelector"
-                                                              model="['attributeName':'qualification3',
-                                                                      'attributeId':'qualification3' ,
-                                                                      'qualification':null]"/>
-                                                </div>
-
-                                                <label class="col-md-1 control-label" >OR</label>
-
-                                                <div class="col-md-2">
-                                                    <g:render template="../qualification/qualificationSelector"
-                                                              model="['attributeName':'qualification4',
-                                                                      'attributeId':'qualification4' ,
-                                                                      'qualification':null]"/>
-                                                </div>
-                                            </div>
-                                        </div>
-
-                                        <div class="row">
-                                            <div class="form-group ">
-                                                <label for="postcode"
-                                                       class="col-sm-2 control-label">Where postcode</label>
-
-                                                <div class="col-md-2">
-                                                    <g:textField name="postcode1" id="postcode1" class="form-control" />
-                                                </div>
-
-                                            </div>
-                                        </div>
-
-
-                                        <div class="row">
-                                            <div class="col-md-8">
-                                                <input type="submit" name="search" class="btn btn-primary btn" value="Search" id="Update">
-                                            </div>
-                                        </div>
-
-                                    </div>
-                                </div>
-                            </div>
-                        </div>
-                    </div>
-                </div>
-            </g:form>
-        </div>
-    </div>
-</div>
-
 
 <div class="row top10">
     <div class="col-md-12">

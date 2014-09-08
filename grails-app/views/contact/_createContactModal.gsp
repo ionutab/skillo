@@ -6,10 +6,10 @@
 				name="createClientContactForm">
 			<div class="modal-content">
 				<div class="modal-body">
+                    <legend>
+                        <g:message code="client.form.contact.newContact" args="[clientInstance?.name]" />
+                    </legend>
 					<div id="createClientContactFormContainer">
-                        <legend>
-                            <g:message code="client.form.contact.newContact" args="[clientInstance?.name]" />
-                        </legend>
 						<g:render template="../contact/contactForm" model="['clientInstance':clientInstance]" />
 					</div>
 				</div>

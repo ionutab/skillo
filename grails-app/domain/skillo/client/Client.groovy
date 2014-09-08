@@ -23,7 +23,12 @@ class Client implements SkilloDomainModelWithHistory {
     Date dateCreated
     Date lastUpdated
 
-    static hasMany = [contacts: Contact, workSite: WorkSite, placement:Placement, clientHistory:ClientEvent]
+    static hasMany = [
+        contacts: Contact,
+        workSite: WorkSite,
+        placement:Placement,
+        clientHistory:ClientEvent,
+        chargeRates:ChargeRate]
 
     static constraints = {
         name unique: true, blank: false, matches: "[a-zA-Z0-9-' ]+"
@@ -37,6 +42,7 @@ class Client implements SkilloDomainModelWithHistory {
     static mapping = {
         autoTimestamp true
         clientHistory cascade: "all-delete-orphan"
+        chargeRates cascade: "all-delete-orphan"
     }
 
     @Override
