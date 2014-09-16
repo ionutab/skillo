@@ -3,7 +3,12 @@ package skillo.candidate.search
 import skillo.BaseController
 import skillo.candidate.Candidate
 
-class CandidateSearchController extends BaseController {
+/**
+ * CandidateSearchController
+ * A controller class handles incoming web requests and performs actions such as redirects, rendering views and so on.
+ */
+class CandidateSearchController extends BaseController{
+
 
     def candidateSearchService
 
@@ -17,8 +22,9 @@ class CandidateSearchController extends BaseController {
         log.info("SEARCH")
 
 
+        def candidates = candidateSearchService.search()
 
-        render(view: "/candidate/search/search", model:[candidateList:Candidate.list()])
+        render(view: "/candidate/search/search", model:[candidateList:candidates])
     }
 
 }

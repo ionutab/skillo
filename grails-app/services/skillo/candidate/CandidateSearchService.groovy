@@ -208,4 +208,18 @@ class CandidateSearchService {
             }
         }
     }
+
+    def search(){
+
+        Criteria cc = Candidate.createCriteria()
+
+        def candidateList =  cc.list() {
+
+            eq ("active", true)
+
+        }
+
+        return candidateList
+
+    }
 }
