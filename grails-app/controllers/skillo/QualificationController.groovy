@@ -1,6 +1,6 @@
 package skillo
 
-import skillo.filters.QualificationSearchFilter
+import skillo.filters.QualificationListFilter
 
 
 class QualificationController extends BaseController {
@@ -16,7 +16,7 @@ class QualificationController extends BaseController {
 
         log.debug("PAGINATION: max " + params.max + " offset " + params.offset)
 
-        QualificationSearchFilter filter = new QualificationSearchFilter()
+        QualificationListFilter filter = new QualificationListFilter()
         if(!params.reset){
             bindData(filter,params)
         }
