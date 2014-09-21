@@ -2,10 +2,8 @@ package skillo.document
 
 import core.util.DocumentUtil
 import grails.transaction.Transactional
-import org.springframework.web.multipart.MultipartFile
 import org.springframework.web.multipart.commons.CommonsMultipartFile
 import skillo.Document
-import skillo.Qualification
 import skillo.candidate.Candidate
 
 /**
