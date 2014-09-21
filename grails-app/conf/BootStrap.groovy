@@ -1,10 +1,3 @@
-import skillo.Consultant
-import skillo.PostCode
-import skillo.Qualification
-import skillo.Role
-import skillo.user.User
-import skillo.user.UserRole
-
 class BootStrap {
 
     def springSecurityService
