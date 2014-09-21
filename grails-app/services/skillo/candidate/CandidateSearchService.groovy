@@ -3,17 +3,13 @@ package skillo.candidate
 import grails.transaction.Transactional
 import org.grails.datastore.mapping.query.api.Criteria
 import skillo.Qualification
-import skillo.candidate.Candidate
-import skillo.enums.SearchOperator
-import skillo.filters.CandidateListSearch
+import skillo.filters.CandidateListFilter
 import skillo.filters.CandidateMatch
-
-import java.util.concurrent.ArrayBlockingQueue
 
 @Transactional
 class CandidateSearchService {
 
-    def Collection<Candidate> search(CandidateListSearch filter){
+    def Collection<Candidate> search(CandidateListFilter filter){
 
         Criteria cc = Candidate.createCriteria()
 
@@ -34,6 +30,7 @@ class CandidateSearchService {
              */
             eq ("active", true)
 
+            /*
             if(filter.qualification){
                 sqlRestriction(" exists (" +
                         "select * " +
@@ -45,6 +42,8 @@ class CandidateSearchService {
                             "and lower(q.name) like ? " +
                         ")",["%" + filter.qualification.toLowerCase() + "%"])
             }
+            */
+
             if(filter.sort && filter.order){
                 order(filter.sort, filter.order)
             }
