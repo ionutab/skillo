@@ -3,7 +3,7 @@ package skillo.filters
 /**
  * Created by Andrei-Home on 7/17/2014.
  */
-class QualificationSearchFilter  extends BasicPaginatedSearchFilter {
+class QualificationListFilter extends BasicPaginatedSearchFilter {
 
     String name
 
