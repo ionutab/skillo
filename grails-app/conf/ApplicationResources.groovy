@@ -115,7 +115,9 @@ modules = {
     }
 
     application {
-        resource url:'js/skillo.inputs.js'
+        resource url: 'js/skilloInputs.js'
+        resource url: 'js/skilloSelect2Initiator.js'
+        resource url: 'js/skilloAdvancedSearch.js'
     }
 
     /**
