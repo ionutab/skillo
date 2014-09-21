@@ -1,7 +1,6 @@
 package skillo.contact
 
 import skillo.Consultant
-import skillo.client.Client
 
 class ContactComment {
 
