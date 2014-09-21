@@ -78,7 +78,7 @@
 					$('#createClientContactDetailsModal').modal('hide');
 					window.location.href = "${createLink(controller: 'client', action: 'list', id: clientInstance?.id)}";
 				} else {
-				    Skillo.applyTelephoneInputStates()
+				    SkilloInputs.applyTelephoneInputStates()
 				}
 			};
 
@@ -89,13 +89,13 @@
 					$('#editClientContactDetailsModal').modal('hide');
 					window.location.href = "${createLink(controller: 'client', action: 'list', id: clientInstance?.id)}";
 				} else {
-				    Skillo.applyTelephoneInputStates()
+				    SkilloInputs.applyTelephoneInputStates()
 				}
 			};
 
 			function assertModalAndOpen(){
 			    $('#editClientContactDetailsModal').modal('show');
-			    Skillo.applyTelephoneInputStates('${message(code: 'default.telephoneNumber.inputmask')}','${message(code: 'default.telephoneNumber.placeholder')}')
+			    SkilloInputs.applyTelephoneInputStates('${message(code: 'default.telephoneNumber.inputmask')}','${message(code: 'default.telephoneNumber.placeholder')}')
 			};
 
 </g:javascript>
