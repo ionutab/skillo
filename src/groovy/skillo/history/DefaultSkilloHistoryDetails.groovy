@@ -1,7 +1,4 @@
 package skillo.history
-
-import skillo.Consultant
-
 /**
  * Created with IntelliJ IDEA.
  * User: ionutab
