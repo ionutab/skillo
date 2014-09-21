@@ -1,11 +1,10 @@
-import java.text.SimpleDateFormat
-
 import org.codehaus.groovy.grails.commons.ApplicationHolder
+import org.codehaus.groovy.grails.web.binding.StructuredDateEditor
 import org.springframework.beans.PropertyEditorRegistrar
 import org.springframework.beans.PropertyEditorRegistry
-import org.springframework.beans.propertyeditors.CustomDateEditor
 import org.springframework.context.i18n.LocaleContextHolder
-import org.codehaus.groovy.grails.web.binding.StructuredDateEditor
+
+import java.text.SimpleDateFormat
 
 public class CustomDateEditorRegistrar implements PropertyEditorRegistrar {
 
