@@ -9,7 +9,6 @@ import skillo.candidate.Candidate
  */
 class CandidateSearchController extends BaseController{
 
-
     def candidateSearchService
 
     def index(){
@@ -21,10 +20,17 @@ class CandidateSearchController extends BaseController{
     def search(){
         log.info("SEARCH")
 
+        log.info("PARAMS" + params);
 
         def candidates = candidateSearchService.search()
 
-        render(view: "/candidate/search/search", model:[candidateList:candidates])
+        render(view: "/candidate/search/search", model:[candidateList:Candidate.list()])
+    }
+
+    def displayQualificationSetWidget(){
+        log.info("GET NEW SEARCH WIDGET")
+        log.info("PARAMS" + params);
+        render(view: "/candidate/search/_qualificationSetWidget")
     }
 
 }
