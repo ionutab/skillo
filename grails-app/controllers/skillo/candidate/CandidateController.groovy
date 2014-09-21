@@ -11,7 +11,7 @@ import skillo.PostCode
 import skillo.enums.ActivityType
 import skillo.enums.Operation
 import skillo.enums.SearchOperator
-import skillo.filters.CandidateListSearch
+import skillo.filters.CandidateListFilter
 import skillo.filters.CandidateMatch
 
 @Transactional
@@ -37,13 +37,13 @@ class CandidateController extends BaseController {
         log.info("LIST")
 
         //first we get from session
-        CandidateListSearch filter = session["candidateSearchFilter"] != null ? session["candidateSearchFilter"] : new CandidateListSearch()
+        CandidateListFilter filter = session["candidateSearchFilter"] != null ? session["candidateSearchFilter"] : new CandidateListFilter()
 
         if (!params.reset) {
             bindData(filter, params)
         } else {
             //we have to reset the filter
-            filter = new CandidateListSearch()
+            filter = new CandidateListFilter()
         }
 
         //performing the search
