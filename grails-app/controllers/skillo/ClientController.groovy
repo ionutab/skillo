@@ -134,6 +134,9 @@ class ClientController extends BaseController {
     }
 
     def display(){
+        if(!params.id){
+            return null
+        }
         def client = Client.get(params.id)
         render(template: 'basicInformation', model:[clientInstance: client])
     }
