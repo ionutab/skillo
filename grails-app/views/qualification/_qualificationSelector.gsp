@@ -14,39 +14,6 @@
 />
 
 <g:javascript>
-        function formatQualificationSelection(item) {
-            return item.name;
-        };
-
-        function formatQualificationResult(item) {
-            return item.name;
-        };
-        function doWeHaveAQualificationAlready(){
-            return "Search for a Qualification";
-        }
-
-        $("#${attributeId}").select2({
-            placeholder: doWeHaveAQualificationAlready,
-            allowClear: true,
-            ajax:{
-                url: '<g:createLink controller="qualification" action="getQualificationsByName" />',
-                dataType: 'json',
-                data: function(term, page){
-                    return {inputCode: term};
-                },
-                results: function (data, page) {
-                    return {results: data};
-                }
-            },
-            initSelection: function(element, callback) {
-                var id=$("#${attributeId}").val();
-                if (id!=="") {
-                    $("#s2id_${attributeId} .select2-chosen").html($("#${attributeId}Placeholder").val());
-                }
-            },
-            formatSelection: formatQualificationSelection,
-            formatResult: formatQualificationResult,
-            escapeMarkup: function (m) { return m; }
-        });
-
+    SkilloSelect2SimpleQualificationInitiator.init('<g:createLink controller="qualification" action="getQualificationsByName" />');
+    SkilloSelect2SimpleQualificationInitiator.select2onID('#${attributeId}');
 </g:javascript>
