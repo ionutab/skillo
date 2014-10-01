@@ -13,8 +13,8 @@ var SkilloAdvancedSearch = (function(){
         ajaxQualificationsQueryURL = null,
         ajaxWidgetURL = null,
         select2InputSelector = "input[type=hidden][class="+initiateClass+"]",
-        duplicableSelector = "div[class=duplicable]",
-        duplicatorSelector = "button[class=duplicator]";
+        duplicableSelector = "div.duplicable",
+        duplicatorSelector = "button.duplicator";
 
     var cfg = cfgDefault;
 
@@ -65,7 +65,8 @@ var SkilloAdvancedSearch = (function(){
         console.log( "SIZE: " + $(".duplicable").size());
     };
 
-    var addQualificationSelect2Widget = function(){
+    var addQualificationSelect2Widget = function(event){
+        event.preventDefault();
         console.log("addQualificationSelect2Widget")
         if(cfg.currentNrInputs < cfg.maxInputs){
             $.get( cfg.ajaxWidgetURL , function( data ) {
@@ -81,8 +82,11 @@ var SkilloAdvancedSearch = (function(){
                 cfg.currentMaxInputID++;
 
                 if(cfg.currentNrInputs >= cfg.maxInputs){
-                  console.log($(cfg.duplicatorSelector));
-                    $(cfg.duplicatorSelector).hide();
+                    console.log($(cfg.duplicatorSelector).length !== 0);
+                    console.log($(cfg.duplicatorSelector));
+                    if(cfg.duplicableSelector.length !== 0){
+                        $(cfg.duplicatorSelector).hide();
+                    }
                 };
             });
         }
