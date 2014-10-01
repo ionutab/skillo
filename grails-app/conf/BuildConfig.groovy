@@ -6,13 +6,13 @@ grails.project.test.reports.dir = "target/test-reports"
 grails.project.work.dir = "target/work"
 grails.project.target.level = 1.7
 grails.project.source.level = 1.7
-grails.project.war.file=ROOT.wa
+grails.project.war.file=ROOT.war
 
 grails.project.fork = [
-        test: [maxMemory: 2048, minMemory: 256, debug: false, maxPerm: 256, daemon:true],
-        run: [maxMemory: 2048, minMemory: 256, debug: false, maxPerm: 256],
+//        test: [maxMemory: 2048, minMemory: 256, debug: false, maxPerm: 256, daemon:true],
+//        run: [maxMemory: 2048, minMemory: 256, debug: false, maxPerm: 256],
         war: [maxMemory: 2048, minMemory: 256, debug: false, maxPerm: 256],
-        console: [maxMemory: 2048, minMemory: 256, debug: false, maxPerm: 256]
+        console: [maxMemory: 2048, minMemory: 256, debug: false, maxPerm: 256, daemon:true]
 ]
 
 
