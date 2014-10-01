@@ -13,7 +13,7 @@
 	    <g:hiddenField class="advancedSearchSelect2Input" name="qualifications" />
 	</div>
 </div>
-<button class="duplicator" onclick="SkilloAdvancedSearch.addQualificationSelect2Widget()">Add</button>
+<button class="duplicator" onclick="SkilloAdvancedSearch.addQualificationSelect2Widget(event)">Add</button>
 <g:javascript>
 
     SkilloAdvancedSearch.init({
