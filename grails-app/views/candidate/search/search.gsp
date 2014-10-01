@@ -7,7 +7,7 @@
     <title><g:message code="candidate.list.label" args=" "/></title>
     <g:set var="pageTitle" value="${message(code: 'candidate.search.label')}" scope="request"/>
     <g:set var="layout_nocontextbar" value="${true}" scope="request" />
-    <r:require modules="search" />
+    <r:require modules="jquery,select2,application" />
 </head>
 <body>
 
