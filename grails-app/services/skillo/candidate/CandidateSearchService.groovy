@@ -212,33 +212,23 @@ class CandidateSearchService {
 
     def search(CandidateFilter filter){
 
-
-
-        log.info("@@@@@@@@@ Searching for ... "+filter.getQualifications())
-        def asd = Qualification.list()
-        for(Qualification q:asd)
-        log.info("################### "+q.id)
-
         def criteria = Candidate.createCriteria()
-        def result = criteria.list{
+        def result = criteria.list(){
             eq("active", true)
-            and {
-                candidateQualifications {
-
-                        for (Collection<Long> qualificationBucket : filter.getQualifications()) {
-                            for (Long id : qualificationBucket) {
-                                log.info("&&&&&&&&&&&&&&&&&&&&& " + id)
-                                eq("qualification.id", id)
-                            }
+            or {
+                for (Collection<Long> qualificationBucket : filter.getQualifications()) {
+                    candidateQualifications {
+                        /*
+                        for (Long id : qualificationBucket) {
+                            eq("qualification.id", id)
+                        }
+                        */
+                        inList("qualification.id", qualificationBucket)
                     }
                 }
             }
         }
 
-
-
         return result
-
-
     }
 }

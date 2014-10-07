@@ -4,7 +4,6 @@ import skillo.candidate.CandidateQualification
 
 class Qualification {
 
-
     String code
     String name
     String description

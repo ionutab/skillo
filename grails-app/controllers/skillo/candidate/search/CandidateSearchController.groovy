@@ -43,8 +43,14 @@ class CandidateSearchController extends BaseController{
             filter.qualifications = Select2InputUtils.getIdsFromHashMapArray(qualificationSets)
         }
 
+        Collection<Candidate> candidateList = candidateSearchService.search(filter)
+
+        for(Candidate cl : candidateList){
+            log.info("@@@@@@@@@@@@@@@  " + cl.toString())
+        }
+
         session['qualificationSets'] = qualificationSets
-        render(view: "/candidate/search/search", model:[candidateFilter:filter, qualificationSets:qualificationSets as grails.converters.JSON, candidateList:Candidate.list()])
+        render(view: "/candidate/search/search", model:[candidateFilter:filter, qualificationSets:qualificationSets as grails.converters.JSON, candidateList:candidateList])
     }
 
     def displayQualificationSetWidget(){

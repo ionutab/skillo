@@ -134,4 +134,13 @@ class Candidate implements SkilloDomainModelWithHistory {
         return firstName + " " + lastName
     }
 
+
+    @Override
+    public String toString() {
+        return "Candidate{" +
+                "id=" + id +
+                ", firstName='" + firstName + '\'' +
+                ", lastName='" + lastName + '\'' +
+                '}';
+    }
 }
