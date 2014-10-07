@@ -28,9 +28,7 @@ class CandidateSearchControllerIntegrationSpec extends BaseIntegrationSpec {
 
         setup:
         //setup requiredQualifications
-        candidateSearchController.params.requiredQualifications=[]
-        //setup excludedQualifications
-        candidateSearchController.params.excludedQualifications=[]
+        candidateSearchController.params.qualifications=[]
 
         when:
         //execute
@@ -50,9 +48,7 @@ class CandidateSearchControllerIntegrationSpec extends BaseIntegrationSpec {
         candidate2.save(flush: true)
 
         //setup requiredQualifications
-        candidateSearchController.params.requiredQualifications=[]
-        //setup excludedQualifications
-        candidateSearchController.params.excludedQualifications=[]
+        candidateSearchController.params.qualifications=[TEST_QUALIFICATION.id]
 
         when:
         //execute
@@ -72,9 +68,7 @@ class CandidateSearchControllerIntegrationSpec extends BaseIntegrationSpec {
         candidate2.save(flush: true)
 
         //setup requiredQualifications
-        candidateSearchController.params.requiredQualifications=[]
-        //setup excludedQualifications
-        candidateSearchController.params.excludedQualifications=[]
+        candidateSearchController.params.qualifications=[TEST_QUALIFICATION.id]
 
         when:
         //execute

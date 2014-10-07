@@ -2,7 +2,9 @@ package skillo.candidate
 
 import grails.transaction.Transactional
 import org.grails.datastore.mapping.query.api.Criteria
+import org.hibernate.annotations.FetchMode
 import skillo.Qualification
+import skillo.filters.CandidateFilter
 import skillo.filters.CandidateListFilter
 import skillo.filters.CandidateMatch
 
@@ -208,17 +210,35 @@ class CandidateSearchService {
         }
     }
 
-    def search(){
+    def search(CandidateFilter filter){
 
-        Criteria cc = Candidate.createCriteria()
 
-        def candidateList =  cc.list() {
 
-            eq ("active", true)
+        log.info("@@@@@@@@@ Searching for ... "+filter.getQualifications())
+        def asd = Qualification.list()
+        for(Qualification q:asd)
+        log.info("################### "+q.id)
 
+        def criteria = Candidate.createCriteria()
+        def result = criteria.list{
+            eq("active", true)
+            and {
+                candidateQualifications {
+
+                        for (Collection<Long> qualificationBucket : filter.getQualifications()) {
+                            for (Long id : qualificationBucket) {
+                                log.info("&&&&&&&&&&&&&&&&&&&&& " + id)
+                                eq("qualification.id", id)
+                            }
+                    }
+                }
+            }
         }
 
-        return candidateList
+
+
+        return result
+
 
     }
 }

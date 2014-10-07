@@ -78,6 +78,8 @@ environments {
 }
 
 log4j = {
+    debug 'org.hibernate.SQL'
+    trace 'org.hibernate.type'
     appenders {
         console name: 'stdout', layout: pattern(conversionPattern: "[%d{HH:mm:ss:SSS}] %-5p %c{2}: %m%n")
     }
