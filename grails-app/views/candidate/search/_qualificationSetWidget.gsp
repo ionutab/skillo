@@ -1,5 +1,5 @@
 <div class="form-group duplicable">
-	<div class="col-md-2">OR</div>
+	<label class="col-md-2 control-label text-right">OR</label>
 	<div class="col-md-8">
 		<g:hiddenField class="advancedSearchSelect2Input" name="advancedSearch.qualifications" />
 	</div>

@@ -14,7 +14,8 @@ var SkilloAdvancedSearch = (function(){
         ajaxWidgetURL = null,
         select2InputSelector = "input[type=hidden][class="+initiateClass+"]",
         duplicableSelector = "div.duplicable",
-        duplicatorSelector = "button.duplicator";
+        duplicatorSelector = "button.duplicator",
+        initValues = {};
 
     var cfg = cfgDefault;
 
@@ -33,6 +34,7 @@ var SkilloAdvancedSearch = (function(){
         cfg.select2InputSelector = params.select2InputSelector || select2InputSelector;
         cfg.duplicableSelector = params.duplicableSelector || duplicableSelector;
         cfg.duplicatorSelector = params.duplicatorSelector || duplicatorSelector;
+        cfg.initValues = params.initValues || initValues;
 
         console.log(cfg);
 
@@ -49,7 +51,12 @@ var SkilloAdvancedSearch = (function(){
             var elemID = cfg.elementsID + index;
             $(this).attr("id", elemID);
 
-            SkilloSelect2MultipleQulificationInitiator.select2onID("#" + elemID);
+            if(cfg.initValues[index]){
+                SkilloSelect2MultipleQulificationInitiator.select2onID("#" + elemID, cfg.initValues[index]);
+            } else {
+                SkilloSelect2MultipleQulificationInitiator.select2onID("#" + elemID);
+            }
+
             cfg.currentNrInputs++;
         });
         cfg.currentMaxInputID = cfg.currentNrInputs;

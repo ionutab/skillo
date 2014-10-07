@@ -1,5 +1,8 @@
 package skillo.filters
 
+import grails.validation.Validateable
+
+@Validateable
 class CandidateFilter extends BasicSearchFilter implements Serializable {
 
     protected Collection<Collection<Long>> qualifications

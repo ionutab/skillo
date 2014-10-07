@@ -4,8 +4,8 @@
 
 var SkilloSelect2QualificationsFormatting = (function(){
 
-    var formatQualificationSelection = function (item) {
-        return item.name;
+        var formatQualificationSelection = function (data) {
+        return data.name;
     };
 
     var formatQualificationResult = function(item) {
@@ -31,12 +31,18 @@ var SkilloSelect2MultipleQulificationInitiator = (function(){
         console.log("ajaxURL: " + ajaxURL);
     };
 
-    var select2onID = function(itemID){
+    var select2onID = function(itemID,initParamValues){
+
+        var initParamValues = initParamValues || {};
+        var initValues = null;
+
         console.log("Select2 on " +itemID);
         $(itemID).select2({
             placeholder: doWeHaveAQualificationAlready,
             allowClear: true,
             multiple: true,
+            triggerChange: true,
+            id: function(e) { return e.id+":"+e.name; },
             ajax:{
                 url: ajaxURL,
                 data: function(term, page){
@@ -47,23 +53,21 @@ var SkilloSelect2MultipleQulificationInitiator = (function(){
                 }
             },
             initSelection: function(element, callback) {
-                var data = [{ id: 'user0', name: 'Disabled User'}, { id: 'user1', name: 'Jane Doe'}];
-                /*
-                    $(element.val().split(",")).each(function(i) {
-                        var item = this.split(':');
-                        data.push({
-                            id: item[0],
-                            name: item[1]
-                        });
-                    });
-                */
-                //$(element).val('');
-                callback(data);
+
+                console.log(initParamValues);
+
+                var initValues = $.map(initParamValues, function(value, index) {
+                    console.log(index);
+                    console.log(value);
+                    return {id:index,name:value};
+                });
+
+                callback(initValues);
             },
             formatSelection: SkilloSelect2QualificationsFormatting.formatQualificationSelection,
             formatResult: SkilloSelect2QualificationsFormatting.formatQualificationResult,
             escapeMarkup: function (m) { return m; }
-        });
+        }).select2('val', []);
     };
 
     return {
