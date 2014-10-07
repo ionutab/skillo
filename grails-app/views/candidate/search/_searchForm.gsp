@@ -31,14 +31,17 @@
 								        </div>
 							        </g:if>
 							        <g:else>
-								        <div class="col-md-2"></div>
+								        <div class="col-md-2">
+									        <button type="submit" id="resetAdvancedCandidateSearchForm" class="btn btn-info" name="reset" value="true">
+										        <i class="fa fa-refresh"></i>
+									        </button>
+								        </div>
 							        </g:else>
 							    </div>
 						    </g:each>
 					    </g:else>
 
                     </div>
-
 	                <div class="row">
 		                <div class="col-md-6 text-right col-md-offset-3 ">
 			                <button class="btn btn-primary btn duplicator" onclick="SkilloAdvancedSearch.addQualificationSelect2Widget(event)">Add</button>
