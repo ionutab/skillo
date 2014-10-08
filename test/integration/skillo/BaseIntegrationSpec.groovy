@@ -49,7 +49,7 @@ class BaseIntegrationSpec extends Specification{
         def springSecurityService = new Object()
         springSecurityService.metaClass.encodePassword = {String password -> "ENCODED_PASSWORD"}
         TEST_USER.springSecurityService = springSecurityService
-        TEST_USER.save(flush: true)
+        TEST_USER.save(flush: true,failOnError: true)
         UserRole.create TEST_USER, role, true
 
 
@@ -59,11 +59,11 @@ class BaseIntegrationSpec extends Specification{
 
         //initialize the address
         TEST_ADDRESS = new Address(details: "Shaftesbury Avenue")
-        TEST_ADDRESS.save(flush: true)
+        TEST_ADDRESS.save(flush: true,failOnError: true)
 
         //initialize the qualification
         TEST_QUALIFICATION = new Qualification(name: "Crane Controller", canBeMainTrade: true)
-        TEST_QUALIFICATION.save(flush: true)
+        TEST_QUALIFICATION.save(flush: true,failOnError: true)
 
         //initialize the candidate qualification
         TEST_CANDIDATE_QUALIFICATION =  new CandidateQualification(qualification: TEST_QUALIFICATION)

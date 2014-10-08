@@ -25,10 +25,10 @@ class CandidateSearchControllerIntegrationSpec extends BaseIntegrationSpec {
 
     void "test candidate search when no candidates exists in database"(){
 
-
         setup:
         //setup requiredQualifications
-        candidateSearchController.params.qualifications=[]
+        ArrayList<String> a = new ArrayList<>()
+        candidateSearchController.params.advancedSearch = a
 
         when:
         //execute
@@ -43,13 +43,15 @@ class CandidateSearchControllerIntegrationSpec extends BaseIntegrationSpec {
 
         setup:
         Candidate candidate1  = new Candidate(firstName: "John", lastName: "Sephard", telephoneNumber: "00751-101-212",address: TEST_ADDRESS, birthDate: new Date(1976,5,21),carOwner: true,driver: true,sponsored: true, consultant: TEST_CONSULTANT,dateCreated: new Date(),lastUpdated: new Date(),candidateQualifications: TEST_CANDIDATE_QUALIFICATION)
-        candidate1.save(flush: true)
+        candidate1.save(flush: true,failOnError: true)
         Candidate candidate2  = new Candidate(firstName: "John", lastName: "Doe", telephoneNumber: "00251-701-242",address: TEST_ADDRESS, birthDate: new Date(1971,2,26),carOwner: true,driver: true,sponsored: true, consultant: TEST_CONSULTANT,dateCreated: new Date(),lastUpdated: new Date(),candidateQualifications: TEST_CANDIDATE_QUALIFICATION)
-        candidate2.save(flush: true)
+        candidate2.save(flush: true,failOnError: true)
 
         //setup requiredQualifications
-        candidateSearchController.params.qualifications=[TEST_QUALIFICATION.id]
-
+        String q1 =TEST_QUALIFICATION.id+":"+TEST_QUALIFICATION.name
+        ArrayList<String> a = new ArrayList<>()
+        a.add(q1)
+        candidateSearchController.params.advancedSearch = a
         when:
         //execute
         def model = candidateSearchController.search()
@@ -63,12 +65,15 @@ class CandidateSearchControllerIntegrationSpec extends BaseIntegrationSpec {
         setup:
         Candidate candidate1  = new Candidate(firstName: "John", lastName: "Sephard", telephoneNumber: "00751-101-212",address: TEST_ADDRESS, birthDate: new Date(1976,5,21),carOwner: true,driver: true,sponsored: true, consultant: TEST_CONSULTANT,dateCreated: new Date(),lastUpdated: new Date(),candidateQualifications: TEST_CANDIDATE_QUALIFICATION)
         candidate1.active=false
-        candidate1.save(flush: true)
+        candidate1.save(flush: true,failOnError: true)
         Candidate candidate2  = new Candidate(firstName: "John", lastName: "Doe", telephoneNumber: "00251-701-242",address: TEST_ADDRESS, birthDate: new Date(1971,2,26),carOwner: true,driver: true,sponsored: true, consultant: TEST_CONSULTANT,dateCreated: new Date(),lastUpdated: new Date(),candidateQualifications: TEST_CANDIDATE_QUALIFICATION)
-        candidate2.save(flush: true)
+        candidate2.save(flush: true,failOnError: true)
 
         //setup requiredQualifications
-        candidateSearchController.params.qualifications=[TEST_QUALIFICATION.id]
+        String q1 =TEST_QUALIFICATION.id+":"+TEST_QUALIFICATION.name
+        ArrayList<String> a = new ArrayList<>()
+        a.add(q1)
+        candidateSearchController.params.advancedSearch = a
 
         when:
         //execute
