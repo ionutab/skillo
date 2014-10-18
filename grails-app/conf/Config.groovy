@@ -1,3 +1,5 @@
+import skillo.tenant.TenantMeta
+
 // locations to search for config files that get merged into the main config;
 // config files can be ConfigSlurper scripts, Java properties files, or classes
 // in the classpath in ConfigSlurper format
@@ -223,4 +225,11 @@ jqueryValidationUi {
 		letterswithbasicpunc:'true',
         lettersonly:'true'
 	]	
+}
+
+
+// Added by the MultiTenant plugin
+multiTenant {
+    tenantClass = TenantMeta
+
 }

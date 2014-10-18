@@ -1,7 +1,9 @@
 package skillo.contact
 
+import grails.plugin.multitenant.core.annotation.MultiTenant
 import skillo.client.Client
 
+@MultiTenant
 class Contact {
 
     String firstName

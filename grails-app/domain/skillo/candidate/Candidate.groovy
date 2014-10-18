@@ -1,5 +1,7 @@
 package skillo.candidate
 
+import grails.plugin.multitenant.core.Tenant
+import grails.plugin.multitenant.core.annotation.MultiTenant
 import org.joda.time.DateTime
 import org.joda.time.Years
 import skillo.Address
@@ -10,7 +12,8 @@ import skillo.Payroll
 import skillo.Placement
 import skillo.history.SkilloDomainModelWithHistory
 
-class Candidate implements SkilloDomainModelWithHistory {
+@MultiTenant
+class Candidate implements SkilloDomainModelWithHistory{
 
     String firstName
     String lastName
@@ -79,6 +82,9 @@ class Candidate implements SkilloDomainModelWithHistory {
         //must see how I can order descending by the property in the embedded note class
         candidateNotes cascade: "all-delete-orphan"
         candidateHistory cascade: "all-delete-orphan"
+
+        //index added on tenant id
+        tenantId index: 'tenant_idx'
     }
 
     def boolean checkVersion(Long version) {

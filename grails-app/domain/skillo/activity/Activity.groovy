@@ -1,5 +1,6 @@
 package skillo.activity
 
+import grails.plugin.multitenant.core.annotation.MultiTenant
 import org.joda.time.DateTime
 import org.joda.time.DateTimeZone
 import skillo.enums.ActivityType
@@ -9,6 +10,7 @@ import skillo.enums.DomainActivityType
  * Activity
  * A domain class describes the data object and it's mapping to the database
  */
+@MultiTenant
 class Activity {
 
 

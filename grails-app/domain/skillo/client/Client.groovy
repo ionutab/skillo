@@ -1,5 +1,6 @@
 package skillo.client
 
+import grails.plugin.multitenant.core.annotation.MultiTenant
 import skillo.Address
 import skillo.Consultant
 import skillo.contact.Contact
@@ -7,6 +8,7 @@ import skillo.Placement
 import skillo.WorkSite
 import skillo.history.SkilloDomainModelWithHistory
 
+@MultiTenant
 class Client implements SkilloDomainModelWithHistory {
 
     static searchable = true
@@ -43,6 +45,9 @@ class Client implements SkilloDomainModelWithHistory {
         autoTimestamp true
         clientHistory cascade: "all-delete-orphan"
         chargeRates cascade: "all-delete-orphan"
+
+        //index added on tenant id
+        tenantId index: 'tenant_idx'
     }
 
     @Override

@@ -1,10 +1,12 @@
 package skillo.candidate
 
+import grails.plugin.multitenant.core.annotation.MultiTenant
 import org.joda.time.DateTime
 import org.joda.time.LocalDate
 import skillo.Constants
 import skillo.Qualification
 
+@MultiTenant
 class CandidateQualification {
 
     Qualification qualification

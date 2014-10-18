@@ -1,5 +1,8 @@
 package skillo
 
+import grails.plugin.multitenant.core.annotation.MultiTenant
+
+@MultiTenant
 class Note {
     
     Date date

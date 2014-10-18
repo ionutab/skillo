@@ -1,8 +1,10 @@
 package skillo.user
 
+import grails.plugin.multitenant.core.annotation.MultiTenant
 import org.apache.commons.lang.builder.HashCodeBuilder
 import skillo.Role
 
+@MultiTenant
 class UserRole implements Serializable {
 
 	User user

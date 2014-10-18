@@ -1,5 +1,8 @@
 package skillo.user
 
+import grails.plugin.multitenant.core.annotation.MultiTenant
+
+@MultiTenant
 class UserDetails {
 
     String firstName

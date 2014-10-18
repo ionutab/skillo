@@ -41,10 +41,20 @@
       <sourceFolder url="file://$MODULE_DIR$/target/work/plugins/constraints-0.6.0/grails-app/utils" isTestSource="false" />
       <sourceFolder url="file://$MODULE_DIR$/target/work/plugins/constraints-0.6.0/grails-app/i18n" isTestSource="false" />
     </content>
+    <content url="file://$MODULE_DIR$/target/work/plugins/hawk-eventing-0.5.1">
+      <sourceFolder url="file://$MODULE_DIR$/target/work/plugins/hawk-eventing-0.5.1/src/java" isTestSource="false" />
+      <sourceFolder url="file://$MODULE_DIR$/target/work/plugins/hawk-eventing-0.5.1/src/groovy" isTestSource="false" />
+      <sourceFolder url="file://$MODULE_DIR$/target/work/plugins/hawk-eventing-0.5.1/grails-app/i18n" isTestSource="false" />
+    </content>
     <content url="file://$MODULE_DIR$/target/work/plugins/hibernate-3.6.10.7">
       <sourceFolder url="file://$MODULE_DIR$/target/work/plugins/hibernate-3.6.10.7/src/java" isTestSource="false" />
       <sourceFolder url="file://$MODULE_DIR$/target/work/plugins/hibernate-3.6.10.7/src/groovy" isTestSource="false" />
       <sourceFolder url="file://$MODULE_DIR$/target/work/plugins/hibernate-3.6.10.7/grails-app/i18n" isTestSource="false" />
+    </content>
+    <content url="file://$MODULE_DIR$/target/work/plugins/hibernate-hijacker-0.8.1">
+      <sourceFolder url="file://$MODULE_DIR$/target/work/plugins/hibernate-hijacker-0.8.1/src/java" isTestSource="false" />
+      <sourceFolder url="file://$MODULE_DIR$/target/work/plugins/hibernate-hijacker-0.8.1/src/groovy" isTestSource="false" />
+      <sourceFolder url="file://$MODULE_DIR$/target/work/plugins/hibernate-hijacker-0.8.1/grails-app/i18n" isTestSource="false" />
     </content>
     <content url="file://$MODULE_DIR$/target/work/plugins/joda-time-1.5">
       <sourceFolder url="file://$MODULE_DIR$/target/work/plugins/joda-time-1.5/src/groovy" isTestSource="false" />
@@ -67,6 +77,11 @@
       <sourceFolder url="file://$MODULE_DIR$/target/work/plugins/jquery-validation-ui-1.4.9/grails-app/services" isTestSource="false" />
       <sourceFolder url="file://$MODULE_DIR$/target/work/plugins/jquery-validation-ui-1.4.9/grails-app/taglib" isTestSource="false" />
     </content>
+    <content url="file://$MODULE_DIR$/target/work/plugins/multi-tenant-single-db-0.8.3">
+      <sourceFolder url="file://$MODULE_DIR$/target/work/plugins/multi-tenant-single-db-0.8.3/src/java" isTestSource="false" />
+      <sourceFolder url="file://$MODULE_DIR$/target/work/plugins/multi-tenant-single-db-0.8.3/src/groovy" isTestSource="false" />
+      <sourceFolder url="file://$MODULE_DIR$/target/work/plugins/multi-tenant-single-db-0.8.3/grails-app/services" isTestSource="false" />
+    </content>
     <content url="file://$MODULE_DIR$/target/work/plugins/remote-pagination-0.4.8">
       <sourceFolder url="file://$MODULE_DIR$/target/work/plugins/remote-pagination-0.4.8/grails-app/i18n" isTestSource="false" />
       <sourceFolder url="file://$MODULE_DIR$/target/work/plugins/remote-pagination-0.4.8/grails-app/taglib" isTestSource="false" />
@@ -87,6 +102,9 @@
       <sourceFolder url="file://$MODULE_DIR$/target/work/plugins/spring-security-core-1.2.7.3/grails-app/i18n" isTestSource="false" />
       <sourceFolder url="file://$MODULE_DIR$/target/work/plugins/spring-security-core-1.2.7.3/grails-app/services" isTestSource="false" />
       <sourceFolder url="file://$MODULE_DIR$/target/work/plugins/spring-security-core-1.2.7.3/grails-app/taglib" isTestSource="false" />
+    </content>
+    <content url="file://$MODULE_DIR$/target/work/plugins/svn-1.0.0.M1">
+      <sourceFolder url="file://$MODULE_DIR$/target/work/plugins/svn-1.0.0.M1/src/groovy" isTestSource="false" />
     </content>
     <content url="file://$MODULE_DIR$/target/work/plugins/tomcat-7.0.54">
       <sourceFolder url="file://$MODULE_DIR$/target/work/plugins/tomcat-7.0.54/src/java" isTestSource="false" />
@@ -131,9 +149,11 @@
           <root url="jar://$MAVEN_REPOSITORY$/org/grails/grails-datastore-gorm-plugin-support/2.0.7.RELEASE/grails-datastore-gorm-plugin-support-2.0.7.RELEASE.jar!/" />
           <root url="jar://$MAVEN_REPOSITORY$/javax/validation/validation-api/1.0.0.GA/validation-api-1.0.0.GA.jar!/" />
           <root url="jar://$MAVEN_REPOSITORY$/org/grails/grails-datastore-gorm-hibernate/2.0.7.RELEASE/grails-datastore-gorm-hibernate-2.0.7.RELEASE.jar!/" />
+          <root url="file://$MODULE_DIR$/target/work/plugins/svn-1.0.0.M1/lib" />
         </CLASSES>
         <JAVADOC />
         <SOURCES />
+        <jarDirectory url="file://$MODULE_DIR$/target/work/plugins/svn-1.0.0.M1/lib" recursive="false" />
       </library>
     </orderEntry>
   </component>

@@ -1,7 +1,9 @@
 package skillo
 
+import grails.plugin.multitenant.core.annotation.MultiTenant
 import skillo.candidate.Candidate
 
+@MultiTenant
 class Job {
     
     String candidatePosition

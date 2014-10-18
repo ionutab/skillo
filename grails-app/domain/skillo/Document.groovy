@@ -1,11 +1,13 @@
 package skillo
 
+import grails.plugin.multitenant.core.annotation.MultiTenant
 import skillo.candidate.Candidate
 
 /**
  * Document
  * A domain class describes the data object and it's mapping to the database
  */
+@MultiTenant
 class Document {
 
     String filename

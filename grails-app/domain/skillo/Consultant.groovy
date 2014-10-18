@@ -1,9 +1,11 @@
 package skillo
 
+import grails.plugin.multitenant.core.annotation.MultiTenant
 import skillo.candidate.CandidateNote
 import skillo.contact.ContactComment
 import skillo.user.User
 
+@MultiTenant
 class Consultant {
 
     String firstName

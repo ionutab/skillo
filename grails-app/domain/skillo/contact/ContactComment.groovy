@@ -1,7 +1,9 @@
 package skillo.contact
 
+import grails.plugin.multitenant.core.annotation.MultiTenant
 import skillo.Consultant
 
+@MultiTenant
 class ContactComment {
 
     Contact contact

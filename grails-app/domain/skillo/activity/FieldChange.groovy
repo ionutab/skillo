@@ -1,10 +1,12 @@
 package skillo.activity
 
+import grails.plugin.multitenant.core.annotation.MultiTenant
 import skillo.enums.DomainActivityType
 
 /**
  * Created by Andrei-PC on 8/11/2014.
  */
+@MultiTenant
 class FieldChange {
 
     // the field of the candidate changed

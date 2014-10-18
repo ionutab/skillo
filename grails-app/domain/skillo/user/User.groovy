@@ -1,8 +1,10 @@
 package skillo.user
 
+import grails.plugin.multitenant.core.annotation.MultiTenant
 import skillo.Consultant
 import skillo.Role
 
+@MultiTenant
 class User {
 
 	transient springSecurityService

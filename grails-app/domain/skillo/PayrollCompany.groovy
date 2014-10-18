@@ -1,5 +1,8 @@
 package skillo
 
+import grails.plugin.multitenant.core.annotation.MultiTenant
+
+@MultiTenant
 class PayrollCompany {
 
     String name

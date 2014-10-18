@@ -70,6 +70,8 @@ grails.project.dependency.resolution = {
 
         compile ":remote-pagination:0.4.8"
 
+        compile ":multi-tenant-single-db:0.8.3"
+
         /*
         compile(":less-resources:1.3.3.2") {
             // depends on :resources:1.2.RC2 (and we are using a better one)
