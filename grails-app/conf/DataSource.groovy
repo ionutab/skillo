@@ -20,11 +20,11 @@ environments {
             url = "jdbc:mysql://localhost/skillo?useUnicode=yes&characterEncoding=UTF-8"
             username = "root"
             password = ""
-            logSql = true
+        //    logSql = true
         }
         hibernate {
-            show_sql = true
-            format_sql = true
+        //    show_sql = true
+        //    format_sql = true
         }
     }
 
