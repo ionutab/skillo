@@ -10,7 +10,11 @@ class UrlMappings {
 		"/contact"		    (view:"/info/contact")
 		"/terms"		    (view:"/info/terms")
         "/map"              (view:"/home/map")
-        "/testAS"           (view:"/test/testAS")
+
+        name candidateSearch: "/candidateSearch" {
+            controller = 'candidateSearch'
+            action = 'search'
+        }
 
 		"/$controller/$action?/$id?"{
 			constraints {
@@ -25,5 +29,6 @@ class UrlMappings {
 		"404"	(view:'/_errors/404')
 		"500"	(view:'/_errors/error')
 		"503"	(view:'/_errors/503')
+
 	}
 }
