@@ -20,8 +20,8 @@ class Candidate implements SkilloDomainModelWithHistory{
     Date birthDate
 
     Boolean driver
-    Boolean sponsored
     Boolean carOwner
+    Boolean sponsored
 
     String telephoneNumber
     String otherTelephoneNumber

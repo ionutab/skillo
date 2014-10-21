@@ -1,20 +1,15 @@
-package skillo.candidate.search
+package skillo.candidate
 
 import grails.test.mixin.Mock
 import grails.test.mixin.TestFor
 import org.apache.log4j.ConsoleAppender
 import org.apache.log4j.PropertyConfigurator
-import skillo.candidate.Candidate
-import skillo.candidate.CandidateSearchService
+import skillo.candidate.search.CandidateSearchController
 import spock.lang.Specification
 
-/**
- * Test action controller rendering for {@link CandidateSearchController}
- */
 @TestFor(CandidateSearchController)
-@Mock([Candidate,CandidateSearchService])
-class CandidateSearchControllerSpec extends Specification {
-
+@Mock(Candidate)
+class CandidateControllerSpec extends Specification {
 
     void setUp() {
         String log4jConfPath = "test/log4j.properties";

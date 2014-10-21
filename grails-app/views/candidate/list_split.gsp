@@ -13,7 +13,7 @@
 
 <body>
 
-<div class="col-md-12">
+<div class="row">
     <div class="col-xs-10">
         <div id="searchContent">
                 <g:form action="list" controller="candidate" name="searchForm" role="form">
@@ -61,7 +61,7 @@
     </div>
 </div>
 
-<div class="row top10">
+<div class="row">
     <div class="col-md-12">
         <g:if test="${candidateList.size() == 0}">
             <div class="page-background-info">

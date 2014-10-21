@@ -1,5 +1,7 @@
 <div class="form-group duplicable">
-	<label class="col-md-2 control-label text-right">OR</label>
+	<div class="col-lg-2">
+		<g:select name="advancedSearch.operators" from="${['AND', 'NOT']}" value="OR" class="form-control fixed-80"/>
+	</div>
 	<div class="col-md-8">
 		<g:hiddenField class="advancedSearchSelect2Input" name="advancedSearch.qualifications" />
 	</div>

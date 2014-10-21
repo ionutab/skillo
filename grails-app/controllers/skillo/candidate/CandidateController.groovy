@@ -462,51 +462,6 @@ class CandidateController extends BaseController {
         redirect(action: params.redirect, id: candidate.id,candidateInstance: candidate)
     }
 
-    /**
-     * method used to search a candidate using multiple criteria
-     * @return
-     */
-    def advancedSearch(){
-        log.info("CandidateController.advancedSearch")
-
-        Long q1Id = null
-        if(params.qualification1){
-            q1Id = Long.valueOf(params.qualification1)
-        }
-
-        Long q2Id = null
-        if(params.qualification2){
-            q2Id = Long.valueOf(params.qualification2)
-        }
-
-        Long q3Id = null
-        if(params.qualification3){
-            q3Id = Long.valueOf(params.qualification3)
-        }
-
-        Long q4Id = null
-        if(params.qualification4){
-            q4Id = Long.valueOf(params.qualification4)
-        }
-
-        String searchPostCode = null
-        if(params.postcode1){
-            searchPostCode=params.postcode1
-        }
-
-        //performing the search
-        def candidateList = candidateSearchService.advancedSearch(q1Id,q2Id,q3Id,q4Id,searchPostCode)
-
-
-        //this candidate will be displayed in the info pane on the right
-        def firstCandidate = candidateList.size() > 0 ? candidateList.first() : null
-
-
-        def searchOperators = SearchOperator.values()
-
-        render(view: "list_split", model: [candidateList: candidateList, candidateShow: firstCandidate, candidateTotal: candidateList.size(), operators:searchOperators])
-    }
-
     def filter ={
         params.max = Math.min(params.max ? params.int('max') : 3, 100)
         def activities = activityService.getCandidateActivities(Long.valueOf(params.id))

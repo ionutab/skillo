@@ -18,39 +18,49 @@ class CandidateSearchController extends BaseController{
 
     def CandidateFilter filter = new CandidateFilter()
 
-    def index(){
-        log.info("INDEX")
-
-        render(view: "/candidate/search/search")
-    }
+    static defaultAction = "search"
 
     def search(){
         log.info("SEARCH ")
         log.info(params)
 
         ArrayList<String> inputQualificationSets = new ArrayList<String>()
-        ArrayList<HashMap<Long,String>> qualificationSets
+        ArrayList<HashMap<Long,String>> qualificationSets = new ArrayList<>()
+        ArrayList<String> inputOperators = new ArrayList<>()
 
-        if(session['qualificationSets']){
-            qualificationSets = session['qualificationSets']
+        if(session['candidateFilter']){
+            filter = session['candidateFilter']
         } else {
-            qualificationSets = new ArrayList<HashMap<Long, String>>()
+            filter = new CandidateFilter()
         }
 
         if(params.advancedSearch) {
             inputQualificationSets = params.advancedSearch.list('qualifications')
+            inputOperators = (ArrayList<String>)params.advancedSearch.list('operators')
             qualificationSets = Select2InputUtils.splitSelect2MultipleArrayToHashMap(inputQualificationSets)
-            filter.qualifications = Select2InputUtils.getIdsFromHashMapArray(qualificationSets)
+
+            filter.isRegistered = params.advancedSearch['isRegistered']
+            filter.isInducted = params.advancedSearch['isInducted']
+            filter.isSponsored = params.advancedSearch['isSponsored']
+            filter.isDriver = params.advancedSearch['isDriver']
+            filter.isCarOwner = params.advancedSearch['isCarOwner']
         }
+
+        filter.qualifications = qualificationSets
+        filter.translateIntoQualificationIds()
+        filter.operators = inputOperators
 
         Collection<Candidate> candidateList = candidateSearchService.search(filter)
 
-        for(Candidate cl : candidateList){
-            log.info("@@@@@@@@@@@@@@@  " + cl.toString())
-        }
+        session['candidateFilter'] = filter
+        render(view: "/candidate/search/search", model:[candidateFilter:filter, qualificationSets:filter.qualifications as grails.converters.JSON, candidateList:candidateList])
+    }
 
-        session['qualificationSets'] = qualificationSets
-        render(view: "/candidate/search/search", model:[candidateFilter:filter, qualificationSets:qualificationSets as grails.converters.JSON, candidateList:candidateList])
+    def reset(){
+        log.info("RESET")
+
+        session['qualificationSets'] = new ArrayList<HashMap<Long, String>>()
+        render(view: "/candidate/search/search", model:[candidateFilter:new CandidateFilter(), qualificationSets:session['qualificationSets'], candidateList:null])
     }
 
     def displayQualificationSetWidget(){

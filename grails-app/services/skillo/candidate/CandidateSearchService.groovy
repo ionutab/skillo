@@ -91,141 +91,42 @@ class CandidateSearchService {
         return candidateList;
     }
 
-    def Collection<Candidate> advancedSearch(Long qualification1, Long qualification2, Long qualification3, Long qualification4, String searchPostCode){
-
-        Criteria cc = Candidate.createCriteria()
-
-        def candidateList =  cc.list() {
-
-            Qualification c1 = null
-            Qualification c2 = null
-            Qualification c3 = null
-            Qualification c4 = null
-
-            if(qualification1){
-                c1 = Qualification.get(qualification1)
-            }
-
-            if(qualification2) {
-                c2 = Qualification.get(qualification2)
-            }
-
-            if(qualification3){
-                c3 = Qualification.get(qualification3)
-            }
-
-            if(qualification4) {
-                c4 = Qualification.get(qualification4)
-            }
-
-            and {
-
-                if(c1){
-                    if(c2){
-                        or {
-                            sqlRestriction(" exists (" +
-                                    "select * " +
-                                    "from " +
-                                    "candidate_qualification cq, " +
-                                    "qualification q where " +
-                                    "cq.qualification_id = q.id " +
-                                    "and cq.candidate_id = this_.id " +
-                                    "and lower(q.name) like ? " +
-                                    ")",["%" + c1.name.toLowerCase() + "%"])
-
-                            sqlRestriction(" exists (" +
-                                    "select * " +
-                                    "from " +
-                                    "candidate_qualification cq, " +
-                                    "qualification q where " +
-                                    "cq.qualification_id = q.id " +
-                                    "and cq.candidate_id = this_.id " +
-                                    "and lower(q.name) like ? " +
-                                    ")",["%" + c2.name.toLowerCase() + "%"])
-                        }
-                    } else {
-                        sqlRestriction(" exists (" +
-                                "select * " +
-                                "from " +
-                                "candidate_qualification cq, " +
-                                "qualification q where " +
-                                "cq.qualification_id = q.id " +
-                                "and cq.candidate_id = this_.id " +
-                                "and lower(q.name) like ? " +
-                                ")",["%" + c1.name.toLowerCase() + "%"])
-                    }
-
-                }
-                if(c3){
-                    if(c4){
-
-                        or {
-                            sqlRestriction(" exists (" +
-                                    "select * " +
-                                    "from " +
-                                    "candidate_qualification cq, " +
-                                    "qualification q where " +
-                                    "cq.qualification_id = q.id " +
-                                    "and cq.candidate_id = this_.id " +
-                                    "and lower(q.name) like ? " +
-                                    ")",["%" + c3.name.toLowerCase() + "%"])
-
-                            sqlRestriction(" exists (" +
-                                    "select * " +
-                                    "from " +
-                                    "candidate_qualification cq, " +
-                                    "qualification q where " +
-                                    "cq.qualification_id = q.id " +
-                                    "and cq.candidate_id = this_.id " +
-                                    "and lower(q.name) like ? " +
-                                    ")",["%" + c4.name.toLowerCase() + "%"])
-                        }
-                    } else {
-                        sqlRestriction(" exists (" +
-                                "select * " +
-                                "from " +
-                                "candidate_qualification cq, " +
-                                "qualification q where " +
-                                "cq.qualification_id = q.id " +
-                                "and cq.candidate_id = this_.id " +
-                                "and lower(q.name) like ? " +
-                                ")", ["%" + c3.name.toLowerCase() + "%"])
-                    }
-                }
-
-                if(searchPostCode) {
-                    sqlRestriction(" exists (" +
-                            "select * " +
-                            "from " +
-                            "address addr, " +
-                            "post_code pc " +
-                            "where " +
-                            "this_.address_id = addr.id " +
-                            "and addr.post_code_id = pc.id " +
-                            "and pc.code like ? " +
-                            ")",[searchPostCode+"%"])
-                }
-
-            }
-        }
-    }
-
     def search(CandidateFilter filter){
-
         def criteria = Candidate.createCriteria()
         def result = criteria.list(){
             eq("active", true)
-            or {
-                for (Collection<Long> qualificationBucket : filter.getQualifications()) {
+            and {
+                if(filter.getQualificationsIds()){
                     candidateQualifications {
-                        /*
-                        for (Long id : qualificationBucket) {
-                            eq("qualification.id", id)
-                        }
-                        */
-                        inList("qualification.id", qualificationBucket)
+                        inList("qualification.id", filter.getQualificationsIds().getAt(0))
                     }
                 }
+                if(filter.getOperators()){
+                    int iOp = 0;
+                    for(String op : filter.getOperators()){
+                        if("AND".equals(op)){
+                            if(filter.getQualificationsIds().size() > (iOp+1) && filter.getQualificationsIds().getAt(iOp+1)){
+                                candidateQualifications {
+                                    inList("qualification.id", filter.getQualificationsIds().getAt(iOp+1))
+                                }
+                            }
+                        }
+                        iOp++
+                    }
+                }
+            }
+            int iOp = 0;
+            for(String op : filter.getOperators()){
+                if("NOT".equals(op)){
+                    if(filter.getQualificationsIds().size() > (iOp+1) && filter.getQualificationsIds().getAt(iOp+1)){
+                        candidateQualifications {
+                            not{
+                                inList("qualification.id", filter.getQualificationsIds().getAt(iOp+1))
+                            }
+                        }
+                    }
+                }
+                iOp++
             }
         }
 
