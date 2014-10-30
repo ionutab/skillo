@@ -13,5 +13,12 @@
 
     <g:render template="/candidate/search/searchForm" model="['candidateFilter':candidateFilter,'qualificationSets':qualificationSets]" />
 
+	<div class="row">
+		<div class="col-md-12">
+			<g:render template="/candidate/candidateList" model="['candidateList':candidateList]"/>
+		</div><!-- /.box -->
+	</div>
+
+
 </body>
 </html>
