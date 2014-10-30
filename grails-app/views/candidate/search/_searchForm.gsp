@@ -2,7 +2,7 @@
     <div class="col-md-12 top10">
         <div class="box box-solid">
             <div class="box-body">
-                <g:form class="form-horizontal" >
+                <g:form class="form-horizontal" method="GET">
                     <div class="col-md-12" id="advancedCandidateSearch">
 	                    <g:if test="${!candidateFilter?.getQualifications()}">
 		                    <div class="form-group duplicable">
@@ -67,16 +67,14 @@
             </div>
         </div>
     </div>
+	<g:javascript>
+		var initSearchFormValues = ${qualificationSets};
+
+	    SkilloAdvancedSearch.init({
+	        initiateID: '#advancedCandidateSearch',
+	        ajaxQualificationsQueryURL:'<g:createLink controller="qualification" action="getQualificationsByName" />',
+	        ajaxWidgetURL:'<g:createLink controller="candidateSearch" action="displayQualificationSetWidget" />',
+	        initValues:initSearchFormValues
+	    });
+	</g:javascript>
 </div>
-<g:javascript>
-
-	var initSearchFormValues = ${qualificationSets};
-
-    SkilloAdvancedSearch.init({
-    	initiateID: '#advancedCandidateSearch',
-        ajaxQualificationsQueryURL:'<g:createLink controller="qualification" action="getQualificationsByName" />',
-        ajaxWidgetURL:'<g:createLink controller="candidateSearch" action="displayQualificationSetWidget" />',
-        initValues:initSearchFormValues
-    });
-
-</g:javascript>
