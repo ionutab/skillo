@@ -28,16 +28,22 @@ class CandidateSearchController extends BaseController{
         ArrayList<HashMap<Long,String>> qualificationSets = new ArrayList<>()
         ArrayList<String> inputOperators = new ArrayList<>()
 
-        if(session['candidateFilter']){
-            filter = session['candidateFilter']
+        if(session["candidateSearchFilter"]){
+            filter = session["candidateSearchFilter"]
         } else {
             filter = new CandidateFilter()
+            filter.qualifications = qualificationSets
+            filter.operators = inputOperators
         }
 
         if(params.advancedSearch) {
             inputQualificationSets = params.advancedSearch.list('qualifications')
             inputOperators = (ArrayList<String>)params.advancedSearch.list('operators')
             qualificationSets = Select2InputUtils.splitSelect2MultipleArrayToHashMap(inputQualificationSets)
+
+            filter.qualifications = qualificationSets
+            filter.translateIntoQualificationIds()
+            filter.operators = inputOperators
 
             filter.isRegistered = params.advancedSearch['isRegistered']
             filter.isInducted = params.advancedSearch['isInducted']
@@ -46,21 +52,18 @@ class CandidateSearchController extends BaseController{
             filter.isCarOwner = params.advancedSearch['isCarOwner']
         }
 
-        filter.qualifications = qualificationSets
-        filter.translateIntoQualificationIds()
-        filter.operators = inputOperators
-
         Collection<Candidate> candidateList = candidateSearchService.search(filter)
+        Candidate firstCandidate = candidateList.size() > 0 ? candidateList.first() : null
 
-        session['candidateFilter'] = filter
-        render(view: "/candidate/search/search", model:[candidateFilter:filter, qualificationSets:filter.qualifications as grails.converters.JSON, candidateList:candidateList])
+        session["candidateSearchFilter"] = filter
+        render(view: "/candidate/search/candidateSearch", model:[candidateFilter:filter, qualificationSets:filter.qualifications as grails.converters.JSON, candidateList:candidateList,  candidateTotal: candidateList.totalCount, candidateShow: firstCandidate])
     }
 
     def reset(){
         log.info("RESET")
-
-        session['qualificationSets'] = new ArrayList<HashMap<Long, String>>()
-        render(view: "/candidate/search/search", model:[candidateFilter:new CandidateFilter(), qualificationSets:session['qualificationSets'], candidateList:null])
+        params.advancedSearch = null
+        session['candidateSearchFilter'] = null
+        return search()
     }
 
     def displayQualificationSetWidget(){

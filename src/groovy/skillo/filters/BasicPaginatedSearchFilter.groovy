@@ -2,9 +2,9 @@ package skillo.filters
 
 abstract class BasicPaginatedSearchFilter extends BasicSearchFilter implements Serializable {
 
-    private Long max
+    protected Long max
 
-    private Long offset
+    protected Long offset
 
     public BasicPaginatedSearchFilter(){
         validatePaginator()

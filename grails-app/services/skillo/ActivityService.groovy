@@ -10,8 +10,6 @@ import skillo.enums.DomainActivityType
 import skillo.enums.Operation
 import skillo.util.ActivityLoggingUtil
 
-import java.text.SimpleDateFormat
-
 /**
  * ActivityService
  * A service class encapsulates the core business logic of a Grails application

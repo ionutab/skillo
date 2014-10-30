@@ -60,7 +60,7 @@ class CandidateSearchService {
         log.info("CandidateService.search")
         Criteria cc = Candidate.createCriteria()
 
-        def candidateList =  cc.list() {
+        def candidateList =  cc.list(max:filter.max, offset:filter.offset) {
 
             or {
                 if(filter.firstName){
@@ -93,25 +93,26 @@ class CandidateSearchService {
 
     def search(CandidateFilter filter){
         def criteria = Candidate.createCriteria()
-        def result = criteria.list(){
+
+        def result = criteria.list(max:filter.max, offset:filter.offset){
             eq("active", true)
             and {
                 if(filter.getQualificationsIds()){
                     candidateQualifications {
                         inList("qualification.id", filter.getQualificationsIds().getAt(0))
                     }
-                }
-                if(filter.getOperators()){
-                    int iOp = 0;
-                    for(String op : filter.getOperators()){
-                        if("AND".equals(op)){
-                            if(filter.getQualificationsIds().size() > (iOp+1) && filter.getQualificationsIds().getAt(iOp+1)){
-                                candidateQualifications {
-                                    inList("qualification.id", filter.getQualificationsIds().getAt(iOp+1))
+                    if(filter.getOperators()){
+                        int iOp = 0;
+                        for(String op : filter.getOperators()){
+                            if("AND".equals(op)){
+                                if(filter.getQualificationsIds().size() > (iOp+1) && filter.getQualificationsIds().getAt(iOp+1)){
+                                    candidateQualifications {
+                                        inList("qualification.id", filter.getQualificationsIds().getAt(iOp+1))
+                                    }
                                 }
                             }
+                            iOp++
                         }
-                        iOp++
                     }
                 }
             }
@@ -121,12 +122,34 @@ class CandidateSearchService {
                     if(filter.getQualificationsIds().size() > (iOp+1) && filter.getQualificationsIds().getAt(iOp+1)){
                         candidateQualifications {
                             not{
-                                inList("qualification.id", filter.getQualificationsIds().getAt(iOp+1))
+                                Long qId = filter.getQualificationsIds().getAt(iOp+1);
+                                if(qId){
+                                    inList("qualification.id", qId)
+                                }
                             }
                         }
                     }
                 }
                 iOp++
+            }
+            if(filter.isRegistered){
+                payroll{
+                    eq("registered", Boolean.TRUE)
+                }
+            }
+            if(filter.isInducted){
+                payroll{
+                    eq("inducted", Boolean.TRUE)
+                }
+            }
+            if(filter.isSponsored){
+                eq("sponsored", Boolean.TRUE)
+            }
+            if(filter.isDriver){
+                eq("driver", Boolean.TRUE)
+            }
+            if(filter.isCarOwner){
+                eq("carOwner", Boolean.TRUE)
             }
         }
 

@@ -10,7 +10,6 @@ import skillo.PayrollCompany
 import skillo.PostCode
 import skillo.enums.ActivityType
 import skillo.enums.Operation
-import skillo.enums.SearchOperator
 import skillo.filters.CandidateListFilter
 import skillo.filters.CandidateMatch
 
@@ -37,7 +36,7 @@ class CandidateController extends BaseController {
         log.info("LIST")
 
         //first we get from session
-        CandidateListFilter filter = session["candidateSearchFilter"] != null ? session["candidateSearchFilter"] : new CandidateListFilter()
+        CandidateListFilter filter = new CandidateListFilter()
 
         if (!params.reset) {
             bindData(filter, params)
@@ -50,7 +49,7 @@ class CandidateController extends BaseController {
         def candidateList = candidateSearchService.search(filter)
 
         //this candidate will be displayed in the info pane on the right
-        def firstCandidate
+        Candidate firstCandidate
 
         if(params.id){
             if(((String)params.id).isNumber()){
@@ -61,9 +60,6 @@ class CandidateController extends BaseController {
         if(!firstCandidate){
             firstCandidate = candidateList.size() > 0 ? candidateList.first() : null
         }
-
-        //saving to session
-        session["candidateSearchFilter"] = filter
 
         log.info("Rendering ${candidateList.size()} Candidates of ${candidateList.totalCount}")
         render(view: "list_split", model: [candidateListFilter: filter, candidateList: candidateList, candidateTotal: candidateList.totalCount, candidateShow: firstCandidate])

@@ -3,7 +3,7 @@ package skillo.filters
 import grails.validation.Validateable
 
 @Validateable
-class CandidateFilter extends BasicSearchFilter implements Serializable {
+class CandidateFilter extends BasicPaginatedSearchFilter implements Serializable {
 
     protected ArrayList<HashMap<Long,String>> qualifications
 
@@ -86,8 +86,8 @@ class CandidateFilter extends BasicSearchFilter implements Serializable {
     }
 
     public translateIntoQualificationIds(){
+        this.qualificationsIds = new ArrayList<ArrayList<Long>>()
         if(this.qualifications){
-            this.qualificationsIds = new ArrayList<ArrayList<Long>>()
             for(HashMap<Long,String> hmq : this.qualifications){
                 this.qualificationsIds.add(hmq.keySet())
             }
