@@ -14,7 +14,7 @@
             <div class="modal-content">
                 <div class="modal-body">
                     <div id="createCandidateNoteFormContainer">
-                        <g:render template="createCandidateNoteForm" model="['newCandidateNote':newCandidateNote]"/>
+                        <g:render template="/candidate/createCandidateNoteForm" model="['newCandidateNote':newCandidateNote]"/>
                     </div>
                 </div>
                 <div class="modal-footer">
