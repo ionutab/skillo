@@ -1,5 +1,5 @@
 <%@ page import="skillo.candidate.Candidate" %>
-
+<g:if test="${candidateShow}">
 <div id="displayCandidate">
     <div class="box box-solid">
 
@@ -172,7 +172,7 @@
         </div>
     </div>
 
-    <g:render template="createCandidateNoteModal" model="['redirect':'list','candidateInstance':candidateShow,'newCandidateNote':newCandidateNote]" />
+    <g:render template="/candidate/createCandidateNoteModal" model="['redirect':'list','candidateInstance':candidateShow,'newCandidateNote':newCandidateNote]" />
 </div>
-
+</g:if>
 
