@@ -6,6 +6,7 @@ import org.slf4j.Logger
 import org.slf4j.LoggerFactory
 
 import javax.servlet.http.HttpServletRequest
+import java.util.regex.Pattern
 
 /**
  * TODO: Implement me!
@@ -14,26 +15,27 @@ import javax.servlet.http.HttpServletRequest
  */
 class DomainTenantResolver implements TenantResolver {
 
-    private static final Logger log = LoggerFactory.getLogger(this)
+    final static Integer DEFAULT_ID = 0; //localhost
+    static Pattern SUBDOMAIN_PATTERN = ~/^[^\.]+/
 
 
     Integer resolve(HttpServletRequest request) throws TenantResolveException {
-        String host = request.getServerName()
-        String tenant = null
+        String subdomain = extractSubdomain(request.getServerName())
 
+        def id = null
 
-        if(host.equals("localhost")){
-            tenant = "localhost"
-        }else{
-            String domain = grails.util.Metadata.current.'app.domain'
-            tenant = host.substring(0,host.indexOf("."+domain))
+        if(subdomain) {
+            id = TenantMeta.findBySubdomain(subdomain)?.id
         }
-        TenantMeta tenantMeta = TenantMeta.findByTenantName(tenant);
 
-       if(tenantMeta!=null){
-           return tenantMeta.tenantId()
-       }
+        request.getSession().setAttribute("tenantId", id ?: DEFAULT_ID)
 
-       return 0 //localhost
+        id ?: DEFAULT_ID
+
+    }
+
+    static String extractSubdomain(String domain) {
+        def m = domain =~ SUBDOMAIN_PATTERN;
+        m ? m[0][1] : false
     }
 }
