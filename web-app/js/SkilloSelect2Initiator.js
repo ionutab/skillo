@@ -4,7 +4,7 @@
 
 var SkilloSelect2QualificationsFormatting = (function(){
 
-        var formatQualificationSelection = function (data) {
+    var formatQualificationSelection = function (data) {
         return data.name;
     };
 
@@ -53,9 +53,7 @@ var SkilloSelect2MultipleQulificationInitiator = (function(){
                 }
             },
             initSelection: function(element, callback) {
-
                 console.log(initParamValues);
-
                 var initValues = $.map(initParamValues, function(value, index) {
                     console.log(index);
                     console.log(value);
