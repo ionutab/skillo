@@ -17,6 +17,7 @@ class Candidate implements SkilloDomainModelWithHistory{
 
     String firstName
     String lastName
+
     Date birthDate
 
     Boolean driver
