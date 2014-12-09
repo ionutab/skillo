@@ -11,6 +11,7 @@
 </head>
 <body>
 
+
     <g:render template="/candidate/search/searchForm" model="['candidateFilter':candidateFilter,'qualificationSets':qualificationSets]" />
 
 	<div class="row">

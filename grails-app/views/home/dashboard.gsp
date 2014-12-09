@@ -10,6 +10,7 @@
 <div class="row">
     <div class="col-md-12">
         <div class="col-md-6">
+
             <g:render template="template/dashboardInformation" />
         </div>
         <div class="col-md-6" id="activityTemplateDivId">

@@ -52,7 +52,10 @@ class CandidateSearchController extends BaseController{
             filter.isCarOwner = params.advancedSearch['isCarOwner']
         }
 
-        Collection<Candidate> candidateList = candidateSearchService.search(filter)
+        log.info("HHHHHHHHHHHHHHHHHHHHHHHHHHH "+params.postCode)
+
+
+        Collection<Candidate> candidateList = candidateSearchService.search(filter, 3, 1000 )
         Candidate firstCandidate = candidateList.size() > 0 ? candidateList.first() : null
 
         session["candidateSearchFilter"] = filter

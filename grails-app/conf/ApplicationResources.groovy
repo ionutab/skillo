@@ -72,6 +72,15 @@ modules = {
         resource url: 'adminLTE/css/iCheck/flat/blue.css'
     }
 
+    ionslider{
+        resource url: 'adminLTE/js/plugins/ionslider/ion.rangeSlider.min.js'
+        resource url: 'adminLTE/css/ionslider/ion.rangeSlider.css'
+        resource url: 'adminLTE/css/ionslider/ion.rangeSlider.skinFlat.css'
+        resource url: 'adminLTE/css/ionslider/ion.rangeSlider.skinNice.css'
+    }
+
+
+
     inputMask {
         resource url: 'adminLTE/js/plugins/input-mask/jquery.inputmask.js'
         resource url: 'adminLTE/js/plugins/input-mask/jquery.inputmask.date.extensions.js'
@@ -103,11 +112,11 @@ modules = {
 	}
 
     forms {
-        dependsOn 'inputMask','select2','iCheck'
+        dependsOn 'inputMask','select2','iCheck','ionslider'
     }
 
     search {
-        dependsOn 'inputMask','select2','iCheck'
+        dependsOn 'inputMask','select2','iCheck','ionslider'
     }
 
     remoteNonStopPageScroll{
