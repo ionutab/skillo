@@ -7,52 +7,10 @@
         <g:message code="qualification.label" default="Qualification" />
     </label>
     <div class="col-sm-8">
-        <g:hiddenField
-                name="newCandidateQualification.qualification.id"
-                id="newCandidateQualificationId"
-                class="form-control"
-                value="${newCandidateQualification?.qualification?.id}"
-        />
-        <g:hiddenField
-                name="newCandidateQualification.namePlaceholder"
-                id="candidateMainTradeName"
-                value="${candidateInstance?.nationality?.nationality}"
-        />
-        <g:javascript>
-            function formatQualificationSelection(item) {
-                return item.name;
-            };
-
-            function formatQualificationResult(item) {
-                return item.name;
-            };
-            function doWeHaveAQualificationAlready(){
-                return "Search for a Qualification";
-            }
-            $("#newCandidateQualificationId").select2({
-                placeholder: doWeHaveAQualificationAlready,
-                allowClear: true,
-                ajax:{
-                    url: '<g:createLink controller="qualification" action="getQualificationsByName" />',
-                    dataType: 'json',
-                    data: function(term, page){
-                        return {inputCode: term};
-                    },
-                    results: function (data, page) {
-                        return {results: data};
-                    }
-                },
-                initSelection: function(element, callback) {
-                    var id=$("#newCandidateQualificationId").val();
-                    if (id!=="") {
-                        $("#s2id_nationalityId .select2-chosen").html($("#candidateMainTradeName").val());
-                    }
-                },
-                formatSelection: formatQualificationSelection,
-                formatResult: formatQualificationResult,
-                escapeMarkup: function (m) { return m; }
-            });
-        </g:javascript>
+        <g:render template="../qualification/qualificationSelector"
+                  model="['attributeName':'newCandidateQualification.qualification.id',
+                          'attributeId':'mainTradeId' ,
+                          'qualification':newCandidateQualification?.qualification]"/>
     </div>
 </div>
 <div class="form-group  ${hasErrors(bean: newCandidateQualification, field: 'expiryDate', 'has-error')} ">
