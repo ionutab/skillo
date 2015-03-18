@@ -270,6 +270,18 @@
                             </div>
                         </div>
 
+	                    <div class="form-group">
+		                    <label for="candidate.inducted" class="col-md-3 control-label">Inducted</label>
+		                    <div class="col-md-9">
+			                    <g:radioGroup values="[true, false]" labels="['yes','no']" name="candidate.inducted" value="${candidateInstance?.inducted}">
+				                    <label class="control-label">
+					                    ${it.radio}&nbsp;${it.label}
+				                    </label>
+				                    &nbsp;
+			                    </g:radioGroup>
+		                    </div>
+	                    </div>
+
                         <div class="col-md-offset-3">
                             <g:submitButton name="Finish" class="btn btn-success" />
                             %{--<g:actionSubmit value="Save And Edit" action="two" class="btn btn-success" />--}%
