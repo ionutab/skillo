@@ -60,7 +60,7 @@ class InitService {
     def loadDefaultSuperuserAndRole(){
         def role = new Role(authority: 'ROLE_USER').save(flush: true)
 
-        def user = new User(username: 'skillo', enabled: true, password: 'skillo').save(flush: true)
+        def user = new User(username: 'skillo', enabled: true, password: 'skillo',).save(flush: true)
         new Consultant(firstName: 'John', lastName: 'Shepard', email: 'bujdei_alexandru@yahoo.com', user: user ).save(flush: true)
 
         UserRole.create user, role, true
