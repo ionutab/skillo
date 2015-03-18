@@ -152,7 +152,7 @@
     </div>
 </div>
 
-<div class="modal fade" id="createCandidateQualificationModal" role="dialog" aria-hidden="true" tabindex="-1">
+<div class="modal fade" id="createCandidateQualificationModal" role="dialog" aria-hidden="true">
     <div class="modal-dialog">
         <g:form
                 method="post"
