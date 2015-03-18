@@ -23,6 +23,7 @@ class Candidate implements SkilloDomainModelWithHistory{
     Boolean driver
     Boolean carOwner
     Boolean sponsored
+    Boolean inducted = Boolean.FALSE
 
     String telephoneNumber
     String otherTelephoneNumber
