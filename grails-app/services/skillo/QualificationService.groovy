@@ -17,6 +17,7 @@ class QualificationService {
             if (filter.name) {
                 ilike("name", new String("%$filter.name%"))
             }
+            order("name", "asc")
         }
 
         return qualificantionList
