@@ -38,6 +38,7 @@
 		<div class="row">
 			<g:if test="${clientList.size() == 0}">
 				<div class="col-md-12">
+					<g:link action="create"><i class="fa fa-plus"></i>&nbsp;Client</g:link>
 					<div class="page-background-info">
 						<h2><g:message code="candidate.search.notFound.label"/></h2>
 					</div>
