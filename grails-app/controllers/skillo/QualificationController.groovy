@@ -120,7 +120,7 @@ class QualificationController extends BaseController {
         if(qualification != null && qualification.size() > 0){
             qualificationList = Qualification.findAllByNameIlike("%${qualification}%")
         } else {
-            qualificationList = Qualification.list()
+            qualificationList = Qualification.listOrderByName()
         }
 
         render( qualificationList as grails.converters.JSON )
