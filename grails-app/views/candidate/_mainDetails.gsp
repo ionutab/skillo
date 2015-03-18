@@ -124,6 +124,25 @@
             </g:else>
         </div>
     </div>
+
+	<div class="form-group">
+		<label for="candidate.inducted" class="col-md-3 control-label">Inducted</label>
+
+		<div class="col-md-9">
+			<g:if test="${editable}">
+				<g:radioGroup values="[true, false]" labels="['yes', 'no']" name="candidate.inducted"
+				              value="${candidateInstance?.inducted}">
+					<label class="control-label">
+						${it.radio}&nbsp;${it.label}
+					</label>
+					&nbsp;
+				</g:radioGroup>
+			</g:if>
+			<g:else>
+				<label class="control-label">${candidateInstance?.inducted ? "yes" : "no"}</label>
+			</g:else>
+		</div>
+	</div>
 </div>
 
 <div class="col-md-6">
