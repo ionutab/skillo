@@ -101,14 +101,8 @@ class CandidateSearchService {
      * @return
      */
     def search(CandidateFilter filter, Long sitePostCodeId, double radius) {
-
-        log.info('££££££££££££££££££ $$$$$$$$$$$$$$$$$$$$ '+ sitePostCodeId)
-
         List<Candidate> candidates = search(filter)
-
         return radiusSearch(candidates, sitePostCodeId, radius)
-
-
     }
 
     /**
@@ -128,35 +122,22 @@ class CandidateSearchService {
 
         // do the radius filter only if are candidates to filter and if a site location was specified from the interface
         if (candidates && sitePostCodeId && radius) {
-
             Iterator<Candidate> iterator = candidates.iterator()
             while (iterator.hasNext()) {
-
                 Candidate current = iterator.next()
                 //current candidate address postcode
-                PostCode candidatePostCode = PostCode.get(current.address.postCodeId)
+                PostCode candidatePostCode = current.address.postCode
                 // site location postcode
                 PostCode sitePostCode = PostCode.get(sitePostCodeId)
 
-                log.info('@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@ Postcodes:  '+ candidatePostCode+ ' '+sitePostCode)
-
                 if (candidatePostCode && sitePostCode) {
-
                     // distance in miles from current candidate address to the site address location
                     double distance = DistanceCalculatorUtil.haversine(sitePostCode.latitude, sitePostCode.longitude, candidatePostCode.latitude, candidatePostCode.longitude)
-
-                    log.info('@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@ Postcodes:   Distance is '+ distance)
-
                     if (distance > radius) {
                         iterator.remove()
                     }
-
-
                 }
-
-
             }
-
         }
 
         return candidates
